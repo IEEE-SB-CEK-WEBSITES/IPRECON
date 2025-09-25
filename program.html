@@ -544,95 +544,13 @@
 
 <body>
   <!-- Header -->
-  <div class="header-container">
-    <div class="header-section">
-      <a href="https://iprecon.org">
-        <img src="./assets/img/iprecon26 black.png" alt="IPRECON 2026 Logo" class="logo" />
-      </a>
-      <div class="separator"></div>
-      <div class="event-info">
-        <span>September 04-06, 2026</span>
-        <span>College of Engineering Karunagappally, Kerala, INDIA</span>
-      </div>
-    </div>
-    <div class="header-section">
-      <span class="sponsor-label" style="visibility: hidden">Powered by</span>
-      <div class="separator"></div>
-      <img src="./assets/img/ieee blk.png" alt="IEEE Logo" class="logo" />
-    </div>
-  </div>
+  <esi:include src="/includes/header.html" />
 
   <!-- Navigation Bar -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <div class="mob-marq marquee-container">
-        <div class="marquee">
-          <div class="notification">
-            <i class="fas fa-bell"></i>
-            Paper Submissions Started! To View Call for Papers
-            <a href="https://iprecon.org/cfp.html" class="purple-link">Click Here</a>
-          </div>
-        </div>
-      </div>
-      <a href="https://iprecon.org">
-        <img src="./assets/img/iprecon26 white.png" alt="IPRECON 2026 Logo" class="brand-logo" id="brandLogo" />
-      </a>
-      <ul class="nav-items">
-        <li class="nav-item"><a href="./index.html">HOME</a></li>
-        <li class="nav-item">
-          <span class="nav-link">ABOUT</span>
-          <div class="dropdown-content">
-            <a href="./about-iprecon.html" class="dropdown-item">IPRECON</a>
-            <a href="./organizers.html" class="dropdown-item">ORGANIZERS</a>
-            <a href="./venue.html" class="dropdown-item">VENUE</a>
-            <a href="./kerala.html" class="dropdown-item">KERALA</a>
-            <a href="./accommodation.html" class="dropdown-item">ACCOMMODATION</a>
-            <a href="./visa.html" class="dropdown-item">VISA</a>
-            <a href="./sponsors.html" class="dropdown-item">SPONSORS & EXHIBITORS</a>
-            <a href="./dei.html" class="dropdown-item">DEI STATEMENT</a>
-          </div>
-        </li>
-        <li class="nav-item"><a href="./committee.html">COMMITTEE</a></li>
-        <li class="nav-item">
-          <span class="nav-link">FOR AUTHORS</span>
-          <div class="dropdown-content">
-            <a href="./cfp.html" class="dropdown-item">CALL FOR PAPERS</a>
-            <a href="./submissions.html" class="dropdown-item">SUBMISSIONS</a>
-            <a href="./important-dates.html" class="dropdown-item">IMPORTANT DATES</a>
-            <a href="./camera-ready.html" class="dropdown-item">CAMERA READY SUBMISSION INSTRUCTIONS</a>
-            <a href="./presentation-guidelines.html" class="dropdown-item">PRESENTATION GUIDELINES</a>
-            <a href="housing-support.html" class="dropdown-item">STUDENT HOUSING SUPPORT</a>
-            <a href="./travel-support.html" class="dropdown-item">STUDENT TRAVEL SUPPORT</a>
-          </div>
-        </li>
-        <li class="nav-item"><a href="./speakers.html">SPEAKERS</a></li>
-        <li class="nav-item">
-          <span class="nav-link">PROGRAM</span>
-          <div class="dropdown-content">
-            <a href="./inaugural.html" class="dropdown-item">INAUGURAL PROGRAM</a>
-            <a href="./distinguished-lectures.html" class="dropdown-item">DISTINGUISHED LECTURE PROGRAM</a>
-            <a href="./tutorials.html" class="dropdown-item">TUTORIALS</a>
-            <a href="./tracks.html" class="dropdown-item">TRACKS</a>
-            <a href="./special-sessions.html" class="dropdown-item">SPECIAL SESSIONS</a>
-            <a href="./keynote.html" class="dropdown-item">KEYNOTE</a>
-          </div>
-        </li>
-        <li class="nav-item"><a href="./registration.html">REGISTRATION</a></li>
-        <li class="nav-item"><a href="./contact.html">CONTACT</a></li>
-      </ul>
-    </div>
-  </nav>
+  <esi:include src="/includes/navbar.html" />
 
   <!-- Marquee -->
-  <div class="non-mob marquee-container">
-    <div class="marquee">
-      <div class="notification">
-        <i class="fas fa-bell"></i>
-        Paper Submissions Opening Soon! To View Call for Papers
-        <a href="https://iprecon.org/cfp.html" class="purple-link">Click Here</a>
-      </div>
-    </div>
-  </div>
+  <esi:include src="/includes/marquee.html" />
 
   <!-- Spacer for when marquee becomes fixed -->
   <div id="marquee-placeholder" style="display: none"></div>
@@ -718,53 +636,7 @@
   </div>
 
   <!-- Footer section -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-column">
-        <h3>Paper Submission</h3>
-        <ul class="footer-links">
-          <li><a href="./cfp.html">Call for Papers</a></li>
-          <li><a href="./submissions.html">Submit a Paper</a></li>
-          <li>
-            <a href="https://www.ieee.org/conferences/publishing/templates">Paper Template</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>About</h3>
-        <ul class="footer-links">
-          <li><a href="https://ieeesbcek.org">IEEE SB CEK</a></li>
-          <li><a href="./committee.html">Team</a></li>
-          <li><a href="./about-iprecon.html">Legacy</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Travel and Accommodation</h3>
-        <ul class="footer-links">
-          <li><a href="./venue.html">Transportation</a></li>
-          <li><a href="./accommodation.html">Hotels</a></li>
-          <li><a href="./kerala.html">Tourism</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <div class="social-icons">
-          <a target="_blank" href="https://www.facebook.com/ieeeceksb/" aria-label="Facebook"><i
-              class="fab fa-facebook-f"></i></a>
-          <a target="_blank" href="https://x.com/IEEE_SB_CEK" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-          <a href="https://www.linkedin.com/company/ieeesbcek/" aria-label="LinkedIn"><i
-              class="fab fa-linkedin-in"></i></a>
-          <a target="_blank" href="https://www.instagram.com/ieee_sb_cek" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
-        </div>
-        <div class="copyright">
-          Built with <i class="fas fa-heart"></i> | IEEE SB CEK © 2025
-        </div>
-      </div>
-    </div>
-  </footer>
+  <esi:include src="/includes/footer.html" />
 
   <script src="./scripts/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
