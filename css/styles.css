@@ -1,0 +1,819 @@
+/* =================================================================
+   IPRECON 2026 - Common Styles
+   Contains only shared styles used across all pages
+   ================================================================= */
+
+/* --------------------- GLOBAL RESET --------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* --------------------- HEADER STYLES --------------------- */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: rgb(253, 253, 253);
+  border-bottom: 1px solid #ddd;
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  height: 90px;
+  width: 1px;
+  background-color: #ddd;
+  margin: 0 30px;
+}
+
+.logo {
+  max-height: 80px;
+}
+
+.sponsor-logo {
+  max-height: 50px;
+  width: auto;
+  margin: 0 5px 0 5px;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  font-weight: bold;
+}
+
+/* Header Responsive */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: row !important;
+    justify-content: space-between;
+    padding: 10px 10px;
+    gap: 10px;
+    background-color: #e9e9e9;
+    color: rgb(0, 0, 0);
+  }
+
+  .header-section:last-child {
+    justify-content: flex-start;
+  }
+
+  .separator {
+    height: 40px;
+    margin: 0 3px;
+    background-color: rgba(136, 136, 136, 0.3);
+  }
+
+  .logo {
+    max-height: 25px !important;
+  }
+
+  .sponsor-logo {
+    max-height: 15px !important;
+  }
+
+  .event-info {
+    font-size: 8px;
+    max-width: 180px;
+    color: rgb(0, 0, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-height: 25px !important;
+  }
+  
+  .sponsor-logo {
+    max-height: 15px !important;
+  }
+
+  .separator {
+    height: 30px;
+    margin: 0 2px;
+  }
+}
+/* --------------------- NAVIGATION BAR STYLES --------------------- */
+.navbar {
+  background-color: #211021;
+  position: relative;
+  width: 100%;
+  z-index: 1001;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 50px;
+}
+
+.brand-logo {
+  max-height: 80px;
+  margin-right: 30px;
+  display: none; /* Initially hidden */
+}
+
+.nav-items {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  height: 100%;
+}
+
+.nav-link-with-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-item > a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 15px 20px;
+  font-weight: bold;
+  height: 100%;
+}
+
+.nav-item {
+  position: relative;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.nav-item:hover {
+  background-color: #8e24aa;
+}
+
+.nav-item > .nav-link {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 15px 20px;
+  font-weight: bold;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav-item:hover > .nav-link {
+  background-color: #8e24aa;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1002; /* Highest z-index */
+  left: 0;
+  top: 100%; /* Ensure it's always at the bottom of the nav item */
+}
+
+.nav-item:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  color: #333;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+/* Sticky Navbar */
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  min-height: 70px;
+}
+
+.navbar.sticky .nav-items {
+  padding-top: 10px;
+}
+
+.navbar.sticky .brand-logo {
+  display: block; /* Show when sticky */
+  max-height: 50px;
+  margin-right: 20px;
+}
+
+/* Mobile Navigation */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px 15px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1010;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Navbar Responsive - ENHANCED DROPDOWN FIX */
+@media (max-width: 1024px) {
+  .navbar {
+    background-color: #211021;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    right: 1px;
+  }
+
+  .nav-container {
+    justify-content: space-between;
+    padding: 10px 15px;
+    position: relative;
+    min-height: 60px;
+  }
+
+  .brand-logo {
+    display: none !important;
+    max-height: 40px;
+    margin: 0;
+    margin-left: 15px;
+  }
+
+  .nav-item {
+    flex-direction: column; /* important! */
+    align-items: flex-start;
+  }
+
+  .nav-link-with-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Just add this BELOW it: */
+  .nav-link-with-toggle a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .nav-link-with-toggle a:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  .nav-link {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .nav-link-with-toggle a:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  .nav-link {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  /* Change the nav-items to overlay style */
+  .nav-items {
+    display: none;
+    position: fixed; /* Change from absolute to fixed */
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 100%; /* Take 80% of screen width */
+    max-width: 600px; /* Maximum width */
+    min-height: 100dvh;
+    height: auto; /* Full height */
+    background-color: #211021; /* Dark background */
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 2000; /* Higher z-index */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out; /* Smooth transition */
+    padding-top: 80px; /* Space for close button */
+  }
+
+  /* When menu is shown */
+  .nav-items.show {
+    display: flex;
+    right: 0; /* Slide in from right */
+  }
+
+  /* Overlay background when menu is open */
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Just below the menu */
+  }
+
+  .menu-overlay.show {
+    display: block;
+  }
+
+  /* Close button in the menu */
+  .menu-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2001;
+  }
+
+  .nav-item {
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: auto;
+  }
+
+  .nav-item > a {
+    display: block;
+    width: 100%; /* FORCE FULL WIDTH */
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .nav-item > a:hover {
+    background-color: #8e24aa;
+    color: white;
+  }
+
+  /* FIXED DROPDOWN STYLES - EXPAND DOWNWARD */
+  .dropdown-content {
+    position: static !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    display: none !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  /* When dropdown is active - expand downward */
+  .nav-item.active .dropdown-content {
+    display: block !important;
+    max-height: 500px; /* Adjust based on your content */
+    transition: max-height 0.3s ease-in;
+  }
+
+  .dropdown-item {
+    color: white;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.514);
+  }
+
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-toggle {
+    margin-left: 10px;
+    display: inline-block;
+  }
+
+  .nav-item:hover .dropdown-content {
+    display: none;
+  }
+
+  .nav-item.active .dropdown-content {
+    display: block;
+  }
+
+  .navbar.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #211021;
+    min-height: 60px;
+  }
+
+  .navbar.sticky .brand-logo {
+    display: block !important;
+    max-height: 45px;
+    margin-right: 0;
+    margin-left: 5px;
+  }
+
+  .fas .fa-chevron-up {
+    margin-left: 30px !important;
+  }
+}
+
+/* --------------------- MARQUEE STYLES --------------------- */
+.mob-marq {
+  display: none;
+}
+
+.marquee-container {
+  position: relative;
+  background-color: #f5f5f5;
+  padding: 12px 0;
+  overflow: hidden;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.marquee-container[style*="position: fixed"] {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.marquee {
+  white-space: nowrap;
+  animation: marquee linear infinite;
+  display: inline-block;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+.notification {
+  display: inline-block;
+  margin: 0 30px;
+  color: #333;
+}
+
+.notification i {
+  color: #6a1b9a;
+  margin-right: 8px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(25%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Marquee Responsive */
+@media (max-width: 1024px) {
+  .mob-marq {
+    display: block !important;
+    background-color: #211021 !important;
+    margin-right: 40px;
+  }
+
+  .non-mob.marquee-container {
+    display: none !important;
+  }
+
+  /* Make text in mobile marquee white for better visibility */
+  .mob-marq .notification {
+    color: white !important;
+  }
+
+  /* Keep purple links and icons as they are */
+  .mob-marq .purple-link {
+    color: #8e24aa !important;
+  }
+
+  .mob-marq .notification i {
+    color: #6a1b9a !important;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(15%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* For sticky state after scrolling */
+  .mob-marq.marquee-container[style*="position: fixed"],
+  .navbar.sticky + .mob-marq.marquee-container {
+    background-color: #f5f5f5 !important;
+    display: block !important;
+  }
+
+  .mob-marq.marquee-container[style*="position: fixed"] .notification,
+  .navbar.sticky + .mob-marq.marquee-container .notification {
+    color: #333 !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mob-marq {
+    display: none !important;
+  }
+
+  .non-mob.marquee-container {
+    display: block;
+  }
+}
+
+/* Marquee placeholder */
+#marquee-placeholder {
+  transition: all 0.3s ease;
+}
+
+#marquee-placeholder.visible {
+  display: block;
+}
+
+/* --------------------- COMMON SECTION TITLE STYLES --------------------- */
+.section-title-container {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 36px;
+  color: #211021;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #8e24aa;
+}
+
+/* Responsive Section Titles */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 26px;
+  }
+
+  .section-title::after {
+    width: 60px;
+  }
+}
+
+/* --------------------- COMMON LINK STYLES --------------------- */
+/* Purple link with chain icon */
+.purple-link {
+  color: #8e24aa;
+  text-decoration: none;
+  font-weight: normal;
+  transition: color 0.3s ease;
+}
+
+.purple-link:hover {
+  color: #6a1b9a;
+  text-decoration: underline;
+}
+
+/* Chain icon for purple links */
+.purple-link::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%238e24aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* --------------------- FOOTER STYLES --------------------- */
+.site-footer {
+  background-color: #1a0e1a;
+  color: #ffffff;
+  padding: 40px 0;
+  margin-top: 40px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+  padding: 0 15px;
+}
+
+.footer-column:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.footer-column h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links li a {
+  color: #a4a4a4;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.footer-links li a:hover {
+  color: #ffffff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid #a4a4a4;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background-color: #ffffff;
+  color: #1a0e1a;
+}
+
+.copyright {
+  color: #a4a4a4;
+  font-size: 14px;
+  text-align: center;
+}
+
+.copyright i {
+  color: #a4a4a4;
+  margin: 0 auto 30px;
+  text-decoration: none;
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+  .footer-column {
+    flex-basis: 50%;
+  }
+
+  .footer-column:last-child {
+    flex-basis: 100%;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-column {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .footer-column:last-child {
+    margin-top: 10px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-column {
+    flex-basis: 50%;
+  }
+
+  .footer-column:last-child {
+    flex-basis: 100%;
+  }
+}
+
+/* --------------------- LARGE SCREEN STYLES --------------------- */
+@media (min-width: 1921px) {
+  .footer-container {
+    max-width: 70%;
+  }
+}
+
+/* --------------------- UTILITY STYLES --------------------- */
+/* Wave separator */
+.wave-separator {
+  width: 100%;
+  margin-top: -20px;
+  position: relative;
+  z-index: 1;
+}
+
+.wave-separator svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
