@@ -428,11 +428,11 @@
     transition: max-height 0.3s ease-out;
   }
 
-  /* When dropdown is active - expand downward */
+  /* Disable inline dropdown expansion - use overlay instead */
   .nav-item.active .dropdown-content {
-    display: block !important;
-    max-height: 1000px; /* Increased for more content */
-    transition: max-height 0.4s ease-in-out;
+    display: none !important;
+    max-height: 0;
+    transition: none;
   }
 
   /* Ensure smooth scrolling behavior in mobile menu */
@@ -481,6 +481,117 @@
 
   .fas .fa-chevron-up {
     margin-left: 30px !important;
+  }
+
+  /* Dropdown Overlay Styles - Match Mobile Menu Design */
+  .dropdown-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    background-color: #211021; /* Same as mobile menu */
+    z-index: 2001; /* Above mobile menu */
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+  }
+
+  .dropdown-overlay.show {
+    display: flex;
+    right: 0;
+  }
+
+  /* Dropdown Overlay Header */
+  .dropdown-overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #211021;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .dropdown-back-btn {
+    display: flex;
+    align-items: center;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+  }
+
+  .dropdown-back-btn:hover {
+    color: #8e24aa;
+  }
+
+  .dropdown-back-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+  }
+
+  .dropdown-overlay-title {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+  }
+
+  .dropdown-close-btn {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown-close-btn:hover {
+    color: #8e24aa;
+  }
+
+  /* Dropdown Overlay Content */
+  .dropdown-overlay-content {
+    flex: 1;
+    padding: 0;
+  }
+
+  .dropdown-overlay-item {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-overlay-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+  }
+
+  .dropdown-overlay-item:last-child {
+    border-bottom: none;
   }
 }
 
