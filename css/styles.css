@@ -331,7 +331,7 @@
     right: -100%; /* Start off-screen */
     width: 100%; /* Take full screen width */
     max-width: 600px; /* Maximum width */
-    height: 100vh; /* Fixed full height */
+    height: 100vh; /* Full viewport height */
     background-color: #211021; /* Dark background */
     flex-direction: column;
     overflow-y: auto; /* Enable vertical scrolling */
@@ -340,7 +340,7 @@
     z-index: 2000; /* Higher z-index */
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease-in-out; /* Smooth transition */
-    padding: 80px 0 20px 0; /* Space for close button and bottom padding */
+    padding: 0; /* Remove padding to allow full scrollable area */
   }
 
   /* When menu is shown */
@@ -385,6 +385,16 @@
     height: auto;
   }
 
+  /* Add top margin to first nav item for close button space */
+  .nav-item:first-child {
+    margin-top: 80px;
+  }
+
+  /* Add bottom padding to last nav item */
+  .nav-item:last-child {
+    padding-bottom: 30px;
+  }
+
   .nav-item > a {
     display: block;
     width: 100%; /* FORCE FULL WIDTH */
@@ -421,8 +431,13 @@
   /* When dropdown is active - expand downward */
   .nav-item.active .dropdown-content {
     display: block !important;
-    max-height: 500px; /* Adjust based on your content */
-    transition: max-height 0.3s ease-in;
+    max-height: 1000px; /* Increased for more content */
+    transition: max-height 0.4s ease-in-out;
+  }
+
+  /* Ensure smooth scrolling behavior in mobile menu */
+  .nav-items {
+    scroll-behavior: smooth;
   }
 
   .dropdown-item {

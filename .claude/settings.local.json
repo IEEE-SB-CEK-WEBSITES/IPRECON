@@ -4,7 +4,8 @@
       "Bash(find:*)",
       "Bash(cat:*)",
       "Bash(python:*)",
-      "Read(//e/IEEE SB CEK - WEB/ALL BACKUP/cloudflare-esi-worker/**)"
+      "Read(//e/IEEE SB CEK - WEB/ALL BACKUP/cloudflare-esi-worker/**)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []
