@@ -335,118 +335,110 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Handle responsive behavior changes
+   * Completely reset navbar to desktop state
    */
-  function handleResponsive() {
+  function resetNavbarToDesktop() {
     const navItemsList = document.querySelector(".nav-items");
     const navContainer = document.querySelector(".nav-container");
 
+    // Force close any mobile menu states
+    closeMobileMenu();
+
+    // Remove ALL mobile-related classes and states
+    if (navItemsList) {
+      navItemsList.classList.remove("show");
+      navItemsList.removeAttribute("style");
+    }
+
+    // Remove overlay completely
+    if (menuOverlay) {
+      menuOverlay.remove();
+      menuOverlay = null;
+    }
+
+    // Remove dropdown overlay completely
+    if (dropdownOverlay) {
+      dropdownOverlay.remove();
+      dropdownOverlay = null;
+    }
+
+    // Remove mobile menu button completely
+    const existingMobileBtn = navContainer ? navContainer.querySelector('.mobile-menu-btn') : null;
+    if (existingMobileBtn) {
+      existingMobileBtn.remove();
+    }
+
+    // Remove mobile menu header completely
+    if (navItemsList) {
+      const mobileMenuHeader = navItemsList.querySelector('.mobile-menu-header');
+      if (mobileMenuHeader) {
+        mobileMenuHeader.remove();
+      }
+    }
+
+    // Reset all navigation items to original desktop state
+    navItems.forEach((item) => {
+      // Remove all mobile-related classes
+      item.classList.remove("active", "dropdown-active");
+      item.removeAttribute("aria-expanded");
+      item.removeAttribute("aria-haspopup");
+
+      // Remove mobile dropdown wrappers and restore original structure
+      const navLinkWrapper = item.querySelector(".nav-link-with-toggle");
+      if (navLinkWrapper) {
+        const mainLink = navLinkWrapper.querySelector("a, .nav-link");
+        if (mainLink) {
+          item.insertBefore(mainLink, navLinkWrapper);
+        }
+        navLinkWrapper.remove();
+      }
+    });
+
+    // Remove any leftover mobile elements
+    document.querySelectorAll(".dropdown-back-btn, .dropdown-close-btn, .dropdown-overlay").forEach(el => {
+      el.remove();
+    });
+
+    // Reset container styles
+    if (navContainer) {
+      navContainer.removeAttribute("style");
+    }
+
+    // Reset brand logo based on scroll position
+    if (brandLogo) {
+      brandLogo.removeAttribute("style");
+      if (window.pageYOffset > 90) {
+        brandLogo.style.display = "block";
+      } else {
+        brandLogo.style.display = "none";
+      }
+    }
+
+    // Reset body overflow
+    document.body.style.overflow = "";
+
+    // Reset mobile menu initialization flag
+    mobileMenuInitialized = false;
+    menuClose = null;
+
+    // Force layout recalculation
+    if (navbar) {
+      navbar.style.display = 'none';
+      navbar.offsetHeight; // Trigger reflow
+      navbar.style.display = '';
+    }
+  }
+
+  /**
+   * Handle responsive behavior changes
+   */
+  function handleResponsive() {
     if (window.innerWidth <= 1024) {
       // Initialize mobile menu if not already done
       initializeMobileMenu();
     } else {
-      // Clean up mobile behavior on larger screens
-      if (navItemsList) {
-        navItemsList.classList.remove("show");
-        // Reset any inline styles that might have been applied in mobile mode
-        navItemsList.style.display = "";
-        navItemsList.style.position = "";
-        navItemsList.style.top = "";
-        navItemsList.style.right = "";
-        navItemsList.style.width = "";
-        navItemsList.style.height = "";
-        navItemsList.style.flexDirection = "";
-        navItemsList.style.alignItems = "";
-        navItemsList.style.justifyContent = "";
-        navItemsList.style.backgroundColor = "";
-        navItemsList.style.zIndex = "";
-        navItemsList.style.overflow = "";
-        navItemsList.style.padding = "";
-      }
-
-      // Remove overlay if exists
-      if (menuOverlay) {
-        menuOverlay.classList.remove("show");
-      }
-
-      // Remove mobile menu button from nav container
-      if (navContainer && navContainer.contains(mobileMenuBtn)) {
-        navContainer.removeChild(mobileMenuBtn);
-      }
-
-      // Remove mobile menu header if it exists
-      if (menuClose && navItemsList) {
-        const mobileMenuHeader = navItemsList.querySelector('.mobile-menu-header');
-        if (mobileMenuHeader) {
-          mobileMenuHeader.remove();
-          menuClose = null;
-        }
-      }
-
-      // Close dropdown overlay if open
-      closeDropdownOverlay();
-      if (dropdownOverlay) {
-        dropdownOverlay.remove();
-        dropdownOverlay = null;
-      }
-
-      // Enable scrolling
-      document.body.style.overflow = "";
-
-      // Reset all nav item states and clean up mobile modifications
-      navItems.forEach((item) => {
-        item.classList.remove("active");
-        item.classList.remove("dropdown-active");
-
-        // Remove mobile dropdown wrappers
-        const navLinkWrapper = item.querySelector(".nav-link-with-toggle");
-        if (navLinkWrapper) {
-          const mainLink = navLinkWrapper.querySelector("a, .nav-link");
-          const toggleIndicator = navLinkWrapper.querySelector(".dropdown-toggle");
-
-          // Move main link back to its original position
-          if (mainLink) {
-            item.insertBefore(mainLink, navLinkWrapper);
-          }
-
-          // Remove the wrapper and toggle
-          navLinkWrapper.remove();
-        }
-
-        // Reset aria attributes
-        item.setAttribute("aria-expanded", "false");
-        item.removeAttribute("aria-haspopup");
-      });
-
-      // Remove any mobile dropdown buttons that might have been added
-      document.querySelectorAll(".dropdown-back-btn, .dropdown-close-btn").forEach(btn => {
-        btn.remove();
-      });
-
-      // Reset menu button icon
-      const menuBtnIcon = mobileMenuBtn.querySelector("i");
-      if (menuBtnIcon) {
-        menuBtnIcon.className = "fas fa-bars";
-      }
-
-      // Reset mobile menu initialization flag to allow re-initialization when going back to mobile
-      mobileMenuInitialized = false;
-
-      // Reset brand logo display based on scroll position
-      if (brandLogo) {
-        if (window.pageYOffset > 90) {
-          brandLogo.style.display = "block";
-        } else {
-          brandLogo.style.display = "none";
-        }
-      }
-
-      // Reset nav container styles that might have been modified for mobile
-      if (navContainer) {
-        navContainer.style.justifyContent = "";
-        navContainer.style.padding = "";
-        navContainer.style.minHeight = "";
-      }
+      // Completely reset to desktop state
+      resetNavbarToDesktop();
     }
   }
 
@@ -590,6 +582,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Debounce resize event
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function () {
+      // If switching to desktop, force reset navbar immediately
+      if (window.innerWidth > 1024 && mobileMenuInitialized) {
+        resetNavbarToDesktop();
+      }
+
       // Update marquee original position on resize
       if (desktopMarquee) {
         // Reset position first to get true position
