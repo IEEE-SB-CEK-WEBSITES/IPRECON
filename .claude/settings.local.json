@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find:*)",
       "Bash(cat:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Read(//e/IEEE SB CEK - WEB/ALL BACKUP/cloudflare-esi-worker/**)"
     ],
     "deny": [],
     "ask": []
