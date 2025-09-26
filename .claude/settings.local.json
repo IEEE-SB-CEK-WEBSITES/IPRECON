@@ -5,7 +5,10 @@
       "Bash(cat:*)",
       "Bash(python:*)",
       "Read(//e/IEEE SB CEK - WEB/ALL BACKUP/cloudflare-esi-worker/**)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
