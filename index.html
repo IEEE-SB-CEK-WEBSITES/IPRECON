@@ -1012,7 +1012,7 @@
       // Owl Carousel initialization
       $(document).ready(function () {
         $("#news-slider").owlCarousel({
-          items: 5,
+          items: 4,
           loop: true,
           margin: 20,
           nav: false,
@@ -1024,25 +1024,21 @@
           autoplay: true,
           autoplayTimeout: 3000,
           autoplayHoverPause: true,
-          animateOut: 'fadeOut',
-          animateIn: 'fadeIn',
           smartSpeed: 450,
           responsive: {
             0: {
-              items: 1,
+              items: 3,
               margin: 10,
-              center: true,
             },
-            480: {
-              items: 2,
+            600: {
+              items: 3,
               margin: 15,
-              center: false,
             },
             768: {
               items: 3,
               margin: 20,
             },
-            1024: {
+            1000: {
               items: 4,
               margin: 20,
             },
