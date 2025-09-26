@@ -732,6 +732,52 @@
   .non-mob.marquee-container {
     display: block;
   }
+
+  /* FORCE DESKTOP NAVBAR STYLES - Override any mobile styles */
+  .nav-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0 50px !important;
+    position: relative !important;
+    min-height: auto !important;
+  }
+
+  .nav-items {
+    display: flex !important;
+    list-style: none !important;
+    justify-content: center !important;
+    height: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    background-color: transparent !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: auto !important;
+    overflow: visible !important;
+  }
+
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .mobile-menu-header {
+    display: none !important;
+  }
+
+  .menu-overlay {
+    display: none !important;
+  }
+
+  .dropdown-overlay {
+    display: none !important;
+  }
 }
 
 /* Marquee placeholder */
