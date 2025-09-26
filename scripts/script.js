@@ -339,6 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function handleResponsive() {
     const navItemsList = document.querySelector(".nav-items");
+    const navContainer = document.querySelector(".nav-container");
 
     if (window.innerWidth <= 1024) {
       // Initialize mobile menu if not already done
@@ -347,6 +348,20 @@ document.addEventListener("DOMContentLoaded", function () {
       // Clean up mobile behavior on larger screens
       if (navItemsList) {
         navItemsList.classList.remove("show");
+        // Reset any inline styles that might have been applied in mobile mode
+        navItemsList.style.display = "";
+        navItemsList.style.position = "";
+        navItemsList.style.top = "";
+        navItemsList.style.right = "";
+        navItemsList.style.width = "";
+        navItemsList.style.height = "";
+        navItemsList.style.flexDirection = "";
+        navItemsList.style.alignItems = "";
+        navItemsList.style.justifyContent = "";
+        navItemsList.style.backgroundColor = "";
+        navItemsList.style.zIndex = "";
+        navItemsList.style.overflow = "";
+        navItemsList.style.padding = "";
       }
 
       // Remove overlay if exists
@@ -354,30 +369,83 @@ document.addEventListener("DOMContentLoaded", function () {
         menuOverlay.classList.remove("show");
       }
 
+      // Remove mobile menu button from nav container
+      if (navContainer && navContainer.contains(mobileMenuBtn)) {
+        navContainer.removeChild(mobileMenuBtn);
+      }
+
+      // Remove mobile menu header if it exists
+      if (menuClose && navItemsList) {
+        const mobileMenuHeader = navItemsList.querySelector('.mobile-menu-header');
+        if (mobileMenuHeader) {
+          mobileMenuHeader.remove();
+          menuClose = null;
+        }
+      }
+
       // Close dropdown overlay if open
       closeDropdownOverlay();
+      if (dropdownOverlay) {
+        dropdownOverlay.remove();
+        dropdownOverlay = null;
+      }
 
       // Enable scrolling
       document.body.style.overflow = "";
 
-      // Reset all nav item states
+      // Reset all nav item states and clean up mobile modifications
       navItems.forEach((item) => {
         item.classList.remove("active");
+        item.classList.remove("dropdown-active");
 
-        // Reset chevron icons
-        const icon = item.querySelector(".dropdown-toggle i");
-        if (icon) {
-          icon.className = "fas fa-chevron-down";
+        // Remove mobile dropdown wrappers
+        const navLinkWrapper = item.querySelector(".nav-link-with-toggle");
+        if (navLinkWrapper) {
+          const mainLink = navLinkWrapper.querySelector("a, .nav-link");
+          const toggleIndicator = navLinkWrapper.querySelector(".dropdown-toggle");
+
+          // Move main link back to its original position
+          if (mainLink) {
+            item.insertBefore(mainLink, navLinkWrapper);
+          }
+
+          // Remove the wrapper and toggle
+          navLinkWrapper.remove();
         }
 
         // Reset aria attributes
         item.setAttribute("aria-expanded", "false");
+        item.removeAttribute("aria-haspopup");
+      });
+
+      // Remove any mobile dropdown buttons that might have been added
+      document.querySelectorAll(".dropdown-back-btn, .dropdown-close-btn").forEach(btn => {
+        btn.remove();
       });
 
       // Reset menu button icon
       const menuBtnIcon = mobileMenuBtn.querySelector("i");
       if (menuBtnIcon) {
         menuBtnIcon.className = "fas fa-bars";
+      }
+
+      // Reset mobile menu initialization flag to allow re-initialization when going back to mobile
+      mobileMenuInitialized = false;
+
+      // Reset brand logo display based on scroll position
+      if (brandLogo) {
+        if (window.pageYOffset > 90) {
+          brandLogo.style.display = "block";
+        } else {
+          brandLogo.style.display = "none";
+        }
+      }
+
+      // Reset nav container styles that might have been modified for mobile
+      if (navContainer) {
+        navContainer.style.justifyContent = "";
+        navContainer.style.padding = "";
+        navContainer.style.minHeight = "";
       }
     }
   }
