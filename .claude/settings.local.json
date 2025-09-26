@@ -8,7 +8,15 @@
       "Bash(findstr:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebSearch",
+      "Read(//e/**)",
+      "Bash(npm run deploy:*)",
+      "Bash(wrangler tail:*)",
+      "Bash(wrangler status:*)",
+      "Bash(wrangler deployments:*)",
+      "Bash(node:*)",
+      "Bash(wrangler dev:*)"
     ],
     "deny": [],
     "ask": []
