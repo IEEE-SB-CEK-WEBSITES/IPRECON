@@ -370,7 +370,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px 20px 25px 20px; /* Added extra bottom padding for spacing */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background-color: #211021;
     position: sticky;
@@ -416,9 +416,9 @@
     height: auto;
   }
 
-  /* Add proper spacing between header and first menu item */
+  /* Header padding provides spacing, no additional margin needed */
   .nav-item:first-child {
-    margin-top: 20px;
+    margin-top: 0;
   }
 
   /* Add bottom padding to last nav item */
