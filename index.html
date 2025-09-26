@@ -408,11 +408,17 @@
         );
         visibility: visible;
         opacity: 1;
-        padding-top: 80px;
+        padding: 80px 0;
         min-height: 400px;
         position: relative;
         overflow: hidden;
         z-index: 1;
+      }
+
+      .carousel-s .container-fluid {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
       }
 
       .owl-nav {
@@ -420,10 +426,164 @@
       }
 
       .carousel-s-title {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         color: white;
         text-align: center;
         font-family: "montserrat", sans-serif;
+      }
+
+      /* Organizers Carousel Styles */
+      .owl-carousel .owl-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+      }
+
+      .post-slide {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .post-slide:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .post-img {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .post-img img {
+        max-width: 100%;
+        max-height: 120px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        filter: brightness(1.1);
+        transition: all 0.3s ease;
+      }
+
+      .post-slide:hover .post-img img {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+      }
+
+      /* Responsive Design for Organizers Section */
+      @media (max-width: 1920px) {
+        .carousel-s .container-fluid {
+          max-width: 1200px;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .carousel-s {
+          padding: 60px 0;
+        }
+
+        .carousel-s .container-fluid {
+          max-width: 100%;
+          padding: 0 30px;
+        }
+
+        .post-slide {
+          padding: 25px 15px;
+          height: 180px;
+        }
+
+        .post-img img {
+          max-height: 100px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-s {
+          padding: 50px 0;
+        }
+
+        .carousel-s .container-fluid {
+          padding: 0 20px;
+        }
+
+        .carousel-s-title {
+          font-size: 28px;
+          margin-bottom: 40px;
+        }
+
+        .post-slide {
+          padding: 20px 10px;
+          height: 160px;
+          margin: 0 5px;
+        }
+
+        .post-img img {
+          max-height: 80px;
+        }
+
+        .owl-carousel .owl-item {
+          padding: 0 5px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .carousel-s {
+          padding: 40px 0;
+        }
+
+        .carousel-s .container-fluid {
+          padding: 0 15px;
+        }
+
+        .carousel-s-title {
+          font-size: 24px;
+          margin-bottom: 30px;
+        }
+
+        .post-slide {
+          padding: 15px 8px;
+          height: 140px;
+          border-radius: 12px;
+        }
+
+        .post-img img {
+          max-height: 65px;
+        }
+      }
+
+      /* Ultrawide Screen Optimization */
+      @media (min-width: 1921px) {
+        .carousel-s .container-fluid {
+          max-width: 1600px;
+          padding: 0 40px;
+        }
+
+        .post-slide {
+          padding: 35px 25px;
+          height: 220px;
+        }
+
+        .post-img img {
+          max-height: 140px;
+        }
+
+        .carousel-s-title {
+          font-size: 42px;
+          margin-bottom: 60px;
+        }
       }
 
       /* --------------------- IMPORTANT DATES SECTION - UPDATED TO MATCH CFP DESIGN --------------------- */
@@ -945,25 +1105,47 @@
       // Owl Carousel initialization
       $(document).ready(function () {
         $("#news-slider").owlCarousel({
-          items: 4,
-          loop: true, // Enable continuous loop
+          items: 5,
+          loop: true,
           margin: 20,
-          nav: false, // Hide navigation arrows
+          nav: false,
+          dots: false,
           navText: [
             "<i class='fa fa-chevron-left'></i>",
             "<i class='fa fa-chevron-right'></i>",
-          ], // Custom navigation icons
-          autoplay: true, // Enable autoplay
-          autoplayTimeout: 3000, // Autoplay interval in milliseconds (3 seconds in this example)
+          ],
+          autoplay: true,
+          autoplayTimeout: 3000,
+          autoplayHoverPause: true,
+          animateOut: 'fadeOut',
+          animateIn: 'fadeIn',
+          smartSpeed: 450,
           responsive: {
             0: {
-              items: 3,
+              items: 1,
+              margin: 10,
+              center: true,
             },
-            600: {
-              items: 3,
+            480: {
+              items: 2,
+              margin: 15,
+              center: false,
             },
-            1000: {
+            768: {
+              items: 3,
+              margin: 20,
+            },
+            1024: {
               items: 4,
+              margin: 20,
+            },
+            1200: {
+              items: 5,
+              margin: 25,
+            },
+            1600: {
+              items: 6,
+              margin: 30,
             },
           },
         });
