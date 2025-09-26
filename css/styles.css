@@ -340,7 +340,7 @@
     z-index: 2000; /* Higher z-index */
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease-in-out; /* Smooth transition */
-    padding: 0; /* Remove padding to allow full scrollable area */
+    padding: 20px 0 0 0; /* Add top padding for spacing after header */
   }
 
   /* When menu is shown */
@@ -370,7 +370,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px 25px 20px; /* Added extra bottom padding for spacing */
+    padding: 15px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background-color: #211021;
     position: sticky;
