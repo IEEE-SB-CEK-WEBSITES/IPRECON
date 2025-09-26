@@ -365,15 +365,46 @@
     display: block;
   }
 
+  /* Mobile Menu Header */
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #211021;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .mobile-menu-logo {
+    height: 40px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-menu-logo:hover {
+    opacity: 0.8;
+  }
+
   /* Close button in the menu */
   .menu-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
     color: white;
     font-size: 24px;
     cursor: pointer;
-    z-index: 2001;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-close:hover {
+    color: #8e24aa;
   }
 
   .nav-item {
@@ -385,9 +416,9 @@
     height: auto;
   }
 
-  /* Add top margin to first nav item for close button space */
+  /* Remove top margin since we now have a proper header */
   .nav-item:first-child {
-    margin-top: 80px;
+    margin-top: 0;
   }
 
   /* Add bottom padding to last nav item */
