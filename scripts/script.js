@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="dropdown-overlay-header">
         <button class="dropdown-back-btn" aria-label="Back to menu">
           <i class="fas fa-arrow-left"></i>
-          Back
         </button>
         <div class="dropdown-overlay-title">${title}</div>
         <button class="dropdown-close-btn" aria-label="Close menu">
