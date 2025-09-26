@@ -344,10 +344,47 @@ document.addEventListener("DOMContentLoaded", function () {
     // Force close any mobile menu states
     closeMobileMenu();
 
-    // Remove ALL mobile-related classes and states
+    // NUCLEAR OPTION: Force remove ALL inline styles
     if (navItemsList) {
       navItemsList.classList.remove("show");
       navItemsList.removeAttribute("style");
+      navItemsList.setAttribute("style", ""); // Force empty style
+
+      // Force desktop styles via inline CSS to override everything
+      navItemsList.style.cssText = `
+        display: flex !important;
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        width: auto !important;
+        max-width: none !important;
+        height: auto !important;
+        background-color: transparent !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: auto !important;
+        overflow: visible !important;
+        list-style: none !important;
+      `;
+    }
+
+    if (navContainer) {
+      navContainer.removeAttribute("style");
+      navContainer.setAttribute("style", ""); // Force empty style
+
+      // Force desktop styles via inline CSS
+      navContainer.style.cssText = `
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 0 50px !important;
+        position: relative !important;
+        min-height: auto !important;
+      `;
     }
 
     // Remove overlay completely
@@ -368,6 +405,9 @@ document.addEventListener("DOMContentLoaded", function () {
       existingMobileBtn.remove();
     }
 
+    // Remove ALL mobile menu buttons from the entire page
+    document.querySelectorAll('.mobile-menu-btn').forEach(btn => btn.remove());
+
     // Remove mobile menu header completely
     if (navItemsList) {
       const mobileMenuHeader = navItemsList.querySelector('.mobile-menu-header');
@@ -382,6 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.classList.remove("active", "dropdown-active");
       item.removeAttribute("aria-expanded");
       item.removeAttribute("aria-haspopup");
+      item.removeAttribute("style");
 
       // Remove mobile dropdown wrappers and restore original structure
       const navLinkWrapper = item.querySelector(".nav-link-with-toggle");
@@ -394,15 +435,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Remove any leftover mobile elements
-    document.querySelectorAll(".dropdown-back-btn, .dropdown-close-btn, .dropdown-overlay").forEach(el => {
+    // Remove any leftover mobile elements from entire page
+    document.querySelectorAll(".dropdown-back-btn, .dropdown-close-btn, .dropdown-overlay, .menu-overlay, .mobile-menu-header").forEach(el => {
       el.remove();
     });
-
-    // Reset container styles
-    if (navContainer) {
-      navContainer.removeAttribute("style");
-    }
 
     // Reset brand logo based on scroll position
     if (brandLogo) {
@@ -457,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function () {
     menuClose = null;
 
     // Force layout recalculation for multiple elements
-    const elementsToReflow = [navbar, mobileMarquee, desktopMarquee].filter(Boolean);
+    const elementsToReflow = [navbar, navContainer, navItemsList, mobileMarquee, desktopMarquee].filter(Boolean);
     elementsToReflow.forEach(element => {
       if (element) {
         element.style.display = 'none';
@@ -466,8 +502,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // Force repaint by temporarily changing a harmless style
+    if (navbar) {
+      navbar.style.opacity = '0.99';
+      setTimeout(() => {
+        navbar.style.opacity = '';
+      }, 10);
+    }
+
     // Recalculate marquee speeds for new viewport
     adjustMarqueeSpeed();
+
+    console.log('Desktop reset completed - navbar should be restored');
   }
 
   /**
