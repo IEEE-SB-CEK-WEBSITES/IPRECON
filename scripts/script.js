@@ -335,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Completely reset navbar to desktop state
+   * Completely reset ALL elements to desktop state
    */
   function resetNavbarToDesktop() {
     const navItemsList = document.querySelector(".nav-items");
@@ -417,16 +417,57 @@ document.addEventListener("DOMContentLoaded", function () {
     // Reset body overflow
     document.body.style.overflow = "";
 
+    // RESET ALL OTHER ELEMENTS THAT MIGHT HAVE MOBILE STYLES
+    // Reset mobile marquee completely
+    if (mobileMarquee) {
+      mobileMarquee.removeAttribute("style");
+      // Reset notification colors in mobile marquee
+      const mobileNotifications = mobileMarquee.querySelectorAll(".notification");
+      mobileNotifications.forEach((notification) => {
+        notification.removeAttribute("style");
+      });
+    }
+
+    // Reset desktop marquee completely
+    if (desktopMarquee) {
+      desktopMarquee.removeAttribute("style");
+      // Recalculate original position
+      desktopMarqueeOriginalTop = desktopMarquee.getBoundingClientRect().top + window.pageYOffset;
+    }
+
+    // Reset marquee placeholder
+    if (marqueePlaceholder) {
+      marqueePlaceholder.removeAttribute("style");
+      marqueePlaceholder.style.display = "none";
+    }
+
+    // Reset any marquee elements that might have animation styles
+    const allMarquees = document.querySelectorAll(".marquee");
+    allMarquees.forEach((marquee) => {
+      // Keep animation duration but reset other styles
+      const animationDuration = marquee.style.animationDuration;
+      marquee.removeAttribute("style");
+      if (animationDuration) {
+        marquee.style.animationDuration = animationDuration;
+      }
+    });
+
     // Reset mobile menu initialization flag
     mobileMenuInitialized = false;
     menuClose = null;
 
-    // Force layout recalculation
-    if (navbar) {
-      navbar.style.display = 'none';
-      navbar.offsetHeight; // Trigger reflow
-      navbar.style.display = '';
-    }
+    // Force layout recalculation for multiple elements
+    const elementsToReflow = [navbar, mobileMarquee, desktopMarquee].filter(Boolean);
+    elementsToReflow.forEach(element => {
+      if (element) {
+        element.style.display = 'none';
+        element.offsetHeight; // Trigger reflow
+        element.style.display = '';
+      }
+    });
+
+    // Recalculate marquee speeds for new viewport
+    adjustMarqueeSpeed();
   }
 
   /**
