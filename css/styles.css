@@ -742,6 +742,48 @@
     padding: 0 50px !important;
     position: relative !important;
     min-height: auto !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Desktop sticky navbar fixes */
+  .navbar.sticky {
+    min-height: 80px !important;
+    height: 80px !important;
+  }
+
+  .navbar.sticky .nav-container {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 15px 50px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    height: 100% !important;
+  }
+
+  .navbar.sticky .brand-logo {
+    margin-right: 30px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .navbar.sticky .nav-items {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .navbar.sticky .nav-item {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Prevent text wrapping on desktop */
+  .nav-item > a,
+  .nav-item > .nav-link {
+    white-space: nowrap !important;
   }
 
   .nav-items {
