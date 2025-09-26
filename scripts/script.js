@@ -185,12 +185,27 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(menuOverlay);
       }
 
-      // Create close button if it doesn't exist
+      // Create mobile menu header if it doesn't exist
       if (!menuClose) {
-        menuClose = document.createElement("div");
-        menuClose.className = "menu-close";
-        menuClose.innerHTML = '<i class="fas fa-times"></i>';
-        navItemsList.prepend(menuClose);
+        const mobileMenuHeader = document.createElement("div");
+        mobileMenuHeader.className = "mobile-menu-header";
+        mobileMenuHeader.innerHTML = `
+          <img src="./assets/img/iprecon26 white.png" alt="IPRECON 2026 Logo" class="mobile-menu-logo" />
+          <button class="menu-close" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+
+        navItemsList.prepend(mobileMenuHeader);
+        menuClose = mobileMenuHeader.querySelector('.menu-close');
+
+        // Add logo click handler to navigate to home
+        const mobileMenuLogo = mobileMenuHeader.querySelector('.mobile-menu-logo');
+        mobileMenuLogo.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = './index.html';
+          closeMobileMenu();
+        });
       }
 
       // Add button to the nav container if not already there
