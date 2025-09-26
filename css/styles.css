@@ -329,17 +329,18 @@
     position: fixed; /* Change from absolute to fixed */
     top: 0;
     right: -100%; /* Start off-screen */
-    width: 100%; /* Take 80% of screen width */
+    width: 100%; /* Take full screen width */
     max-width: 600px; /* Maximum width */
-    min-height: 100dvh;
-    height: auto; /* Full height */
+    height: 100vh; /* Fixed full height */
     background-color: #211021; /* Dark background */
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     z-index: 2000; /* Higher z-index */
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease-in-out; /* Smooth transition */
-    padding-top: 80px; /* Space for close button */
+    padding: 80px 0 20px 0; /* Space for close button and bottom padding */
   }
 
   /* When menu is shown */
