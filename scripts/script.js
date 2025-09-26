@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let mobileMenuInitialized = false;
   let menuOverlay = null;
   let menuClose = null;
+  let dropdownOverlay = null;
 
   // Store original position of the desktop marquee
   let desktopMarqueeOriginalTop = 0;
@@ -70,6 +71,73 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
+   * Show dropdown overlay with title and items
+   */
+  function showDropdownOverlay(title, items) {
+    // Create overlay if it doesn't exist
+    if (!dropdownOverlay) {
+      dropdownOverlay = document.createElement("div");
+      dropdownOverlay.className = "dropdown-overlay";
+      document.body.appendChild(dropdownOverlay);
+    }
+
+    // Build overlay content
+    dropdownOverlay.innerHTML = `
+      <div class="dropdown-overlay-header">
+        <button class="dropdown-back-btn" aria-label="Back to menu">
+          <i class="fas fa-arrow-left"></i>
+          Back
+        </button>
+        <div class="dropdown-overlay-title">${title}</div>
+        <button class="dropdown-close-btn" aria-label="Close menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="dropdown-overlay-content">
+        ${items.map(item => `
+          <a href="${item.href}" class="dropdown-overlay-item">${item.text}</a>
+        `).join('')}
+      </div>
+    `;
+
+    // Add event listeners
+    const backBtn = dropdownOverlay.querySelector(".dropdown-back-btn");
+    const closeBtn = dropdownOverlay.querySelector(".dropdown-close-btn");
+    const overlayItems = dropdownOverlay.querySelectorAll(".dropdown-overlay-item");
+
+    backBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      closeDropdownOverlay();
+    });
+
+    closeBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      closeDropdownOverlay();
+      closeMobileMenu();
+    });
+
+    // Handle overlay item clicks
+    overlayItems.forEach(item => {
+      item.addEventListener("click", function(e) {
+        closeDropdownOverlay();
+        closeMobileMenu();
+      });
+    });
+
+    // Show overlay
+    dropdownOverlay.classList.add("show");
+  }
+
+  /**
+   * Close dropdown overlay
+   */
+  function closeDropdownOverlay() {
+    if (dropdownOverlay) {
+      dropdownOverlay.classList.remove("show");
+    }
+  }
+
+  /**
    * Close mobile menu and reset states
    */
   function closeMobileMenu() {
@@ -79,13 +147,16 @@ document.addEventListener("DOMContentLoaded", function () {
       menuOverlay.classList.remove("show");
       document.body.style.overflow = "";
 
+      // Close dropdown overlay if open
+      closeDropdownOverlay();
+
       // Reset menu button icon
       const menuBtnIcon = mobileMenuBtn.querySelector("i");
       if (menuBtnIcon) {
         menuBtnIcon.className = "fas fa-bars";
       }
 
-      // Reset all dropdown states
+      // Reset all dropdown states (no longer needed but kept for consistency)
       navItems.forEach((item) => {
         item.classList.remove("active");
         const icon = item.querySelector(".dropdown-toggle i");
@@ -193,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
           item.setAttribute("aria-expanded", "false");
           item.setAttribute("aria-haspopup", "true");
 
-          // Handle wrapper click for dropdown toggle
+          // Handle wrapper click for dropdown toggle - use overlay system
           navLinkWrapper.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -210,38 +281,21 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
 
-            // Close other dropdowns
-            navItems.forEach((otherItem) => {
-              if (
-                otherItem !== item &&
-                otherItem.classList.contains("active")
-              ) {
-                otherItem.classList.remove("active");
-                const otherIcon = otherItem.querySelector(".dropdown-toggle i");
-                if (otherIcon) {
-                  otherIcon.className = "fas fa-chevron-down";
-                }
-                otherItem.setAttribute("aria-expanded", "false");
-              }
+            // Get dropdown title and items
+            const dropdownTitle = mainLink.textContent.trim();
+            const dropdownItems = [];
+            const dropdownLinks = item.querySelectorAll(".dropdown-item");
+
+            dropdownLinks.forEach(link => {
+              dropdownItems.push({
+                href: link.getAttribute("href"),
+                text: link.textContent.trim()
+              });
             });
 
-            // Toggle current dropdown
-            const isActive = item.classList.contains("active");
-
-            if (isActive) {
-              item.classList.remove("active");
-              item.setAttribute("aria-expanded", "false");
-            } else {
-              item.classList.add("active");
-              item.setAttribute("aria-expanded", "true");
-            }
-
-            // Update chevron icon
-            const icon = item.querySelector(".dropdown-toggle i");
-            if (icon) {
-              icon.className = item.classList.contains("active")
-                ? "fas fa-chevron-up"
-                : "fas fa-chevron-down";
+            // Show overlay instead of inline expansion
+            if (dropdownItems.length > 0) {
+              showDropdownOverlay(dropdownTitle, dropdownItems);
             }
           });
 
@@ -285,6 +339,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (menuOverlay) {
         menuOverlay.classList.remove("show");
       }
+
+      // Close dropdown overlay if open
+      closeDropdownOverlay();
 
       // Enable scrolling
       document.body.style.overflow = "";
