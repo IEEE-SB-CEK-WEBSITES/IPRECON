@@ -4,259 +4,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon - IPRECON 2026</title>
+  <title>Sponsorship - IPRECON 2026</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
+  <meta name="description"
+    content="Sponsorship opportunities for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
   <style>
-    /* Your existing styles... */
-    .coming-soon-section {
-      padding: 80px 0;
-      background: linear-gradient(135deg,
-          #6c5a7a 0%,
-          #4a3c5a 50%,
-          #3d2f4a 100%);
-      min-height: 60vh;
-      display: flex;
+    /* =================================================================
+         STANDARDIZED BUTTON SYSTEM
+         ================================================================= */
+    .iprecon-btn {
+      display: inline-flex;
       align-items: center;
-    }
-
-    .coming-soon-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-
-    .coming-soon-content {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 60px 40px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
-
-    .coming-soon-content::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #8e24aa, #d4af37);
-    }
-
-    .coming-soon-icon {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #8e24aa, #211021);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 30px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .coming-soon-icon i {
-      font-size: 3rem;
-      color: white;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .coming-soon-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #211021;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .coming-soon-subtitle {
-      font-size: 1.5rem;
-      color: #8e24aa;
-      margin-bottom: 30px;
+      gap: 12px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
       font-weight: 600;
-    }
-
-    .coming-soon-message {
-      font-size: 1.2rem;
-      color: #6c757d;
-      margin-bottom: 40px;
-      line-height: 1.6;
-    }
-
-    .notification-signup {
-      background: linear-gradient(135deg, #211021, #8e24aa);
-      color: white;
-      padding: 40px;
-      border-radius: 15px;
-      margin: 40px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .notification-signup::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-    }
-
-    .notification-signup h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .notification-signup p {
       font-size: 1rem;
-      margin-bottom: 20px;
-      opacity: 0.9;
-      position: relative;
-      z-index: 2;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      justify-content: center;
+      line-height: 1;
+      white-space: nowrap;
     }
 
-    .notification-form {
-      max-width: 400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .form-row {
-      display: flex;
+    .iprecon-btn.large {
+      padding: 18px 40px;
+      font-size: 1.1rem;
       gap: 15px;
     }
 
-    .email-input-container {
-      flex: 1;
+    .iprecon-btn.small {
+      padding: 12px 25px;
+      font-size: 0.9rem;
+      gap: 8px;
     }
 
-    .notification-form input {
-      width: 100%;
-      padding: 12px 15px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
+    /* PRIMARY BUTTON */
+    .iprecon-btn.primary {
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(142, 36, 170, 0.3);
     }
 
-    .notification-form input:focus {
-      border-color: #d4af37;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    .iprecon-btn.primary:hover {
+      background: linear-gradient(135deg, #7b1f96, #1a0e1a);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(142, 36, 170, 0.4);
+      color: white;
+      text-decoration: none;
     }
 
-    .notification-form input.error {
-      border-color: #dc3545;
-      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-    }
-
-    .notification-form button {
-      padding: 12px 20px;
+    /* SECONDARY BUTTON */
+    .iprecon-btn.secondary {
       background: #d4af37;
       color: #211021;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      min-width: 120px;
+      border-color: #d4af37;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
-    .notification-form button:hover:not(:disabled) {
-      background: #b8941f;
-      transform: scale(1.05);
+    .iprecon-btn.secondary:hover {
+      background: transparent;
+      color: #d4af37;
+      border-color: #d4af37;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+      text-decoration: none;
     }
 
-    .notification-form button:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-      transform: none;
+    /* TERTIARY BUTTON */
+    .iprecon-btn.tertiary {
+      background: transparent;
+      color: white;
+      border-color: white;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
 
-    .notification-form button .fa-spinner {
-      animation: spin 1s linear infinite;
+    .iprecon-btn.tertiary:hover {
+      background: white;
+      color: #211021;
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+      text-decoration: none;
     }
 
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
+    .iprecon-btn.tertiary.dark-bg {
+      color: #211021;
+      border-color: #211021;
+      box-shadow: 0 5px 15px rgba(33, 16, 33, 0.2);
     }
 
-    .error-message,
-    .success-message {
-      font-size: 0.875rem;
-      margin-top: 8px;
-      margin-bottom: 0;
-      display: none;
-      font-weight: 500;
-      text-align: left;
-      position: relative;
-      z-index: 2;
+    .iprecon-btn.tertiary.dark-bg:hover {
+      background: #211021;
+      color: white;
+      border-color: #211021;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(33, 16, 33, 0.3);
     }
 
-    .error-message {
-      color: #ff6b6b;
-    }
-
-    .success-message {
-      color: #51cf66;
-    }
-
-    .error-message.show,
-    .success-message.show {
-      display: block;
-      animation: fadeInMessage 0.3s ease;
-    }
-
-    @keyframes fadeInMessage {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .coming-soon-actions {
+    .iprecon-btn-group {
       display: flex;
-      gap: 20px;
+      gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 40px;
+      align-items: center;
     }
 
-    .action-btn {
+    /* =================================================================
+         CFP-STYLE BUTTON SYSTEM (copied from cfp.html)
+         ================================================================= */
+    .cfp-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -267,585 +133,1886 @@
       font-size: 1rem;
       transition: all 0.3s ease;
       border: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    .action-btn.primary {
-      background: #8e24aa;
-      color: white;
+    .cfp-btn.primary {
+      background: #d4af37;
+      color: #211021;
+      border-color: #d4af37;
+    }
+
+    .cfp-btn.primary:hover {
+      background: transparent;
+      color: #d4af37;
+      border-color: #d4af37;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+      text-decoration: none;
+    }
+
+    .cfp-btn.secondary.purple-theme {
+      background: transparent;
+      color: #8e24aa;
       border-color: #8e24aa;
     }
 
-    .action-btn.primary:hover {
-      background: transparent;
-      color: #8e24aa;
+    .cfp-btn.secondary.purple-theme:hover {
+      background: #8e24aa;
+      color: white;
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(142, 36, 170, 0.3);
+      text-decoration: none;
     }
 
-    /* Success Popup Modal - Enhanced */
-    .success-popup {
-      position: fixed;
+    /* =================================================================
+         ANIMATION CLASSES
+         ================================================================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =================================================================
+         HERO SECTION
+         ================================================================= */
+    .sponsor-hero {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 60px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .sponsor-hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .sponsor-hero-header {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .sponsor-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+
+    .sponsor-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background-color: #8e24aa;
+    }
+
+    .sponsor-conference-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 30px;
+      line-height: 1.3;
+    }
+
+    .cfp-conference-details {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .cfp-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
+
+    .cfp-detail-item i {
+      color: #8e24aa;
+      font-size: 1rem;
+    }
+
+    .cfp-action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    /* =================================================================
+         SHARED CONTAINER & SECTION TITLE
+         ================================================================= */
+    .cfp-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #211021;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
+      margin: 15px auto 0;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-top: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+    }
+
+    .section-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    /* =================================================================
+         ABOUT / OVERVIEW SECTION  (white, 80px)
+         ================================================================= */
+    .sponsor-overview {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 50px;
+    }
+
+    .overview-content h3 {
+      font-size: 2rem;
+      color: #211021;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .overview-content p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .highlight-box i {
+      font-size: 1.5rem;
+      color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .overview-features h4 {
+      font-size: 1.5rem;
+      color: #211021;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 0;
+      font-size: 1rem;
+      color: #555;
+      border-bottom: 1px solid #eee;
+    }
+
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+
+    .features-list i {
+      color: #8e24aa;
+      font-size: 1.2rem;
+      min-width: 20px;
+    }
+
+    /* =================================================================
+         CORPORATE SPONSORSHIP TIERS  (#f8f9fa, 80px)
+         ================================================================= */
+    .sponsor-tiers {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 0;
+    }
+
+    /* Tier card - adapted from step-card pattern */
+    .tier-card {
+      background: #f8f9fa;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tier-card::before {
+      content: "";
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      right: 0;
+      height: 6px;
+    }
+
+    .tier-card.diamond::before  { background: #00bcd4; }
+    .tier-card.gold-tier::before { background: #d4af37; }
+    .tier-card.silver::before   { background: #9e9e9e; }
+    .tier-card.bronze::before   { background: #cd7f32; }
+
+    .tier-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Tier header */
+    .tier-header {
+      color: white;
+      padding: 30px 25px 25px;
+      text-align: center;
+    }
+
+    .tier-card.diamond  .tier-header { background: linear-gradient(135deg, #006064, #00363a); }
+    .tier-card.gold-tier .tier-header { background: linear-gradient(135deg, #8a6800, #5c4400); }
+    .tier-card.silver   .tier-header { background: linear-gradient(135deg, #424242, #212121); }
+    .tier-card.bronze   .tier-header { background: linear-gradient(135deg, #6d3b00, #3e2000); }
+
+    .tier-header-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .tier-card.diamond  .tier-header-icon { color: #80deea; }
+    .tier-card.gold-tier .tier-header-icon { color: #ffe082; }
+    .tier-card.silver   .tier-header-icon { color: #e0e0e0; }
+    .tier-card.bronze   .tier-header-icon { color: #ffcc80; }
+
+    .tier-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .tier-price-usd {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .tier-price-inr {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Tier body */
+    .tier-body {
+      padding: 30px 25px;
+      background: white;
+      flex: 1;
+    }
+
+    .tier-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tier-benefits li {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .tier-benefits li::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: #8e24aa;
+      font-weight: bold;
+    }
+
+    .tier-benefits li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* =================================================================
+         SPONSORSHIP COMPARISON TABLE
+         ================================================================= */
+    .tiers-comparison-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .tiers-comparison {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      min-width: 560px;
+    }
+
+    .tc-row {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+      align-items: stretch;
+      border-bottom: 1px solid #ececec;
+    }
+
+    .tc-row:last-child {
+      border-bottom: none;
+    }
+
+    .tc-row:nth-child(even) .tc-benefit-col {
+      background: #fafafa;
+    }
+
+    .tc-row:nth-child(even) .tc-check-cell {
+      background: #fafafa;
+    }
+
+    /* Header row */
+    .tc-header-label {
+      background: linear-gradient(135deg, #211021, #3a1a3a);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 20px;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .tc-header-label i {
+      font-size: 2rem;
+      color: #d4af37;
+    }
+
+    .tc-header-label span {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+    }
+
+    .tc-tier-head {
+      color: white;
+      padding: 28px 12px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .tc-tier-head:last-child {
+      border-right: none;
+    }
+
+    .diamond-hdr { background: linear-gradient(135deg, #006064, #00363a); }
+    .gold-hdr    { background: linear-gradient(135deg, #8a6800, #5c4400); }
+    .silver-hdr  { background: linear-gradient(135deg, #424242, #212121); }
+    .bronze-hdr  { background: linear-gradient(135deg, #6d3b00, #3e2000); }
+
+    .tc-head-icon {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .diamond-hdr .tc-head-icon { color: #80deea; }
+    .gold-hdr    .tc-head-icon { color: #ffe082; }
+    .silver-hdr  .tc-head-icon { color: #e0e0e0; }
+    .bronze-hdr  .tc-head-icon { color: #ffcc80; }
+
+    .tc-head-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .tc-head-usd {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 3px;
+    }
+
+    .tc-head-inr {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Benefit label column */
+    .tc-benefit-col {
+      padding: 13px 20px;
+      font-size: 0.91rem;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.45;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid #ececec;
+    }
+
+    /* Check / cross cells */
+    .tc-check-cell {
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
+      padding: 10px 5px;
+      border-right: 1px solid #ececec;
+      font-size: 1.7rem;
+      font-weight: 700;
     }
 
-    .success-popup.show {
-      opacity: 1;
-      visibility: visible;
+    .tc-check-cell:last-child {
+      border-right: none;
     }
 
-    .success-popup-content {
+    .tc-yes { color: #2e7d32; }
+    .tc-no  { color: #c62828; }
+
+
+    .scroll-hint {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .tc-benefit-col {
+        padding: 12px 12px;
+        font-size: 0.82rem;
+      }
+
+      .tc-tier-head {
+        padding: 20px 8px;
+      }
+
+      .tc-head-name  { font-size: 0.9rem; }
+      .tc-head-usd   { font-size: 0.85rem; }
+      .tc-head-inr   { font-size: 0.68rem; }
+      .tc-head-icon  { font-size: 1.4rem; }
+      .tc-check-cell { font-size: 1.4rem; }
+
+      .scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #8e24aa;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 8px 0;
+      }
+
+      .scroll-hint i {
+        font-size: 1rem;
+        animation: nudge 1.4s ease-in-out infinite;
+      }
+
+      .scroll-hint i.left  { animation-delay: 0s; }
+      .scroll-hint i.right { animation-delay: 0.2s; }
+
+      @keyframes nudge {
+        0%, 100% { transform: translateX(0); opacity: 1; }
+        50%       { transform: translateX(4px); opacity: 0.5; }
+      }
+
+      .scroll-hint i.left {
+        animation-name: nudge-left;
+      }
+
+      @keyframes nudge-left {
+        0%, 100% { transform: translateX(0); opacity: 1; }
+        50%       { transform: translateX(-4px); opacity: 0.5; }
+      }
+    }
+
+    /* =================================================================
+         ADDITIONAL SPONSORSHIP  (white, 80px)
+         ================================================================= */
+    .additional-section {
+      padding: 80px 0;
       background: white;
-      padding: 40px 30px;
+    }
+
+    .additional-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    /* Additional card - date-card pattern */
+    .additional-card {
+      background: white;
       border-radius: 15px;
+      padding: 30px;
       text-align: center;
-      max-width: 450px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
       position: relative;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
+      overflow: hidden;
     }
 
-    .success-popup.show .success-popup-content {
-      transform: scale(1);
+    .additional-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
     }
 
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: #28a745;
+    .additional-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .additional-icon-circle {
+      background: linear-gradient(135deg, #8e24aa, #211021);
       border-radius: 50%;
+      width: 70px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      animation: successBounce 0.6s ease;
+      box-shadow: 0 8px 20px rgba(142, 36, 170, 0.3);
     }
 
-    .success-icon i {
-      font-size: 2.5rem;
+    .additional-icon-circle i {
+      color: white;
+      font-size: 1.8rem;
+    }
+
+    .additional-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 12px;
+    }
+
+    .additional-price-usd {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #8e24aa;
+      margin-bottom: 4px;
+    }
+
+    .additional-price-inr {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* =================================================================
+         SISTER CONFERENCES SECTION  (white, 80px)
+         ================================================================= */
+    .sister-section {
+      padding: 50px 0;
+      background: linear-gradient(135deg, #420c52, #130a13);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sister-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+      pointer-events: none;
+    }
+
+    .sister-section .cfp-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .sister-section .section-title {
       color: white;
     }
 
-    @keyframes successBounce {
-      0% {
-        transform: scale(0);
-      }
-
-      50% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
+    .sister-section .section-title::after {
+      background: linear-gradient(90deg, #d4af37, #8e24aa);
     }
 
-    .success-popup h3 {
-      font-size: 1.8rem;
+    .sister-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .sister-carousel-wrap {
+      position: relative;
+      margin-top: 30px;
+      padding: 0 55px;
+    }
+
+    .sister-carousel .owl-item {
+      display: flex;
+    }
+
+    .sister-carousel .sister-card {
+      margin: 10px 15px 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Nav arrows */
+    .sister-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      background: #d4af37;
+      border: none;
+      border-radius: 50%;
       color: #211021;
-      margin-bottom: 15px;
-      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.45);
+      transition: all 0.3s ease;
+      z-index: 10;
     }
 
-    .success-popup p {
+    .sister-nav:hover {
+      background: white;
+      color: #211021;
+      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .sister-nav.prev { left: 0; }
+    .sister-nav.next { right: 0; }
+
+    /* Override owl dots */
+    .sister-carousel + .owl-dots {
+      margin-top: 10px;
+    }
+
+    .sister-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .sister-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
+    }
+
+    .sister-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.13);
+    }
+
+    .sister-logo {
+      width: 110px;
+      height: 70px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sister-logo-fallback {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sister-logo-fallback i {
+      color: #d4af37;
+      font-size: 1.8rem;
+    }
+
+    .sister-acronym {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #8e24aa;
+      letter-spacing: 0.04em;
+    }
+
+    .sister-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #211021;
+      line-height: 1.4;
+    }
+
+    .sister-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .sister-location i {
+      color: #8e24aa;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .sister-section {
+        padding: 40px 0;
+      }
+
+      .sister-carousel-wrap {
+        padding: 0 45px;
+      }
+    }
+
+    /* =================================================================
+         SPONSOR FORM SECTION  (#f8f9fa, 80px)
+         ================================================================= */
+    .sponsor-form-section {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .form-card {
+      max-width: 800px;
+      margin: 50px auto 0;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
+    }
+
+    .sponsor-form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label,
+    .form-group-label {
+      color: #333;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .form-group input,
+    .form-group select {
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      width: 100%;
+      outline: none;
+      background: white;
+      color: #333;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #8e24aa;
+      box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #aaa;
+    }
+
+    .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    /* Radio pill toggles */
+    .radio-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .radio-pill-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 2px solid #8e24aa;
+      border-radius: 25px;
+      padding: 8px 18px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #8e24aa;
+      transition: all 0.25s ease;
+      user-select: none;
+      background: white;
+    }
+
+    .radio-pill-group input[type="radio"] {
+      display: none;
+    }
+
+    .radio-pill-group label:has(input[type="radio"]:checked) {
+      background: #8e24aa;
+      color: white;
+      box-shadow: 0 4px 12px rgba(142, 36, 170, 0.3);
+    }
+
+    .radio-pill-group label:hover {
+      background: #8e24aa;
+      color: white;
+    }
+
+    /* intl-tel-input overrides */
+    .iti {
+      width: 100%;
+    }
+
+    .iti__tel-input {
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 14px 16px 14px 52px;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      width: 100%;
+      outline: none;
+      background: white;
+      color: #333;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .iti__tel-input:focus {
+      border-color: #8e24aa;
+      box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
+    }
+
+    .iti__flag-container {
+      border-radius: 8px 0 0 8px;
+    }
+
+    /* Right-align dial codes in dropdown */
+    .iti__country {
+      display: flex;
+      align-items: center;
+    }
+
+    .iti__country-name {
+      flex: 1;
+    }
+
+    .iti__dial-code {
+      margin-left: auto;
+      padding-left: 10px;
+      color: #888;
+      font-size: 0.88rem;
+    }
+
+    .submit-btn {
+      background: #d4af37;
+      color: #211021;
+      font-weight: 700;
+      padding: 18px;
+      border-radius: 10px;
       font-size: 1.1rem;
-      color: #6c757d;
-      margin-bottom: 25px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #b8962e;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.45);
+    }
+
+    .thankyou-message {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .thankyou-icon {
+      font-size: 4rem;
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
+
+    .thankyou-message h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 12px;
+    }
+
+    .thankyou-message p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* =================================================================
+         CONTACT STRIP  (dark gradient, 60px)
+         ================================================================= */
+    .contact-strip {
+      background: white;
+      padding: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-strip::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+      pointer-events: none;
+    }
+
+    .contact-strip-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .contact-strip-inner h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 12px;
+    }
+
+    .contact-strip-inner > p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 30px;
       line-height: 1.5;
     }
 
-    .success-popup-actions {
+    .contact-info {
       display: flex;
-      gap: 15px;
+      gap: 30px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .popup-btn {
-      display: inline-flex;
+    .contact-link {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 25px;
-      border-radius: 8px;
+      gap: 10px;
+      color: #8e24aa;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       transition: all 0.3s ease;
-      border: 2px solid;
-      cursor: pointer;
     }
 
-    .popup-btn.primary {
-      background: #8e24aa;
-      color: white;
-      border-color: #8e24aa;
-    }
-
-    .popup-btn.primary:hover {
-      background: #7b1f96;
+    .contact-link:hover {
+      color: #211021;
       transform: translateY(-2px);
+      text-decoration: none;
     }
 
-    .popup-btn.secondary {
-      background: transparent;
-      color: #6c757d;
-      border-color: #6c757d;
+    .contact-link i {
+      font-size: 1.2rem;
     }
 
-    .popup-btn.secondary:hover {
-      background: #6c757d;
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .auto-close-info {
-      font-size: 0.85rem;
-      color: #adb5bd;
-      margin-top: 15px;
-      font-style: italic;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .coming-soon-content {
-        padding: 40px 30px;
+    /* =================================================================
+         RESPONSIVE DESIGN
+         ================================================================= */
+    @media (max-width: 1024px) {
+      .tiers-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .coming-soon-title {
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sponsor-hero {
+        padding: 40px 0;
+      }
+
+      .sponsor-title {
         font-size: 2.2rem;
       }
 
-      .coming-soon-subtitle {
+      .sponsor-title::after {
+        width: 100px;
+        height: 3px;
+      }
+
+      .sponsor-conference-name {
         font-size: 1.2rem;
       }
 
-      .coming-soon-message {
-        font-size: 1rem;
+      .cfp-conference-details {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
       }
 
-      .coming-soon-actions {
+      .cfp-action-buttons {
         flex-direction: column;
         align-items: center;
       }
 
-      .action-btn {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .tiers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .additional-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .form-row {
-        flex-direction: column;
-        gap: 15px;
+        grid-template-columns: 1fr;
       }
 
-      .notification-form {
-        max-width: 100%;
+      .form-card {
+        padding: 35px 25px;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .sponsor-overview,
+      .sponsor-tiers,
+      .additional-section,
+      .sponsor-form-section {
+        padding: 60px 0;
       }
     }
 
     @media (max-width: 480px) {
-      .coming-soon-content {
-        padding: 30px 20px;
-      }
-
-      .coming-soon-title {
+      .sponsor-title {
         font-size: 1.8rem;
       }
 
-      .coming-soon-icon {
+      .sponsor-title::after {
         width: 80px;
-        height: 80px;
       }
 
-      .coming-soon-icon i {
-        font-size: 2rem;
+      .tiers-grid {
+        grid-template-columns: 1fr;
       }
 
-      .success-popup-content {
+      .additional-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .form-card {
         padding: 30px 20px;
-      }
-
-      .success-icon {
-        width: 60px;
-        height: 60px;
-      }
-
-      .success-icon i {
-        font-size: 2rem;
-      }
-
-      .success-popup h3 {
-        font-size: 1.5rem;
-      }
-
-      .success-popup p {
-        font-size: 1rem;
-      }
-
-      .success-popup-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .popup-btn {
-        width: 100%;
-        max-width: 200px;
-        justify-content: center;
-      }
-    }
-
-    /* Animation for elements */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
-
-    .fade-in:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .fade-in:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .fade-in:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    .fade-in:nth-child(4) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
       }
     }
   </style>
-  <meta name="description"
-    content="Coming Soon - IPRECON 2026 International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
 </head>
 
 <body>
   <!-- Header -->
   <esi:include src="/includes/header.html" />
 
-  <!-- Navigation Bar -->
   <esi:include src="/includes/navbar.html" />
 
-  <!-- Marquee -->
   <esi:include src="/includes/marquee.html" />
 
   <!-- Spacer for when marquee becomes fixed -->
   <div id="marquee-placeholder" style="display: none"></div>
 
   <main>
-    <!-- Coming Soon Section -->
-    <section class="coming-soon-section">
-      <div class="coming-soon-container">
-        <div class="coming-soon-content">
-          <div class="coming-soon-icon fade-in">
-            <i class="fas fa-cogs"></i>
-          </div>
 
-          <h1 class="coming-soon-title fade-in">Coming Soon</h1>
-          <h2 class="coming-soon-subtitle fade-in">
-            This Page Is Being Developed
-          </h2>
+    <!-- ============================================================
+         SECTION 1 - HERO
+         ============================================================ -->
+    <section class="sponsor-hero">
+      <div class="sponsor-hero-content">
+        <div class="sponsor-hero-header">
 
-          <p class="coming-soon-message fade-in">
-            This section is currently being finalized. We are preparing
-            comprehensive information and details that will be published
-            shortly. Please check back soon for updates.
+          <h1 class="sponsor-title fade-in">Sponsorship</h1>
+
+          <p class="sponsor-conference-name fade-in">
+            2026 IEEE International Power and Renewable Energy Conference (IPRECON)
           </p>
 
-          <div class="notification-signup fade-in">
-            <h3>Get Notified When We Launch</h3>
-            <p>
-              Be the first to know when this section becomes available. We'll
-              send you an update as soon as it's ready!
-            </p>
-            <div class="notification-form">
-              <div class="form-row">
-                <div class="email-input-container">
-                  <input type="email" placeholder="Enter your email address" id="emailInput" autocomplete="email" />
-                </div>
-                <button type="submit" id="notifyBtn">
-                  <i class="fas fa-bell"></i>
-                  Notify Me
-                </button>
-              </div>
-              <div class="error-message" id="errorMessage"></div>
-              <div class="success-message" id="successMessage"></div>
+          <div class="cfp-conference-details fade-in">
+            <div class="cfp-detail-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>September 04&ndash;06, 2026</span>
+            </div>
+            <div class="cfp-detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>College of Engineering Karunagappally, Kerala, India</span>
+            </div>
+            <div class="cfp-detail-item">
+              <i class="fas fa-users"></i>
+              <span>India&rsquo;s First &amp; Only IEEE Club of 6 Conference</span>
             </div>
           </div>
 
-          <div class="coming-soon-actions fade-in">
-            <a href="./index.html" class="action-btn primary">
-              <i class="fas fa-home"></i>
-              Back to Home
+          <div class="cfp-action-buttons fade-in">
+            <a href="#sponsor-form" class="cfp-btn primary">
+              <i class="fas fa-handshake"></i>
+              Become a Sponsor
+            </a>
+            <a href="#" class="cfp-btn secondary purple-theme">
+              <i class="fas fa-file-download"></i>
+              Download Prospectus
             </a>
           </div>
+
         </div>
       </div>
     </section>
+
+
+    <!-- ============================================================
+         SECTION 2 - ABOUT IPRECON  (white, 80px)
+         ============================================================ -->
+    <section class="sponsor-overview">
+      <div class="cfp-container">
+
+        <div class="overview-grid">
+
+          <!-- Left: content -->
+          <div class="overview-content fade-in">
+            <h3>About IPRECON 2026</h3>
+            <p>
+              IPRECON 2026 is a premier IEEE-sponsored international conference on power systems, renewable energy,
+              and sustainable technologies, hosted at the College of Engineering Karunagappally, Kerala. As India&rsquo;s
+              First and Only IEEE Club of 6 Technical Paper Conference, it unites ten IEEE Technical Societies under one roof.
+            </p>
+            <p>
+              Partnering with IPRECON 2026 connects your organization with a global community of researchers, engineers,
+              and industry professionals - aligning your brand with innovation, academic excellence, and the trusted IEEE name.
+            </p>
+
+            <div class="highlight-box">
+              <i class="fas fa-handshake"></i>
+              <p>
+                IPRECON 2026 is part of the prestigious &ldquo;Club of Six&rdquo; IEEE IAS/PES
+                international conferences in India.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: why sponsor features -->
+          <div class="overview-features fade-in">
+            <h4>Why Sponsor?</h4>
+            <ul class="features-list">
+              <li>
+                <i class="fas fa-check-circle"></i>
+                300+ international researchers &amp; engineers
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                Peer-reviewed IEEE conference proceedings
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                Global industry-academia network
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                3-day premier technical conference
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                Hybrid mode - worldwide reach
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                IEEE PES &amp; IAS co-sponsored
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 3 - CORPORATE SPONSORSHIP TIERS  (#f8f9fa, 80px)
+         ============================================================ -->
+    <section class="sponsor-tiers">
+      <div class="cfp-container">
+
+        <div class="section-header fade-in">
+          <h2 class="section-title">Corporate Sponsorship Tiers</h2>
+          <p class="section-subtitle">Choose the sponsorship level that best aligns with your organization&rsquo;s goals</p>
+        </div>
+
+        <div class="scroll-hint">
+          <i class="fas fa-chevron-left left"></i>
+          Scroll to compare tiers
+          <i class="fas fa-chevron-right right"></i>
+        </div>
+
+        <div class="tiers-comparison-wrap fade-in">
+          <div class="tiers-comparison">
+
+            <!-- Header row: tier names & prices -->
+            <div class="tc-row">
+              <div class="tc-header-label">
+                <i class="fas fa-list-check"></i>
+                <span>Sponsorship<br>Benefits</span>
+              </div>
+              <div class="tc-tier-head diamond-hdr">
+                <span class="tc-head-icon"><i class="fas fa-gem"></i></span>
+                <div class="tc-head-name">Diamond</div>
+                <div class="tc-head-usd">US$5,000</div>
+                <div class="tc-head-inr">INR &#8377;4,60,000</div>
+              </div>
+              <div class="tc-tier-head gold-hdr">
+                <span class="tc-head-icon"><i class="fas fa-star"></i></span>
+                <div class="tc-head-name">Gold</div>
+                <div class="tc-head-usd">US$4,000</div>
+                <div class="tc-head-inr">INR &#8377;3,70,000</div>
+              </div>
+              <div class="tc-tier-head silver-hdr">
+                <span class="tc-head-icon"><i class="fas fa-medal"></i></span>
+                <div class="tc-head-name">Silver</div>
+                <div class="tc-head-usd">US$3,000</div>
+                <div class="tc-head-inr">INR &#8377;2,80,000</div>
+              </div>
+              <div class="tc-tier-head bronze-hdr">
+                <span class="tc-head-icon"><i class="fas fa-award"></i></span>
+                <div class="tc-head-name">Bronze</div>
+                <div class="tc-head-usd">US$2,000</div>
+                <div class="tc-head-inr">INR &#8377;1,90,000</div>
+              </div>
+            </div>
+
+            <!-- Benefit rows - ordered: all-4 first, then D+G+S, then D+G, then Diamond-only -->
+            <div class="tc-row">
+              <div class="tc-benefit-col">Corporate name in program book</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Conference bag promotional material</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Corporate name on conference website</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Logo on conference eDM to participants</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Logo displayed before conference start</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">45-60 Minute Keynote/Plenary Session</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Exhibition booth at Welcome Reception (&times;1)</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Logo in conference rundown</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">5&times; complimentary full conference passes</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Logo on banner &amp; delegate badge</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">A4 advertisement in program book</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">1-min company video during session breaks</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+            <div class="tc-row">
+              <div class="tc-benefit-col">Networking Gala Dinner - VIP table (&times;10 pax)</div>
+              <div class="tc-check-cell tc-yes">&#10003;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+              <div class="tc-check-cell tc-no">&#10007;</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="scroll-hint">
+          <i class="fas fa-chevron-left left"></i>
+          Scroll to compare tiers
+          <i class="fas fa-chevron-right right"></i>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 4 - ADDITIONAL SPONSORSHIP OPPORTUNITIES  (white, 80px)
+         ============================================================ -->
+    <section class="additional-section">
+      <div class="cfp-container">
+
+        <div class="section-header fade-in">
+          <h2 class="section-title">Additional Sponsorship Opportunities</h2>
+          <p class="section-subtitle">Targeted sponsorship options for specific conference elements</p>
+        </div>
+
+        <div class="additional-grid">
+
+          <div class="additional-card fade-in">
+            <div class="additional-icon-circle">
+              <i class="fas fa-coffee"></i>
+            </div>
+            <h3>Beverage Sponsor</h3>
+            <div class="additional-price-usd">US$1,000</div>
+            <div class="additional-price-inr">INR &#8377;1,00,000</div>
+          </div>
+
+          <div class="additional-card fade-in">
+            <div class="additional-icon-circle">
+              <i class="fas fa-gift"></i>
+            </div>
+            <h3>Souvenir Sponsor</h3>
+            <div class="additional-price-usd">US$800</div>
+            <div class="additional-price-inr">INR &#8377;80,000</div>
+          </div>
+
+          <div class="additional-card fade-in">
+            <div class="additional-icon-circle">
+              <i class="fas fa-store"></i>
+            </div>
+            <h3>Exhibition Booth (Dual)</h3>
+            <div class="additional-price-usd">US$500</div>
+            <div class="additional-price-inr">INR &#8377;50,000</div>
+          </div>
+
+          <div class="additional-card fade-in">
+            <div class="additional-icon-circle">
+              <i class="fas fa-store-alt"></i>
+            </div>
+            <h3>Exhibition Booth (Single)</h3>
+            <div class="additional-price-usd">US$300</div>
+            <div class="additional-price-inr">INR &#8377;30,000</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 5 - SISTER CONFERENCES  (white, 80px)
+         ============================================================ -->
+    <section class="sister-section">
+      <div class="cfp-container">
+
+        <div class="section-header fade-in">
+          <h2 class="section-title">Other Club of 6 Sister Conferences</h2>
+          <p class="section-subtitle">IPRECON is proud to be part of this elite group of IEEE power &amp; energy conferences</p>
+        </div>
+
+        <div class="sister-carousel-wrap">
+          <button class="sister-nav prev" id="sisterPrev"><i class="fas fa-chevron-left"></i></button>
+
+          <div class="owl-carousel sister-carousel">
+
+            <!-- 1. TPEC -->
+            <div class="sister-card">
+              <img src="assets/img/tpec.webp" alt="TPEC Logo" class="sister-logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">TPEC</div>
+              <div class="sister-name">Texas Power and Energy Conference</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> College Station, TX, USA</div>
+            </div>
+
+            <!-- 2. IYCE -->
+            <div class="sister-card">
+              <img src="assets/img/iyce.webp" alt="IYCE Logo" class="sister-logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">IYCE</div>
+              <div class="sister-name">International Youth Conference on Energy</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> Hungary &amp; Europe</div>
+            </div>
+
+            <!-- 3. PECI -->
+            <div class="sister-card">
+              <img src="assets/img/peci.webp" alt="PECI Logo" class="sister-logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">PECI</div>
+              <div class="sister-name">Power and Energy Conference</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> Urbana-Champaign, IL, USA</div>
+            </div>
+
+            <!-- 4. SCEMS -->
+            <div class="sister-card">
+              <img src="assets/img/scems.jpg" alt="SCEMS Logo" class="sister-logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">SCEMS</div>
+              <div class="sister-name">Student Conference on Electric Machines and Systems</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> South Korea</div>
+            </div>
+
+            <!-- 5. KPEC -->
+            <div class="sister-card">
+              <img src="assets/img/kpec.webp" alt="KPEC Logo" class="sister-logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">KPEC</div>
+              <div class="sister-name">Kansas Power &amp; Energy Conference</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> Urbana-Champaign, IL, USA</div>
+            </div>
+
+            <!-- 6. CIYCEE -->
+            <div class="sister-card">
+              <img src="assets/img/ciycee.jpg" alt="CIYCEE Logo" class="sister-logo" style="width:105px;height:66px;"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="sister-logo-fallback" style="display:none;"><i class="fas fa-bolt"></i></div>
+              <div class="sister-acronym">CIYCEE</div>
+              <div class="sister-name">China International Youth Conference on Electrical Engineering</div>
+              <div class="sister-location"><i class="fas fa-map-marker-alt"></i> Wuhan &amp; Chengdu, China</div>
+            </div>
+
+          </div>
+
+          <button class="sister-nav next" id="sisterNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 6 - SPONSORSHIP CONTACT FORM  (#f8f9fa, 80px)
+         ============================================================ -->
+    <section class="sponsor-form-section" id="sponsor-form">
+      <div class="cfp-container">
+
+        <div class="section-header fade-in">
+          <h2 class="section-title">Become a Sponsor</h2>
+          <p class="section-subtitle">Fill in the form below and our team will get back to you shortly</p>
+        </div>
+
+        <div class="form-card fade-in">
+
+          <div id="sponsor-form-wrap">
+            <form class="sponsor-form" id="sponsorForm" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="John" required />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="organization">Organization Name</label>
+                <input type="text" id="organization" name="organization"
+                  placeholder="Your Company or Institution" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email"
+                  placeholder="john.smith@company.com" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="98989 84848" />
+              </div>
+
+              <div class="form-group">
+                <label for="sponsorType">Sponsorship Type</label>
+                <select id="sponsorType" name="sponsorType" required>
+                  <option value="" disabled selected>Select a sponsorship tier</option>
+                  <option value="Diamond">Diamond</option>
+                  <option value="Gold">Gold</option>
+                  <option value="Silver">Silver</option>
+                  <option value="Bronze">Bronze</option>
+                  <option value="Beverage Sponsor">Beverage Sponsor</option>
+                  <option value="Souvenir Sponsor">Souvenir Sponsor</option>
+                  <option value="Exhibition Booth (Dual)">Exhibition Booth (Dual)</option>
+                  <option value="Exhibition Booth (Single)">Exhibition Booth (Single)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Query</label>
+                <textarea id="message" name="message" rows="4"
+                  placeholder="Write your query or message here..."
+                  style="border: 2px solid #e9ecef; border-radius: 8px; padding: 14px 16px; font-size: 1rem; font-family: 'Montserrat', sans-serif; width: 100%; outline: none; resize: vertical; color: #333; transition: border-color 0.3s ease, box-shadow 0.3s ease; box-sizing: border-box;"></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                Submit Inquiry
+              </button>
+
+            </form>
+          </div>
+
+          <div class="thankyou-message" id="thankyouMsg">
+            <div class="thankyou-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Thank You for Your Interest!</h3>
+            <p>
+              Our sponsorship team will contact you within 48 hours.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 6 - CONTACT STRIP  (dark gradient, 60px)
+         ============================================================ -->
+    <section class="contact-strip">
+      <div class="contact-strip-inner">
+        <h3>Need Sponsorship Support?</h3>
+        <p>For further questions regarding Sponsorship support, please contact the IPRECON Sponsorship Helpdesk</p>
+        <div class="contact-info">
+          <a href="mailto:sponsors@iprecon.org" class="contact-link">
+            <i class="fas fa-envelope"></i>
+            sponsors@iprecon.org
+          </a>
+          <a href="tel:+919311401568" class="contact-link">
+            <i class="fas fa-phone"></i>
+            +91 93114 01568
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Success Popup Modal -->
-  <div class="success-popup" id="successPopup">
-    <div class="success-popup-content">
-      <div class="success-icon">
-        <i class="fas fa-check"></i>
-      </div>
-      <h3>Thank You!</h3>
-      <p>
-        We'll notify you at the earliest once this page is ready. Please check
-        your inbox regularly for updates.
-      </p>
-      <div class="success-popup-actions">
-        <a href="./index.html" class="popup-btn primary">
-          <i class="fas fa-home"></i>
-          Back to Home
-        </a>
-        <button class="popup-btn secondary" onclick="closeSuccessPopup()">
-          <i class="fas fa-times"></i>
-          Close
-        </button>
-      </div>
-      <div class="auto-close-info">
-        This popup will close automatically in
-        <span id="countdown">5</span> seconds
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer section -->
   <esi:include src="/includes/footer.html" />
 
   <script src="./scripts/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
   <script>
     $(document).ready(function () {
-      // Configuration - REPLACE WITH YOUR ACTUAL WORKER URL
-      const WORKER_URL = 'https://iprecon-email-collector.ieeesbcek2000.workers.dev'; // Replace with your Worker URL
-      const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+      // Owl Carousel init (for shared script compatibility)
+      if ($("#news-slider").length) {
+        $("#news-slider").owlCarousel({
+          items: 4,
+          loop: true,
+          margin: 20,
+          nav: true,
+          navText: [
+            "<i class='fa fa-chevron-left'></i>",
+            "<i class='fa fa-chevron-right'></i>",
+          ],
+          autoplay: true,
+          autoplayTimeout: 3000,
+          responsive: {
+            0: { items: 3 },
+            600: { items: 3 },
+            1000: { items: 4 },
+          },
+        });
+      }
 
-      // Enhanced notification form handling with backend integration
-      let countdownTimer;
-      let countdownInterval;
+      // intl-tel-input for phone field
+      var phoneInput = document.querySelector("#phone");
+      if (phoneInput) {
+        window.iti = intlTelInput(phoneInput, {
+          initialCountry: "in",
+          separateDialCode: true,
+          countrySearch: true,
+          utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
+        });
+      }
 
-      $("#notifyBtn").click(function (e) {
+      // Sister conferences carousel
+      var $sisterCarousel = $(".sister-carousel").owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: false,
+        dots: true,
+        autoHeight: false,
+        autoplay: true,
+        autoplayTimeout: 3500,
+        autoplayHoverPause: true,
+        responsive: {
+          0:    { items: 1 },
+          600:  { items: 2 },
+          1000: { items: 3 },
+        },
+        onInitialized: equalSisterHeight,
+        onResized: equalSisterHeight,
+        onTranslated: equalSisterHeight,
+      });
+
+      function equalSisterHeight() {
+        var maxH = 0;
+        $(".sister-carousel .sister-card").css("min-height", "").each(function () {
+          maxH = Math.max(maxH, $(this).outerHeight());
+        });
+        $(".sister-carousel .sister-card").css("min-height", maxH + "px");
+      }
+
+      $("#sisterPrev").on("click", function () {
+        $sisterCarousel.trigger("prev.owl.carousel");
+      });
+
+      $("#sisterNext").on("click", function () {
+        $sisterCarousel.trigger("next.owl.carousel");
+      });
+
+      // IntersectionObserver - fade-in animation
+      var observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade-in").forEach(function (el) {
+        observer.observe(el);
+      });
+
+      // Sponsorship form submit handler
+      $("#sponsorForm").on("submit", function (e) {
         e.preventDefault();
-
-        const email = $("#emailInput").val().trim();
-        const emailInput = $("#emailInput");
-        const errorMessage = $("#errorMessage");
-        const successMessage = $("#successMessage");
-        const submitButton = $(this);
-
-        // Clear previous states
-        emailInput.removeClass("error");
-        errorMessage.removeClass("show").text("");
-        successMessage.removeClass("show").text("");
-
-        // Validation
-        if (!email) {
-          showError("Please enter an email address.");
-          return;
-        }
-
-        if (!isValidEmail(email)) {
-          showError("Please enter a valid email address.");
-          return;
-        }
-
-        // Show loading state
-        showLoadingState(submitButton, true);
-
-        // Send to backend
-        submitEmailToBackend(email, currentPage)
-          .then(response => {
-            showLoadingState(submitButton, false);
-
-            if (response.success) {
-              showSuccessPopup(response.message);
-              emailInput.val("");
-
-              // Track the submission (optional analytics)
-              if (typeof gtag !== 'undefined') {
-                gtag('event', 'email_signup', {
-                  'page': currentPage,
-                  'email_domain': email.split('@')[1]
-                });
-              }
-            } else {
-              showError(response.error || "An error occurred. Please try again.");
-            }
-          })
-          .catch(error => {
-            showLoadingState(submitButton, false);
-            console.error('Email submission error:', error);
-            showError("Network error. Please check your connection and try again.");
-          });
-
-        function showError(message) {
-          emailInput.addClass("error");
-          errorMessage.text(message).addClass("show");
-          successMessage.removeClass("show");
-        }
-
-        function isValidEmail(email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailRegex.test(email);
-        }
+        $("#sponsor-form-wrap").hide();
+        $("#thankyouMsg").show();
       });
 
-      // Clear error state when user starts typing
-      $("#emailInput").on("input", function () {
-        $(this).removeClass("error");
-        $("#errorMessage").removeClass("show");
-        $("#successMessage").removeClass("show");
-      });
-
-      // Submit email to backend
-      async function submitEmailToBackend(email, page) {
-        try {
-          const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: email,
-              page: page
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          return await response.json();
-        } catch (error) {
-          console.error('Backend submission error:', error);
-          throw error;
-        }
-      }
-
-      // Show loading state on button
-      function showLoadingState(button, isLoading) {
-        const originalText = button.data('original-text') || button.html();
-
-        if (!button.data('original-text')) {
-          button.data('original-text', originalText);
-        }
-
-        if (isLoading) {
-          button.prop('disabled', true);
-          button.html('<i class="fas fa-spinner fa-spin"></i> Subscribing...');
-        } else {
-          button.prop('disabled', false);
-          button.html(originalText);
-        }
-      }
-
-      // Success popup functions
-      function showSuccessPopup(customMessage) {
-        // Update the success message if provided
-        if (customMessage) {
-          $("#successPopup .success-popup-content p").text(customMessage);
-        }
-
-        $("#successPopup").addClass("show");
-        startCountdown();
-      }
-
-      function closeSuccessPopup() {
-        $("#successPopup").removeClass("show");
-        if (countdownTimer) {
-          clearTimeout(countdownTimer);
-        }
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-        }
-
-        // Reset the success message to default
-        $("#successPopup .success-popup-content p").text(
-          "We'll notify you at the earliest once this page is ready. Please check your inbox regularly for updates."
-        );
-      }
-
-      function startCountdown() {
-        let seconds = 5;
-        $("#countdown").text(seconds);
-
-        countdownInterval = setInterval(function () {
-          seconds--;
-          $("#countdown").text(seconds);
-
-          if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            closeSuccessPopup();
-          }
-        }, 1000);
-
-        countdownTimer = setTimeout(function () {
-          closeSuccessPopup();
-        }, 5000);
-      }
-
-      // Close popup when clicking outside
-      $("#successPopup").click(function (e) {
-        if (e.target === this) {
-          closeSuccessPopup();
+      // Smooth scroll for #sponsor-form anchor
+      $('a[href="#sponsor-form"]').on("click", function (e) {
+        e.preventDefault();
+        var target = $("#sponsor-form");
+        if (target.length) {
+          $("html, body").animate(
+            { scrollTop: target.offset().top - 80 },
+            600
+          );
         }
       });
-
-      // Global function for close button
-      window.closeSuccessPopup = closeSuccessPopup;
-
-      // Enhanced form validation with real-time feedback
-      $("#emailInput").on("blur", function () {
-        const email = $(this).val().trim();
-        if (email && !isValidEmail(email)) {
-          $(this).addClass("error");
-          $("#errorMessage").text("Please enter a valid email address.").addClass("show");
-        }
-      });
-
-      function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      }
-
-      // Add keyboard support for form submission
-      $("#emailInput").on("keypress", function (e) {
-        if (e.which === 13) { // Enter key
-          $("#notifyBtn").click();
-        }
-      });
-
-      // Optional: Add a subtle animation to the form on page load
-      setTimeout(function () {
-        $(".notification-signup").addClass("fade-in");
-      }, 500);
     });
   </script>
 </body>
+
 </html>
