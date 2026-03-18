@@ -1155,6 +1155,12 @@
       box-shadow: 0 12px 28px rgba(212, 175, 55, 0.45);
     }
 
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .thankyou-message {
       display: none;
       text-align: center;
@@ -1537,7 +1543,6 @@
               </div>
             </div>
 
-            <!-- Benefit rows - ordered: all-4 first, then D+G+S, then D+G, then Diamond-only -->
             <div class="tc-row">
               <div class="tc-benefit-col">Corporate name in program book</div>
               <div class="tc-check-cell tc-yes">&#10003;</div>
@@ -1882,7 +1887,7 @@
 
 
     <!-- ============================================================
-         SECTION 6 - CONTACT STRIP  (dark gradient, 60px)
+         SECTION 7 - CONTACT STRIP
          ============================================================ -->
     <section class="contact-strip">
       <div class="contact-strip-inner">
@@ -2003,11 +2008,46 @@
         observer.observe(el);
       });
 
-      // Sponsorship form submit handler
-      $("#sponsorForm").on("submit", function (e) {
+      // ── Sponsorship form submit handler ──────────────────────────────
+      $("#sponsorForm").on("submit", async function (e) {
         e.preventDefault();
-        $("#sponsor-form-wrap").hide();
-        $("#thankyouMsg").show();
+
+        var submitBtn = $(this).find(".submit-btn");
+        submitBtn.prop("disabled", true).html('<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i>Sending...');
+
+        var phone = window.iti ? window.iti.getNumber() : $("#phone").val();
+
+        var payload = {
+          formType:        "sponsor",
+          firstName:       $("#firstName").val().trim(),
+          lastName:        $("#lastName").val().trim(),
+          organization:    $("#organization").val().trim(),
+          email:           $("#email").val().trim(),
+          phone:           phone,
+          sponsorshipType: $("#sponsorType").val().toLowerCase().replace(/ /g, "-").replace(/[()]/g, ""),
+          message:         $("#message").val().trim(),
+        };
+
+        try {
+          var res = await fetch("https://iprecon-contact-form-worker.ieeesbcek2000.workers.dev/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          var data = await res.json();
+
+          if (data.success) {
+            $("#sponsor-form-wrap").hide();
+            $("#thankyouMsg").show();
+          } else {
+            alert("Error: " + (data.error || "Something went wrong. Please try again."));
+            submitBtn.prop("disabled", false).html('<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Submit Inquiry');
+          }
+        } catch (err) {
+          alert("Network error. Please check your connection and try again.");
+          submitBtn.prop("disabled", false).html('<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Submit Inquiry');
+        }
       });
 
       // Smooth scroll for #sponsor-form anchor
