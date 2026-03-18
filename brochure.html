@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPRECON 2026 - Sponsorship Brochure</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark:   #211021;
+    --purple: #8e24aa;
+    --gold:   #d4af37;
+    --white:  #ffffff;
+    --offwhite: #f8f5ff;
+    --muted:  #c8aed4;
+    --light-purple: #b06ac4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #1a0e1a;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    width: min(210mm, 96vw);
+    min-height: 297mm;
+    margin: 8mm auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 60px rgba(0,0,0,.6);
+  }
+
+  @media print {
+    body { background: #211021; margin: 0; }
+    .page { width: 210mm; margin: 0; box-shadow: none; page-break-after: always; }
+    .page:last-child { page-break-after: avoid; }
+    @page { size: A4; margin: 0; }
+    a { color: inherit !important; text-decoration: none !important; }
+    a[href]:after { content: none !important; }
+  }
+
+  /* ══════════════════════════
+     PAGE 1 - COVER
+  ══════════════════════════ */
+  .cover {
+    background: linear-gradient(135deg, #420c52 0%, #2a0638 40%, #130a13 100%);
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  /* Exact dotted overlay from IPRECON website sister-section */
+  .cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.02) 9px, transparent 9px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Gold top bar */
+  .cover-topbar {
+    height: 5mm;
+    background: linear-gradient(90deg, var(--gold), #f0ce60, var(--gold));
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  /* Logo row */
+  .cover-logo-row {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 5mm 12mm;
+    border-bottom: 1px solid rgba(212,175,55,.2);
+    background: rgba(0,0,0,.18);
+  }
+  .cover-logo-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4mm;
+  }
+  .cover-logo-item img {
+    max-height: 19mm;
+    max-width: 42mm;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .cover-logo-item.ieee-logo img {
+    max-height: 25mm;
+    max-width: 48mm;
+  }
+
+  /* Dividers - hidden */
+  .cover-logo-divider { display: none; }
+
+  /* Center hero area */
+  .cover-hero {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8mm 14mm 6mm;
+    text-align: center;
+  }
+
+  .cover-iprecon-logo {
+    max-height: 52mm;
+    width: auto;
+    margin-bottom: 6mm;
+  }
+
+  .cover-hybrid-badge {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.75);
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    padding: 0;
+    margin-bottom: 12mm;
+  }
+
+  .cover-conf-name {
+    font-size: 22pt;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.3;
+    max-width: 155mm;
+    margin-bottom: 5mm;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .cover-conf-name span { color: var(--gold); }
+
+  /* Clean centered date + venue */
+  .cover-details-big {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6mm;
+  }
+  .cover-detail-big {
+    text-align: center;
+  }
+  .cover-detail-big-label {
+    font-size: 6.5pt;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 1mm;
+    line-height: 1;
+  }
+  .cover-detail-big-value {
+    font-size: 11pt;
+    color: white;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* Lower stats/tagline block */
+  .cover-lower {
+    background: rgba(33,16,33,.75);
+    padding: 7mm 14mm 9mm;
+    position: relative;
+    z-index: 2;
+    border-top: 2px solid var(--gold);
+    flex-shrink: 0;
+  }
+
+  .cover-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5mm;
+    margin-bottom: 7mm;
+  }
+  .cover-stat { text-align: center; }
+  .cover-stat-num {
+    display: block;
+    font-size: 24pt;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 1.5mm;
+  }
+  .cover-stat-label {
+    font-size: 6.5pt;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .cover-tagline {
+    background: rgba(142,36,170,.18);
+    border-left: 3px solid var(--purple);
+    padding: 3.5mm 5mm;
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: rgba(255,255,255,.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .cover-tagline strong { color: var(--gold); font-style: normal; font-weight: 700; }
+
+  .cover-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5mm;
+    padding-top: 4mm;
+    border-top: 1px solid rgba(212,175,55,.2);
+  }
+  .cover-foot-url { font-size: 7pt; color: var(--muted); letter-spacing: .1em; }
+  .cover-foot-right { font-size: 7pt; font-weight: 700; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* ══════════════════════════
+     PAGE 2 - ABOUT
+  ══════════════════════════ */
+  .p2 { background: var(--offwhite); min-height: 297mm; display: flex; flex-direction: column; }
+
+  .page-topbar { height: 1.5mm; background: linear-gradient(90deg, var(--purple), var(--gold)); }
+
+  .page-nav {
+    background: var(--dark);
+    padding: 4mm 14mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .page-nav-brand { font-size: 11pt; font-weight: 900; color: white; letter-spacing: .04em; }
+  .page-nav-brand span { color: var(--gold); }
+  .page-nav-right { font-size: 6.5pt; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; text-align: right; line-height: 1.8; }
+
+  .p2-content { flex: 1; display: flex; flex-direction: column; gap: 7mm; padding: 10mm 14mm; justify-content: space-between; }
+
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--purple);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1mm;
+    margin-bottom: 3mm;
+  }
+  .section-heading { font-size: 18pt; font-weight: 900; color: var(--dark); line-height: 1.1; margin-bottom: 4mm; }
+
+  .about-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, #4a1160 100%);
+    padding: 8mm 10mm;
+    border-radius: 1mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::after {
+    content: 'IPRECON';
+    position: absolute;
+    right: -10mm; bottom: -5mm;
+    font-size: 60pt; font-weight: 900;
+    color: rgba(255,255,255,.04);
+    pointer-events: none;
+  }
+  .about-hero-eyebrow { font-size: 6.5pt; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2mm; }
+  .about-hero-title { font-size: 16pt; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 4mm; }
+  .about-hero-body { font-size: 8pt; color: var(--muted); line-height: 1.7; max-width: 150mm; text-align: justify; }
+  .about-hero-body strong { color: var(--gold); }
+
+  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 5mm; }
+  .about-card { background: white; border-top: 3px solid var(--purple); padding: 5mm; box-shadow: 0 2px 12px rgba(142,36,170,.08); }
+  .about-card-head { display: flex; align-items: center; gap: 3mm; margin-bottom: 2.5mm; }
+  .about-card-icon {
+    width: 8mm; height: 8mm;
+    background: linear-gradient(135deg, var(--purple), var(--dark));
+    border-radius: .5mm;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10pt; flex-shrink: 0;
+  }
+  .about-card-title { font-size: 8pt; font-weight: 700; color: var(--dark); line-height: 1.2; }
+  .about-card-text { font-size: 7.5pt; color: #5a3060; line-height: 1.55; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .why-card { background: var(--dark); padding: 5mm 4mm; text-align: center; border-bottom: 3px solid var(--gold); border-radius: .5mm; }
+  .why-num { display: block; font-size: 20pt; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 2mm; }
+  .why-label { font-size: 7pt; color: var(--muted); line-height: 1.45; font-weight: 500; }
+
+  .club-block { background: linear-gradient(135deg, var(--purple), var(--dark)); padding: 6mm 8mm; border-radius: 1mm; }
+  .club-block-title { font-size: 9pt; font-weight: 700; color: var(--gold); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4mm; }
+  .club-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .club-item { padding-left: 3mm; border-left: 2px solid rgba(212,175,55,.5); }
+  .club-abbr { font-size: 10pt; font-weight: 800; color: var(--gold); }
+  .club-name { font-size: 6.5pt; color: rgba(255,255,255,.8); line-height: 1.3; margin-top: .5mm; font-weight: 500; }
+  .club-loc { font-size: 6pt; color: var(--muted); margin-top: .5mm; }
+
+  .gold-foot-strip { height: 2mm; background: linear-gradient(90deg, var(--gold), #f0ce60, var(--gold)); margin-top: auto; }
+
+  /* ══════════════════════════
+     PAGE 3 - TIERS
+  ══════════════════════════ */
+  .p3 { background: var(--dark); min-height: 297mm; display: flex; flex-direction: column; justify-content: space-between; }
+
+  .p3-header {
+    background: linear-gradient(135deg, #8e24aa 0%, #5b1070 100%);
+    padding: 8mm 14mm;
+    border-bottom: 2px solid var(--gold);
+  }
+  .p3-header-eyebrow { font-size: 7pt; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2mm; }
+  .p3-header-title { font-size: 22pt; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 2mm; }
+  .p3-header-sub { font-size: 7.5pt; color: rgba(255,255,255,.7); font-weight: 400; }
+
+  .p3-body { flex: 1; padding: 8mm 14mm 14mm; }
+
+  .tier-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+
+  .tier-card { border-radius: 1mm; overflow: hidden; display: flex; flex-direction: column; }
+  .tier-card.diamond { background: linear-gradient(180deg, #2a0f35 0%, #1a0a22 100%); border: 1.5px solid var(--gold); box-shadow: 0 0 20px rgba(212,175,55,.2); }
+  .tier-card.gold-t   { background: linear-gradient(180deg, #251030 0%, #1a0a22 100%); border: 1.5px solid #c0982a; }
+  .tier-card.silver-t { background: linear-gradient(180deg, #1f0d28 0%, #160820 100%); border: 1px solid #6a80a0; }
+  .tier-card.bronze-t { background: linear-gradient(180deg, #1c0c24 0%, #130818 100%); border: 1px solid #8a5030; }
+
+  .tier-head { padding: 6mm 4mm 5mm; text-align: center; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .tier-gem { font-size: 18pt; line-height: 1; display: block; margin-bottom: 2mm; }
+  .tier-name { font-size: 11pt; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; display: block; margin-bottom: 4mm; line-height: 1; }
+  .tier-card.diamond .tier-name { color: var(--gold); }
+  .tier-card.gold-t   .tier-name { color: #d4a832; }
+  .tier-card.silver-t .tier-name { color: #90b8d8; }
+  .tier-card.bronze-t .tier-name { color: #c87a40; }
+  .tier-price-usd { font-size: 18pt; font-weight: 900; color: white; display: block; line-height: 1; }
+  .tier-price-inr { font-size: 7pt; color: var(--muted); display: block; margin-top: 1mm; }
+
+  .tier-benefits-list { padding: 4mm; flex: 1; display: flex; flex-direction: column; gap: 2mm; }
+  .tb { display: flex; gap: 2mm; align-items: flex-start; font-size: 7pt; line-height: 1.35; }
+  .tb .chk { flex-shrink: 0; font-size: 7pt; margin-top: .5mm; }
+  .tb .chk.y { color: #6ee08a; }
+  .tb .chk.n { color: #3a2a40; }
+  .tb.off { color: #3a2a40; }
+  .tb.on  { color: rgba(255,255,255,.85); }
+
+  /* ══════════════════════════
+     PAGE 4 - ADDITIONAL + CONTACT
+  ══════════════════════════ */
+  .p4 { background: var(--offwhite); min-height: 297mm; display: flex; flex-direction: column; }
+
+  .p4-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, #4a1160 100%);
+    padding: 7mm 14mm;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .p4-hero-title { font-size: 18pt; font-weight: 900; color: white; line-height: 1.1; }
+  .p4-hero-title span { color: var(--gold); }
+  .p4-hero-sub { font-size: 8pt; color: var(--muted); margin-top: 1.5mm; font-weight: 400; }
+  .p4-hero-right { text-align: right; font-size: 7pt; color: var(--muted); line-height: 1.8; letter-spacing: .06em; }
+
+  .p4-body { flex: 1; padding: 9mm 14mm; display: flex; flex-direction: column; gap: 8mm; }
+
+  .add-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3mm; }
+  .add-card { background: var(--dark); border-radius: 1mm; padding: 5mm 6mm; display: flex; gap: 4mm; align-items: center; border-right: 3px solid var(--purple); }
+  .add-icon { font-size: 20pt; flex-shrink: 0; }
+  .add-title { font-size: 9pt; font-weight: 700; color: white; margin-bottom: 2mm; }
+  .add-usd { font-size: 14pt; font-weight: 900; color: var(--gold); line-height: 1; }
+  .add-inr { font-size: 7pt; color: var(--muted); margin-top: .5mm; }
+
+  .steps-row { display: flex; gap: 0; position: relative; margin-top: 4mm; }
+  .steps-row::before { content: ''; position: absolute; top: 9mm; left: 9mm; right: 9mm; height: 1px; background: linear-gradient(90deg, var(--purple), var(--gold)); }
+  .step { flex: 1; text-align: center; position: relative; z-index: 1; }
+  .step-num { width: 18mm; height: 18mm; background: var(--dark); border: 2px solid var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10pt; font-weight: 900; color: var(--gold); margin: 0 auto 3mm; }
+  .step-label { font-size: 7pt; font-weight: 600; color: #3d2040; line-height: 1.4; max-width: 28mm; margin: 0 auto; }
+
+  .contact-block { background: linear-gradient(135deg, var(--dark) 0%, #3d1050 100%); border-radius: 1mm; padding: 7mm 8mm; display: grid; grid-template-columns: 1fr auto; gap: 8mm; align-items: center; border-top: 3px solid var(--gold); }
+  .contact-title { font-size: 14pt; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 3mm; }
+  .contact-title span { color: var(--gold); }
+  .contact-desc { font-size: 8pt; color: var(--muted); line-height: 1.65; }
+  .contact-desc strong { color: var(--gold); font-weight: 700; }
+  .contact-items { display: flex; flex-direction: column; gap: 4mm; }
+  .contact-row { display: flex; gap: 3mm; align-items: center; }
+  .contact-icon-box { width: 9mm; height: 9mm; background: rgba(142,36,170,.25); border: 1px solid rgba(142,36,170,.5); border-radius: .5mm; display: flex; align-items: center; justify-content: center; font-size: 11pt; flex-shrink: 0; }
+  .contact-row-label { font-size: 6pt; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .5mm; }
+  .contact-row-val { font-size: 8.5pt; color: white; font-weight: 600; }
+
+  .p4-footer { background: var(--dark); padding: 4mm 14mm; display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 2px solid var(--gold); }
+  .p4-footer-brand { font-size: 10pt; font-weight: 900; color: white; letter-spacing: .05em; }
+  .p4-footer-brand span { color: var(--gold); }
+  .p4-footer-right { font-size: 6.5pt; color: var(--muted); text-align: right; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 - COVER -->
+<div class="page cover">
+  <!-- Gold top bar -->
+  <div class="cover-topbar"></div>
+
+  <!-- Logo row: CEK | IAS | PES | IEEE (right = biggest, order right-to-left) -->
+  <div class="cover-logo-row">
+    <div class="cover-logo-item">
+      <img src="https://iprecon.org/carousel%20images/Collegenbg-01.png" alt="CEK">
+    </div>
+    <div class="cover-logo-divider"></div>
+    <div class="cover-logo-item">
+      <img src="https://iprecon.org/carousel%20images/ias_white.png" alt="IAS">
+    </div>
+    <div class="cover-logo-divider"></div>
+    <div class="cover-logo-item">
+      <img src="https://iprecon.org/carousel%20images/pes_white.png" alt="PES">
+    </div>
+    <div class="cover-logo-divider"></div>
+    <div class="cover-logo-item ieee-logo">
+      <img src="https://iprecon.org/carousel%20images/IEEEnbg-01.png" alt="IEEE">
+    </div>
+  </div>
+
+  <!-- Centered hero -->
+  <div class="cover-hero">
+    <img
+      class="cover-iprecon-logo"
+      src="https://raw.githubusercontent.com/IEEE-SB-CEK-WEBSITES/IPRECON/main/assets/img/iprecon26%20white.png"
+      alt="IPRECON 2026"
+    >
+
+    <div class="cover-conf-name">
+      <span>2026 IEEE International Power</span><br>
+      and Renewable Energy Conference
+    </div>
+
+    <div class="cover-hybrid-badge">[ Hybrid Conference ]</div>
+
+    <div class="cover-details-big">
+      <div class="cover-detail-big">
+        <div class="cover-detail-big-label">Date</div>
+        <div class="cover-detail-big-value">September 04-06, 2026</div>
+      </div>
+      <div class="cover-detail-big">
+        <div class="cover-detail-big-label">Venue</div>
+        <div class="cover-detail-big-value">College of Engineering Karunagappally, Kerala, India</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lower stats + tagline -->
+  <div class="cover-lower">
+    <div class="cover-stats-row">
+      <div class="cover-stat">
+        <span class="cover-stat-num">300+</span>
+        <span class="cover-stat-label">International Researchers &amp; Engineers</span>
+      </div>
+      <div class="cover-stat">
+        <span class="cover-stat-num">10</span>
+        <span class="cover-stat-label">IEEE Technical Societies Under One Roof</span>
+      </div>
+      <div class="cover-stat">
+        <span class="cover-stat-num">4th</span>
+        <span class="cover-stat-label">Edition - India's First IEEE Club of 6 Conference</span>
+      </div>
+    </div>
+    <div class="cover-tagline">
+      <strong>India's First &amp; Only IEEE Club of 6 Technical Paper Conference</strong> - connecting your organization with a global community of power and renewable energy innovators, under the trusted IEEE name.
+    </div>
+    <div class="cover-foot">
+      <div class="cover-foot-url">iprecon.org/sponsors</div>
+      <div class="cover-foot-right">IEEE Xplore® Listed - Worldwide Reach</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 - ABOUT -->
+<div class="page p2">
+  <div class="page-topbar"></div>
+  <div class="page-nav">
+    <div class="page-nav-brand">IPR<span>E</span>CON 2026</div>
+    <div class="page-nav-right">September 04-06, 2026 - Kerala, India</div>
+  </div>
+  <div class="p2-content">
+
+    <div class="about-hero">
+      <div class="about-hero-eyebrow">About the Conference</div>
+      <div class="about-hero-title">A Premier IEEE Platform for<br>Power &amp; Renewable Energy</div>
+      <div class="about-hero-body">
+        IPRECON 2026 is the <strong>4th edition</strong> of India's first and only IEEE Club of 6 Technical Paper Conference, organized by the IEEE Student Branch of the College of Engineering Karunagappally. With technical co-sponsorship from <strong>IEEE IAS and IEEE PES</strong>, it serves as a premier platform for students, researchers, and professionals to share cutting-edge innovations.<br><br>
+        This edition revolves around the theme: <strong>"Advancing Power and Renewable Energy Systems through AI, Computing, and Emerging Technologies."</strong> All accepted papers are submitted to the <strong>IEEE Xplore® Digital Library</strong>. Up to 20% of presented papers are eligible for further review and possible publication in IAS Periodicals.
+      </div>
+    </div>
+
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-head"><div class="about-card-icon">⚡</div><div class="about-card-title">IEEE Xplore® Publication</div></div>
+        <div class="about-card-text">All presented papers archived in IEEE Xplore Digital Library - globally accessible and permanently indexed.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-head"><div class="about-card-icon">🌐</div><div class="about-card-title">Hybrid Format</div></div>
+        <div class="about-card-text">In-person in Kerala, accessible worldwide virtually - maximizing your brand's reach across continents.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-head"><div class="about-card-icon">🏛️</div><div class="about-card-title">Dual IEEE Society Backing</div></div>
+        <div class="about-card-text">Co-sponsored by IEEE PES and IEEE IAS - two of the most respected societies in electrical engineering.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-head"><div class="about-card-icon">🤝</div><div class="about-card-title">Industry-Academia Network</div></div>
+        <div class="about-card-text">Direct access to decision-makers, researchers, and future engineering leaders from across the globe.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-eyebrow">Why Sponsor</div>
+      <div class="section-heading" style="font-size:15pt">Your Brand. Global Stage.</div>
+      <div class="why-grid">
+        <div class="why-card"><span class="why-num">300+</span><div class="why-label">International Researchers &amp; Engineers</div></div>
+        <div class="why-card"><span class="why-num">3</span><div class="why-label">Days of Premier Technical Conference</div></div>
+        <div class="why-card"><span class="why-num">10</span><div class="why-label">IEEE Technical Societies Represented</div></div>
+        <div class="why-card"><span class="why-num">2</span><div class="why-label">IEEE Societies Co-Sponsoring: PES &amp; IAS</div></div>
+        <div class="why-card"><span class="why-num">6</span><div class="why-label">Elite "Club of Six" Member Conference</div></div>
+        <div class="why-card"><span class="why-num">∞</span><div class="why-label">IEEE Xplore® Proceedings - Permanent Reach</div></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="gold-foot-strip"></div>
+</div>
+
+<!-- PAGE 3 - TIERS -->
+<div class="page p3">
+  <!-- Club of 6 sister conferences -->
+  <div class="club-block" style="margin:0;border-radius:0;padding:14mm 14mm 12mm;">
+    <div class="club-block-title">✦ Club of 6 - IEEE Sister Conferences</div>
+    <div class="club-grid">
+      <div class="club-item"><div class="club-abbr">TPEC</div><div class="club-name">Texas Power &amp; Energy Conference</div><div class="club-loc">College Station, TX, USA</div></div>
+      <div class="club-item"><div class="club-abbr">IYCE</div><div class="club-name">Intl Youth Conference on Energy</div><div class="club-loc">Hungary &amp; Europe</div></div>
+      <div class="club-item"><div class="club-abbr">PECI</div><div class="club-name">Power &amp; Energy Conference at Illinois</div><div class="club-loc">Urbana-Champaign, IL, USA</div></div>
+      <div class="club-item"><div class="club-abbr">SCEMS</div><div class="club-name">Student Conf. on Electric Machines</div><div class="club-loc">South Korea</div></div>
+      <div class="club-item"><div class="club-abbr">KPEC</div><div class="club-name">Kansas Power &amp; Energy Conference</div><div class="club-loc">Urbana-Champaign, IL, USA</div></div>
+      <div class="club-item"><div class="club-abbr">CIYCEE</div><div class="club-name">China Intl Youth Conf. Electrical Eng.</div><div class="club-loc">Wuhan &amp; Chengdu, China</div></div>
+    </div>
+  </div>
+
+  <div style="height:10mm;"></div>
+
+  <div class="p3-header" style="margin-top:0;">
+    <div class="p3-header-eyebrow">Corporate Sponsorship Tiers</div>
+    <div class="p3-header-title">Choose Your Level of Partnership</div>
+    <div class="p3-header-sub">All tiers include: Corporate name in program book - Conference bag promotional material - Corporate name on conference website</div>
+  </div>
+  <div class="p3-body">
+    <div class="tier-cards">
+
+      <div class="tier-card diamond">
+        <div class="tier-head">
+          <span class="tier-gem">💎</span>
+          <span class="tier-name">Diamond</span>
+          <span class="tier-price-usd">US$5,000</span>
+          <span class="tier-price-inr">INR ₹4,60,000</span>
+        </div>
+        <div class="tier-benefits-list">
+          <div class="tb on"><span class="chk y">✔</span> Corporate name in program book</div>
+          <div class="tb on"><span class="chk y">✔</span> Conference bag promo material</div>
+          <div class="tb on"><span class="chk y">✔</span> Name on conference website</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo on eDM to participants</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo displayed before conference</div>
+          <div class="tb on"><span class="chk y">✔</span> 45-60 Min Keynote / Plenary</div>
+          <div class="tb on"><span class="chk y">✔</span> Exhibition booth - Welcome Reception</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo in conference rundown</div>
+          <div class="tb on"><span class="chk y">✔</span> 5× complimentary full passes</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo on banner &amp; delegate badge</div>
+          <div class="tb on"><span class="chk y">✔</span> A4 ad in program book</div>
+          <div class="tb on"><span class="chk y">✔</span> 1-min company video in breaks</div>
+          <div class="tb on"><span class="chk y">✔</span> VIP Gala Dinner table ×10</div>
+        </div>
+      </div>
+
+      <div class="tier-card gold-t">
+        <div class="tier-head">
+          <span class="tier-gem">🥇</span>
+          <span class="tier-name">Gold</span>
+          <span class="tier-price-usd">US$4,000</span>
+          <span class="tier-price-inr">INR ₹3,70,000</span>
+        </div>
+        <div class="tier-benefits-list">
+          <div class="tb on"><span class="chk y">✔</span> Corporate name in program book</div>
+          <div class="tb on"><span class="chk y">✔</span> Conference bag promo material</div>
+          <div class="tb on"><span class="chk y">✔</span> Name on conference website</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo on eDM to participants</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo displayed before conference</div>
+          <div class="tb on"><span class="chk y">✔</span> 45-60 Min Keynote / Plenary</div>
+          <div class="tb on"><span class="chk y">✔</span> Exhibition booth - Welcome Reception</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo in conference rundown</div>
+          <div class="tb on"><span class="chk y">✔</span> 5× complimentary full passes</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo on banner &amp; badge</div>
+          <div class="tb off"><span class="chk n">✗</span> A4 advertisement</div>
+          <div class="tb off"><span class="chk n">✗</span> Company video</div>
+          <div class="tb off"><span class="chk n">✗</span> Gala Dinner table</div>
+        </div>
+      </div>
+
+      <div class="tier-card silver-t">
+        <div class="tier-head">
+          <span class="tier-gem">🥈</span>
+          <span class="tier-name">Silver</span>
+          <span class="tier-price-usd">US$3,000</span>
+          <span class="tier-price-inr">INR ₹2,80,000</span>
+        </div>
+        <div class="tier-benefits-list">
+          <div class="tb on"><span class="chk y">✔</span> Corporate name in program book</div>
+          <div class="tb on"><span class="chk y">✔</span> Conference bag promo material</div>
+          <div class="tb on"><span class="chk y">✔</span> Name on conference website</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo on eDM to participants</div>
+          <div class="tb on"><span class="chk y">✔</span> Logo displayed before conference</div>
+          <div class="tb off"><span class="chk n">✗</span> Keynote / Plenary Session</div>
+          <div class="tb off"><span class="chk n">✗</span> Exhibition booth</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo in conf. rundown</div>
+          <div class="tb off"><span class="chk n">✗</span> Complimentary passes</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo on banner &amp; badge</div>
+          <div class="tb off"><span class="chk n">✗</span> A4 advertisement</div>
+          <div class="tb off"><span class="chk n">✗</span> Company video</div>
+          <div class="tb off"><span class="chk n">✗</span> Gala Dinner table</div>
+        </div>
+      </div>
+
+      <div class="tier-card bronze-t">
+        <div class="tier-head">
+          <span class="tier-gem">🥉</span>
+          <span class="tier-name">Bronze</span>
+          <span class="tier-price-usd">US$2,000</span>
+          <span class="tier-price-inr">INR ₹1,90,000</span>
+        </div>
+        <div class="tier-benefits-list">
+          <div class="tb on"><span class="chk y">✔</span> Corporate name in program book</div>
+          <div class="tb on"><span class="chk y">✔</span> Conference bag promo material</div>
+          <div class="tb on"><span class="chk y">✔</span> Name on conference website</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo on eDM to participants</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo displayed before conf.</div>
+          <div class="tb off"><span class="chk n">✗</span> Keynote / Plenary Session</div>
+          <div class="tb off"><span class="chk n">✗</span> Exhibition booth</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo in conf. rundown</div>
+          <div class="tb off"><span class="chk n">✗</span> Complimentary passes</div>
+          <div class="tb off"><span class="chk n">✗</span> Logo on banner &amp; badge</div>
+          <div class="tb off"><span class="chk n">✗</span> A4 advertisement</div>
+          <div class="tb off"><span class="chk n">✗</span> Company video</div>
+          <div class="tb off"><span class="chk n">✗</span> Gala Dinner table</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 - ADDITIONAL + CONTACT -->
+<div class="page p4">
+  <div class="page-topbar"></div>
+  <div class="p4-hero">
+    <div>
+      <div class="p4-hero-title">Additional <span>Sponsorship</span><br>Opportunities</div>
+      <div class="p4-hero-sub">Targeted visibility options for every budget</div>
+    </div>
+  </div>
+
+  <div class="p4-body">
+
+    <div>
+      <div class="section-eyebrow">À La Carte Packages</div>
+      <div class="add-cards">
+        <div class="add-card"><div class="add-icon">☕</div><div><div class="add-title">Beverage Sponsor</div><div class="add-usd">US$1,000</div><div class="add-inr">INR ₹1,00,000</div></div></div>
+        <div class="add-card"><div class="add-icon">🎁</div><div><div class="add-title">Souvenir Sponsor</div><div class="add-usd">US$800</div><div class="add-inr">INR ₹80,000</div></div></div>
+        <div class="add-card"><div class="add-icon">🏢</div><div><div class="add-title">Exhibition Booth - Dual</div><div class="add-usd">US$500</div><div class="add-inr">INR ₹50,000</div></div></div>
+        <div class="add-card"><div class="add-icon">🪧</div><div><div class="add-title">Exhibition Booth - Single</div><div class="add-usd">US$300</div><div class="add-inr">INR ₹30,000</div></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-eyebrow">Becoming a Sponsor</div>
+      <div class="section-heading" style="font-size:14pt">4 Simple Steps</div>
+      <div class="steps-row">
+        <div class="step"><div class="step-num">1</div><div class="step-label">Choose your tier or package</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-label">Submit inquiry via form or email</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-label">Our team responds within 48 hrs</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-label">Sign agreement &amp; confirm partnership</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-eyebrow">Contact Us</div>
+      <div class="contact-block">
+        <div>
+          <div class="contact-title">Ready to <span>Partner</span><br>with IPRECON 2026?</div>
+          <div class="contact-desc">Our sponsorship team is ready to help you find the right package. Reach out directly or fill in the inquiry form at <strong>iprecon.org/sponsors</strong>. We respond within 48 hours.</div>
+        </div>
+        <div class="contact-items">
+          <div class="contact-row"><div class="contact-icon-box">✉</div><div><div class="contact-row-label">Email</div><div class="contact-row-val"><a href="mailto:sponsorship@iprecon.org" style="color:white;text-decoration:none;">sponsorship@iprecon.org</a></div></div></div>
+          <div class="contact-row"><div class="contact-icon-box">📞</div><div><div class="contact-row-label">Phone / WhatsApp</div><div class="contact-row-val"><a href="tel:+919311401568" style="color:white;text-decoration:none;">+91 93114 01568</a></div></div></div>
+          <div class="contact-row"><div class="contact-icon-box">🌐</div><div><div class="contact-row-label">Website</div><div class="contact-row-val"><a href="https://iprecon.org/sponsors" style="color:white;text-decoration:none;">iprecon.org/sponsors</a></div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- IEEESBCEK logo - vertically centered in remaining space -->
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:1mm;padding-bottom:calc(10mm + 50px);">
+    <img
+      src="https://iprecon.org/carousel%20images/IEEESBCEKnbg-01.png"
+      alt="IEEE SB CEK"
+      style="max-height:18mm;width:auto;filter:invert(1);"
+    >
+    <div style="font-size:7pt;color:#5a3060;font-weight:500;letter-spacing:.02em;text-align:center;">College of Engineering Karunagappally, Engineering College Road, Thodiyoor PO, Karunagappally, Kollam, Kerala - 690523</div>
+  </div>
+
+  <div class="p4-footer">
+    <div class="p4-footer-brand">IPR<span>E</span>CON 2026</div>
+    <div class="p4-footer-right">
+      2026 IEEE International Power &amp; Renewable Energy Conference - September 04-06, 2026<br>
+      College of Engineering Karunagappally, Kerala, India
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
