@@ -4,542 +4,706 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon - IPRECON 2026</title>
+  <title>Accommodation & Travel - IPRECON 2026</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
   <style>
-    /* Your existing styles... */
-    .coming-soon-section {
+    /* =================================================================
+       HERO SECTION
+       ================================================================= */
+    .at-hero {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
       padding: 80px 0;
-      background: linear-gradient(135deg,
-          #6c5a7a 0%,
-          #4a3c5a 50%,
-          #3d2f4a 100%);
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
+      border-bottom: 1px solid #e9ecef;
     }
 
-    .coming-soon-container {
+    .at-hero-content {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
       text-align: center;
     }
 
-    .coming-soon-content {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 60px 40px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
-
-    .coming-soon-content::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #8e24aa, #d4af37);
-    }
-
-    .coming-soon-icon {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #8e24aa, #211021);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 30px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .coming-soon-icon i {
-      font-size: 3rem;
-      color: white;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .coming-soon-title {
-      font-size: 3rem;
+    .at-title {
+      font-size: 3.5rem;
       font-weight: 700;
       color: #211021;
       margin-bottom: 20px;
       line-height: 1.2;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
     }
 
-    .coming-soon-subtitle {
-      font-size: 1.5rem;
-      color: #8e24aa;
-      margin-bottom: 30px;
-      font-weight: 600;
+    .at-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background-color: #8e24aa;
     }
 
-    .coming-soon-message {
-      font-size: 1.2rem;
+    .at-subtitle {
+      font-size: 1.3rem;
       color: #6c757d;
-      margin-bottom: 40px;
+      margin-bottom: 0;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
       line-height: 1.6;
     }
 
-    .notification-signup {
+    /* =================================================================
+       MAIN CONTENT AREA
+       ================================================================= */
+    .at-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* =================================================================
+       SECTION TITLES
+       ================================================================= */
+    .at-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .at-section-title i {
+      color: #8e24aa;
+      font-size: 1.6rem;
+    }
+
+    .at-section-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      color: #6c757d;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+
+    /* =================================================================
+       DISCOUNT BANNER
+       ================================================================= */
+    .discount-banner {
       background: linear-gradient(135deg, #211021, #8e24aa);
       color: white;
-      padding: 40px;
-      border-radius: 15px;
-      margin: 40px 0;
+      padding: 35px 40px;
+      border-radius: 16px;
+      margin-bottom: 40px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 25px;
     }
 
-    .notification-signup::before {
-      content: "";
+    .discount-banner::before {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+      pointer-events: none;
     }
 
-    .notification-signup h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .notification-signup p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      opacity: 0.9;
-      position: relative;
-      z-index: 2;
-    }
-
-    .notification-form {
-      max-width: 400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 15px;
-    }
-
-    .email-input-container {
-      flex: 1;
-    }
-
-    .notification-form input {
-      width: 100%;
-      padding: 12px 15px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .notification-form input:focus {
-      border-color: #d4af37;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-    }
-
-    .notification-form input.error {
-      border-color: #dc3545;
-      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-    }
-
-    .notification-form button {
-      padding: 12px 20px;
-      background: #d4af37;
-      color: #211021;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      min-width: 120px;
-    }
-
-    .notification-form button:hover:not(:disabled) {
-      background: #b8941f;
-      transform: scale(1.05);
-    }
-
-    .notification-form button:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-      transform: none;
-    }
-
-    .notification-form button .fa-spinner {
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .error-message,
-    .success-message {
-      font-size: 0.875rem;
-      margin-top: 8px;
-      margin-bottom: 0;
-      display: none;
-      font-weight: 500;
-      text-align: left;
-      position: relative;
-      z-index: 2;
-    }
-
-    .error-message {
-      color: #ff6b6b;
-    }
-
-    .success-message {
-      color: #51cf66;
-    }
-
-    .error-message.show,
-    .success-message.show {
-      display: block;
-      animation: fadeInMessage 0.3s ease;
-    }
-
-    @keyframes fadeInMessage {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .coming-soon-actions {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .action-btn.primary {
-      background: #8e24aa;
-      color: white;
-      border-color: #8e24aa;
-    }
-
-    .action-btn.primary:hover {
-      background: transparent;
-      color: #8e24aa;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(142, 36, 170, 0.3);
-    }
-
-    /* Success Popup Modal - Enhanced */
-    .success-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .success-popup.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .success-popup-content {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 450px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      position: relative;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-
-    .success-popup.show .success-popup-content {
-      transform: scale(1);
-    }
-
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: #28a745;
+    .discount-banner-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(212, 175, 55, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
-      animation: successBounce 0.6s ease;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
-    .success-icon i {
-      font-size: 2.5rem;
-      color: white;
+    .discount-banner-icon i {
+      font-size: 1.5rem;
+      color: #d4af37;
     }
 
-    @keyframes successBounce {
-      0% {
-        transform: scale(0);
-      }
-
-      50% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
+    .discount-banner-text {
+      position: relative;
+      z-index: 1;
+      flex: 1;
     }
 
-    .success-popup h3 {
-      font-size: 1.8rem;
-      color: #211021;
-      margin-bottom: 15px;
+    .discount-banner-text h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
       font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .success-popup p {
-      font-size: 1.1rem;
-      color: #6c757d;
-      margin-bottom: 25px;
+    .discount-banner-text p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin: 0;
       line-height: 1.5;
     }
 
-    .success-popup-actions {
+    .discount-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: #d4af37;
+      color: #211021;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .discount-banner-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      text-decoration: none;
+    }
+
+    /* =================================================================
+       HOTEL CARDS
+       ================================================================= */
+    .hotel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .hotel-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .hotel-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .hotel-card-body {
+      padding: 25px;
+    }
+
+    .hotel-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .hotel-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #211021;
+      margin: 0;
+    }
+
+    .hotel-stars {
+      color: #d4af37;
+      font-size: 0.8rem;
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .hotel-address {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .hotel-address i {
+      color: #8e24aa;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .hotel-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .hotel-tag {
+      background: #f3e8ff;
+      color: #6a1b9a;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .hotel-tag.distance {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .hotel-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .hotel-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .hotel-action-btn.directions {
+      background: #8e24aa;
+      color: white;
+    }
+
+    .hotel-action-btn.directions:hover {
+      background: #7b1f96;
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: white;
+    }
+
+    .hotel-action-btn.call {
+      background: #f3e8ff;
+      color: #6a1b9a;
+    }
+
+    .hotel-action-btn.call:hover {
+      background: #e8d5f5;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    /* Google Maps button */
+    .map-btn-container {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 60px;
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 35px;
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(142, 36, 170, 0.3);
+    }
+
+    .map-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(142, 36, 170, 0.4);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* =================================================================
+       TRAVEL SECTION
+       ================================================================= */
+    .travel-section {
+      margin-top: 20px;
+    }
+
+    .travel-category {
+      margin-bottom: 45px;
+    }
+
+    .travel-category-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .travel-category-title i {
+      color: #8e24aa;
+    }
+
+    .travel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 25px;
+    }
+
+    .travel-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+
+    .travel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .travel-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .travel-card-body {
+      padding: 22px;
+    }
+
+    .travel-card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 4px;
+    }
+
+    .travel-card-code {
+      font-size: 0.85rem;
+      color: #8e24aa;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .travel-card-distance {
+      font-size: 0.9rem;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .travel-card-distance i {
+      color: #e65100;
+      font-size: 0.85rem;
+    }
+
+    .travel-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: #8e24aa;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .travel-card-btn:hover {
+      background: #7b1f96;
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Bus stand cards - no image variant */
+    .bus-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .bus-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .bus-card-icon {
+      width: 50px;
+      height: 50px;
+      background: #f3e8ff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bus-card-icon i {
+      font-size: 1.2rem;
+      color: #8e24aa;
+    }
+
+    .bus-card-info {
+      flex: 1;
+    }
+
+    .bus-card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 3px;
+    }
+
+    .bus-card-distance {
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    .bus-card-distance i {
+      color: #e65100;
+      margin-right: 4px;
+    }
+
+    .bus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    /* =================================================================
+       ASSISTANCE SECTION
+       ================================================================= */
+    .assistance-box {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 50px;
+      border: 1px solid #e9ecef;
+    }
+
+    .assistance-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 10px;
+    }
+
+    .assistance-box p {
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .assistance-btns {
       display: flex;
       gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .popup-btn {
+    .assistance-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
+      padding: 12px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
       font-weight: 600;
-      font-size: 0.95rem;
+      text-decoration: none;
+      border-radius: 8px;
       transition: all 0.3s ease;
-      border: 2px solid;
-      cursor: pointer;
     }
 
-    .popup-btn.primary {
+    .assistance-btn.primary {
       background: #8e24aa;
       color: white;
-      border-color: #8e24aa;
     }
 
-    .popup-btn.primary:hover {
+    .assistance-btn.primary:hover {
       background: #7b1f96;
       transform: translateY(-2px);
-    }
-
-    .popup-btn.secondary {
-      background: transparent;
-      color: #6c757d;
-      border-color: #6c757d;
-    }
-
-    .popup-btn.secondary:hover {
-      background: #6c757d;
+      box-shadow: 0 8px 20px rgba(142, 36, 170, 0.3);
+      text-decoration: none;
       color: white;
+    }
+
+    .assistance-btn.secondary {
+      background: white;
+      color: #211021;
+      border: 2px solid #e9ecef;
+    }
+
+    .assistance-btn.secondary:hover {
+      border-color: #8e24aa;
+      color: #8e24aa;
       transform: translateY(-2px);
+      text-decoration: none;
     }
 
-    .auto-close-info {
-      font-size: 0.85rem;
-      color: #adb5bd;
-      margin-top: 15px;
-      font-style: italic;
-    }
-
-    /* Responsive Design */
+    /* =================================================================
+       RESPONSIVE
+       ================================================================= */
     @media (max-width: 768px) {
-      .coming-soon-content {
-        padding: 40px 30px;
+      .at-hero {
+        padding: 60px 0;
       }
 
-      .coming-soon-title {
+      .at-title {
         font-size: 2.2rem;
       }
 
-      .coming-soon-subtitle {
-        font-size: 1.2rem;
+      .at-title::after {
+        width: 100px;
       }
 
-      .coming-soon-message {
-        font-size: 1rem;
+      .at-subtitle {
+        font-size: 1.05rem;
       }
 
-      .coming-soon-actions {
+      .at-main {
+        padding: 40px 15px;
+      }
+
+      .at-section-title {
+        font-size: 1.6rem;
+      }
+
+      .discount-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 22px;
+      }
+
+      .discount-banner-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hotel-grid,
+      .travel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hotel-actions {
+        flex-direction: column;
+      }
+
+      .hotel-action-btn {
+        justify-content: center;
+      }
+
+      .assistance-btns {
         flex-direction: column;
         align-items: center;
       }
 
-      .action-btn {
+      .assistance-btn {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px;
         justify-content: center;
-      }
-
-      .form-row {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .notification-form {
-        max-width: 100%;
       }
     }
 
     @media (max-width: 480px) {
-      .coming-soon-content {
-        padding: 30px 20px;
+      .at-hero {
+        padding: 45px 0;
       }
 
-      .coming-soon-title {
+      .at-title {
         font-size: 1.8rem;
       }
 
-      .coming-soon-icon {
-        width: 80px;
-        height: 80px;
+      .at-subtitle {
+        font-size: 0.95rem;
       }
 
-      .coming-soon-icon i {
-        font-size: 2rem;
+      .at-section-title {
+        font-size: 1.35rem;
       }
 
-      .success-popup-content {
-        padding: 30px 20px;
+      .travel-category-title {
+        font-size: 1.2rem;
       }
 
-      .success-icon {
-        width: 60px;
-        height: 60px;
+      .travel-card-img {
+        height: 150px;
       }
 
-      .success-icon i {
-        font-size: 2rem;
-      }
-
-      .success-popup h3 {
-        font-size: 1.5rem;
-      }
-
-      .success-popup p {
-        font-size: 1rem;
-      }
-
-      .success-popup-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .popup-btn {
-        width: 100%;
-        max-width: 200px;
-        justify-content: center;
+      .assistance-box {
+        padding: 25px 18px;
       }
     }
 
-    /* Animation for elements */
+    /* Fade-in animation */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .fade-in:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .fade-in:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .fade-in:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    .fade-in:nth-child(4) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
   <meta name="description"
-    content="Coming Soon - IPRECON 2026 International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
+    content="Accommodation and travel information for IPRECON 2026 - Hotels, airports, railway stations, and bus stands near College of Engineering Karunagappally, Kollam, Kerala, India" />
 </head>
 
 <body>
@@ -554,295 +718,477 @@
   <div id="marquee-placeholder" style="display: none"></div>
 
   <main>
-    <!-- Coming Soon Section -->
-    <section class="coming-soon-section">
-      <div class="coming-soon-container">
-        <div class="coming-soon-content">
-          <div class="coming-soon-icon fade-in">
-            <i class="fas fa-cogs"></i>
-          </div>
-
-          <h1 class="coming-soon-title fade-in">Coming Soon</h1>
-          <h2 class="coming-soon-subtitle fade-in">
-            This Page Is Being Developed
-          </h2>
-
-          <p class="coming-soon-message fade-in">
-            This section is currently being finalized. We are preparing
-            comprehensive information and details that will be published
-            shortly. Please check back soon for updates.
-          </p>
-
-          <div class="notification-signup fade-in">
-            <h3>Get Notified When We Launch</h3>
-            <p>
-              Be the first to know when this section becomes available. We'll
-              send you an update as soon as it's ready!
-            </p>
-            <div class="notification-form">
-              <div class="form-row">
-                <div class="email-input-container">
-                  <input type="email" placeholder="Enter your email address" id="emailInput" autocomplete="email" />
-                </div>
-                <button type="submit" id="notifyBtn">
-                  <i class="fas fa-bell"></i>
-                  Notify Me
-                </button>
-              </div>
-              <div class="error-message" id="errorMessage"></div>
-              <div class="success-message" id="successMessage"></div>
-            </div>
-          </div>
-
-          <div class="coming-soon-actions fade-in">
-            <a href="./index.html" class="action-btn primary">
-              <i class="fas fa-home"></i>
-              Back to Home
-            </a>
-          </div>
-        </div>
+    <!-- Hero Section -->
+    <section class="at-hero">
+      <div class="at-hero-content">
+        <h1 class="at-title">Accommodation & Travel</h1>
+        <p class="at-subtitle">
+          Find recommended hotels near the conference venue and travel information to reach
+          College of Engineering Karunagappally, Kollam, Kerala.
+        </p>
       </div>
     </section>
-  </main>
 
-  <!-- Success Popup Modal -->
-  <div class="success-popup" id="successPopup">
-    <div class="success-popup-content">
-      <div class="success-icon">
-        <i class="fas fa-check"></i>
-      </div>
-      <h3>Thank You!</h3>
-      <p>
-        We'll notify you at the earliest once this page is ready. Please check
-        your inbox regularly for updates.
+    <div class="at-main">
+
+      <!-- ============================================================
+           ACCOMMODATION SECTION
+           ============================================================ -->
+      <h2 class="at-section-title fade-in">
+        <i class="fas fa-bed"></i>
+        Accommodation Options
+      </h2>
+      <p class="at-section-subtitle fade-in">
+        Recommended nearby hotels for IPRECON 2026 delegates. We have partnered with select properties to offer discounted rates for conference attendees.
       </p>
-      <div class="success-popup-actions">
-        <a href="./index.html" class="popup-btn primary">
-          <i class="fas fa-home"></i>
-          Back to Home
+
+      <!-- Discount Banner -->
+      <div class="discount-banner fade-in">
+        <div class="discount-banner-icon">
+          <i class="fas fa-percent"></i>
+        </div>
+        <div class="discount-banner-text">
+          <h3>Discounted Rates Available for Delegates</h3>
+          <p>We can arrange special discounted accommodation for IPRECON 2026 attendees. Please contact the organizing committee before booking to avail exclusive conference rates.</p>
+        </div>
+        <a href="./contact.html" class="discount-banner-btn">
+          <i class="fas fa-envelope"></i>
+          Contact Organizers
         </a>
-        <button class="popup-btn secondary" onclick="closeSuccessPopup()">
-          <i class="fas fa-times"></i>
-          Close
-        </button>
       </div>
-      <div class="auto-close-info">
-        This popup will close automatically in
-        <span id="countdown">5</span> seconds
+
+      <!-- Hotel Cards -->
+      <div class="hotel-grid">
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/quilon-beach-hotel.webp" alt="The Quilon Beach Hotel" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">The Quilon Beach Hotel & Convention Centre</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Pallithottam-Beach Rd, Thamarakulam, Kollam, Kerala 691006</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">5-Star</span>
+              <span class="hotel-tag">Beachfront</span>
+              <span class="hotel-tag distance">~27 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=The+Quilon+Beach+Hotel+Kollam" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/hotel-raviz.jpg" alt="The Raviz Kollam" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">The Raviz Kollam</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Ashtamudi Lake, Kollam, Kerala 691001</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">5-Star</span>
+              <span class="hotel-tag">Heritage Lakefront</span>
+              <span class="hotel-tag distance">~28 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=The+Raviz+Kollam" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/hotel-allseason.jpg" alt="Hotel Allseason" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">Hotel Allseason</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Ashtamudi Lake, Mathilil, Kollam, Kerala 691601</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">4-Star</span>
+              <span class="hotel-tag">Lakefront</span>
+              <span class="hotel-tag distance">~25 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=Hotel+Allseason+Kollam" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/club-mahindra.webp" alt="Club Mahindra Ashtamudi" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">Club Mahindra Ashtamudi</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Ashtamudi, Kollam, Kerala 691001</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">4-Star Resort</span>
+              <span class="hotel-tag">Lake View</span>
+              <span class="hotel-tag distance">~28 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=Club+Mahindra+Ashtamudi+Kollam" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/zodiac-regency.jpg" alt="Zodiac Regency" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">Zodiac Regency</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Vadayattukotta Rd, Chinnakada, Kollam, Kerala 691001</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">3-Star</span>
+              <span class="hotel-tag">City Centre</span>
+              <span class="hotel-tag distance">~27 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=Zodiac+Regency+Kollam" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-card fade-in">
+          <img src="./assets/img/accommodation/grande-muscat.webp" alt="Hotel Grande Muscat" class="hotel-card-img" loading="lazy" />
+          <div class="hotel-card-body">
+            <div class="hotel-card-header">
+              <h3 class="hotel-name">Hotel Grande Muscat</h3>
+              <div class="hotel-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+            <div class="hotel-address">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>KC Centre, Karunagappally, Kollam, Kerala 690518</span>
+            </div>
+            <div class="hotel-tags">
+              <span class="hotel-tag">3-Star</span>
+              <span class="hotel-tag">Nearest to Venue</span>
+              <span class="hotel-tag distance">~3 km from venue</span>
+            </div>
+            <div class="hotel-actions">
+              <a href="https://maps.google.com/?q=Hotel+Grande+Muscat+Karunagappally" target="_blank" rel="noopener" class="hotel-action-btn directions">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <!-- View on Google Maps Button -->
+      <div class="map-btn-container fade-in">
+        <a href="https://www.google.com/maps/search/hotels+near+College+of+Engineering+Karunagappally+Kollam" target="_blank" rel="noopener" class="map-btn">
+          <i class="fas fa-map-marked-alt"></i>
+          View Nearby Hotels on Google Maps
+        </a>
+      </div>
+
+      <!-- ============================================================
+           TRAVEL SECTION
+           ============================================================ -->
+      <h2 class="at-section-title fade-in">
+        <i class="fas fa-route"></i>
+        Travel Information
+      </h2>
+      <p class="at-section-subtitle fade-in">
+        College of Engineering Karunagappally is well-connected by air, rail, and road.
+        Here are the nearest transportation hubs to help you plan your journey.
+      </p>
+
+      <div class="travel-section">
+
+        <!-- Airports -->
+        <div class="travel-category fade-in">
+          <h3 class="travel-category-title">
+            <i class="fas fa-plane"></i>
+            Nearest Airports
+          </h3>
+          <div class="travel-grid">
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/trivandrum-airport.jpg" alt="Trivandrum International Airport" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Trivandrum International Airport</div>
+                <div class="travel-card-code">IATA: TRV</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  85 km from venue (~2 hrs via NH 66)
+                </div>
+                <a href="https://goo.gl/maps/Jm5vp9W5zxDMR5SH7" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/cochin-airport.jpg" alt="Cochin International Airport" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Cochin International Airport</div>
+                <div class="travel-card-code">IATA: COK</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  160 km from venue (~3.5 hrs via NH 66)
+                </div>
+                <a href="https://goo.gl/maps/nvnsiV4hzhidKfFf7" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/calicut-airport.jpg" alt="Calicut International Airport" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Calicut International Airport</div>
+                <div class="travel-card-code">IATA: CCJ</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  297 km from venue (~6 hrs via NH 66)
+                </div>
+                <a href="https://www.google.com/maps/dir/Calicut+International+Airport/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Railway Stations -->
+        <div class="travel-category fade-in">
+          <h3 class="travel-category-title">
+            <i class="fas fa-train"></i>
+            Nearest Railway Stations
+          </h3>
+          <div class="travel-grid">
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/karunagappally-station.jpg" alt="Karunagappally Railway Station" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Karunagappally Railway Station</div>
+                <div class="travel-card-code">Station Code: KPY</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  3 km from venue (~5 mins)
+                </div>
+                <a href="https://www.google.com/maps/dir/Karunagappalli+Railway+Station/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/kollam-junction.jpg" alt="Kollam Junction Railway Station" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Kollam Junction Railway Station</div>
+                <div class="travel-card-code">Station Code: QLN</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  27 km from venue (~45 mins)
+                </div>
+                <a href="https://www.google.com/maps/dir/Kollam+Junction+Railway+Station/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+            <div class="travel-card">
+              <img src="./assets/img/accommodation/kayamkulam-junction.jpg" alt="Kayamkulam Junction Railway Station" class="travel-card-img" loading="lazy" />
+              <div class="travel-card-body">
+                <div class="travel-card-name">Kayamkulam Junction Railway Station</div>
+                <div class="travel-card-code">Station Code: KYJ</div>
+                <div class="travel-card-distance">
+                  <i class="fas fa-map-marker-alt"></i>
+                  20 km from venue (~30 mins)
+                </div>
+                <a href="https://www.google.com/maps/dir/Kayamkulam+Junction+Railway+Station/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="travel-card-btn">
+                  <i class="fas fa-directions"></i> Get Directions
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bus Stands -->
+        <div class="travel-category fade-in">
+          <h3 class="travel-category-title">
+            <i class="fas fa-bus"></i>
+            Nearest Bus Stands
+          </h3>
+          <div class="bus-grid">
+
+            <div class="bus-card">
+              <div class="bus-card-icon">
+                <i class="fas fa-bus"></i>
+              </div>
+              <div class="bus-card-info">
+                <div class="bus-card-name">Karunagappally Bus Stand</div>
+                <div class="bus-card-distance">
+                  <i class="fas fa-map-marker-alt"></i> 4 km from venue
+                </div>
+              </div>
+              <a href="https://www.google.com/maps/dir/Karunagappally+Bus+Stand/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="hotel-action-btn directions" style="flex-shrink:0">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+
+            <div class="bus-card">
+              <div class="bus-card-icon">
+                <i class="fas fa-bus"></i>
+              </div>
+              <div class="bus-card-info">
+                <div class="bus-card-name">Kollam KSRTC Bus Stand</div>
+                <div class="bus-card-distance">
+                  <i class="fas fa-map-marker-alt"></i> 27 km from venue
+                </div>
+              </div>
+              <a href="https://www.google.com/maps/dir/Kollam+KSRTC+Bus+Stand/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="hotel-action-btn directions" style="flex-shrink:0">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+
+            <div class="bus-card">
+              <div class="bus-card-icon">
+                <i class="fas fa-bus"></i>
+              </div>
+              <div class="bus-card-info">
+                <div class="bus-card-name">Kayamkulam Bus Stand</div>
+                <div class="bus-card-distance">
+                  <i class="fas fa-map-marker-alt"></i> 12 km from venue
+                </div>
+              </div>
+              <a href="https://www.google.com/maps/dir/Kayamkulam+Bus+Stand/College+of+Engineering+Karunagappally" target="_blank" rel="noopener" class="hotel-action-btn directions" style="flex-shrink:0">
+                <i class="fas fa-directions"></i> Directions
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Assistance Section -->
+      <div class="assistance-box fade-in">
+        <h3><i class="fas fa-headset"></i> Need Travel or Accommodation Assistance?</h3>
+        <p>
+          For international delegates, transportation assistance from the airport can be arranged upon request.
+          Contact the organizing committee for accommodation bookings, travel help, or any other queries.
+        </p>
+        <div class="assistance-btns">
+          <a href="./contact.html" class="assistance-btn primary">
+            <i class="fas fa-envelope"></i> Contact Organizers
+          </a>
+          <a href="./venue.html" class="assistance-btn secondary">
+            <i class="fas fa-map-pin"></i> View Venue Details
+          </a>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </main>
 
   <esi:include src="/includes/footer.html" />
 
   <script src="./scripts/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script>
     $(document).ready(function () {
-      // Configuration - REPLACE WITH YOUR ACTUAL WORKER URL
-      const WORKER_URL = 'https://iprecon-email-collector.ieeesbcek2000.workers.dev'; // Replace with your Worker URL
-      const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+      // Owl Carousel init
+      if ($("#news-slider").length) {
+        $("#news-slider").owlCarousel({
+          items: 4,
+          loop: true,
+          margin: 20,
+          nav: true,
+          navText: [
+            "<i class='fa fa-chevron-left'></i>",
+            "<i class='fa fa-chevron-right'></i>",
+          ],
+          autoplay: true,
+          autoplayTimeout: 3000,
+          responsive: {
+            0: { items: 3 },
+            600: { items: 3 },
+            1000: { items: 4 },
+          },
+        });
+      }
 
-      // Enhanced notification form handling with backend integration
-      let countdownTimer;
-      let countdownInterval;
-
-      $("#notifyBtn").click(function (e) {
-        e.preventDefault();
-
-        const email = $("#emailInput").val().trim();
-        const emailInput = $("#emailInput");
-        const errorMessage = $("#errorMessage");
-        const successMessage = $("#successMessage");
-        const submitButton = $(this);
-
-        // Clear previous states
-        emailInput.removeClass("error");
-        errorMessage.removeClass("show").text("");
-        successMessage.removeClass("show").text("");
-
-        // Validation
-        if (!email) {
-          showError("Please enter an email address.");
-          return;
-        }
-
-        if (!isValidEmail(email)) {
-          showError("Please enter a valid email address.");
-          return;
-        }
-
-        // Show loading state
-        showLoadingState(submitButton, true);
-
-        // Send to backend
-        submitEmailToBackend(email, currentPage)
-          .then(response => {
-            showLoadingState(submitButton, false);
-
-            if (response.success) {
-              showSuccessPopup(response.message);
-              emailInput.val("");
-
-              // Track the submission (optional analytics)
-              if (typeof gtag !== 'undefined') {
-                gtag('event', 'email_signup', {
-                  'page': currentPage,
-                  'email_domain': email.split('@')[1]
-                });
-              }
-            } else {
-              showError(response.error || "An error occurred. Please try again.");
+      // Scroll fade-in animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
             }
-          })
-          .catch(error => {
-            showLoadingState(submitButton, false);
-            console.error('Email submission error:', error);
-            showError("Network error. Please check your connection and try again.");
           });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
 
-        function showError(message) {
-          emailInput.addClass("error");
-          errorMessage.text(message).addClass("show");
-          successMessage.removeClass("show");
-        }
-
-        function isValidEmail(email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailRegex.test(email);
-        }
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
       });
 
-      // Clear error state when user starts typing
-      $("#emailInput").on("input", function () {
-        $(this).removeClass("error");
-        $("#errorMessage").removeClass("show");
-        $("#successMessage").removeClass("show");
+      // Handle broken images gracefully
+      document.querySelectorAll('.travel-card-img').forEach(function (img) {
+        img.onerror = function () {
+          this.style.background = 'linear-gradient(135deg, #f3e8ff, #e8d5f5)';
+          this.style.display = 'flex';
+          this.style.alignItems = 'center';
+          this.style.justifyContent = 'center';
+          this.alt = '';
+          this.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%238e24aa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>');
+          this.style.objectFit = 'none';
+          this.style.objectPosition = 'center';
+        };
       });
-
-      // Submit email to backend
-      async function submitEmailToBackend(email, page) {
-        try {
-          const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: email,
-              page: page
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          return await response.json();
-        } catch (error) {
-          console.error('Backend submission error:', error);
-          throw error;
-        }
-      }
-
-      // Show loading state on button
-      function showLoadingState(button, isLoading) {
-        const originalText = button.data('original-text') || button.html();
-
-        if (!button.data('original-text')) {
-          button.data('original-text', originalText);
-        }
-
-        if (isLoading) {
-          button.prop('disabled', true);
-          button.html('<i class="fas fa-spinner fa-spin"></i> Subscribing...');
-        } else {
-          button.prop('disabled', false);
-          button.html(originalText);
-        }
-      }
-
-      // Success popup functions
-      function showSuccessPopup(customMessage) {
-        // Update the success message if provided
-        if (customMessage) {
-          $("#successPopup .success-popup-content p").text(customMessage);
-        }
-
-        $("#successPopup").addClass("show");
-        startCountdown();
-      }
-
-      function closeSuccessPopup() {
-        $("#successPopup").removeClass("show");
-        if (countdownTimer) {
-          clearTimeout(countdownTimer);
-        }
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-        }
-
-        // Reset the success message to default
-        $("#successPopup .success-popup-content p").text(
-          "We'll notify you at the earliest once this page is ready. Please check your inbox regularly for updates."
-        );
-      }
-
-      function startCountdown() {
-        let seconds = 5;
-        $("#countdown").text(seconds);
-
-        countdownInterval = setInterval(function () {
-          seconds--;
-          $("#countdown").text(seconds);
-
-          if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            closeSuccessPopup();
-          }
-        }, 1000);
-
-        countdownTimer = setTimeout(function () {
-          closeSuccessPopup();
-        }, 5000);
-      }
-
-      // Close popup when clicking outside
-      $("#successPopup").click(function (e) {
-        if (e.target === this) {
-          closeSuccessPopup();
-        }
-      });
-
-      // Global function for close button
-      window.closeSuccessPopup = closeSuccessPopup;
-
-      // Enhanced form validation with real-time feedback
-      $("#emailInput").on("blur", function () {
-        const email = $(this).val().trim();
-        if (email && !isValidEmail(email)) {
-          $(this).addClass("error");
-          $("#errorMessage").text("Please enter a valid email address.").addClass("show");
-        }
-      });
-
-      function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      }
-
-      // Add keyboard support for form submission
-      $("#emailInput").on("keypress", function (e) {
-        if (e.which === 13) { // Enter key
-          $("#notifyBtn").click();
-        }
-      });
-
-      // Optional: Add a subtle animation to the form on page load
-      setTimeout(function () {
-        $(".notification-signup").addClass("fade-in");
-      }, 500);
     });
   </script>
 </body>
+
 </html>
