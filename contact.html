@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.min.css" />
   <style>
     /* =================================================================
          STANDARDIZED BUTTON SYSTEM
@@ -1109,6 +1110,56 @@
     .phone-popup-modal.show .phone-popup-content {
       animation: phonePopupSlideIn 0.4s ease-out;
     }
+
+    /* intl-tel-input overrides */
+    .iti {
+      width: 100%;
+    }
+
+    .iti__tel-input {
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px 16px 15px 52px;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      width: 100%;
+      outline: none;
+      background: #f8f9fa;
+      color: #333;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .iti__tel-input:focus {
+      border-color: #8e24aa;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
+    }
+
+    .iti__tel-input.error {
+      border-color: #e74c3c;
+      background: #fdf2f2;
+    }
+
+    .iti__flag-container {
+      border-radius: 8px 0 0 8px;
+    }
+
+    .iti__country {
+      display: flex;
+      align-items: center;
+    }
+
+    .iti__country-name {
+      flex: 1;
+    }
+
+    .iti__dial-code {
+      margin-left: auto;
+      padding-left: 10px;
+      color: #888;
+      font-size: 0.88rem;
+    }
   </style>
   <meta name="description"
     content="Contact IPRECON 2026 - Get in touch with the International Power and Renewable Energy Conference team at College of Engineering Karunagappally, Kerala, India" />
@@ -1358,8 +1409,7 @@
                       <i class="fas fa-phone"></i>
                       Phone Number <span class="required">*</span>
                     </label>
-                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="+91 8139861033"
-                      required />
+                    <input type="tel" id="phone" name="phone" placeholder="99999 99999" required />
                     <div class="error-message" id="phoneError">
                       Please enter your phone number
                     </div>
@@ -1508,6 +1558,7 @@
   <script src="./scripts/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
   <script>
     $(document).ready(function () {
       $("#news-slider").owlCarousel({
@@ -1533,6 +1584,23 @@
           },
         },
       });
+
+      // intl-tel-input for phone field
+      var phoneInput = document.querySelector("#phone");
+      if (phoneInput) {
+        window.iti = intlTelInput(phoneInput, {
+          initialCountry: "auto",
+          separateDialCode: true,
+          countrySearch: true,
+          geoIpLookup: function (callback) {
+            fetch("https://ipapi.co/json/")
+              .then(function (res) { return res.json(); })
+              .then(function (data) { callback(data.country_code); })
+              .catch(function () { callback("in"); });
+          },
+          utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
+        });
+      }
 
       // Scroll animations
       const observerOptions = {
@@ -1728,7 +1796,7 @@
         }
 
         // Validate phone
-        const phone = document.getElementById("phone").value.trim();
+        const phone = window.iti ? window.iti.getNumber() : document.getElementById("phone").value.trim();
         if (!phone) {
           showError("phone", "Please enter your phone number");
           isValid = false;
@@ -1806,7 +1874,7 @@
             organization: document
               .getElementById("organization")
               .value.trim(),
-            phone: document.getElementById("phone").value.trim(),
+            phone: window.iti ? window.iti.getNumber() : document.getElementById("phone").value.trim(),
             subject: document.getElementById("subject").value,
             customSubject: document
               .getElementById("customSubject")
