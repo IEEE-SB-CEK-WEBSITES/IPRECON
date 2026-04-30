@@ -240,6 +240,72 @@
       margin: 50px 0;
     }
 
+    /* Fee Notice Box — matches no-show-policy design */
+    .fee-notice-box {
+      display: flex;
+      max-width: 1000px;
+      margin: 0 auto 30px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid #8e24aa;
+    }
+
+    .fee-notice-header {
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 150px;
+      flex-shrink: 0;
+    }
+
+    .fee-notice-header i {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .fee-notice-label {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .fee-notice-list {
+      flex: 1;
+      padding: 20px 25px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+    }
+
+    .fee-notice-list li {
+      padding-left: 18px;
+      position: relative;
+      color: #333;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .fee-notice-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #8e24aa;
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1.3;
+    }
+
     .section-title {
       font-size: 2.5rem;
       color: #211021;
@@ -1091,8 +1157,20 @@
     }
 
     @media (max-width: 768px) {
-      .fee-notice {
-        font-size: 0.85rem !important;
+      .fee-notice-box {
+        flex-direction: column;
+      }
+
+      .fee-notice-header {
+        flex-direction: row;
+        gap: 10px;
+        padding: 15px 20px;
+        min-width: unset;
+      }
+
+      .fee-notice-header i {
+        margin-bottom: 0;
+        font-size: 1.2rem;
       }
 
       .registration-hero {
@@ -1642,15 +1720,17 @@
         <!-- Fee Structure -->
         <div class="fee-section">
           <h2 class="section-title">Registration Fees</h2>
-          <p class="fee-notice" style="text-align: center; color: #ff4444; font-size: 1.1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <strong>Notice:</strong> The fee shown below is excluding Payment Gateway charges and Currency Conversion charges.
-          </p>
-          <p class="fee-notice" style="text-align: center; color: #ff4444; font-size: 1.1rem; margin-top: 0rem; margin-bottom: 0.5rem;">
-            As the organizing body falls below the prescribed GST turnover threshold, GST will not be levied or collected from attendees.
-          </p>
-          <p class="fee-notice" style="text-align: center; color: #ff4444; font-size: 1.1rem; margin-top: 0rem; margin-bottom: 1.5rem;">
-            The invoice issued by the ticketing platform shall serve as the sole and final proof of payment.
-          </p>
+          <div class="fee-notice-box">
+            <div class="fee-notice-header">
+              <i class="fas fa-info-circle"></i>
+              <div class="fee-notice-label">Fee Notice</div>
+            </div>
+            <ul class="fee-notice-list">
+              <li>The fee shown below is excluding Payment Gateway charges and Currency Conversion charges.</li>
+              <li>As the organizing body falls below the prescribed GST turnover threshold, GST will not be levied or collected from attendees.</li>
+              <li>The invoice issued by the ticketing platform shall serve as the sole and final proof of payment.</li>
+            </ul>
+          </div>
 
           <!-- Modern Card Layout -->
           <div class="fee-cards-container">
