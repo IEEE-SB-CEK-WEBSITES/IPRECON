@@ -8,34 +8,36 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css" />
+  <meta name="description"
+    content="Thank you for registering for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
   <style>
-    /* ===== Thank You Page ===== */
+    /* ===== Thank-You Page (dark card on light bg) ===== */
     .thankyou-section {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(160deg, #faf6fd 0%, #f4f5f8 100%);
-      min-height: 78vh;
+      min-height: 72vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 20px;
+      padding: 70px 20px;
+      background: linear-gradient(160deg, #faf6fd 0%, #f4f5f8 100%);
+      font-family: 'Montserrat', sans-serif;
     }
 
-    /* Floating decorative blobs in the background */
+    /* Floating decorative blobs */
     .floaty {
       position: absolute;
       border-radius: 50%;
       filter: blur(3px);
-      opacity: 0.18;
+      opacity: 0.3;
       pointer-events: none;
       animation: floatUpDown 9s ease-in-out infinite;
     }
-
-    .floaty.f1 { width: 120px; height: 120px; background: #ce93d8; top: 12%; left: 8%; animation-delay: 0s; }
-    .floaty.f2 { width: 70px;  height: 70px;  background: #8e24aa; top: 65%; left: 14%; animation-delay: 1.5s; }
-    .floaty.f3 { width: 90px;  height: 90px;  background: #ba68c8; top: 22%; right: 10%; animation-delay: 0.8s; }
-    .floaty.f4 { width: 50px;  height: 50px;  background: #f48fb1; top: 72%; right: 16%; animation-delay: 2.2s; }
-    .floaty.f5 { width: 30px;  height: 30px;  background: #9c27b0; top: 40%; left: 48%; animation-delay: 3s; }
+    .floaty.f1 { width: 130px; height: 130px; background: #ce93d8; top: 10%; left: 8%; animation-delay: 0s; }
+    .floaty.f2 { width: 72px;  height: 72px;  background: #8e24aa; top: 66%; left: 13%; animation-delay: 1.5s; }
+    .floaty.f3 { width: 96px;  height: 96px;  background: #ba68c8; top: 20%; right: 9%;  animation-delay: 0.8s; }
+    .floaty.f4 { width: 54px;  height: 54px;  background: #f48fb1; top: 72%; right: 14%; animation-delay: 2.2s; }
+    .floaty.f5 { width: 34px;  height: 34px;  background: #9c27b0; top: 42%; left: 6%;   animation-delay: 3s; }
 
     @keyframes floatUpDown {
       0%, 100% { transform: translateY(0) scale(1); }
@@ -45,35 +47,28 @@
     .thankyou-card {
       position: relative;
       z-index: 2;
-      max-width: 760px;
+      max-width: 700px;
       width: 100%;
-      background: #ffffff;
-      border: 1px solid #ededf2;
-      border-radius: 18px;
-      box-shadow: 0 12px 40px rgba(33, 16, 33, 0.08);
-      padding: 56px 48px;
       text-align: center;
+      background: #221831;
+      border: 1px solid rgba(142, 36, 170, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(33, 16, 33, 0.25);
+      padding: 56px 48px;
       animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     @keyframes cardIn {
-      from { opacity: 0; transform: translateY(40px) scale(0.96); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Animated success check */
-    .check-wrap {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 28px;
-      position: relative;
-    }
+    /* Animated check */
+    .check-wrap { width: 104px; height: 104px; margin: 0 auto 26px; position: relative; }
 
     .check-pulse {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(142, 36, 170, 0.25) 0%, rgba(142, 36, 170, 0) 70%);
+      position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 36, 170, 0.35) 0%, rgba(142, 36, 170, 0) 70%);
       animation: pulseRing 2.2s ease-out infinite;
     }
 
@@ -84,83 +79,74 @@
     }
 
     .check-svg {
-      width: 110px;
-      height: 110px;
-      position: relative;
-      z-index: 1;
+      width: 104px; height: 104px; position: relative; z-index: 1;
+      filter: drop-shadow(0 0 10px rgba(142, 36, 170, 0.5));
     }
 
     .check-circle {
-      stroke: #8e24aa;
-      stroke-width: 5;
-      fill: rgba(142, 36, 170, 0.06);
-      stroke-dasharray: 295;
-      stroke-dashoffset: 295;
+      stroke: #8e24aa; stroke-width: 5; fill: rgba(142, 36, 170, 0.1);
+      stroke-dasharray: 295; stroke-dashoffset: 295;
       animation: drawCircle 0.7s ease-out 0.2s forwards;
     }
 
     .check-mark {
-      stroke: #8e24aa;
-      stroke-width: 7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-      stroke-dasharray: 70;
-      stroke-dashoffset: 70;
+      stroke: #ce93d8; stroke-width: 7;
+      stroke-linecap: round; stroke-linejoin: round; fill: none;
+      stroke-dasharray: 70; stroke-dashoffset: 70;
       animation: drawCheck 0.45s ease-out 0.85s forwards;
     }
 
     @keyframes drawCircle { to { stroke-dashoffset: 0; } }
     @keyframes drawCheck  { to { stroke-dashoffset: 0; } }
 
-    /* Staggered reveal helper */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: revealUp 0.6s ease forwards;
-    }
+    /* Staggered reveal */
+    .reveal { opacity: 0; transform: translateY(16px); animation: revealUp 0.6s ease forwards; }
     .d1 { animation-delay: 1.1s; }
     .d2 { animation-delay: 1.3s; }
     .d3 { animation-delay: 1.5s; }
     .d4 { animation-delay: 1.7s; }
-    .d5 { animation-delay: 1.9s; }
-
-    @keyframes revealUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
 
     .thankyou-card h1 {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #211021;
-      margin-bottom: 10px;
+      color: #ffffff;
+      margin: 0 0 14px;
       line-height: 1.2;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 14px;
+    }
+
+    .thankyou-card h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 3px;
+      background-color: #8e24aa;
+      border-radius: 2px;
     }
 
     .thankyou-card .subtitle {
       font-size: 1.1rem;
-      color: #8e24aa;
+      color: #d4af37;
       font-weight: 600;
-      margin-bottom: 24px;
+      margin: 0 0 22px;
     }
 
-    .thankyou-card p {
+    .thankyou-card .lead {
       font-size: 1rem;
-      color: #555a60;
+      color: rgba(255, 255, 255, 0.72);
       line-height: 1.7;
-      margin-bottom: 16px;
+      margin: 0 auto;
+      max-width: 540px;
     }
 
-    .thankyou-card > p:first-of-type {
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Two side-by-side notice cards — matches registration page header style */
+    /* Two side-by-side notice cards */
     .ty-notices {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       margin: 30px 0 6px;
       text-align: left;
     }
@@ -171,71 +157,57 @@
       flex-direction: column;
       border-radius: 10px;
       overflow: hidden;
-      border: 1px solid #8e24aa;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(142, 36, 170, 0.45);
+      background: rgba(0, 0, 0, 0.2);
     }
-
-    .ty-notice.danger {
-      border-color: #cc0000;
-    }
+    .ty-notice.danger { border-color: rgba(204, 0, 0, 0.5); }
 
     .ty-notice-header {
       background: linear-gradient(135deg, #8e24aa, #211021);
-      padding: 16px 18px;
+      padding: 13px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
     }
-
     .ty-notice.danger .ty-notice-header {
       background: linear-gradient(135deg, #cc0000, #7a0000);
     }
-
-    .ty-notice-header i {
-      color: #ffffff;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-
-    .ty-notice-header .label {
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 1rem;
-      line-height: 1.3;
-    }
+    .ty-notice-header i { color: #ffffff; font-size: 1.15rem; flex-shrink: 0; }
+    .ty-notice-header .label { color: #ffffff; font-weight: 700; font-size: 0.95rem; line-height: 1.3; }
 
     .ty-notice-body {
       flex: 1;
-      background: #ffffff;
-      padding: 18px;
-      font-size: 0.9rem;
-      color: #444444;
+      padding: 15px 16px;
+      font-size: 0.86rem;
+      color: rgba(255, 255, 255, 0.78);
       line-height: 1.6;
     }
+    .ty-notice-body strong { color: #ff8a80; }
 
-    .ty-notice.danger .ty-notice-body {
-      background: #fff5f5;
+    .thankyou-card .contact {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.72);
+      margin: 22px 0 0;
     }
+    .thankyou-card .contact a { color: #d4af37; font-weight: 600; text-decoration: none; }
+    .thankyou-card .contact a:hover { text-decoration: underline; }
 
-    .ty-notice.danger .ty-notice-body strong {
-      color: #b71c1c;
-    }
-
+    /* Buttons */
     .thankyou-actions {
       display: flex;
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 32px;
+      margin-top: 30px;
     }
 
     .thankyou-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 14px 28px;
+      padding: 13px 28px;
       border-radius: 50px;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -244,51 +216,44 @@
     .thankyou-btn.primary {
       background: #8e24aa;
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(142, 36, 170, 0.22);
+      box-shadow: 0 4px 14px rgba(142, 36, 170, 0.4);
     }
-
     .thankyou-btn.primary:hover {
-      background: #7b1fa2;
+      background: #9c27b0;
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(142, 36, 170, 0.3);
+      box-shadow: 0 8px 20px rgba(142, 36, 170, 0.5);
     }
 
     .thankyou-btn.secondary {
-      background: #ffffff;
-      color: #8e24aa;
-      border: 2px solid #8e24aa;
+      background: transparent;
+      color: #d4af37;
+      border: 2px solid #d4af37;
     }
-
     .thankyou-btn.secondary:hover {
-      background: #8e24aa;
-      color: #ffffff;
+      background: rgba(212, 175, 55, 0.12);
       transform: translateY(-2px);
     }
 
-    /* Confetti pieces */
+    /* Confetti */
     .confetti-piece {
       position: fixed;
       top: -12px;
-      width: 10px;
-      height: 16px;
+      width: 10px; height: 16px;
       opacity: 0.95;
       z-index: 9999;
       pointer-events: none;
       will-change: transform;
-      box-shadow: 0 1px 4px rgba(106, 27, 154, 0.18);
     }
 
     @media (max-width: 600px) {
-      .thankyou-card { padding: 45px 24px; }
-      .thankyou-card h1 { font-size: 1.9rem; }
-      .thankyou-card .subtitle { font-size: 1.05rem; }
+      .thankyou-card { padding: 44px 24px; }
+      .thankyou-card h1 { font-size: 1.8rem; }
+      .thankyou-card .subtitle { font-size: 1rem; }
       .ty-notices { flex-direction: column; }
       .thankyou-actions { flex-direction: column; }
       .thankyou-btn { justify-content: center; }
     }
   </style>
-  <meta name="description"
-    content="Thank you for registering for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
 </head>
 
 <body>
@@ -316,16 +281,16 @@
       <div class="thankyou-card">
         <div class="check-wrap">
           <span class="check-pulse"></span>
-          <svg class="check-svg" viewBox="0 0 110 110" aria-hidden="true">
-            <circle class="check-circle" cx="55" cy="55" r="47" />
-            <path class="check-mark" d="M35 57 L49 71 L76 41" />
+          <svg class="check-svg" viewBox="0 0 104 104" aria-hidden="true">
+            <circle class="check-circle" cx="52" cy="52" r="45" />
+            <path class="check-mark" d="M33 54 L47 68 L72 38" />
           </svg>
         </div>
 
         <h1 class="reveal d1">Thank You for Registering!</h1>
         <p class="subtitle reveal d2">Your registration for IPRECON 2026 was successful.</p>
 
-        <p class="reveal d3">
+        <p class="lead reveal d3">
           We're delighted to have you join the IEEE International Power and Renewable
           Energy Conference (IPRECON 2026). A confirmation, along with your invoice and
           ticket, has been sent to your registered email address by our ticketing partner.
@@ -338,9 +303,9 @@
               <span class="label">Keep Handy</span>
             </div>
             <div class="ty-notice-body">
-              Keep your transaction receipt and Paper ID safe — all correspondence
-              regarding your registration should include your Paper ID. If you don't see
-              the confirmation email within a few minutes, kindly check your spam/junk folder.
+              Keep your transaction receipt and Paper ID safe &mdash; all correspondence about
+              your registration should include your Paper ID. If you don't see the confirmation
+              email within a few minutes, kindly check your spam/junk folder.
             </div>
           </div>
 
@@ -350,28 +315,27 @@
               <span class="label">Verification Penalty</span>
             </div>
             <div class="ty-notice-body">
-              Your details will be verified after registration. If you registered under the
-              IEEE or Student category, ensure you've uploaded a valid IEEE membership card
-              or student ID. If validation fails, a <strong>penalty of ₹1,000 / $25 plus the
-              difference in the applicable registration fee</strong> will be imposed.
+              Your details will be verified after registration. If you registered under the IEEE
+              or Student category, ensure you've uploaded a valid IEEE membership card or student
+              ID. If validation fails, a <strong>penalty of &#8377;1,000 / $25 plus the difference
+              in the applicable fee</strong> will be imposed.
             </div>
           </div>
         </div>
 
-        <p class="reveal d4">
+        <p class="contact reveal d4">
           For any queries regarding your registration, write to us at
-          <a href="mailto:registrations@iprecon.org" class="gold-link">registrations@iprecon.org</a>.
+          <a href="mailto:registrations@iprecon.org">registrations@iprecon.org</a>
         </p>
 
         <div class="thankyou-actions reveal d4">
           <a href="./index.html" class="thankyou-btn primary">
-            <i class="fas fa-home"></i> Back to Home
+            <i class="fas fa-house"></i> Back to Home
           </a>
           <a href="./important-dates.html" class="thankyou-btn secondary">
-            <i class="fas fa-calendar-alt"></i> Important Dates
+            <i class="fas fa-calendar-day"></i> Important Dates
           </a>
         </div>
-
       </div>
     </section>
   </main>
@@ -382,10 +346,10 @@
   <script src="./scripts/script.js"></script>
   <script>
     (function () {
-      // Light purple + white palette
-      var colors = ['#ce93d8', '#e1bee7', '#ba68c8', '#d7b3e8', '#ffffff', '#f3e5f5'];
+      // Light purple + white + gold confetti — pops on the dark background
+      var colors = ['#ce93d8', '#e1bee7', '#ba68c8', '#d7b3e8', '#ffffff', '#f3e5f5', '#d4af37'];
 
-      // One burst that pops from the top-center and fans out as it falls.
+      // Single burst that pops from the top-centre and fans out as it falls.
       function launchConfetti(amount) {
         var vw = window.innerWidth;
         for (var i = 0; i < amount; i++) {
@@ -393,7 +357,6 @@
           piece.className = 'confetti-piece';
           var color = colors[Math.floor(Math.random() * colors.length)];
           var size = 6 + Math.random() * 8;
-          // Every piece starts at the horizontal centre, just above the top.
           piece.style.left = '50vw';
           piece.style.top = '0px';
           piece.style.background = color;
@@ -402,7 +365,6 @@
           piece.style.borderRadius = Math.random() > 0.5 ? '2px' : '50%';
 
           var fall = 2400 + Math.random() * 1600;
-          // Fan outward across the viewport from the centre point.
           var drift = (Math.random() - 0.5) * vw * 1.1;
           var spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
 
@@ -410,19 +372,12 @@
           piece.animate([
             { transform: 'translate(-50%, -20px) rotate(0deg)', opacity: 1 },
             { transform: 'translate(' + (drift - size / 2) + 'px, 104vh) rotate(' + spin + 'deg)', opacity: 0.9 }
-          ], {
-            duration: fall,
-            easing: 'cubic-bezier(0.18, 0.7, 0.35, 1)'
-          });
+          ], { duration: fall, easing: 'cubic-bezier(0.18, 0.7, 0.35, 1)' });
 
-          (function (el) {
-            setTimeout(function () { el.remove(); }, fall);
-          })(piece);
+          (function (el) { setTimeout(function () { el.remove(); }, fall); })(piece);
         }
       }
 
-      // Single celebration burst once the check finishes drawing.
-      // Run regardless of whether the page is still loading or already loaded.
       function initialBurst() {
         setTimeout(function () { launchConfetti(140); }, 900);
       }
