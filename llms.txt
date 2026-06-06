@@ -1,0 +1,28 @@
+# IPRECON 2026
+
+> IPRECON 2026 is the IEEE International Power and Renewable Energy Conference, a hybrid (in-person and online) academic conference on power systems and renewable energy, held 4-6 September 2026 at College of Engineering Karunagappally, Kerala, India.
+
+## Key facts
+
+- Event: IEEE International Power and Renewable Energy Conference (IPRECON 2026)
+- Dates: 4-6 September 2026
+- Venue: College of Engineering Karunagappally, Kerala, India
+- Mode: Hybrid (in-person and online)
+- Notification of acceptance: 30 June 2026
+- Final camera-ready paper: 31 July 2026
+- Early-bird registration deadline: 30 June 2026 (regular fee applies from 1 July 2026)
+- Registration: https://iprecon.org/registration.html
+
+## Primary pages
+
+- [Home](https://iprecon.org/): Conference overview and announcements
+- [About IPRECON](https://iprecon.org/about-iprecon.html): About the conference
+- [Call for Papers](https://iprecon.org/cfp.html): Topics, scope, and submission details
+- [Important Dates](https://iprecon.org/important-dates.html): Deadlines and key dates
+- [Registration](https://iprecon.org/registration.html): Fees and how to register
+- [Paper Submissions](https://iprecon.org/submissions.html): Submission instructions
+- [Camera-Ready](https://iprecon.org/camera-ready.html): Final paper submission instructions
+- [Tracks](https://iprecon.org/tracks.html): Technical tracks and topics
+- [Committee](https://iprecon.org/committee.html): Organizing committee
+- [Venue](https://iprecon.org/venue.html): Conference venue
+- [Contact](https://iprecon.org/contact.html): Contact information

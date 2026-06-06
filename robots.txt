@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Utility pages not for indexing
+Disallow: /admin-interface-v1.html
+Disallow: /poster.html
+Disallow: /thank-you.html
+
+Sitemap: https://iprecon.org/sitemap.xml
