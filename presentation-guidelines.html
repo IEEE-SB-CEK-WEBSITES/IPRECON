@@ -284,6 +284,39 @@
       font-size: 0.95rem;
     }
 
+    .template-flexibility-notice {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 28px 30px;
+      border: 1px solid rgba(142, 36, 170, 0.2);
+      border-left: 4px solid #d4af37;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      text-align: left;
+    }
+
+    .template-flexibility-notice h4 {
+      color: #211021;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .template-flexibility-notice h4 i {
+      color: #d4af37;
+      font-size: 1.1rem;
+    }
+
+    .template-flexibility-notice p {
+      color: #555;
+      line-height: 1.7;
+      margin: 0;
+      font-size: 1rem;
+    }
+
     /* Presentation Type Cards - Stacked Vertically */
     .presentation-types {
       display: flex;
@@ -716,6 +749,10 @@
         gap: 20px;
       }
 
+      .template-flexibility-notice {
+        padding: 24px 22px;
+      }
+
       /* FIXED: Button responsive styles for mobile */
       .iprecon-btn {
         min-width: 200px;
@@ -942,8 +979,21 @@
             </div>
           </div>
 
+          <div class="template-flexibility-notice">
+            <h4>
+              <i class="fas fa-sliders-h"></i>
+              Template Flexibility Notice
+            </h4>
+            <p>
+              The provided file is a flexible starting template. Authors may freely add, remove, reorder, or redesign
+              the content slides. However, the title slide structure and the header and footer on every slide must
+              remain unchanged, and no content, images, shapes, or videos may overlap these areas.
+            </p>
+          </div>
+
           <div class="action-section">
-            <a href="./#" class="iprecon-btn secondary large">
+            <a href="./assets/documents/IPRECON_2026_Conference_Template.pptx"
+              download="IPRECON_2026_Conference_Template.pptx" class="iprecon-btn secondary large">
               <i class="fas fa-download"></i>
               Download Presentation Template
             </a>
