@@ -939,38 +939,48 @@
       let isLoggedIn = false;
 
       // Initialize
+      //
+      // Each step is isolated. A missing element used to throw out of
+      // setupEventListeners(), which meant checkExistingSession() never ran and
+      // auto-login silently stopped working for every organiser, with nothing on
+      // screen to say why. One broken control must not take out the rest.
       document.addEventListener("DOMContentLoaded", function () {
-        setupEventListeners();
-        checkExistingSession();
+        initStep("setupEventListeners", setupEventListeners);
+        initStep("checkExistingSession", checkExistingSession);
       });
 
+      function initStep(label, fn) {
+        try {
+          fn();
+        } catch (error) {
+          console.error(`Admin init step "${label}" failed:`, error);
+        }
+      }
+
+      // Binds one listener, tolerating an element that is not on the page.
+      // Returns false (and logs) instead of throwing, so the remaining bindings
+      // still get made.
+      function bindListener(id, event, handler) {
+        const el = document.getElementById(id);
+        if (!el) {
+          console.error(`Admin init: element "${id}" not found — ${event} handler not bound`);
+          return false;
+        }
+        el.addEventListener(event, handler);
+        return true;
+      }
+
       function setupEventListeners() {
-        document
-          .getElementById("loginForm")
-          .addEventListener("submit", handleLogin);
-        document
-          .getElementById("pageLiveForm")
-          .addEventListener("submit", handlePageLiveSubmission);
-        document
-          .getElementById("testEmailForm")
-          .addEventListener("submit", handleTestEmailSubmission);
+        bindListener("loginForm", "submit", handleLogin);
+        bindListener("pageLiveForm", "submit", handlePageLiveSubmission);
+        bindListener("testEmailForm", "submit", handleTestEmailSubmission);
 
         // Presentation & Video Submissions
-        document
-          .getElementById("submissionsRefreshBtn")
-          .addEventListener("click", refreshSubmissionsSection);
-        document
-          .getElementById("submissionsExportBtn")
-          .addEventListener("click", handleSubmissionsExport);
-        document
-          .getElementById("submissionsLatestOnly")
-          .addEventListener("change", reloadSubmissionsList);
-        document
-          .getElementById("submissionsStatusFilter")
-          .addEventListener("change", reloadSubmissionsList);
-        document
-          .getElementById("submissionsModeFilter")
-          .addEventListener("change", reloadSubmissionsList);
+        bindListener("submissionsRefreshBtn", "click", refreshSubmissionsSection);
+        bindListener("submissionsExportBtn", "click", handleSubmissionsExport);
+        bindListener("submissionsLatestOnly", "change", reloadSubmissionsList);
+        bindListener("submissionsStatusFilter", "change", reloadSubmissionsList);
+        bindListener("submissionsModeFilter", "change", reloadSubmissionsList);
       }
 
       function checkExistingSession() {
@@ -1733,10 +1743,15 @@
         const totalBytes = Number(stats.total_bytes) || 0;
         const totalGB = (totalBytes / 1073741824).toFixed(2);
 
+        // Complete + Partial + Pending + Abandoned must add up to Total on
+        // screen. Pending and Abandoned were counted in Total but never shown,
+        // so the strip looked like it had lost submissions.
         const boxes = [
           ["Total", stats.total],
           ["Complete", stats.complete],
           ["Partial", stats.partial],
+          ["Pending", stats.pending],
+          ["Abandoned", stats.abandoned],
           ["Papers", stats.papers],
           ["Total Size", `${totalGB} GB`],
           ["Virtual", stats.virtual],
@@ -1839,6 +1854,30 @@
         return tr;
       }
 
+      // An empty result is a legitimate answer, never an error — the error box
+      // stays for requests that actually failed. Name the active filters,
+      // because "Latest versions only" combined with Pending or Abandoned
+      // correctly returns nothing: the latest-versions view only ever exposes
+      // complete and partial rows.
+      function submissionsEmptyMessage() {
+        const latestOnly = document.getElementById("submissionsLatestOnly");
+        const status = document.getElementById("submissionsStatusFilter");
+        const mode = document.getElementById("submissionsModeFilter");
+
+        const active = [];
+        if (latestOnly && latestOnly.checked) active.push("Latest versions only");
+        if (status && status.value) {
+          active.push(`Status: ${status.options[status.selectedIndex].text}`);
+        }
+        if (mode && mode.value) {
+          active.push(`Mode: ${mode.options[mode.selectedIndex].text}`);
+        }
+
+        return active.length
+          ? `No submissions match the current filters (${active.join(", ")}).`
+          : "No submissions yet.";
+      }
+
       function renderSubmissionsTable(submissions) {
         const tbody = document.getElementById("submissionsTableBody");
         const wrapper = document.getElementById("submissionsTableWrapper");
@@ -1849,6 +1888,7 @@
 
         if (!Array.isArray(submissions) || submissions.length === 0) {
           wrapper.style.display = "none";
+          emptyState.textContent = submissionsEmptyMessage();
           emptyState.classList.add("show");
           return;
         }

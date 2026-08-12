@@ -1568,7 +1568,7 @@
                     <label class="form-label" for="f-name">Presenting Author Name<span
                         class="req-star">*</span></label>
                     <input class="form-input" type="text" id="f-name" name="name" required autocomplete="name"
-                      placeholder="Jane Doe" aria-describedby="err-name" />
+                      maxlength="200" placeholder="Jane Doe" aria-describedby="err-name" />
                     <p class="field-error" id="err-name" role="alert"></p>
                   </div>
 
@@ -1593,8 +1593,8 @@
                     <label class="form-label" for="f-org">University / Organisation<span
                         class="req-star">*</span></label>
                     <input class="form-input" type="text" id="f-org" name="organisation" required
-                      autocomplete="organization" placeholder="College of Engineering Karunagappally"
-                      aria-describedby="err-org" />
+                      autocomplete="organization" maxlength="200"
+                      placeholder="College of Engineering Karunagappally" aria-describedby="err-org" />
                     <p class="field-error" id="err-org" role="alert"></p>
                   </div>
 
@@ -1775,9 +1775,10 @@
 
               <div class="confirm-panel" id="cancel-confirm" role="alertdialog" aria-labelledby="cancel-confirm-title"
                 aria-describedby="cancel-confirm-body">
-                <h4 id="cancel-confirm-title"><i class="fas fa-triangle-exclamation"></i> Cancel this submission?</h4>
-                <p id="cancel-confirm-body">Uploads in progress will stop. Any file that has already finished is kept
-                  and recorded, and your files stay attached so you can start again.</p>
+                <h4 id="cancel-confirm-title"><i class="fas fa-triangle-exclamation"></i> <span
+                    id="cancel-confirm-heading">Cancel this submission?</span></h4>
+                <p id="cancel-confirm-body">Uploads in progress will stop and nothing is recorded. Your files stay
+                  attached so you can start again.</p>
                 <div class="confirm-actions">
                   <button type="button" class="danger-btn" id="cancel-yes">Yes, cancel the submission</button>
                   <button type="button" class="mini-btn" id="cancel-no">No, keep uploading</button>
@@ -1894,8 +1895,10 @@
       const SLIDES_MAX_BYTES = 209715200; // 200 MB per slide deck
       const TOTAL_MAX_BYTES = 1073741824; // never surfaced anywhere in the UI
       const MAX_ATTEMPTS = 6;
+      const MAX_TEXT_LEN = 200;           // server cap on name / organisation
+      const MAX_EMAIL_LEN = 254;
       const PHONE_RE = /^\+[0-9][0-9 \-]{7,17}$/;
-      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;   // byte-for-byte the server's regex
 
       const EXT_KIND = { mp4: "video", pptx: "slides", pdf: "slides" };
       const EXT_MIME = {
@@ -1911,6 +1914,7 @@
       };
       const MSG_FORMATS = "Accepted formats: MP4 (H.264) for video, PPTX or PDF for slides.";
       const MSG_TOTAL = "Total file size exceeds the allowed limit. Please reduce your files and try again — exporting the video at a lower bitrate usually helps.";
+      const MSG_EMPTY = "A 0-byte file is almost always an \"online only\" placeholder from OneDrive or Google Drive rather than the real file. Open its folder, download it to this computer, then attach it again.";
 
       /* =================================================================
          SMALL HELPERS
@@ -1947,7 +1951,10 @@
       function extOf(name) {
         var s = String(name || "");
         var i = s.lastIndexOf(".");
-        return i < 0 ? "" : s.slice(i + 1).toLowerCase();
+        /* `> 0`, not `>= 0`, to match the server exactly: ".mp4" is a dotfile
+           with no base name, not an MP4, and the server rejects it. Drag-and-drop
+           bypasses the picker's accept filter, so this is reachable. */
+        return i > 0 ? s.slice(i + 1).toLowerCase() : "";
       }
       function pick(obj, keys) {
         if (!obj) return null;
@@ -2054,16 +2061,20 @@
         return { value: String(n), folder: "PID" + pad };
       }
 
+      /* These mirror the server exactly — non-empty after trim, then the cap.
+         A stricter client can only turn a legitimate author away. */
       function validateName(silent) {
         var v = $("f-name").value.trim();
-        var msg = v.length >= 2 ? "" : "Please enter the presenting author's full name.";
+        var msg = !v ? "Please enter the presenting author's full name."
+          : (v.length > MAX_TEXT_LEN ? "Your name must be " + MAX_TEXT_LEN + " characters or fewer." : "");
         if (!silent) fieldError("f-name", "err-name", msg);
         return !msg;
       }
       function validateEmail(silent) {
         var v = $("f-email").value.trim();
         var msg = !v ? "Please enter your email address."
-          : (EMAIL_RE.test(v) ? "" : "Please enter a valid email address.");
+          : (v.length > MAX_EMAIL_LEN ? "Your email address must be " + MAX_EMAIL_LEN + " characters or fewer."
+            : (EMAIL_RE.test(v) ? "" : "Please enter a valid email address."));
         if (!silent) fieldError("f-email", "err-email", msg);
         return !msg;
       }
@@ -2076,7 +2087,8 @@
       }
       function validateOrg(silent) {
         var v = $("f-org").value.trim();
-        var msg = v.length >= 2 ? "" : "Please enter your university or organisation.";
+        var msg = !v ? "Please enter your university or organisation."
+          : (v.length > MAX_TEXT_LEN ? "Your university or organisation must be " + MAX_TEXT_LEN + " characters or fewer." : "");
         if (!silent) fieldError("f-org", "err-org", msg);
         return !msg;
       }
@@ -2192,6 +2204,7 @@
         var list = Array.prototype.slice.call(fileList || []);
         if (!list.length) return;
         var rejected = [];
+        var empty = [];
         var notes = [];
         var overflow = false;
 
@@ -2200,6 +2213,9 @@
           var ext = extOf(f.name);
           var kind = EXT_KIND[ext];           // kind comes from the EXTENSION, never the MIME type
           if (!kind) { rejected.push(f.name); continue; }
+          /* The server requires a size > 0. A 0-byte file is a cloud placeholder,
+             so stop it here with the real reason rather than after a full form. */
+          if (!(Number(f.size) > 0)) { empty.push(f.name); continue; }
 
           var rec = { file: f, name: f.name, size: f.size, ext: ext, kind: kind, mime: EXT_MIME[ext] };
           var dupe = -1;
@@ -2226,7 +2242,7 @@
         }
 
         renderStaged();
-        validateFiles(rejected);
+        validateFiles(rejected, empty);
         refreshSubmitState();
       }
 
@@ -2271,10 +2287,14 @@
       }
 
       /* Mirror of the server-side validation. */
-      function validateFiles(rejectedNames) {
+      function validateFiles(rejectedNames, emptyNames) {
         var errors = [];
 
         if (rejectedNames && rejectedNames.length) errors.push(MSG_FORMATS);
+
+        if (emptyNames && emptyNames.length) {
+          errors.push("These files are 0 bytes and were not attached: " + emptyNames.join(", ") + ". " + MSG_EMPTY);
+        }
 
         var big = staged.filter(function (s) { return s.kind === "slides" && s.size > SLIDES_MAX_BYTES; });
         if (big.length) {
@@ -2414,7 +2434,10 @@
       }
       function beforeUnloadHandler(e) {
         e.preventDefault();
-        e.returnValue = queueRunning
+        // A paused file is half-uploaded, so it counts as in progress even
+        // though the queue is idle.
+        var live = queueRunning || jobs.some(function (j) { return j.state === "paused"; });
+        e.returnValue = live
           ? "An upload is still in progress. Leaving now will stop it."
           : "You have not uploaded your presentation yet. Leaving now will discard what you have entered.";
         return e.returnValue;
@@ -2525,8 +2548,12 @@
       function buildJobs(serverFiles) {
         jobs = serverFiles.map(function (f, i) {
           var src = staged[i] || null;
-          // Index order is the contract; fall back to a name match if it ever drifts.
-          if (!src || (String(f.name).indexOf(src.name) < 0 && String(f.name) !== src.name)) {
+          /* Index order is the contract; fall back to a name match if it ever
+             drifts. The drift test is kind, not name: the server sanitises the
+             base name, so a name compare fails for every file with a space in it
+             and sends a perfectly good match into the fallback — where a file
+             called "Talk.pdf" happily claims the job for "My Talk.pdf". */
+          if (!src || src.kind !== f.kind) {
             for (var j = 0; j < staged.length; j++) {
               if (String(f.name).indexOf(staged[j].name) >= 0 && staged[j].kind === f.kind) { src = staged[j]; break; }
             }
@@ -2916,7 +2943,8 @@
 
         var pending = jobs.filter(function (j) { return j.state === "paused"; });
         if (pending.length) {
-          disarmBeforeUnload();
+          // Guard stays armed: pausing is precisely when an author walks away
+          // from the tab, and closing it throws away every byte uploaded so far.
           log("queue idle — " + pending.length + " file(s) paused");
           announce();
           return;
@@ -2961,41 +2989,53 @@
       /* =================================================================
          COMPLETE / ABANDON / CANCEL
          ================================================================= */
+      /* Only ever one /complete in flight. Three paths lead here — the queue
+         finishing, "Try finishing again", and Cancel with finished files — and a
+         second call landing while the first is still open is what makes the
+         server send the notification twice. */
+      var completing = false;
+
       async function completeSubmission() {
-        var completed = jobs.filter(function (j) { return j.state === "done" && j.driveId; });
-        var payload = {
-          files: completed.map(function (j) { return { file_id: j.file_id, drive_file_id: j.driveId }; })
-        };
-        log("POST /api/submissions/" + submissionId + "/complete with " + payload.files.length + " file(s)");
-
-        var res = null, data = null;
+        if (completing) { log("/complete already in flight — ignoring the duplicate call"); return; }
+        completing = true;
         try {
-          res = await fetch(WORKER_URL + "/api/submissions/" + encodeURIComponent(submissionId) + "/complete", {
-            method: "POST",
-            mode: "cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-          try { data = await res.json(); } catch (e) { data = null; }
-        } catch (err) {
-          $("btn-retry-complete").hidden = false;
-          showUploadError("Your files uploaded, but we could not confirm the submission. Please try finishing again.");
-          return;
-        }
+          var completed = jobs.filter(function (j) { return j.state === "done" && j.driveId; });
+          var payload = {
+            files: completed.map(function (j) { return { file_id: j.file_id, drive_file_id: j.driveId }; })
+          };
+          log("POST /api/submissions/" + submissionId + "/complete with " + payload.files.length + " file(s)");
 
-        if (!res.ok || !data) {
-          $("btn-retry-complete").hidden = false;
-          showUploadError((data && data.error) ? data.error
-            : "Your files uploaded, but the submission could not be confirmed (HTTP " + res.status + "). Please try finishing again.");
-          return;
-        }
+          var res = null, data = null;
+          try {
+            res = await fetch(WORKER_URL + "/api/submissions/" + encodeURIComponent(submissionId) + "/complete", {
+              method: "POST",
+              mode: "cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+            try { data = await res.json(); } catch (e) { data = null; }
+          } catch (err) {
+            $("btn-retry-complete").hidden = false;
+            showUploadError("Your files uploaded, but we could not confirm the submission. Please try finishing again.");
+            return;
+          }
 
-        show($("up-error"), false);
-        $("btn-retry-complete").hidden = true;
-        disarmBeforeUnload();
-        log("submission confirmed with status " + (data.status || "(unknown)"));
-        renderReceipt(data.receipt || data, data.status);
-        showView("done");
+          if (!res.ok || !data) {
+            $("btn-retry-complete").hidden = false;
+            showUploadError((data && data.error) ? data.error
+              : "Your files uploaded, but the submission could not be confirmed (HTTP " + res.status + "). Please try finishing again.");
+            return;
+          }
+
+          show($("up-error"), false);
+          $("btn-retry-complete").hidden = true;
+          disarmBeforeUnload();
+          log("submission confirmed with status " + (data.status || "(unknown)"));
+          renderReceipt(data.receipt || data, data.status);
+          showView("done");
+        } finally {
+          completing = false;
+        }
       }
 
       async function abandonSubmission() {
@@ -3012,9 +3052,35 @@
         }
       }
 
+      /* The Cancel button is two different actions wearing one label. With no
+         finished files it really does cancel and hand the form back. With even
+         one finished file it *submits* — a partial submission is recorded and
+         the receipt email goes out, and there is no way back to the form. Say
+         which one is about to happen before the author commits to it. */
+      function describeCancel() {
+        var done = jobs.filter(function (j) { return j.state === "done" && j.driveId; }).length;
+        if (done) {
+          setText($("cancel-confirm-heading"), "Stop uploading and submit what is finished?");
+          setText($("cancel-confirm-body"),
+            done + (done === 1 ? " file has" : " files have") + " already finished uploading. Stopping now records them"
+            + " as a partial submission and emails you the receipt — you will not return to this form. You can upload"
+            + " the rest any time before the deadline.");
+          setText($("cancel-yes"), "Yes, submit what is finished");
+        } else {
+          setText($("cancel-confirm-heading"), "Cancel this submission?");
+          setText($("cancel-confirm-body"),
+            "Uploads in progress will stop and nothing is recorded. Your files stay attached so you can start again.");
+          setText($("cancel-yes"), "Yes, cancel the submission");
+        }
+      }
+
       async function doCancel() {
-        cancelled = true;
         $("cancel-confirm").classList.remove("show");
+        if (cancelled || completing) {
+          log("cancel ignored — the submission is already being cancelled or confirmed");
+          return;
+        }
+        cancelled = true;
         log("cancel requested for submission " + submissionId);
 
         jobs.forEach(function (j) {
@@ -3026,8 +3092,11 @@
         });
         disarmBeforeUnload();
 
-        // Best-effort release of Google's partial bytes.
+        // Best-effort release of Google's partial bytes. Finished files are
+        // skipped on purpose — their session already produced a real Drive file,
+        // and that file is exactly what /complete is about to verify.
         jobs.forEach(function (j) {
+          if (j.state === "done") return;
           try {
             var x = new XMLHttpRequest();
             x.open("DELETE", j.url, true);
@@ -3170,6 +3239,7 @@
         $("upload-form").addEventListener("submit", onSubmit);
 
         $("btn-cancel").addEventListener("click", function () {
+          describeCancel();
           $("cancel-confirm").classList.add("show");
           $("cancel-yes").focus();
         });
