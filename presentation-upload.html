@@ -1895,6 +1895,7 @@
       const SLIDES_MAX_BYTES = 209715200; // 200 MB per slide deck
       const TOTAL_MAX_BYTES = 1073741824; // never surfaced anywhere in the UI
       const MAX_ATTEMPTS = 6;
+      const MAX_STALLS = 3;               // 308s that acknowledge no new bytes
       const MAX_TEXT_LEN = 200;           // server cap on name / organisation
       const MAX_EMAIL_LEN = 254;
       const PHONE_RE = /^\+[0-9][0-9 \-]{7,17}$/;
@@ -1915,6 +1916,9 @@
       const MSG_FORMATS = "Accepted formats: MP4 (H.264) for video, PPTX or PDF for slides.";
       const MSG_TOTAL = "Total file size exceeds the allowed limit. Please reduce your files and try again — exporting the video at a lower bitrate usually helps.";
       const MSG_EMPTY = "A 0-byte file is almost always an \"online only\" placeholder from OneDrive or Google Drive rather than the real file. Open its folder, download it to this computer, then attach it again.";
+      const MSG_EXPIRED = "The upload session expired. Please submit the form again to restart this file.";
+      const MSG_STALLED = "This upload stopped making progress — Google is no longer confirming the bytes it has received. Please submit the form again to restart this file.";
+      const MSG_NO_FILE_ID = "This file finished uploading, but Google did not return an identifier we can record, so it cannot be added to your submission. Please submit the form again to re-upload this file.";
 
       /* =================================================================
          SMALL HELPERS
@@ -2573,6 +2577,7 @@
             paused: false,
             needsResync: false,
             attempts: 0,
+            stalls: 0,
             driveId: null,
             error: "",
             speed: 0,
@@ -2727,13 +2732,55 @@
         });
       }
 
-      /* "bytes=0-8388607" -> 8388608 (the next offset). null when unreadable. */
-      function nextOffsetFromRange(header) {
-        if (!header) return null;
+      /* How many bytes Google says it holds, read off a 308's Range header.
+         "bytes=0-8388607" -> 8388608, the offset the next PUT must start at.
+
+         An ABSENT Range header is not "unknown": the resumable protocol uses it
+         to say Google holds ZERO bytes, so the answer is 0. The header is
+         readable cross-origin here — the Worker passes `origin` when it mints
+         the session, so the session carries a CORS policy — which is why the old
+         "assume the header was stripped" fallback was wrong.
+
+         null is now reserved for the one case we genuinely cannot read: a header
+         that is present but does not parse. */
+      function ackedOffset(header) {
+        if (header === null || header === undefined || String(header).trim() === "") return 0;
         var m = /bytes\s*=\s*0-(\d+)/i.exec(String(header));
         if (!m) return null;
         var n = parseInt(m[1], 10);
         return isFinite(n) ? n + 1 : null;
+      }
+
+      /* Move the offset to exactly what Google acknowledged — never past it.
+         A 308 can acknowledge fewer bytes than the chunk we sent, and the old
+         optimistic `end + 1` left every later PUT starting beyond what Google
+         holds, which Google answers with a 400 there is no way back from. */
+      function applyAck(job, acked) {
+        job.offset = acked;
+        job.sent = acked;
+      }
+
+      /* Which statuses are worth trying again. 0 is a dropped connection or a
+         timeout. 408 and 429 are Google asking for more time. Everything else in
+         the 4xx range is a settled answer, and retrying it only spends six
+         backoffs arriving at the same place. */
+      function isRetryable(status) {
+        return status === 0 || status === 408 || status === 429 || status >= 500;
+      }
+
+      /* A permanent rejection needs its own wording — telling the author to
+         check their connection sends them after the wrong problem. */
+      function permanentMessage(status) {
+        if (status === 400 || status === 412) {
+          return "Google rejected this upload as out of step with its own record of the file (HTTP "
+            + status + "). Please submit the form again to restart this file.";
+        }
+        if (status === 401 || status === 403) {
+          return "This upload is no longer authorised by Google (HTTP " + status
+            + "). Please submit the form again to restart this file.";
+        }
+        return "Google rejected this upload (HTTP " + status
+          + ") and trying again will not change that. Please submit the form again to restart this file.";
       }
 
       function driveIdFrom(text) {
@@ -2755,13 +2802,15 @@
           return { status: 0, range: null, text: "" };
         }
         if (r.status === 308) {
-          var next = nextOffsetFromRange(r.range);
-          if (next === null) {
-            log("re-sync 308 with unreadable Range header — keeping client offset " + job.offset);
+          var acked = ackedOffset(r.range);
+          if (acked === null) {
+            /* Present but unparseable. A probe is only a question, so leave the
+               offset alone and let the chunk loop deal with it — it has to pick
+               an offset to send from, and it fails rather than guessing. */
+            log("re-sync 308 with an unreadable Range header — keeping client offset " + job.offset);
           } else {
-            job.offset = next;
-            job.sent = next;
-            log("re-sync 308 Range=" + r.range + " → offset " + job.offset);
+            applyAck(job, acked);
+            log("re-sync 308 Range=" + (r.range || "(none — Google holds 0 bytes)") + " → offset " + job.offset);
           }
         } else {
           log("re-sync returned HTTP " + r.status + " for " + job.displayName);
@@ -2769,15 +2818,42 @@
         return r;
       }
 
+      /* Google has every byte. The response body carries the Drive file id, and
+         that id is the whole point of finishing: /complete verifies each claimed
+         id against Drive, so a job without one contributes nothing. Returning
+         false rather than quietly reporting "Done" is what stops a receipt that
+         reads "partial" while every card on screen reads Done. */
       function markDone(job, text) {
-        job.driveId = driveIdFrom(text);
+        var id = driveIdFrom(text);
+        if (!id) {
+          log("upload finished for " + job.displayName + " but no Drive file id came back");
+          return false;
+        }
+        job.driveId = id;
         job.offset = job.size;
         job.sent = job.size;
         job.state = "done";
         job.error = "";
-        log("complete " + job.displayName + " drive_file_id=" + (job.driveId || "(not returned)"));
+        log("complete " + job.displayName + " drive_file_id=" + job.driveId);
         renderJob(job, true);
         announce();
+        return true;
+      }
+
+      /* Bytes are all delivered but the file id was not readable. Re-probing the
+         session normally returns the file resource again, so hand the job back to
+         the finalise branch — bounded by the stall budget so it cannot spin.
+         Returns false once the budget is gone and the job has been failed. */
+      function finishedWithoutId(job) {
+        job.offset = job.size;
+        job.sent = job.size;
+        job.stalls++;
+        if (job.stalls >= MAX_STALLS) {
+          markFailed(job, MSG_NO_FILE_ID);
+          return false;
+        }
+        log("re-probing " + job.displayName + " for its file id (attempt " + job.stalls + " of " + MAX_STALLS + ")");
+        return true;
       }
 
       function markFailed(job, message) {
@@ -2817,8 +2893,16 @@
         if (job.needsResync) {
           job.needsResync = false;
           var pr = await resync(job);
-          if (pr.status === 200 || pr.status === 201) { markDone(job, pr.text); return; }
-          if (pr.status === 404) { markFailed(job, "The upload session expired. Please submit the form again to restart this file."); return; }
+          if (pr.status === 200 || pr.status === 201) {
+            if (markDone(job, pr.text)) return;
+            if (!finishedWithoutId(job)) return;
+          } else if (pr.status === 404) {
+            markFailed(job, MSG_EXPIRED);
+            return;
+          } else if (pr.status !== 308 && !isRetryable(pr.status)) {
+            markFailed(job, permanentMessage(pr.status));
+            return;
+          }
         }
 
         while (true) {
@@ -2829,9 +2913,26 @@
           if (job.offset >= job.size) {
             log("all bytes sent for " + job.displayName + " — finalising");
             var fr = await resync(job);
-            if (fr.status === 200 || fr.status === 201) { markDone(job, fr.text); return; }
-            if (fr.status === 404) { markFailed(job, "The upload session expired. Please submit the form again to restart this file."); return; }
-            if (fr.status === 308 && job.offset < job.size) continue;
+            if (fr.status === 200 || fr.status === 201) {
+              if (markDone(job, fr.text)) return;
+              if (!finishedWithoutId(job)) return;
+              await sleep(Math.pow(2, job.stalls - 1) * 1000);
+              continue;
+            }
+            if (fr.status === 404) { markFailed(job, MSG_EXPIRED); return; }
+            if (fr.status === 308) {
+              /* resync() has already pulled the offset back to Google's count.
+                 Short of the total there are real bytes to re-send, so go send
+                 them. At the total, Google holds everything and still will not
+                 finalise — the same probe cannot produce a different answer, so
+                 bound it instead of looping. */
+              if (job.offset < job.size) continue;
+              job.stalls++;
+              if (job.stalls >= MAX_STALLS) { markFailed(job, MSG_STALLED); return; }
+              await sleep(Math.pow(2, job.stalls - 1) * 1000);
+              continue;
+            }
+            if (!isRetryable(fr.status)) { markFailed(job, permanentMessage(fr.status)); return; }
             job.attempts++;
             if (job.attempts >= MAX_ATTEMPTS) {
               markFailed(job, "The upload could not be finalised. Please submit the form again.");
@@ -2855,7 +2956,11 @@
               if (!ev.lengthComputable) return;
               job.sent = start + ev.loaded;
               tickSpeed(job);
-              renderJob(job, false);
+              /* Force the paint on the chunk's last progress event. The 120 ms
+                 throttle otherwise swallows it and the bar sits visibly short of
+                 the boundary for as long as Google takes to answer — which on a
+                 slow link reads as a stall. */
+              renderJob(job, ev.loaded >= ev.total);
             });
           } catch (err) {
             if (cancelled) { job.state = "cancelled"; renderJob(job, true); return; }
@@ -2873,25 +2978,51 @@
           }
 
           if (r.status === 308) {
-            var next = nextOffsetFromRange(r.range);
-            if (next !== null) {
-              job.offset = next;
-              log("308 Range=" + r.range + " → next offset " + job.offset);
-            } else {
-              job.offset = end + 1;
-              log("308 without readable Range header (CORS) → client-tracked offset " + job.offset);
+            var acked = ackedOffset(r.range);
+            if (acked === null) {
+              /* The one reading we cannot make. Advancing would put the offset
+                 past what Google holds, and re-sending the same chunk forever is
+                 the spin this budget exists to prevent. */
+              log("308 with an unreadable Range header for " + job.displayName);
+              markFailed(job, MSG_STALLED);
+              return;
             }
-            job.sent = job.offset;
-            job.attempts = 0;
+            var moved = acked > start;
+            applyAck(job, acked);
+            log("308 Range=" + (r.range || "(none — Google holds 0 bytes)") + " → offset " + job.offset);
             renderJob(job, true);
+            if (moved) {
+              job.attempts = 0;
+              job.stalls = 0;
+              continue;
+            }
+            /* Google took none of that chunk. Re-sending it is legitimate once
+               or twice, but a session that never moves has to end somewhere. */
+            job.stalls++;
+            if (job.stalls >= MAX_STALLS) {
+              log("no forward progress after " + job.stalls + " chunk attempts for " + job.displayName);
+              markFailed(job, MSG_STALLED);
+              return;
+            }
+            await sleep(Math.pow(2, job.stalls - 1) * 1000);
             continue;
           }
 
-          if (r.status === 200 || r.status === 201) { markDone(job, r.text); return; }
+          if (r.status === 200 || r.status === 201) {
+            if (markDone(job, r.text)) return;
+            if (!finishedWithoutId(job)) return;
+            continue;   // the finalise branch re-probes for the file id
+          }
 
           if (r.status === 404) {
             log("404 — upload session gone for " + job.displayName);
-            markFailed(job, "The upload session expired. Please submit the form again to restart this file.");
+            markFailed(job, MSG_EXPIRED);
+            return;
+          }
+
+          if (!isRetryable(r.status)) {
+            log("HTTP " + r.status + " is permanent for " + job.displayName + " — not retrying");
+            markFailed(job, permanentMessage(r.status));
             return;
           }
 
@@ -2908,9 +3039,17 @@
           if (job.paused) { job.state = "paused"; job.needsResync = true; renderJob(job, true); return; }
 
           var rr = await resync(job);
-          if (rr.status === 200 || rr.status === 201) { markDone(job, rr.text); return; }
+          if (rr.status === 200 || rr.status === 201) {
+            if (markDone(job, rr.text)) return;
+            if (!finishedWithoutId(job)) return;
+            continue;
+          }
           if (rr.status === 404) {
-            markFailed(job, "The upload session expired. Please submit the form again to restart this file.");
+            markFailed(job, MSG_EXPIRED);
+            return;
+          }
+          if (rr.status !== 308 && !isRetryable(rr.status)) {
+            markFailed(job, permanentMessage(rr.status));
             return;
           }
         }
