@@ -2048,6 +2048,7 @@
         if (!m) return null;
         var n = parseInt(m[1], 10);
         if (!isFinite(n)) return null;
+        if (n < 1) return null;   // paper numbering starts at 1 — PID000 is not a paper
         var pad = String(n);
         while (pad.length < 3) pad = "0" + pad;
         return { value: String(n), folder: "PID" + pad };
