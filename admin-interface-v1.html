@@ -448,6 +448,160 @@
           margin-top: 15px;
           width: 100%;
         }
+
+        .submissions-filter-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+
+      /* Presentation & Video Submissions */
+      .submission-stats-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .submission-stat-box {
+        background: #f8f9fa;
+        border-left: 4px solid #8e24aa;
+        border-radius: 8px;
+        padding: 12px 10px;
+        text-align: center;
+      }
+
+      .submission-stat-value {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #211021;
+      }
+
+      .submission-stat-label {
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .submissions-filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .submissions-filter-group {
+        margin-bottom: 0;
+        min-width: 150px;
+      }
+
+      .submissions-checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .submissions-checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #8e24aa;
+        cursor: pointer;
+      }
+
+      .submissions-table-wrapper {
+        overflow-x: auto;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+      }
+
+      .submissions-table {
+        width: 100%;
+        min-width: 1100px;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+
+      .submissions-table th,
+      .submissions-table td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+        white-space: nowrap;
+      }
+
+      .submissions-table thead th {
+        background: #211021;
+        color: white;
+        font-weight: 600;
+      }
+
+      .submissions-table tbody tr:hover {
+        background: #f8f4fb;
+      }
+
+      .submission-status-chip {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: capitalize;
+        background: #e2e3e5;
+        color: #383d41;
+      }
+
+      .submission-status-chip.status-complete {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .submission-status-chip.status-partial {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .submission-status-chip.status-pending {
+        background: #e2e3e5;
+        color: #383d41;
+      }
+
+      .submission-status-chip.status-abandoned {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .submission-links-cell {
+        white-space: nowrap;
+      }
+
+      .submission-file-link {
+        display: inline-block;
+        margin-right: 6px;
+        font-size: 1.1rem;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .submission-file-link-disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .submissions-empty-state {
+        display: none;
+        text-align: center;
+        padding: 30px;
+        color: #6c757d;
+      }
+
+      .submissions-empty-state.show {
+        display: block;
       }
     </style>
     <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
@@ -673,6 +827,97 @@
             Refresh Stats
           </button>
         </div>
+
+        <!-- Presentation & Video Submissions -->
+        <div
+          class="admin-card"
+          id="submissionsAdminCard"
+          style="grid-column: 1 / -1"
+        >
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-file-video"></i>
+            </div>
+            <h3 class="card-title">Presentation & Video Submissions</h3>
+          </div>
+
+          <div class="error-message" id="submissionsError"></div>
+
+          <div
+            class="submission-stats-strip"
+            id="submissionsStatsStrip"
+          ></div>
+
+          <div class="submissions-filter-row">
+            <label class="submissions-checkbox-label">
+              <input type="checkbox" id="submissionsLatestOnly" checked />
+              Latest versions only
+            </label>
+
+            <div class="form-group submissions-filter-group">
+              <label for="submissionsStatusFilter">Status</label>
+              <select id="submissionsStatusFilter">
+                <option value="">All</option>
+                <option value="complete">Complete</option>
+                <option value="partial">Partial</option>
+                <option value="pending">Pending</option>
+                <option value="abandoned">Abandoned</option>
+              </select>
+            </div>
+
+            <div class="form-group submissions-filter-group">
+              <label for="submissionsModeFilter">Mode</label>
+              <select id="submissionsModeFilter">
+                <option value="">All</option>
+                <option value="virtual">Virtual</option>
+                <option value="in-person">In-Person</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              class="btn secondary"
+              id="submissionsRefreshBtn"
+            >
+              <i class="fas fa-sync"></i>
+              Refresh
+            </button>
+
+            <button type="button" class="btn" id="submissionsExportBtn">
+              <i class="fas fa-file-csv"></i>
+              Export CSV
+            </button>
+          </div>
+
+          <div
+            class="submissions-table-wrapper"
+            id="submissionsTableWrapper"
+          >
+            <table class="submissions-table" id="submissionsTable">
+              <thead>
+                <tr>
+                  <th>Paper</th>
+                  <th>Version</th>
+                  <th>Mode</th>
+                  <th>Author</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Organisation</th>
+                  <th>Status</th>
+                  <th>Files</th>
+                  <th>Size</th>
+                  <th>Links</th>
+                  <th>Submitted (IST)</th>
+                </tr>
+              </thead>
+              <tbody id="submissionsTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="submissions-empty-state" id="submissionsEmptyState">
+            No submissions yet.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -682,6 +927,8 @@
       // ===================================
       const WORKER_URL =
         "https://iprecon-email-collector.ieeesbcek2000.workers.dev"; // UPDATE THIS
+      const UPLOADS_WORKER_URL =
+        "https://iprecon-uploads.ieeesbcek2000.workers.dev";
 
       // ===================================
       // Authentication & Session Management
@@ -707,6 +954,23 @@
         document
           .getElementById("testEmailForm")
           .addEventListener("submit", handleTestEmailSubmission);
+
+        // Presentation & Video Submissions
+        document
+          .getElementById("submissionsRefreshBtn")
+          .addEventListener("click", refreshSubmissionsSection);
+        document
+          .getElementById("submissionsExportBtn")
+          .addEventListener("click", handleSubmissionsExport);
+        document
+          .getElementById("submissionsLatestOnly")
+          .addEventListener("change", reloadSubmissionsList);
+        document
+          .getElementById("submissionsStatusFilter")
+          .addEventListener("change", reloadSubmissionsList);
+        document
+          .getElementById("submissionsModeFilter")
+          .addEventListener("change", reloadSubmissionsList);
       }
 
       function checkExistingSession() {
@@ -839,6 +1103,16 @@
         document.getElementById("adminInterface").classList.add("show");
         document.body.style.background = "#f8f9fa";
         isLoggedIn = true;
+
+        // Presentation & Video Submissions (additive; must never break login)
+        try {
+          initSubmissionsSection();
+        } catch (error) {
+          console.error(
+            "Presentation & Video Submissions failed to initialise:",
+            error
+          );
+        }
       }
 
       function updateSessionInfo() {
@@ -884,7 +1158,13 @@
       }
 
       // Authenticated API request helper
-      async function makeAuthenticatedRequest(endpoint, options = {}) {
+      // baseUrl defaults to WORKER_URL so every existing call site keeps
+      // working unchanged; pass UPLOADS_WORKER_URL to hit the uploads worker.
+      async function makeAuthenticatedRequest(
+        endpoint,
+        options = {},
+        baseUrl = WORKER_URL
+      ) {
         if (!authToken) {
           throw new Error("Not authenticated");
         }
@@ -895,7 +1175,7 @@
           ...options.headers,
         };
 
-        const response = await fetch(`${WORKER_URL}${endpoint}`, {
+        const response = await fetch(`${baseUrl}${endpoint}`, {
           ...options,
           headers,
         });
@@ -1346,6 +1626,352 @@
           return e.returnValue;
         }
       });
+
+      // ===================================
+      // Presentation & Video Submissions
+      // ===================================
+      // Talks to UPLOADS_WORKER_URL via the same generalised
+      // makeAuthenticatedRequest() helper and the same Bearer token. This
+      // worker may not be deployed yet, so every entry point below is
+      // wrapped so a failure only shows a message inside this card and
+      // never touches login or any other card.
+
+      let submissionsAutoLoaded = false;
+
+      function formatBytes(bytes) {
+        const value = Number(bytes);
+        if (!value || value <= 0) {
+          return "0 B";
+        }
+
+        const units = ["B", "KB", "MB", "GB", "TB"];
+        const exponent = Math.min(
+          Math.floor(Math.log(value) / Math.log(1024)),
+          units.length - 1
+        );
+        const scaled = value / Math.pow(1024, exponent);
+
+        return `${
+          exponent === 0 ? scaled : scaled.toFixed(2)
+        } ${units[exponent]}`;
+      }
+
+      function formatSubmissionMode(mode) {
+        if (mode === "virtual") return "Virtual";
+        if (mode === "in-person") return "In-Person";
+        return mode || "—";
+      }
+
+      function formatSubmittedIST(createdAt) {
+        if (!createdAt) return "—";
+        const date = new Date(createdAt);
+        if (isNaN(date.getTime())) return "—";
+        return date.toLocaleString(undefined, { timeZone: "Asia/Kolkata" });
+      }
+
+      function cellText(value) {
+        return value === undefined || value === null || value === ""
+          ? "—"
+          : String(value);
+      }
+
+      function getSubmissionsFilterParams() {
+        const params = new URLSearchParams();
+        const latestOnly = document.getElementById(
+          "submissionsLatestOnly"
+        ).checked;
+        const status = document.getElementById("submissionsStatusFilter")
+          .value;
+        const mode = document.getElementById("submissionsModeFilter").value;
+
+        if (latestOnly) params.set("latest", "1");
+        if (status) params.set("status", status);
+        if (mode) params.set("mode", mode);
+
+        return params;
+      }
+
+      function setSubmissionsLoading(isLoading) {
+        const btn = document.getElementById("submissionsRefreshBtn");
+        if (!btn) return;
+        const icon = btn.querySelector("i");
+
+        btn.disabled = isLoading;
+        if (icon) {
+          icon.className = isLoading
+            ? "fas fa-spinner spinner"
+            : "fas fa-sync";
+        }
+      }
+
+      function clearSubmissionsError() {
+        const errorBox = document.getElementById("submissionsError");
+        if (errorBox) {
+          errorBox.textContent = "";
+          errorBox.classList.remove("show");
+        }
+      }
+
+      function showSubmissionsError(error) {
+        console.error("Presentation & Video Submissions error:", error);
+        const errorBox = document.getElementById("submissionsError");
+        if (!errorBox) return;
+
+        const detail = error && error.message ? ` (${error.message})` : "";
+        errorBox.textContent = `Could not reach the uploads worker.${detail}`;
+        errorBox.classList.add("show");
+      }
+
+      // Numeric stats only (server-controlled) but still rendered via
+      // textContent everywhere, consistent with the rest of this section.
+      function renderSubmissionsStats(stats) {
+        const strip = document.getElementById("submissionsStatsStrip");
+        if (!strip) return;
+
+        strip.replaceChildren();
+
+        const totalBytes = Number(stats.total_bytes) || 0;
+        const totalGB = (totalBytes / 1073741824).toFixed(2);
+
+        const boxes = [
+          ["Total", stats.total],
+          ["Complete", stats.complete],
+          ["Partial", stats.partial],
+          ["Papers", stats.papers],
+          ["Total Size", `${totalGB} GB`],
+          ["Virtual", stats.virtual],
+          ["In-Person", stats.in_person],
+        ];
+
+        boxes.forEach(([label, value]) => {
+          const box = document.createElement("div");
+          box.className = "submission-stat-box";
+
+          const valueEl = document.createElement("div");
+          valueEl.className = "submission-stat-value";
+          valueEl.textContent =
+            value === undefined || value === null ? "0" : String(value);
+
+          const labelEl = document.createElement("div");
+          labelEl.className = "submission-stat-label";
+          labelEl.textContent = label;
+
+          box.appendChild(valueEl);
+          box.appendChild(labelEl);
+          strip.appendChild(box);
+        });
+      }
+
+      // XSS-safe cell builders below use createElement/textContent only.
+      // author_name, author_email, author_phone, organisation and file
+      // names all come from public form submissions and are never trusted.
+
+      function buildSubmissionStatusCell(status) {
+        const td = document.createElement("td");
+        const chip = document.createElement("span");
+        const key = (status || "").toLowerCase();
+        const known = ["complete", "partial", "pending", "abandoned"].includes(
+          key
+        );
+
+        chip.className = `submission-status-chip${known ? ` status-${key}` : ""}`;
+        chip.textContent = status ? cellText(status) : "Unknown";
+        td.appendChild(chip);
+        return td;
+      }
+
+      function buildSubmissionLinksCell(files) {
+        const td = document.createElement("td");
+        td.className = "submission-links-cell";
+
+        if (!Array.isArray(files) || files.length === 0) {
+          td.textContent = "—";
+          return td;
+        }
+
+        files.forEach((file) => {
+          const icon = file && file.kind === "video" ? "🎬" : "📑";
+          const label = file && file.name ? file.name : "";
+
+          if (file && file.drive_link) {
+            const a = document.createElement("a");
+            a.href = file.drive_link;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.title = label;
+            a.className = "submission-file-link";
+            a.textContent = icon;
+            td.appendChild(a);
+          } else {
+            const span = document.createElement("span");
+            span.className =
+              "submission-file-link submission-file-link-disabled";
+            span.title = label;
+            span.textContent = icon;
+            td.appendChild(span);
+          }
+        });
+
+        return td;
+      }
+
+      function buildSubmissionRow(sub) {
+        const tr = document.createElement("tr");
+        const cell = (text) => {
+          const td = document.createElement("td");
+          td.textContent = cellText(text);
+          return td;
+        };
+
+        tr.appendChild(cell(sub.folder_name || sub.paper_id));
+        tr.appendChild(cell(sub.version_label));
+        tr.appendChild(cell(formatSubmissionMode(sub.mode)));
+        tr.appendChild(cell(sub.author_name));
+        tr.appendChild(cell(sub.author_email));
+        tr.appendChild(cell(sub.author_phone));
+        tr.appendChild(cell(sub.organisation));
+        tr.appendChild(buildSubmissionStatusCell(sub.status));
+        tr.appendChild(cell(sub.file_count));
+        tr.appendChild(cell(formatBytes(sub.total_bytes)));
+        tr.appendChild(buildSubmissionLinksCell(sub.files));
+        tr.appendChild(cell(formatSubmittedIST(sub.created_at)));
+
+        return tr;
+      }
+
+      function renderSubmissionsTable(submissions) {
+        const tbody = document.getElementById("submissionsTableBody");
+        const wrapper = document.getElementById("submissionsTableWrapper");
+        const emptyState = document.getElementById("submissionsEmptyState");
+        if (!tbody || !wrapper || !emptyState) return;
+
+        tbody.replaceChildren();
+
+        if (!Array.isArray(submissions) || submissions.length === 0) {
+          wrapper.style.display = "none";
+          emptyState.classList.add("show");
+          return;
+        }
+
+        emptyState.classList.remove("show");
+        wrapper.style.display = "";
+        submissions.forEach((sub) => tbody.appendChild(buildSubmissionRow(sub)));
+      }
+
+      async function loadSubmissionsStats() {
+        const response = await makeAuthenticatedRequest(
+          "/api/admin/stats",
+          {},
+          UPLOADS_WORKER_URL
+        );
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.error || "Failed to load submission stats");
+        }
+
+        renderSubmissionsStats(data.stats || {});
+      }
+
+      async function loadSubmissionsList() {
+        const params = getSubmissionsFilterParams();
+        const response = await makeAuthenticatedRequest(
+          `/api/admin/submissions?${params.toString()}`,
+          {},
+          UPLOADS_WORKER_URL
+        );
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.error || "Failed to load submissions");
+        }
+
+        renderSubmissionsTable(data.submissions || []);
+      }
+
+      // Full reload: stats strip + table. Used on init and Refresh click.
+      async function refreshSubmissionsSection() {
+        clearSubmissionsError();
+        setSubmissionsLoading(true);
+
+        try {
+          await loadSubmissionsStats();
+          await loadSubmissionsList();
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showSubmissionsError(error);
+          }
+        } finally {
+          setSubmissionsLoading(false);
+        }
+      }
+
+      // Table-only reload: used when a filter changes (stats aren't
+      // filtered, so there's no need to re-fetch them every time).
+      async function reloadSubmissionsList() {
+        clearSubmissionsError();
+        setSubmissionsLoading(true);
+
+        try {
+          await loadSubmissionsList();
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showSubmissionsError(error);
+          }
+        } finally {
+          setSubmissionsLoading(false);
+        }
+      }
+
+      async function handleSubmissionsExport() {
+        const exportBtn = document.getElementById("submissionsExportBtn");
+        const icon = exportBtn ? exportBtn.querySelector("i") : null;
+        const originalIconClass = icon ? icon.className : "";
+
+        if (exportBtn) exportBtn.disabled = true;
+        if (icon) icon.className = "fas fa-spinner spinner";
+
+        try {
+          const params = getSubmissionsFilterParams();
+          const response = await makeAuthenticatedRequest(
+            `/api/admin/export.csv?${params.toString()}`,
+            {},
+            UPLOADS_WORKER_URL
+          );
+
+          if (!response.ok) {
+            throw new Error(`Export failed (status ${response.status})`);
+          }
+
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "iprecon-submissions.csv";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showAlert(
+              "error",
+              `Could not export submissions: ${error.message}`
+            );
+          }
+        } finally {
+          if (exportBtn) exportBtn.disabled = false;
+          if (icon) icon.className = originalIconClass || "fas fa-file-csv";
+        }
+      }
+
+      // Called once from showAdminInterface(); Refresh/filter handlers can
+      // still be triggered any number of times afterwards.
+      function initSubmissionsSection() {
+        if (submissionsAutoLoaded) return;
+        submissionsAutoLoaded = true;
+        refreshSubmissionsSection();
+      }
 
       // Console welcome message for developers
       console.log(`

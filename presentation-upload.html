@@ -1,0 +1,3188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Your Presentation - IPRECON 2026</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    /* =================================================================
+         STANDARDIZED BUTTON SYSTEM
+         ================================================================= */
+    .iprecon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      justify-content: center;
+      line-height: 1;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .iprecon-btn.large {
+      padding: 18px 40px;
+      font-size: 1.1rem;
+      gap: 15px;
+    }
+
+    .iprecon-btn.small {
+      padding: 12px 25px;
+      font-size: 0.9rem;
+      gap: 8px;
+    }
+
+    /* PRIMARY BUTTON */
+    .iprecon-btn.primary {
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(142, 36, 170, 0.3);
+    }
+
+    .iprecon-btn.primary:hover {
+      background: linear-gradient(135deg, #7b1f96, #1a0e1a);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(142, 36, 170, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* SECONDARY BUTTON */
+    .iprecon-btn.secondary {
+      background: #d4af37;
+      color: #211021;
+      border-color: #d4af37;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .iprecon-btn.secondary:hover {
+      background: transparent;
+      color: #d4af37;
+      border-color: #d4af37;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+      text-decoration: none;
+    }
+
+    /* TERTIARY BUTTON */
+    .iprecon-btn.tertiary {
+      background: transparent;
+      color: white;
+      border-color: white;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .iprecon-btn.tertiary:hover {
+      background: white;
+      color: #211021;
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+    }
+
+    .iprecon-btn.tertiary.dark-bg {
+      color: #211021;
+      border-color: #211021;
+      box-shadow: 0 5px 15px rgba(33, 16, 33, 0.2);
+    }
+
+    .iprecon-btn.tertiary.dark-bg:hover {
+      background: #211021;
+      color: white;
+      border-color: #211021;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(33, 16, 33, 0.3);
+    }
+
+    .iprecon-btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .iprecon-btn:disabled,
+    .iprecon-btn[disabled] {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+      filter: grayscale(0.35);
+    }
+
+    .iprecon-btn:focus-visible {
+      outline: 3px solid #d4af37;
+      outline-offset: 3px;
+    }
+
+    /* =================================================================
+         PRESENTATION UPLOAD PAGE STYLES
+         ================================================================= */
+
+    /* Hero Section */
+    .presentation-hero {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 60px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .presentation-hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .presentation-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #211021;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+
+    .presentation-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background-color: #8e24aa;
+    }
+
+    .presentation-subtitle {
+      font-size: 1.3rem;
+      color: #6c757d;
+      margin-bottom: 30px;
+      line-height: 1.4;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .deadline-highlight {
+      background: linear-gradient(135deg, #211021, #8e24aa);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 30px auto;
+      max-width: 600px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deadline-highlight::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    }
+
+    .deadline-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .deadline-icon {
+      font-size: 2rem;
+      color: #d4af37;
+    }
+
+    .deadline-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .presentation-content {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .presentation-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------- Cards ---------- */
+    .upload-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      border: 2px solid transparent;
+      margin-bottom: 40px;
+      max-width: 100%;
+    }
+
+    .upload-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
+      z-index: 3;
+    }
+
+    .upload-card-header {
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      color: white;
+      padding: 34px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-card-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    }
+
+    .upload-card-header-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .upload-card-icon {
+      width: 76px;
+      height: 76px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .upload-card-icon i {
+      font-size: 2.2rem;
+      color: white;
+    }
+
+    .upload-card-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+
+    .upload-card-header p {
+      margin: 0;
+      opacity: 0.92;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .upload-card-body {
+      padding: 40px;
+    }
+
+    .section-heading {
+      color: #211021;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-heading i {
+      color: #8e24aa;
+      font-size: 1.05rem;
+    }
+
+    .form-divider {
+      border: 0;
+      border-top: 1px solid #eceaf1;
+      margin: 38px 0;
+    }
+    /* ---------- Form fields ---------- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: #211021;
+      margin-bottom: 9px;
+      font-size: 0.95rem;
+    }
+
+    .req-star {
+      color: #8e24aa;
+      margin-left: 4px;
+      font-weight: 700;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e3e1ea;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: #211021;
+      background: #fff;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .form-input::placeholder {
+      color: #a9a4b4;
+    }
+
+    .form-input:hover {
+      border-color: #c9a5d6;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #8e24aa;
+      box-shadow: 0 0 0 4px rgba(142, 36, 170, 0.15);
+    }
+
+    .form-input.invalid {
+      border-color: #d32f2f;
+      background: #fffafa;
+    }
+
+    .field-hint {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin: 8px 0 0;
+      line-height: 1.55;
+    }
+
+    .field-error {
+      display: none;
+      font-size: 0.87rem;
+      color: #c62828;
+      margin: 8px 0 0;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .field-error.show {
+      display: block;
+    }
+
+    .pid-preview {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fdf3d8, #fffdf5);
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      color: #7a5f12;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.4px;
+    }
+
+    .pid-preview.show {
+      display: inline-flex;
+    }
+
+    /* ---------- Panels / alerts ---------- */
+    .panel {
+      display: none;
+      gap: 14px;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 16px;
+      line-height: 1.65;
+      font-size: 0.95rem;
+      align-items: flex-start;
+    }
+
+    .panel.show {
+      display: flex;
+    }
+
+    .panel i {
+      flex-shrink: 0;
+      font-size: 1.15rem;
+      margin-top: 2px;
+    }
+
+    .panel.info {
+      background: linear-gradient(135deg, #f3e5f5, #f7f2fb);
+      border: 1px solid rgba(142, 36, 170, 0.25);
+      border-left: 4px solid #8e24aa;
+      color: #43254c;
+    }
+
+    .panel.info i {
+      color: #8e24aa;
+    }
+
+    .panel.error {
+      background: #fdecea;
+      border: 1px solid #f3c4c0;
+      border-left: 4px solid #d32f2f;
+      color: #8e1b16;
+    }
+
+    .panel.error i {
+      color: #d32f2f;
+    }
+
+    .panel.warn {
+      background: #fff3e0;
+      border: 1px solid #ffcc80;
+      border-left: 4px solid #ff9800;
+      color: #8a4b00;
+    }
+
+    .panel.warn i {
+      color: #ff9800;
+    }
+
+    .panel.note {
+      background: #f6f5f9;
+      border: 1px solid #e3e1ea;
+      border-left: 4px solid #b39ddb;
+      color: #4a4458;
+      font-size: 0.9rem;
+      padding: 13px 16px;
+    }
+
+    .panel.note i {
+      color: #7e57c2;
+      font-size: 1rem;
+    }
+
+    .panel-list {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .panel-list li {
+      margin-bottom: 5px;
+      word-break: break-word;
+    }
+
+    /* ---------- Mode selector ---------- */
+    .mode-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .mode-card {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .mode-radio {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .mode-card-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 2px solid #e3e1ea;
+      border-radius: 14px;
+      padding: 20px 22px;
+      background: #fff;
+      transition: all 0.25s ease;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .mode-card:hover .mode-card-body {
+      border-color: #c9a5d6;
+      transform: translateY(-2px);
+    }
+
+    .mode-radio:checked+.mode-card-body {
+      border-color: #8e24aa;
+      background: linear-gradient(135deg, #faf2fd, #ffffff);
+      box-shadow: 0 10px 24px rgba(142, 36, 170, 0.16);
+    }
+
+    .mode-radio:focus-visible+.mode-card-body {
+      outline: 3px solid #d4af37;
+      outline-offset: 3px;
+    }
+
+    .mode-dot {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #bdb7c9;
+      position: relative;
+      margin-top: 3px;
+      transition: border-color 0.25s ease;
+    }
+
+    .mode-dot::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: #8e24aa;
+      transform: scale(0);
+      transition: transform 0.2s ease;
+    }
+
+    .mode-radio:checked+.mode-card-body .mode-dot {
+      border-color: #8e24aa;
+    }
+
+    .mode-radio:checked+.mode-card-body .mode-dot::after {
+      transform: scale(1);
+    }
+
+    .mode-card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 600;
+      color: #211021;
+      font-size: 1.05rem;
+      margin-bottom: 5px;
+    }
+
+    .mode-card-title i {
+      color: #8e24aa;
+    }
+
+    .mode-card-desc {
+      display: block;
+      color: #6c757d;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    /* ---------- Requirements panel ---------- */
+    .req-panel {
+      background: linear-gradient(135deg, #fdf6e3, #fffdf7);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-left: 5px solid #d4af37;
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-top: 24px;
+    }
+
+    .req-panel h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #211021;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+
+    .req-panel h4 i {
+      color: #d4af37;
+    }
+
+    .req-text {
+      color: #5d4a13;
+      font-weight: 600;
+      margin: 0 0 16px;
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+
+    .req-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .req-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 0.92rem;
+      color: #4a4458;
+      flex-wrap: wrap;
+    }
+
+    .req-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      background: #e6e3ec;
+      color: #6c757d;
+      font-weight: 700;
+    }
+
+    .req-item.met .req-icon {
+      background: #2e7d32;
+      color: #fff;
+    }
+
+    .req-item.missing .req-icon {
+      background: #ff9800;
+      color: #fff;
+    }
+
+    .req-label {
+      flex: 1 1 auto;
+      font-weight: 600;
+      color: #211021;
+    }
+
+    .req-state {
+      font-size: 0.82rem;
+      color: #6c757d;
+      font-weight: 600;
+    }
+
+    .req-item.met .req-state {
+      color: #2e7d32;
+    }
+
+    .req-item.missing .req-state {
+      color: #b26500;
+    }
+    /* ---------- Drop zone ---------- */
+    .dropzone {
+      border: 3px dashed rgba(142, 36, 170, 0.4);
+      border-radius: 16px;
+      background: linear-gradient(135deg, #faf5fc, #ffffff);
+      padding: 46px 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 24px;
+    }
+
+    .dropzone:hover {
+      border-color: #8e24aa;
+      background: linear-gradient(135deg, #f5e9fa, #ffffff);
+      transform: translateY(-2px);
+    }
+
+    .dropzone:focus-visible {
+      outline: 3px solid #d4af37;
+      outline-offset: 4px;
+    }
+
+    .dropzone.dragover {
+      border-color: #d4af37;
+      background: linear-gradient(135deg, #fdf6e3, #ffffff);
+      box-shadow: 0 14px 32px rgba(212, 175, 55, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .dropzone-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8e24aa, #211021);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 10px 24px rgba(142, 36, 170, 0.3);
+    }
+
+    .dropzone-icon i {
+      font-size: 1.9rem;
+      color: #fff;
+    }
+
+    .dropzone-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #211021;
+      margin: 0 0 8px;
+    }
+
+    .dropzone-sub {
+      color: #6c757d;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .format-note {
+      margin: 16px 0 0;
+      font-size: 0.9rem;
+      color: #4a4458;
+      line-height: 1.65;
+      background: #f6f5f9;
+      border-radius: 10px;
+      padding: 13px 16px;
+      border-left: 4px solid #8e24aa;
+    }
+
+    /* ---------- Staged files ---------- */
+    .staged-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 26px 0 14px;
+    }
+
+    .staged-head h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #211021;
+    }
+
+    .staged-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .staged-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid #e8e6ee;
+      border-left: 4px solid #8e24aa;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      flex-wrap: wrap;
+    }
+
+    .kind-chip {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .kind-chip.video {
+      background: #f3e5f5;
+      color: #6a1b9a;
+    }
+
+    .kind-chip.slides {
+      background: #fdf3d8;
+      color: #7a5f12;
+    }
+
+    .staged-meta {
+      flex: 1 1 220px;
+      min-width: 0;
+    }
+
+    .staged-name {
+      font-weight: 600;
+      color: #211021;
+      word-break: break-word;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    .staged-size {
+      font-size: 0.83rem;
+      color: #6c757d;
+      margin-top: 3px;
+    }
+
+    .icon-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #e3e1ea;
+      background: #fff;
+      color: #6c757d;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .icon-btn:hover {
+      background: #fdecea;
+      border-color: #d32f2f;
+      color: #d32f2f;
+    }
+
+    .icon-btn:focus-visible {
+      outline: 3px solid #8e24aa;
+      outline-offset: 2px;
+    }
+
+    .staged-empty {
+      color: #6c757d;
+      font-size: 0.93rem;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* ---------- Turnstile + submit ---------- */
+    .turnstile-wrap {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .submit-hint {
+      text-align: center;
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin: 14px 0 0;
+      line-height: 1.6;
+      min-height: 1.2em;
+    }
+
+    /* ---------- Upload progress ---------- */
+    .upload-summary {
+      background: linear-gradient(135deg, #f3e5f5, #f7f2fb);
+      border: 1px solid rgba(142, 36, 170, 0.22);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      color: #43254c;
+      font-weight: 600;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .upload-summary i {
+      color: #8e24aa;
+      font-size: 1.2rem;
+    }
+
+    .upload-file {
+      border: 1px solid #e8e6ee;
+      border-left: 4px solid #8e24aa;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      background: #fff;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .upload-file-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .upload-file-name {
+      flex: 1 1 200px;
+      font-weight: 600;
+      color: #211021;
+      word-break: break-word;
+      min-width: 0;
+      font-size: 0.97rem;
+    }
+
+    .state-chip {
+      flex-shrink: 0;
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      background: #ece9f1;
+      color: #6c757d;
+      white-space: nowrap;
+    }
+
+    .state-chip.uploading {
+      background: #f3e5f5;
+      color: #6a1b9a;
+    }
+
+    .state-chip.paused {
+      background: #fff3e0;
+      color: #b26500;
+    }
+
+    .state-chip.done {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .state-chip.failed {
+      background: #fdecea;
+      color: #c62828;
+    }
+
+    .state-chip.cancelled {
+      background: #ece9f1;
+      color: #55505f;
+    }
+
+    .progress-track {
+      height: 12px;
+      background: #ece7f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #8e24aa, #d4af37);
+      transition: width 0.2s linear;
+    }
+
+    .upload-file.is-done .progress-fill {
+      background: linear-gradient(90deg, #2e7d32, #66bb6a);
+    }
+
+    .upload-file.is-failed .progress-fill {
+      background: linear-gradient(90deg, #c62828, #ef5350);
+    }
+
+    .upload-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 12px;
+    }
+
+    .upload-stats b {
+      color: #211021;
+      font-weight: 600;
+    }
+
+    .upload-file-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .mini-btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 2px solid #8e24aa;
+      background: #fff;
+      color: #8e24aa;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mini-btn:hover {
+      background: #8e24aa;
+      color: #fff;
+    }
+
+    .mini-btn:focus-visible {
+      outline: 3px solid #d4af37;
+      outline-offset: 2px;
+    }
+
+    .mini-btn[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: #fff;
+      color: #8e24aa;
+    }
+
+    .upload-file-error {
+      display: none;
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: #c62828;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .upload-file-error.show {
+      display: block;
+    }
+
+    /* ---------- Inline confirm ---------- */
+    .confirm-panel {
+      display: none;
+      background: #fdecea;
+      border: 1px solid #f3c4c0;
+      border-left: 5px solid #d32f2f;
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-top: 22px;
+    }
+
+    .confirm-panel.show {
+      display: block;
+    }
+
+    .confirm-panel h4 {
+      margin: 0 0 10px;
+      color: #8e1b16;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .confirm-panel p {
+      margin: 0 0 18px;
+      color: #7c2b26;
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    .confirm-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .danger-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 2px solid #d32f2f;
+      background: #d32f2f;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .danger-btn:hover {
+      background: #b71c1c;
+      border-color: #b71c1c;
+    }
+
+    .danger-btn:focus-visible {
+      outline: 3px solid #211021;
+      outline-offset: 2px;
+    }
+
+    /* ---------- Receipt ---------- */
+    .success-check {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2e7d32, #66bb6a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 14px 32px rgba(46, 125, 50, 0.32);
+    }
+
+    .success-check i {
+      font-size: 3rem;
+      color: #fff;
+    }
+
+    .receipt-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 30px 0;
+      text-align: left;
+    }
+
+    .receipt-item {
+      background: #f8f7fa;
+      border-radius: 12px;
+      padding: 16px 18px;
+      border-left: 4px solid #8e24aa;
+    }
+
+    .receipt-item .label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .receipt-item .value {
+      display: block;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #211021;
+      word-break: break-word;
+    }
+
+    .receipt-note {
+      background: linear-gradient(135deg, #e8f5e8, #f3e5f5);
+      border-radius: 12px;
+      padding: 20px 24px;
+      color: #33323a;
+      line-height: 1.7;
+      margin: 26px 0 10px;
+      text-align: left;
+      border-left: 4px solid #d4af37;
+      font-size: 0.97rem;
+    }
+
+    /* ---------- Contact Section ---------- */
+    .contact-section {
+      background: #f8f9fa;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .contact-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-content h3 {
+      font-size: 2rem;
+      color: #211021;
+      margin-bottom: 20px;
+    }
+
+    .contact-content p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8e24aa;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: #211021;
+      transform: translateY(-2px);
+    }
+
+    .contact-link i {
+      font-size: 1.2rem;
+    }
+
+    .action-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .action-section .iprecon-btn-group {
+      margin-top: 20px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+      .presentation-content {
+        padding: 60px 0;
+      }
+
+      .upload-card-body {
+        padding: 34px 28px;
+      }
+
+      .receipt-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .presentation-hero {
+        padding: 40px 0;
+      }
+
+      .presentation-title {
+        font-size: 2.5rem;
+      }
+
+      .presentation-title::after {
+        width: 100px;
+        height: 3px;
+      }
+
+      .presentation-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .deadline-content {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .presentation-content {
+        padding: 45px 0;
+      }
+
+      .upload-card-body {
+        padding: 28px 20px;
+      }
+
+      .upload-card-title {
+        font-size: 1.5rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .mode-options {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .dropzone {
+        padding: 34px 20px;
+      }
+
+      .req-panel {
+        padding: 20px 18px;
+      }
+
+      .receipt-meta {
+        grid-template-columns: 1fr;
+      }
+
+      /* FIXED: Button responsive styles for mobile */
+      .iprecon-btn {
+        min-width: 200px;
+        max-width: 100%;
+        padding: 14px 25px;
+        font-size: 0.95rem;
+        white-space: normal;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .iprecon-btn.large {
+        padding: 16px 30px;
+        font-size: 1rem;
+      }
+
+      .action-section {
+        margin: 30px 0;
+        padding: 0 10px;
+      }
+
+      .action-section .iprecon-btn {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .upload-file-actions .mini-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+
+      .confirm-actions .danger-btn,
+      .confirm-actions .mini-btn {
+        flex: 1 1 auto;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .contact-link {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .presentation-title {
+        font-size: 2rem;
+      }
+
+      .presentation-title::after {
+        width: 80px;
+      }
+
+      .upload-card-body {
+        padding: 24px 16px;
+      }
+
+      .upload-card-header {
+        padding: 26px 18px;
+      }
+
+      .staged-row {
+        gap: 10px;
+      }
+
+      .staged-meta {
+        flex: 1 1 100%;
+        order: 3;
+      }
+
+      .iprecon-btn {
+        min-width: 180px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+
+      .iprecon-btn.large {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+      }
+
+      .action-section .iprecon-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .success-check {
+        width: 78px;
+        height: 78px;
+      }
+
+      .success-check i {
+        font-size: 2.4rem;
+      }
+    }
+
+    /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .fade-in,
+      .progress-fill,
+      .iprecon-btn,
+      .mode-card-body,
+      .dropzone {
+        transition: none !important;
+      }
+    }
+  </style>
+  <meta name="description"
+    content="Upload your presentation video and slide deck for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/img/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iprecon.org/assets/img/og-image.png" />
+  <meta property="og:image:width" content="720" />
+  <meta property="og:image:height" content="360" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://iprecon.org/assets/img/og-image.png" />
+  <link rel="canonical" href="https://iprecon.org/presentation-upload.html" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Submit Your Presentation - IPRECON 2026" />
+  <meta property="og:description" content="Upload your presentation video and slide deck for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
+  <meta property="og:url" content="https://iprecon.org/presentation-upload.html" />
+  <meta property="og:site_name" content="IPRECON 2026" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:title" content="Submit Your Presentation - IPRECON 2026" />
+  <meta name="twitter:description" content="Upload your presentation video and slide deck for IPRECON 2026 - International Power and Renewable Energy Conference at College of Engineering Karunagappally, Kerala, India" />
+</head>
+
+<body>
+  <!-- Header -->
+  <esi:include src="/includes/header.html" />
+
+  <!-- Navigation Bar -->
+  <esi:include src="/includes/navbar.html" />
+
+  <!-- Marquee -->
+  <esi:include src="/includes/marquee.html" />
+
+  <!-- Spacer for when marquee becomes fixed -->
+  <div id="marquee-placeholder" style="display: none"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="presentation-hero">
+      <div class="presentation-hero-content">
+        <h1 class="presentation-title">Submit Your Presentation</h1>
+        <p class="presentation-subtitle">
+          Upload your presentation video and slide deck directly to the conference archive
+        </p>
+
+        <div class="deadline-highlight">
+          <div class="deadline-content">
+            <i class="fas fa-calendar-alt deadline-icon"></i>
+            <div class="deadline-text">
+              <strong>Submission Deadline: August 25, 2026</strong>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-style: italic; color: #6c757d; margin-top: 20px;">
+          Please review the presentation guidelines before uploading.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="presentation-content">
+      <div class="presentation-container">
+        <!-- ============ VIEW 1: FORM ============ -->
+        <div id="view-form" class="fade-in">
+          <div class="upload-card">
+            <div class="upload-card-header">
+              <div class="upload-card-header-inner">
+                <div class="upload-card-icon">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                </div>
+                <h2 class="upload-card-title">Presentation Upload</h2>
+                <p>Tell us who you are, attach your files, and we will take it from there. Nothing is sent until you
+                  press Upload.</p>
+              </div>
+            </div>
+
+            <div class="upload-card-body">
+              <form id="upload-form" novalidate autocomplete="on">
+
+                <h3 class="section-heading"><i class="fas fa-user-pen"></i> Presenter details</h3>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label class="form-label" for="f-name">Presenting Author Name<span
+                        class="req-star">*</span></label>
+                    <input class="form-input" type="text" id="f-name" name="name" required autocomplete="name"
+                      placeholder="Jane Doe" aria-describedby="err-name" />
+                    <p class="field-error" id="err-name" role="alert"></p>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="f-email">Email<span class="req-star">*</span></label>
+                    <input class="form-input" type="email" id="f-email" name="email" required autocomplete="email"
+                      placeholder="jane.doe@university.edu" aria-describedby="err-email" />
+                    <p class="field-error" id="err-email" role="alert"></p>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="f-phone">Phone with country code<span
+                        class="req-star">*</span></label>
+                    <input class="form-input" type="tel" id="f-phone" name="phone" required autocomplete="tel"
+                      placeholder="+91 98765 43210" pattern="^\+[0-9][0-9 \-]{7,17}$"
+                      aria-describedby="hint-phone err-phone" />
+                    <p class="field-hint" id="hint-phone">Include your country code, starting with +</p>
+                    <p class="field-error" id="err-phone" role="alert"></p>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="f-org">University / Organisation<span
+                        class="req-star">*</span></label>
+                    <input class="form-input" type="text" id="f-org" name="organisation" required
+                      autocomplete="organization" placeholder="College of Engineering Karunagappally"
+                      aria-describedby="err-org" />
+                    <p class="field-error" id="err-org" role="alert"></p>
+                  </div>
+
+                  <div class="form-field full">
+                    <label class="form-label" for="f-pid">Paper ID<span class="req-star">*</span></label>
+                    <input class="form-input" type="text" id="f-pid" name="paper_id" required inputmode="text"
+                      autocomplete="off" placeholder="34" aria-describedby="hint-pid err-pid" />
+                    <span class="pid-preview" id="pid-preview" aria-hidden="true"></span>
+                    <p class="field-hint" id="hint-pid">e.g. paper 34 &rarr; PID034, paper 7 &rarr; PID007, paper 142 &rarr; PID142</p>
+                    <p class="field-error" id="err-pid" role="alert"></p>
+                    <div class="panel info" id="pid-exists">
+                      <i class="fas fa-circle-info"></i>
+                      <div id="pid-exists-text"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="form-divider" />
+
+                <h3 class="section-heading"><i class="fas fa-chalkboard-user"></i> Presentation mode</h3>
+
+                <fieldset style="border:0;padding:0;margin:0;">
+                  <legend class="sr-only">Choose your presentation mode</legend>
+                  <div class="mode-options">
+                    <label class="mode-card" for="mode-virtual">
+                      <input class="mode-radio" type="radio" name="mode" id="mode-virtual" value="virtual" required />
+                      <span class="mode-card-body">
+                        <span class="mode-dot" aria-hidden="true"></span>
+                        <span>
+                          <span class="mode-card-title"><i class="fas fa-video"></i> Virtual</span>
+                          <span class="mode-card-desc">You will present with a pre-recorded video played during your
+                            session.</span>
+                        </span>
+                      </span>
+                    </label>
+
+                    <label class="mode-card" for="mode-inperson">
+                      <input class="mode-radio" type="radio" name="mode" id="mode-inperson" value="in-person"
+                        required />
+                      <span class="mode-card-body">
+                        <span class="mode-dot" aria-hidden="true"></span>
+                        <span>
+                          <span class="mode-card-title"><i class="fas fa-users"></i> In-Person</span>
+                          <span class="mode-card-desc">You will present live at the venue from your submitted
+                            slides.</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <p class="field-error" id="err-mode" role="alert"></p>
+                </fieldset>
+
+                <div class="req-panel" id="req-panel">
+                  <h4><i class="fas fa-list-check"></i> What you need to attach</h4>
+                  <p class="req-text" id="req-text">Choose your presentation mode above to see what is required.</p>
+                  <ul class="req-list">
+                    <li class="req-item" id="req-video">
+                      <span class="req-icon" aria-hidden="true">&#9679;</span>
+                      <span class="req-label">Presentation video &mdash; .mp4</span>
+                      <span class="req-state" id="req-video-state">Awaiting mode</span>
+                    </li>
+                    <li class="req-item" id="req-slides">
+                      <span class="req-icon" aria-hidden="true">&#9679;</span>
+                      <span class="req-label">Slide deck &mdash; .pptx or .pdf</span>
+                      <span class="req-state" id="req-slides-state">Awaiting mode</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <hr class="form-divider" />
+
+                <h3 class="section-heading"><i class="fas fa-paperclip"></i> Your files</h3>
+
+                <div class="dropzone" id="dropzone" role="button" tabindex="0"
+                  aria-describedby="dropzone-sub format-note">
+                  <div class="dropzone-icon"><i class="fas fa-file-arrow-up"></i></div>
+                  <p class="dropzone-title">Drag your files here, or click to browse</p>
+                  <p class="dropzone-sub" id="dropzone-sub">Attach your presentation video and slide deck. They stay on
+                    your computer until you press Upload.</p>
+                </div>
+                <input type="file" id="file-input" multiple accept=".mp4,.pptx,.pdf" class="sr-only"
+                  aria-label="Choose presentation files" />
+
+                <p class="format-note" id="format-note">
+                  Video: MP4 (H.264) &middot; under 500 MB recommended for a faster upload. Slides: PPTX or PDF.
+                </p>
+
+                <div class="staged-head">
+                  <h4>Attached files <span id="staged-count" style="color:#6c757d;font-weight:500;"></span></h4>
+                  <button type="button" class="mini-btn" id="btn-add-more"><i class="fas fa-plus"></i> Add more
+                    files</button>
+                </div>
+
+                <p class="staged-empty" id="staged-empty">No files attached yet.</p>
+                <ul class="staged-list" id="staged-list"></ul>
+
+                <div class="panel note" id="staged-note">
+                  <i class="fas fa-circle-info"></i>
+                  <div id="staged-note-text"></div>
+                </div>
+
+                <div class="panel error" id="file-errors">
+                  <i class="fas fa-triangle-exclamation"></i>
+                  <div id="file-errors-text"></div>
+                </div>
+
+                <hr class="form-divider" />
+
+                <h3 class="section-heading"><i class="fas fa-shield-halved"></i> Verification</h3>
+
+                <div class="turnstile-wrap">
+                  <div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAENigVCAEg4MXUNo"
+                    data-callback="onIpreconTurnstileSuccess" data-expired-callback="onIpreconTurnstileExpired"
+                    data-error-callback="onIpreconTurnstileError" data-theme="light"></div>
+                </div>
+
+                <div class="panel error" id="form-error" role="alert">
+                  <i class="fas fa-circle-exclamation"></i>
+                  <div id="form-error-text"></div>
+                </div>
+
+                <div class="action-section">
+                  <div class="iprecon-btn-group">
+                    <button type="submit" class="iprecon-btn primary large" id="submit-btn" disabled>
+                      <i class="fas fa-cloud-arrow-up"></i>
+                      Upload Presentation
+                    </button>
+                  </div>
+                  <p class="submit-hint" id="submit-hint" aria-live="polite"></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- ============ VIEW 2: UPLOAD PROGRESS ============ -->
+        <div id="view-upload" hidden>
+          <div class="upload-card">
+            <div class="upload-card-header">
+              <div class="upload-card-header-inner">
+                <div class="upload-card-icon">
+                  <i class="fas fa-tower-broadcast"></i>
+                </div>
+                <h2 class="upload-card-title">Uploading your files</h2>
+                <p>Keep this tab open until every file finishes. Files upload one after another.</p>
+              </div>
+            </div>
+
+            <div class="upload-card-body">
+              <div class="upload-summary">
+                <i class="fas fa-folder-open"></i>
+                <div>
+                  <span id="up-folder"></span>
+                  <span id="up-version" style="font-weight:500;opacity:.85;"></span>
+                </div>
+              </div>
+
+              <div id="up-progress-region" aria-live="polite" aria-atomic="true">
+                <p class="submit-hint" id="up-status" style="text-align:left;font-weight:600;color:#43254c;"></p>
+              </div>
+
+              <div id="up-files"></div>
+
+              <div class="panel error" id="up-error" role="alert">
+                <i class="fas fa-circle-exclamation"></i>
+                <div id="up-error-text"></div>
+              </div>
+
+              <div class="action-section">
+                <div class="iprecon-btn-group">
+                  <button type="button" class="mini-btn" id="btn-retry-complete" hidden>
+                    <i class="fas fa-rotate-right"></i> Try finishing again
+                  </button>
+                  <button type="button" class="danger-btn" id="btn-cancel">
+                    <i class="fas fa-xmark"></i> Cancel submission
+                  </button>
+                </div>
+              </div>
+
+              <div class="confirm-panel" id="cancel-confirm" role="alertdialog" aria-labelledby="cancel-confirm-title"
+                aria-describedby="cancel-confirm-body">
+                <h4 id="cancel-confirm-title"><i class="fas fa-triangle-exclamation"></i> Cancel this submission?</h4>
+                <p id="cancel-confirm-body">Uploads in progress will stop. Any file that has already finished is kept
+                  and recorded, and your files stay attached so you can start again.</p>
+                <div class="confirm-actions">
+                  <button type="button" class="danger-btn" id="cancel-yes">Yes, cancel the submission</button>
+                  <button type="button" class="mini-btn" id="cancel-no">No, keep uploading</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ VIEW 3: CONFIRMATION ============ -->
+        <div id="view-done" hidden>
+          <div class="upload-card">
+            <div class="upload-card-header">
+              <div class="upload-card-header-inner">
+                <h2 class="upload-card-title" id="done-title">Submission received</h2>
+                <p id="done-subtitle">Thank you &mdash; your presentation is now with the IPRECON 2026 organisers.</p>
+              </div>
+            </div>
+
+            <div class="upload-card-body" style="text-align:center;">
+              <div class="success-check"><i class="fas fa-check"></i></div>
+
+              <div class="panel warn" id="done-partial">
+                <i class="fas fa-triangle-exclamation"></i>
+                <div id="done-partial-text"></div>
+              </div>
+
+              <div class="receipt-meta">
+                <div class="receipt-item">
+                  <span class="label">Paper folder</span>
+                  <span class="value" id="done-folder"></span>
+                </div>
+                <div class="receipt-item">
+                  <span class="label">Version label</span>
+                  <span class="value" id="done-version"></span>
+                </div>
+                <div class="receipt-item">
+                  <span class="label">Presentation mode</span>
+                  <span class="value" id="done-mode"></span>
+                </div>
+                <div class="receipt-item">
+                  <span class="label">Submitted at (IST)</span>
+                  <span class="value" id="done-time"></span>
+                </div>
+              </div>
+
+              <h4 style="text-align:left;color:#211021;font-size:1.05rem;margin:0 0 14px;">Files received</h4>
+              <ul class="staged-list" id="done-files"></ul>
+
+              <div class="receipt-note">
+                A copy of this receipt has gone to the organisers. You may upload a revised version any time before the
+                deadline &mdash; your earlier files are always kept.
+              </div>
+
+              <div class="action-section">
+                <div class="iprecon-btn-group">
+                  <a href="./presentation-guidelines.html" class="iprecon-btn primary large">
+                    <i class="fas fa-clipboard-list"></i>
+                    Back to Presentation Guidelines
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="presentation-container">
+        <div class="contact-content fade-in">
+          <h3>Trouble Uploading?</h3>
+          <p>If an upload will not complete, or you need to correct something you have already sent, get in touch and
+            we will sort it out.</p>
+          <div class="contact-info">
+            <a href="mailto:support@iprecon.org" class="contact-link">
+              <i class="fas fa-envelope"></i>
+              support@iprecon.org
+            </a>
+            <a href="./presentation-guidelines.html" class="contact-link">
+              <i class="fas fa-clipboard-list"></i>
+              Presentation Guidelines
+            </a>
+            <a href="./contact.html" class="contact-link">
+              <i class="fas fa-headset"></i>
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer section -->
+  <esi:include src="/includes/footer.html" />
+
+  <script src="./scripts/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      /* =================================================================
+         PAGE CONSTANTS
+         ================================================================= */
+      const WORKER_URL = "https://iprecon-uploads.ieeesbcek2000.workers.dev";
+      const TURNSTILE_SITE_KEY = "0x4AAAAAAENigVCAEg4MXUNo"; // patched at deploy time — keep this exact placeholder
+
+      const CHUNK_SIZE = 8388608;         // 8 MiB — must be a multiple of 256 KiB
+      const MAX_FILES = 6;
+      const SLIDES_MAX_BYTES = 209715200; // 200 MB per slide deck
+      const TOTAL_MAX_BYTES = 1073741824; // never surfaced anywhere in the UI
+      const MAX_ATTEMPTS = 6;
+      const PHONE_RE = /^\+[0-9][0-9 \-]{7,17}$/;
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      const EXT_KIND = { mp4: "video", pptx: "slides", pdf: "slides" };
+      const EXT_MIME = {
+        mp4: "video/mp4",
+        pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        pdf: "application/pdf"
+      };
+      const KIND_CHIP = { video: "🎬 Video", slides: "📑 Slides" };
+      const MODE_LABEL = { virtual: "Virtual", "in-person": "In-Person" };
+      const REQ_TEXT = {
+        virtual: "Required: 1 presentation video (.mp4) AND 1 slide deck (.pptx or .pdf)",
+        "in-person": "Required: 1 slide deck (.pptx or .pdf). Video optional."
+      };
+      const MSG_FORMATS = "Accepted formats: MP4 (H.264) for video, PPTX or PDF for slides.";
+      const MSG_TOTAL = "Total file size exceeds the allowed limit. Please reduce your files and try again — exporting the video at a lower bitrate usually helps.";
+
+      /* =================================================================
+         SMALL HELPERS
+         ================================================================= */
+      function $(id) { return document.getElementById(id); }
+      function log(msg) { console.log("[UPLOAD] " + msg); }
+      function setText(node, value) { if (node) node.textContent = value == null ? "" : String(value); }
+      function show(node, on) { if (node) node.classList.toggle("show", !!on); }
+      function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = String(text);
+        return n;
+      }
+      function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+      function now() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+      function mb(bytes) {
+        var n = Number(bytes);
+        if (!isFinite(n) || n < 0) return "—";
+        return (n / 1048576).toFixed(1) + " MB";
+      }
+      function fmtSpeed(bps) {
+        if (!isFinite(bps) || bps <= 0) return "—";
+        return (bps / 1048576).toFixed(2) + " MB/s";
+      }
+      function fmtEta(seconds) {
+        if (!isFinite(seconds) || seconds <= 0) return "—";
+        var s = Math.round(seconds);
+        if (s < 60) return s + " s";
+        var m = Math.floor(s / 60);
+        if (m < 60) return m + " min " + (s % 60) + " s";
+        return Math.floor(m / 60) + " h " + (m % 60) + " min";
+      }
+      function extOf(name) {
+        var s = String(name || "");
+        var i = s.lastIndexOf(".");
+        return i < 0 ? "" : s.slice(i + 1).toLowerCase();
+      }
+      function pick(obj, keys) {
+        if (!obj) return null;
+        for (var i = 0; i < keys.length; i++) {
+          var v = obj[keys[i]];
+          if (v !== undefined && v !== null && v !== "") return v;
+        }
+        return null;
+      }
+      function prettyDate(raw) {
+        if (!raw) return "";
+        var d = new Date(String(raw).replace(" ", "T"));
+        if (isNaN(d.getTime())) return String(raw);
+        try {
+          return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+        } catch (e) {
+          return String(raw);
+        }
+      }
+
+      /* =================================================================
+         PAGE STATE
+         ================================================================= */
+      var staged = [];          // { file, name, size, ext, kind, mime }
+      var jobs = [];            // upload jobs, built from the server response
+      var turnstileToken = "";
+      var submitting = false;
+      var submissionId = "";
+      var paperFolder = "";
+      var versionLabel = "";
+      var chosenMode = "";
+      var queueRunning = false;
+      var cancelled = false;
+      var beforeUnloadArmed = false;
+      var lastAnnounce = "";
+      var pidCheckSeq = 0;
+
+      /* =================================================================
+         TURNSTILE
+         ================================================================= */
+      window.onIpreconTurnstileSuccess = function (token) {
+        turnstileToken = token || "";
+        log("turnstile token received");
+        refreshSubmitState();
+      };
+      window.onIpreconTurnstileExpired = function () {
+        turnstileToken = "";
+        log("turnstile token expired");
+        refreshSubmitState();
+      };
+      window.onIpreconTurnstileError = function () {
+        turnstileToken = "";
+        log("turnstile error");
+        refreshSubmitState();
+      };
+
+      function resetTurnstile() {
+        turnstileToken = "";
+        try {
+          if (window.turnstile && typeof window.turnstile.reset === "function") window.turnstile.reset();
+        } catch (e) { /* widget may not be rendered yet */ }
+        refreshSubmitState();
+      }
+
+      // Safety net: reconcile with the widget in case the named callbacks were
+      // missed (e.g. the widget rendered before this script ran).
+      setInterval(function () {
+        if (!window.turnstile || typeof window.turnstile.getResponse !== "function") return;
+        var t = "";
+        try { t = window.turnstile.getResponse() || ""; } catch (e) { return; }
+        if (t !== turnstileToken) {
+          turnstileToken = t;
+          refreshSubmitState();
+        }
+      }, 1500);
+
+      /* =================================================================
+         FIELD VALIDATION
+         ================================================================= */
+      function fieldError(inputId, errorId, message) {
+        var input = $(inputId), err = $(errorId);
+        if (input) {
+          input.classList.toggle("invalid", !!message);
+          input.setAttribute("aria-invalid", message ? "true" : "false");
+        }
+        setText(err, message || "");
+        show(err, !!message);
+        return !message;
+      }
+
+      function parsePaperId(raw) {
+        var s = String(raw || "").trim().replace(/\s+/g, "");
+        if (!s) return null;
+        var m = /^(?:pid)?([0-9]{1,4})$/i.exec(s);
+        if (!m) return null;
+        var n = parseInt(m[1], 10);
+        if (!isFinite(n)) return null;
+        var pad = String(n);
+        while (pad.length < 3) pad = "0" + pad;
+        return { value: String(n), folder: "PID" + pad };
+      }
+
+      function validateName(silent) {
+        var v = $("f-name").value.trim();
+        var msg = v.length >= 2 ? "" : "Please enter the presenting author's full name.";
+        if (!silent) fieldError("f-name", "err-name", msg);
+        return !msg;
+      }
+      function validateEmail(silent) {
+        var v = $("f-email").value.trim();
+        var msg = !v ? "Please enter your email address."
+          : (EMAIL_RE.test(v) ? "" : "Please enter a valid email address.");
+        if (!silent) fieldError("f-email", "err-email", msg);
+        return !msg;
+      }
+      function validatePhone(silent) {
+        var v = $("f-phone").value.trim();
+        var msg = !v ? "Please enter your phone number."
+          : (PHONE_RE.test(v) ? "" : "Include your country code, starting with + — for example +91 98765 43210.");
+        if (!silent) fieldError("f-phone", "err-phone", msg);
+        return !msg;
+      }
+      function validateOrg(silent) {
+        var v = $("f-org").value.trim();
+        var msg = v.length >= 2 ? "" : "Please enter your university or organisation.";
+        if (!silent) fieldError("f-org", "err-org", msg);
+        return !msg;
+      }
+      function validatePid(silent) {
+        var raw = $("f-pid").value.trim();
+        var parsed = parsePaperId(raw);
+        var msg = !raw ? "Please enter your paper ID."
+          : (parsed ? "" : "Enter 1 to 4 digits, with or without the PID prefix — for example 34 or PID034.");
+        if (!silent) fieldError("f-pid", "err-pid", msg);
+        return !msg;
+      }
+      function validateMode(silent) {
+        var msg = chosenMode ? "" : "Please choose Virtual or In-Person.";
+        if (!silent) { setText($("err-mode"), msg); show($("err-mode"), !!msg); }
+        return !msg;
+      }
+
+      function updatePidPreview() {
+        var parsed = parsePaperId($("f-pid").value);
+        var box = $("pid-preview");
+        if (parsed) {
+          setText(box, "→ " + parsed.folder);
+          box.classList.add("show");
+        } else {
+          setText(box, "");
+          box.classList.remove("show");
+        }
+      }
+
+      async function checkExistingSubmission() {
+        var parsed = parsePaperId($("f-pid").value);
+        var panel = $("pid-exists");
+        if (!parsed) { show(panel, false); return; }
+        var seq = ++pidCheckSeq;
+        var url = WORKER_URL + "/api/check?paper_id=" + encodeURIComponent(parsed.value);
+        var data = null;
+        try {
+          var res = await fetch(url, { method: "GET", mode: "cors" });
+          data = await res.json();
+          if (!res.ok) data = null;
+        } catch (e) {
+          data = null; // network hiccup must never block an author
+        }
+        if (seq !== pidCheckSeq) return;
+        if (!data || !data.exists) { show(panel, false); return; }
+        var folder = pick(data, ["folder_name"]) || parsed.folder;
+        var when = prettyDate(data.latest ? pick(data.latest, ["created_at"]) : null);
+        var text = "A submission already exists for " + folder
+          + (when ? " (uploaded " + when + ")" : "")
+          + ". Uploading again adds a new version; your earlier files are kept.";
+        setText($("pid-exists-text"), text);
+        show(panel, true);
+      }
+
+      /* =================================================================
+         MODE + REQUIREMENTS
+         ================================================================= */
+      function stagedHas(kind) {
+        for (var i = 0; i < staged.length; i++) if (staged[i].kind === kind) return true;
+        return false;
+      }
+
+      function setReqItem(id, stateId, status, label) {
+        var item = $(id);
+        item.classList.remove("met", "missing");
+        if (status) item.classList.add(status);
+        var icon = item.querySelector(".req-icon");
+        setText(icon, status === "met" ? "✓" : (status === "missing" ? "!" : "●"));
+        setText($(stateId), label);
+      }
+
+      function updateRequirements() {
+        var hasVideo = stagedHas("video");
+        var hasSlides = stagedHas("slides");
+        if (!chosenMode) {
+          setText($("req-text"), "Choose your presentation mode above to see what is required.");
+          setReqItem("req-video", "req-video-state", "", "Awaiting mode");
+          setReqItem("req-slides", "req-slides-state", "", "Awaiting mode");
+          return;
+        }
+        setText($("req-text"), REQ_TEXT[chosenMode]);
+        if (chosenMode === "virtual") {
+          setReqItem("req-video", "req-video-state", hasVideo ? "met" : "missing",
+            hasVideo ? "Attached" : "Required");
+        } else {
+          setReqItem("req-video", "req-video-state", hasVideo ? "met" : "",
+            hasVideo ? "Attached" : "Optional");
+        }
+        setReqItem("req-slides", "req-slides-state", hasSlides ? "met" : "missing",
+          hasSlides ? "Attached" : "Required");
+      }
+
+      function onModeChange() {
+        var checked = document.querySelector('input[name="mode"]:checked');
+        chosenMode = checked ? checked.value : "";
+        log("presentation mode set to " + (chosenMode || "(none)"));
+        validateMode(true);
+        show($("err-mode"), false);
+        updateRequirements();
+        if (staged.length) validateFiles(); else show($("file-errors"), false);
+        refreshSubmitState();
+      }
+      /* =================================================================
+         FILE STAGING  (nothing is uploaded until Submit)
+         ================================================================= */
+      function totalStagedBytes() {
+        var t = 0;
+        for (var i = 0; i < staged.length; i++) t += Number(staged[i].size) || 0;
+        return t;
+      }
+
+      function addFiles(fileList) {
+        var list = Array.prototype.slice.call(fileList || []);
+        if (!list.length) return;
+        var rejected = [];
+        var notes = [];
+        var overflow = false;
+
+        for (var i = 0; i < list.length; i++) {
+          var f = list[i];
+          var ext = extOf(f.name);
+          var kind = EXT_KIND[ext];           // kind comes from the EXTENSION, never the MIME type
+          if (!kind) { rejected.push(f.name); continue; }
+
+          var rec = { file: f, name: f.name, size: f.size, ext: ext, kind: kind, mime: EXT_MIME[ext] };
+          var dupe = -1;
+          for (var j = 0; j < staged.length; j++) {
+            if (staged[j].name.toLowerCase() === String(f.name).toLowerCase()) { dupe = j; break; }
+          }
+          if (dupe >= 0) {
+            staged[dupe] = rec;
+            notes.push('Swapped in the newer file named "' + f.name + '".');
+          } else if (staged.length >= MAX_FILES) {
+            overflow = true;
+          } else {
+            staged.push(rec);
+          }
+        }
+
+        var noteLines = notes.slice();
+        if (overflow) noteLines.push("You can attach up to " + MAX_FILES + " files per submission, so some files were not added.");
+        if (noteLines.length) {
+          setText($("staged-note-text"), noteLines.join(" "));
+          show($("staged-note"), true);
+        } else {
+          show($("staged-note"), false);
+        }
+
+        renderStaged();
+        validateFiles(rejected);
+        refreshSubmitState();
+      }
+
+      function removeStagedAt(index) {
+        if (index < 0 || index >= staged.length) return;
+        staged.splice(index, 1);
+        show($("staged-note"), false);
+        renderStaged();
+        validateFiles();
+        refreshSubmitState();
+      }
+
+      function renderStaged() {
+        var list = $("staged-list");
+        while (list.firstChild) list.removeChild(list.firstChild);
+
+        setText($("staged-count"), staged.length ? "(" + staged.length + " of " + MAX_FILES + ")" : "");
+        $("staged-empty").hidden = staged.length > 0;
+
+        staged.forEach(function (s, index) {
+          var row = el("li", "staged-row");
+
+          var chip = el("span", "kind-chip " + s.kind, KIND_CHIP[s.kind]);
+          row.appendChild(chip);
+
+          var meta = el("div", "staged-meta");
+          meta.appendChild(el("div", "staged-name", s.name));
+          meta.appendChild(el("div", "staged-size", mb(s.size)));
+          row.appendChild(meta);
+
+          var btn = el("button", "icon-btn", "✕");
+          btn.type = "button";
+          btn.setAttribute("aria-label", "Remove " + s.name);
+          btn.addEventListener("click", function () { removeStagedAt(index); });
+          row.appendChild(btn);
+
+          list.appendChild(row);
+        });
+
+        updateRequirements();
+      }
+
+      /* Mirror of the server-side validation. */
+      function validateFiles(rejectedNames) {
+        var errors = [];
+
+        if (rejectedNames && rejectedNames.length) errors.push(MSG_FORMATS);
+
+        var big = staged.filter(function (s) { return s.kind === "slides" && s.size > SLIDES_MAX_BYTES; });
+        if (big.length) {
+          errors.push("Slide decks must be 200 MB or smaller: " + big.map(function (s) { return s.name; }).join(", ") + ".");
+        }
+
+        if (staged.length > MAX_FILES) {
+          errors.push("You can attach up to " + MAX_FILES + " files per submission.");
+        }
+
+        if (totalStagedBytes() > TOTAL_MAX_BYTES) {
+          errors.push(MSG_TOTAL);
+        }
+
+        if (staged.length === 0) {
+          errors.push("Attach your presentation files before uploading.");
+        } else if (chosenMode === "virtual") {
+          if (!stagedHas("video") || !stagedHas("slides")) errors.push(REQ_TEXT.virtual + ".");
+        } else if (chosenMode === "in-person") {
+          if (!stagedHas("slides")) errors.push(REQ_TEXT["in-person"]);
+        }
+
+        var box = $("file-errors"), text = $("file-errors-text");
+        while (text.firstChild) text.removeChild(text.firstChild);
+        if (errors.length) {
+          if (errors.length === 1) {
+            text.appendChild(el("div", null, errors[0]));
+          } else {
+            var ul = el("ul", "panel-list");
+            errors.forEach(function (e) { ul.appendChild(el("li", null, e)); });
+            text.appendChild(ul);
+          }
+          show(box, true);
+        } else {
+          show(box, false);
+        }
+        return errors.length === 0;
+      }
+
+      function filesAreValid() {
+        if (!staged.length) return false;
+        if (staged.length > MAX_FILES) return false;
+        if (totalStagedBytes() > TOTAL_MAX_BYTES) return false;
+        for (var i = 0; i < staged.length; i++) {
+          if (staged[i].kind === "slides" && staged[i].size > SLIDES_MAX_BYTES) return false;
+        }
+        if (chosenMode === "virtual") return stagedHas("video") && stagedHas("slides");
+        if (chosenMode === "in-person") return stagedHas("slides");
+        return false;
+      }
+
+      function refreshSubmitState() {
+        var btn = $("submit-btn");
+        if (!btn) return;
+        var ready = !!turnstileToken && !submitting;
+        btn.disabled = !ready;
+
+        var hint = "";
+        if (submitting) hint = "Preparing your upload…";
+        else if (!turnstileToken) hint = "Complete the verification check above to enable the upload button.";
+        else if (!filesAreValid()) hint = "Attach the required files to continue.";
+        setText($("submit-hint"), hint);
+      }
+
+      /* =================================================================
+         DROP ZONE
+         ================================================================= */
+      function initDropzone() {
+        var zone = $("dropzone");
+        var input = $("file-input");
+
+        function openPicker() { input.click(); }
+
+        zone.addEventListener("click", openPicker);
+        zone.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+            e.preventDefault();
+            openPicker();
+          }
+        });
+        $("btn-add-more").addEventListener("click", openPicker);
+
+        input.addEventListener("change", function () {
+          addFiles(input.files);
+          input.value = ""; // allow re-picking the same file
+        });
+
+        ["dragenter", "dragover"].forEach(function (evt) {
+          zone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            zone.classList.add("dragover");
+          });
+        });
+        ["dragleave", "dragend"].forEach(function (evt) {
+          zone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            zone.classList.remove("dragover");
+          });
+        });
+        zone.addEventListener("drop", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          zone.classList.remove("dragover");
+          if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+        });
+
+        // Stop the browser from navigating away if a file is dropped outside the zone.
+        window.addEventListener("dragover", function (e) { e.preventDefault(); });
+        window.addEventListener("drop", function (e) { e.preventDefault(); });
+      }
+      /* =================================================================
+         VIEW SWITCHING
+         ================================================================= */
+      function showView(name) {
+        $("view-form").hidden = name !== "form";
+        $("view-upload").hidden = name !== "upload";
+        $("view-done").hidden = name !== "done";
+        var target = $("view-" + name);
+        if (target) {
+          target.classList.add("visible");
+          try { window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - 140), behavior: "smooth" }); }
+          catch (e) { window.scrollTo(0, 0); }
+        }
+      }
+
+      function armBeforeUnload() {
+        if (beforeUnloadArmed) return;
+        window.addEventListener("beforeunload", beforeUnloadHandler);
+        beforeUnloadArmed = true;
+      }
+      function disarmBeforeUnload() {
+        if (!beforeUnloadArmed) return;
+        window.removeEventListener("beforeunload", beforeUnloadHandler);
+        beforeUnloadArmed = false;
+      }
+      function beforeUnloadHandler(e) {
+        e.preventDefault();
+        e.returnValue = "An upload is still in progress. Leaving now will stop it.";
+        return e.returnValue;
+      }
+
+      /* =================================================================
+         SUBMIT — create the submission, then switch to the upload view
+         ================================================================= */
+      async function onSubmit(e) {
+        e.preventDefault();
+        if (submitting) return;
+
+        show($("form-error"), false);
+
+        var okName = validateName(), okEmail = validateEmail(), okPhone = validatePhone();
+        var okOrg = validateOrg(), okPid = validatePid(), okMode = validateMode();
+        var okFiles = validateFiles();
+
+        if (!(okName && okEmail && okPhone && okOrg && okPid && okMode && okFiles)) {
+          var firstBad = document.querySelector(".form-input.invalid") ||
+            (!okMode ? $("mode-virtual") : null) ||
+            (!okFiles ? $("dropzone") : null);
+          if (firstBad && firstBad.focus) firstBad.focus();
+          return;
+        }
+        if (!turnstileToken) { refreshSubmitState(); return; }
+
+        var parsed = parsePaperId($("f-pid").value);
+        submitting = true;
+        refreshSubmitState();
+
+        var payload = {
+          paper_id: parsed.value,
+          name: $("f-name").value.trim(),
+          email: $("f-email").value.trim(),
+          phone: $("f-phone").value.trim(),
+          organisation: $("f-org").value.trim(),
+          mode: chosenMode,
+          turnstile: turnstileToken,
+          files: staged.map(function (s) {
+            return { name: s.name, size: s.size, type: s.mime, kind: s.kind };
+          })
+        };
+
+        log("POST /api/submissions paper_id=" + parsed.value + " mode=" + chosenMode + " files=" + payload.files.length);
+
+        var res = null, data = null;
+        try {
+          res = await fetch(WORKER_URL + "/api/submissions", {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          try { data = await res.json(); } catch (err) { data = null; }
+        } catch (err) {
+          submitting = false;
+          resetTurnstile();
+          showFormError("We could not reach the upload service. Check your connection and try again.");
+          return;
+        }
+
+        if (!res.ok || !data || !data.submission_id || !Array.isArray(data.files)) {
+          submitting = false;
+          resetTurnstile();
+          showFormError((data && data.error) ? data.error : ("Submission failed (HTTP " + res.status + "). Please try again."));
+          return;
+        }
+
+        submissionId = String(data.submission_id);
+        paperFolder = data.paper_folder ? String(data.paper_folder) : parsed.folder;
+        versionLabel = data.version_label ? String(data.version_label) : "";
+        cancelled = false;
+        submitting = false;
+
+        log("submission created id=" + submissionId + " folder=" + paperFolder + " version=" + versionLabel);
+
+        buildJobs(data.files);
+        renderUploadView();
+        showView("upload");
+        runQueue();
+      }
+
+      function showFormError(message) {
+        setText($("form-error-text"), message);
+        show($("form-error"), true);
+        refreshSubmitState();
+        try { $("form-error").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { }
+      }
+
+      function buildJobs(serverFiles) {
+        jobs = serverFiles.map(function (f, i) {
+          var src = staged[i] || null;
+          // Index order is the contract; fall back to a name match if it ever drifts.
+          if (!src || (String(f.name).indexOf(src.name) < 0 && String(f.name) !== src.name)) {
+            for (var j = 0; j < staged.length; j++) {
+              if (String(f.name).indexOf(staged[j].name) >= 0 && staged[j].kind === f.kind) { src = staged[j]; break; }
+            }
+            if (!src) src = staged[i] || null;
+          }
+          return {
+            file_id: String(f.file_id || ""),
+            kind: String(f.kind || (src ? src.kind : "slides")),
+            url: String(f.upload_url || ""),
+            serverName: String(f.name || (src ? src.name : "file")),
+            displayName: src ? src.name : String(f.name || "file"),
+            blob: src ? src.file : null,
+            size: src ? Number(src.size) : 0,
+            offset: 0,
+            sent: 0,
+            state: "waiting",
+            paused: false,
+            needsResync: false,
+            attempts: 0,
+            driveId: null,
+            error: "",
+            speed: 0,
+            lastT: 0,
+            lastBytes: 0,
+            lastPaint: 0,
+            xhr: null,
+            nodes: null
+          };
+        });
+      }
+
+      /* =================================================================
+         UPLOAD VIEW RENDERING
+         ================================================================= */
+      var STATE_LABEL = {
+        waiting: "Waiting", uploading: "Uploading", paused: "Paused",
+        done: "Done", failed: "Failed", cancelled: "Cancelled"
+      };
+
+      function renderUploadView() {
+        setText($("up-folder"), paperFolder);
+        setText($("up-version"), versionLabel ? " · version " + versionLabel : "");
+        show($("up-error"), false);
+        $("btn-retry-complete").hidden = true;
+        $("cancel-confirm").classList.remove("show");
+
+        var host = $("up-files");
+        while (host.firstChild) host.removeChild(host.firstChild);
+
+        jobs.forEach(function (job) {
+          var card = el("div", "upload-file");
+
+          var head = el("div", "upload-file-head");
+          head.appendChild(el("span", "kind-chip " + job.kind, KIND_CHIP[job.kind] || job.kind));
+          var nameNode = el("span", "upload-file-name", job.displayName);
+          head.appendChild(nameNode);
+          var chip = el("span", "state-chip", STATE_LABEL.waiting);
+          head.appendChild(chip);
+          card.appendChild(head);
+
+          var track = el("div", "progress-track");
+          track.setAttribute("role", "progressbar");
+          track.setAttribute("aria-valuemin", "0");
+          track.setAttribute("aria-valuemax", "100");
+          track.setAttribute("aria-valuenow", "0");
+          track.setAttribute("aria-label", "Upload progress for " + job.displayName);
+          var fill = el("div", "progress-fill");
+          track.appendChild(fill);
+          card.appendChild(track);
+
+          var stats = el("div", "upload-stats");
+          var sPct = el("span", null, "0%");
+          var sBytes = el("span", null, "0.0 MB of " + mb(job.size));
+          var sSpeed = el("span", null, "Speed: —");
+          var sEta = el("span", null, "ETA: —");
+          stats.appendChild(sPct);
+          stats.appendChild(sBytes);
+          stats.appendChild(sSpeed);
+          stats.appendChild(sEta);
+          card.appendChild(stats);
+
+          var errNode = el("p", "upload-file-error");
+          card.appendChild(errNode);
+
+          var actions = el("div", "upload-file-actions");
+          var pauseBtn = el("button", "mini-btn");
+          pauseBtn.type = "button";
+          pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          pauseBtn.appendChild(document.createTextNode(" Pause"));
+          pauseBtn.addEventListener("click", function () { togglePause(job); });
+          actions.appendChild(pauseBtn);
+          card.appendChild(actions);
+
+          host.appendChild(card);
+
+          job.nodes = {
+            card: card, chip: chip, track: track, fill: fill,
+            pct: sPct, bytes: sBytes, speed: sSpeed, eta: sEta,
+            error: errNode, pause: pauseBtn
+          };
+          renderJob(job, true);
+        });
+
+        announce();
+      }
+
+      function renderJob(job, force) {
+        var n = job.nodes;
+        if (!n) return;
+        var t = now();
+        if (!force && t - job.lastPaint < 120) return;
+        job.lastPaint = t;
+
+        var pct = job.size > 0 ? Math.min(100, (job.sent / job.size) * 100) : (job.state === "done" ? 100 : 0);
+        n.fill.style.width = pct.toFixed(1) + "%";
+        n.track.setAttribute("aria-valuenow", String(Math.round(pct)));
+        setText(n.pct, pct.toFixed(0) + "%");
+        setText(n.bytes, mb(job.sent) + " of " + mb(job.size));
+        setText(n.speed, "Speed: " + (job.state === "uploading" ? fmtSpeed(job.speed) : "—"));
+        setText(n.eta, "ETA: " + (job.state === "uploading" && job.speed > 0 ? fmtEta((job.size - job.sent) / job.speed) : "—"));
+
+        n.chip.className = "state-chip " + job.state;
+        setText(n.chip, STATE_LABEL[job.state] || job.state);
+
+        n.card.classList.toggle("is-done", job.state === "done");
+        n.card.classList.toggle("is-failed", job.state === "failed");
+
+        setText(n.error, job.error || "");
+        show(n.error, !!job.error);
+
+        var terminal = (job.state === "done" || job.state === "failed" || job.state === "cancelled");
+        n.pause.disabled = terminal || cancelled;
+        while (n.pause.firstChild) n.pause.removeChild(n.pause.firstChild);
+        var icon = document.createElement("i");
+        icon.className = job.paused ? "fas fa-play" : "fas fa-pause";
+        n.pause.appendChild(icon);
+        n.pause.appendChild(document.createTextNode(job.paused ? " Resume" : " Pause"));
+      }
+
+      function announce() {
+        var done = jobs.filter(function (j) { return j.state === "done"; }).length;
+        var active = jobs.filter(function (j) { return j.state === "uploading"; })[0];
+        var msg = done + " of " + jobs.length + " file" + (jobs.length === 1 ? "" : "s") + " uploaded.";
+        if (active) msg += " Currently uploading " + active.displayName + ".";
+        else if (done === jobs.length && jobs.length) msg += " Finishing up.";
+        if (msg === lastAnnounce) return;
+        lastAnnounce = msg;
+        setText($("up-status"), msg);
+      }
+      /* =================================================================
+         UPLOAD ENGINE — XMLHttpRequest, sequential, 8 MiB chunks
+         ================================================================= */
+      function xhrPut(job, body, contentRange, timeoutMs, onProgress) {
+        return new Promise(function (resolve, reject) {
+          var xhr = new XMLHttpRequest();
+          job.xhr = xhr;
+          xhr.open("PUT", job.url, true);
+          xhr.timeout = timeoutMs;
+          try { xhr.setRequestHeader("Content-Range", contentRange); } catch (e) { }
+          if (onProgress && xhr.upload) xhr.upload.onprogress = onProgress;
+          xhr.onload = function () {
+            job.xhr = null;
+            var range = null;
+            try { range = xhr.getResponseHeader("Range"); } catch (e) { range = null; }
+            resolve({ status: xhr.status, range: range, text: xhr.responseText || "" });
+          };
+          xhr.onerror = function () { job.xhr = null; reject(new Error("network")); };
+          xhr.ontimeout = function () { job.xhr = null; reject(new Error("timeout")); };
+          xhr.onabort = function () { job.xhr = null; reject(new Error("abort")); };
+          xhr.send(body);
+        });
+      }
+
+      /* "bytes=0-8388607" -> 8388608 (the next offset). null when unreadable. */
+      function nextOffsetFromRange(header) {
+        if (!header) return null;
+        var m = /bytes\s*=\s*0-(\d+)/i.exec(String(header));
+        if (!m) return null;
+        var n = parseInt(m[1], 10);
+        return isFinite(n) ? n + 1 : null;
+      }
+
+      function driveIdFrom(text) {
+        if (!text) return null;
+        try {
+          var o = JSON.parse(text);
+          return (o && o.id) ? String(o.id) : null;
+        } catch (e) { return null; }
+      }
+
+      /* Ask Google how many bytes it actually holds. */
+      async function resync(job) {
+        log("re-sync probe " + job.displayName + " → Content-Range: bytes */" + job.size);
+        var r;
+        try {
+          r = await xhrPut(job, null, "bytes */" + job.size, 60000, null);
+        } catch (err) {
+          log("re-sync failed (" + err.message + ") for " + job.displayName + " — keeping client offset " + job.offset);
+          return { status: 0, range: null, text: "" };
+        }
+        if (r.status === 308) {
+          var next = nextOffsetFromRange(r.range);
+          if (next === null) {
+            log("re-sync 308 with unreadable Range header — keeping client offset " + job.offset);
+          } else {
+            job.offset = next;
+            job.sent = next;
+            log("re-sync 308 Range=" + r.range + " → offset " + job.offset);
+          }
+        } else {
+          log("re-sync returned HTTP " + r.status + " for " + job.displayName);
+        }
+        return r;
+      }
+
+      function markDone(job, text) {
+        job.driveId = driveIdFrom(text);
+        job.offset = job.size;
+        job.sent = job.size;
+        job.state = "done";
+        job.error = "";
+        log("complete " + job.displayName + " drive_file_id=" + (job.driveId || "(not returned)"));
+        renderJob(job, true);
+        announce();
+      }
+
+      function markFailed(job, message) {
+        job.state = "failed";
+        job.error = message;
+        renderJob(job, true);
+        announce();
+      }
+
+      function tickSpeed(job) {
+        var t = now();
+        var dt = (t - job.lastT) / 1000;
+        if (dt < 0.4) return;
+        var db = job.sent - job.lastBytes;
+        job.lastT = t;
+        job.lastBytes = job.sent;
+        if (db <= 0) return;
+        var inst = db / dt;
+        job.speed = job.speed > 0 ? (job.speed * 0.75 + inst * 0.25) : inst;
+      }
+
+      async function uploadJob(job) {
+        if (job.state === "done") return;
+        if (!job.blob) { markFailed(job, "The selected file is no longer available. Please submit the form again."); return; }
+
+        job.state = "uploading";
+        job.paused = false;
+        job.attempts = 0;
+        job.speed = 0;
+        job.sent = job.offset;
+        job.lastT = now();
+        job.lastBytes = job.offset;
+        renderJob(job, true);
+        announce();
+        log("start " + job.displayName + " size=" + job.size + " offset=" + job.offset);
+
+        if (job.needsResync) {
+          job.needsResync = false;
+          var pr = await resync(job);
+          if (pr.status === 200 || pr.status === 201) { markDone(job, pr.text); return; }
+          if (pr.status === 404) { markFailed(job, "The upload session expired. Please submit the form again to restart this file."); return; }
+        }
+
+        while (true) {
+          if (cancelled) { job.state = "cancelled"; renderJob(job, true); return; }
+          if (job.paused) { job.state = "paused"; renderJob(job, true); announce(); return; }
+
+          /* All bytes accounted for but Google never returned 200/201 — finalise. */
+          if (job.offset >= job.size) {
+            log("all bytes sent for " + job.displayName + " — finalising");
+            var fr = await resync(job);
+            if (fr.status === 200 || fr.status === 201) { markDone(job, fr.text); return; }
+            if (fr.status === 404) { markFailed(job, "The upload session expired. Please submit the form again to restart this file."); return; }
+            if (fr.status === 308 && job.offset < job.size) continue;
+            job.attempts++;
+            if (job.attempts >= MAX_ATTEMPTS) {
+              markFailed(job, "The upload could not be finalised. Please submit the form again.");
+              return;
+            }
+            await sleep(Math.pow(2, job.attempts - 1) * 1000);
+            continue;
+          }
+
+          var start = job.offset;
+          var end = Math.min(start + CHUNK_SIZE, job.size) - 1;
+          var contentRange = "bytes " + start + "-" + end + "/" + job.size;
+          job.sent = start;
+          job.lastBytes = start;
+          job.lastT = now();
+          log("PUT chunk " + job.displayName + " Content-Range: " + contentRange);
+
+          var r;
+          try {
+            r = await xhrPut(job, job.blob.slice(start, end + 1), contentRange, 600000, function (ev) {
+              if (!ev.lengthComputable) return;
+              job.sent = start + ev.loaded;
+              tickSpeed(job);
+              renderJob(job, false);
+            });
+          } catch (err) {
+            if (cancelled) { job.state = "cancelled"; renderJob(job, true); return; }
+            if (job.paused || err.message === "abort") {
+              job.state = "paused";
+              job.needsResync = true;
+              job.paused = true;
+              log("aborted mid-chunk at offset " + start + " for " + job.displayName + " — will re-sync on resume");
+              renderJob(job, true);
+              announce();
+              return;
+            }
+            log("chunk error (" + err.message + ") at offset " + start + " for " + job.displayName);
+            r = { status: 0, range: null, text: "" };
+          }
+
+          if (r.status === 308) {
+            var next = nextOffsetFromRange(r.range);
+            if (next !== null) {
+              job.offset = next;
+              log("308 Range=" + r.range + " → next offset " + job.offset);
+            } else {
+              job.offset = end + 1;
+              log("308 without readable Range header (CORS) → client-tracked offset " + job.offset);
+            }
+            job.sent = job.offset;
+            job.attempts = 0;
+            renderJob(job, true);
+            continue;
+          }
+
+          if (r.status === 200 || r.status === 201) { markDone(job, r.text); return; }
+
+          if (r.status === 404) {
+            log("404 — upload session gone for " + job.displayName);
+            markFailed(job, "The upload session expired. Please submit the form again to restart this file.");
+            return;
+          }
+
+          job.attempts++;
+          if (job.attempts >= MAX_ATTEMPTS) {
+            log("giving up on " + job.displayName + " after " + job.attempts + " attempts");
+            markFailed(job, "Upload failed after several attempts. Check your connection and submit the form again.");
+            return;
+          }
+          var wait = Math.pow(2, job.attempts - 1) * 1000;
+          log("HTTP " + r.status + " — backoff " + wait + "ms (attempt " + job.attempts + " of " + MAX_ATTEMPTS + ") for " + job.displayName);
+          await sleep(wait);
+          if (cancelled) { job.state = "cancelled"; renderJob(job, true); return; }
+          if (job.paused) { job.state = "paused"; job.needsResync = true; renderJob(job, true); return; }
+
+          var rr = await resync(job);
+          if (rr.status === 200 || rr.status === 201) { markDone(job, rr.text); return; }
+          if (rr.status === 404) {
+            markFailed(job, "The upload session expired. Please submit the form again to restart this file.");
+            return;
+          }
+        }
+      }
+
+      function nextJob() {
+        for (var i = 0; i < jobs.length; i++) {
+          var j = jobs[i];
+          if (j.paused) continue;
+          if (j.state === "done" || j.state === "failed" || j.state === "cancelled") continue;
+          return j;
+        }
+        return null;
+      }
+
+      async function runQueue() {
+        if (queueRunning) return;
+        queueRunning = true;
+        armBeforeUnload();
+        log("queue started with " + jobs.length + " file(s)");
+
+        while (!cancelled) {
+          var job = nextJob();
+          if (!job) break;
+          await uploadJob(job);
+        }
+
+        queueRunning = false;
+        if (cancelled) { log("queue stopped — submission cancelled"); return; }
+
+        var pending = jobs.filter(function (j) { return j.state === "paused"; });
+        if (pending.length) {
+          disarmBeforeUnload();
+          log("queue idle — " + pending.length + " file(s) paused");
+          announce();
+          return;
+        }
+
+        disarmBeforeUnload();
+        var allDone = jobs.every(function (j) { return j.state === "done"; });
+        log("queue finished — allDone=" + allDone);
+        if (allDone) {
+          await completeSubmission();
+        } else {
+          showUploadError("Some files did not finish uploading. You can resume them above, or submit the form again.");
+          announce();
+        }
+      }
+
+      function togglePause(job) {
+        if (job.state === "done" || job.state === "failed" || job.state === "cancelled" || cancelled) return;
+        if (job.paused || job.state === "paused") {
+          job.paused = false;
+          job.needsResync = true;
+          job.state = "waiting";
+          log("resume requested for " + job.displayName);
+          renderJob(job, true);
+          armBeforeUnload();
+          runQueue();
+        } else {
+          job.paused = true;
+          job.needsResync = true;
+          log("pause requested for " + job.displayName + " at offset " + job.offset);
+          if (job.xhr) { try { job.xhr.abort(); } catch (e) { } }
+          job.state = "paused";
+          renderJob(job, true);
+          announce();
+        }
+      }
+
+      function showUploadError(message) {
+        setText($("up-error-text"), message);
+        show($("up-error"), true);
+      }
+      /* =================================================================
+         COMPLETE / ABANDON / CANCEL
+         ================================================================= */
+      async function completeSubmission() {
+        var completed = jobs.filter(function (j) { return j.state === "done" && j.driveId; });
+        var payload = {
+          files: completed.map(function (j) { return { file_id: j.file_id, drive_file_id: j.driveId }; })
+        };
+        log("POST /api/submissions/" + submissionId + "/complete with " + payload.files.length + " file(s)");
+
+        var res = null, data = null;
+        try {
+          res = await fetch(WORKER_URL + "/api/submissions/" + encodeURIComponent(submissionId) + "/complete", {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          try { data = await res.json(); } catch (e) { data = null; }
+        } catch (err) {
+          $("btn-retry-complete").hidden = false;
+          showUploadError("Your files uploaded, but we could not confirm the submission. Please try finishing again.");
+          return;
+        }
+
+        if (!res.ok || !data) {
+          $("btn-retry-complete").hidden = false;
+          showUploadError((data && data.error) ? data.error
+            : "Your files uploaded, but the submission could not be confirmed (HTTP " + res.status + "). Please try finishing again.");
+          return;
+        }
+
+        show($("up-error"), false);
+        $("btn-retry-complete").hidden = true;
+        disarmBeforeUnload();
+        log("submission confirmed with status " + (data.status || "(unknown)"));
+        renderReceipt(data.receipt || data, data.status);
+        showView("done");
+      }
+
+      async function abandonSubmission() {
+        log("POST /api/submissions/" + submissionId + "/abandon");
+        try {
+          await fetch(WORKER_URL + "/api/submissions/" + encodeURIComponent(submissionId) + "/abandon", {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: "{}"
+          });
+        } catch (e) {
+          log("abandon call failed — server will expire the session on its own");
+        }
+      }
+
+      async function doCancel() {
+        cancelled = true;
+        $("cancel-confirm").classList.remove("show");
+        log("cancel requested for submission " + submissionId);
+
+        jobs.forEach(function (j) {
+          if (j.xhr) { try { j.xhr.abort(); } catch (e) { } }
+        });
+        jobs.forEach(function (j) {
+          if (j.state !== "done") { j.state = "cancelled"; j.error = ""; }
+          renderJob(j, true);
+        });
+        disarmBeforeUnload();
+
+        // Best-effort release of Google's partial bytes.
+        jobs.forEach(function (j) {
+          try {
+            var x = new XMLHttpRequest();
+            x.open("DELETE", j.url, true);
+            x.send();
+            log("DELETE upload session for " + j.displayName);
+          } catch (e) { }
+        });
+
+        var completed = jobs.filter(function (j) { return j.state === "done" && j.driveId; });
+        if (completed.length) {
+          log("cancel with " + completed.length + " completed file(s) — requesting a partial receipt");
+          await completeSubmission();
+        } else {
+          await abandonSubmission();
+          backToForm();
+        }
+      }
+
+      function backToForm() {
+        jobs = [];
+        submissionId = "";
+        cancelled = false;
+        queueRunning = false;
+        resetTurnstile();
+        show($("form-error"), false);
+        setText($("form-error-text"), "");
+        renderStaged();
+        validateFiles();
+        refreshSubmitState();
+        showView("form");
+        log("returned to the form — files are still attached");
+      }
+
+      /* =================================================================
+         CONFIRMATION SCREEN
+         ================================================================= */
+      function renderReceipt(receipt, status) {
+        receipt = receipt || {};
+        var folder = pick(receipt, ["paper_folder", "folder_name"]) || paperFolder;
+        var version = pick(receipt, ["version_label"]) || versionLabel;
+        var rawMode = pick(receipt, ["mode"]) || chosenMode;
+        var mode = MODE_LABEL[rawMode] || rawMode;
+        var when = pick(receipt, ["submitted_at_ist", "submitted_at", "completed_at", "created_at"]) || "";
+
+        setText($("done-folder"), folder || "—");
+        setText($("done-version"), version || "—");
+        setText($("done-mode"), mode || "—");
+        setText($("done-time"), when || "—");
+
+        var partial = String(status || pick(receipt, ["status"]) || "").toLowerCase() === "partial";
+        if (partial) {
+          setText($("done-partial-text"),
+            "Some files did not finish uploading, so this is a partial submission. The files listed below are safely stored. You can upload the rest any time before the deadline.");
+          show($("done-partial"), true);
+          setText($("done-title"), "Partial submission received");
+        } else {
+          show($("done-partial"), false);
+          setText($("done-title"), "Submission received");
+        }
+
+        var files = Array.isArray(receipt.files) ? receipt.files : [];
+        if (!files.length) {
+          files = jobs.filter(function (j) { return j.state === "done"; }).map(function (j) {
+            return { name: j.serverName, size: j.size, kind: j.kind };
+          });
+        }
+
+        var list = $("done-files");
+        while (list.firstChild) list.removeChild(list.firstChild);
+
+        files.forEach(function (f) {
+          var row = el("li", "staged-row");
+          var kind = String(pick(f, ["kind"]) || "");
+          var chipClass = (kind === "video" || kind === "slides") ? kind : "slides";
+          row.appendChild(el("span", "kind-chip " + chipClass, KIND_CHIP[kind] || kind || "File"));
+
+          var meta = el("div", "staged-meta");
+          meta.appendChild(el("div", "staged-name", pick(f, ["name", "file_name"]) || "file"));
+          var size = pick(f, ["size", "size_bytes"]);
+          meta.appendChild(el("div", "staged-size", (size !== null && isFinite(Number(size))) ? mb(size) : String(size || "")));
+          row.appendChild(meta);
+
+          list.appendChild(row);
+        });
+      }
+
+      /* =================================================================
+         INIT
+         ================================================================= */
+      function applyModeFromUrl() {
+        var mode = "";
+        try {
+          mode = (new URLSearchParams(window.location.search)).get("mode") || "";
+        } catch (e) {
+          var m = /[?&]mode=([^&]+)/.exec(window.location.search);
+          mode = m ? decodeURIComponent(m[1]) : "";
+        }
+        mode = String(mode).trim().toLowerCase();
+        if (mode === "virtual") $("mode-virtual").checked = true;
+        else if (mode === "in-person" || mode === "inperson" || mode === "in_person") $("mode-inperson").checked = true;
+        onModeChange();
+      }
+
+      function initForm() {
+        [["f-name", validateName], ["f-email", validateEmail], ["f-phone", validatePhone],
+        ["f-org", validateOrg]].forEach(function (pair) {
+          var input = $(pair[0]);
+          input.addEventListener("blur", function () { pair[1](); });
+          input.addEventListener("input", function () {
+            if (input.classList.contains("invalid")) pair[1]();
+          });
+        });
+
+        var pid = $("f-pid");
+        pid.addEventListener("input", function () {
+          updatePidPreview();
+          if (pid.classList.contains("invalid")) validatePid();
+          show($("pid-exists"), false);
+        });
+        pid.addEventListener("blur", function () {
+          updatePidPreview();
+          if (validatePid()) checkExistingSubmission();
+          else show($("pid-exists"), false);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('input[name="mode"]'), function (r) {
+          r.addEventListener("change", onModeChange);
+        });
+
+        $("upload-form").addEventListener("submit", onSubmit);
+
+        $("btn-cancel").addEventListener("click", function () {
+          $("cancel-confirm").classList.add("show");
+          $("cancel-yes").focus();
+        });
+        $("cancel-no").addEventListener("click", function () {
+          $("cancel-confirm").classList.remove("show");
+          $("btn-cancel").focus();
+        });
+        $("cancel-yes").addEventListener("click", function () { doCancel(); });
+        $("btn-retry-complete").addEventListener("click", function () {
+          show($("up-error"), false);
+          $("btn-retry-complete").hidden = true;
+          completeSubmission();
+        });
+
+        initDropzone();
+        applyModeFromUrl();
+        renderStaged();
+        show($("file-errors"), false);
+        refreshSubmitState();
+      }
+
+      /* Scroll-in animations, matching the rest of the site. */
+      function initAnimations() {
+        if (!("IntersectionObserver" in window)) {
+          Array.prototype.forEach.call(document.querySelectorAll(".fade-in"), function (n) {
+            n.classList.add("visible");
+          });
+          return;
+        }
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        Array.prototype.forEach.call(document.querySelectorAll(".fade-in"), function (n) {
+          observer.observe(n);
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { initForm(); initAnimations(); });
+      } else {
+        initForm();
+        initAnimations();
+      }
+    })();
+  </script>
+</body>
+
+</html>
