@@ -6,3 +6,4 @@
 
 # Playwright MCP local artifacts
 .playwright-mcp/
+HANDOVER.md
