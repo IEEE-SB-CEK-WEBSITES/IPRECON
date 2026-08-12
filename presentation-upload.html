@@ -1601,9 +1601,9 @@
                   <div class="form-field full">
                     <label class="form-label" for="f-pid">Paper ID<span class="req-star">*</span></label>
                     <input class="form-input" type="text" id="f-pid" name="paper_id" required inputmode="text"
-                      autocomplete="off" placeholder="34" aria-describedby="hint-pid err-pid" />
+                      autocomplete="off" placeholder="PID034" aria-describedby="hint-pid err-pid" />
                     <span class="pid-preview" id="pid-preview" aria-hidden="true"></span>
-                    <p class="field-hint" id="hint-pid">e.g. paper 34 &rarr; PID034, paper 7 &rarr; PID007, paper 142 &rarr; PID142</p>
+                    <p class="field-hint" id="hint-pid">Use the full PID format &mdash; paper 34 is <strong>PID034</strong>, paper 7 is <strong>PID007</strong>, paper 142 is <strong>PID142</strong></p>
                     <p class="field-error" id="err-pid" role="alert"></p>
                     <div class="panel info" id="pid-exists">
                       <i class="fas fa-circle-info"></i>
@@ -2038,10 +2038,13 @@
         return !message;
       }
 
+      /* The PID prefix is required. Typing is auto-uppercased as you go, so a
+         lowercase "pid34" becomes "PID34" in the field rather than being
+         rejected — but a bare "34" is not accepted. */
       function parsePaperId(raw) {
         var s = String(raw || "").trim().replace(/\s+/g, "");
         if (!s) return null;
-        var m = /^(?:pid)?([0-9]{1,4})$/i.exec(s);
+        var m = /^PID([0-9]{1,4})$/i.exec(s);
         if (!m) return null;
         var n = parseInt(m[1], 10);
         if (!isFinite(n)) return null;
@@ -2080,7 +2083,7 @@
         var raw = $("f-pid").value.trim();
         var parsed = parsePaperId(raw);
         var msg = !raw ? "Please enter your paper ID."
-          : (parsed ? "" : "Enter 1 to 4 digits, with or without the PID prefix — for example 34 or PID034.");
+          : (parsed ? "" : "Use the PID format — for example PID034 for paper 34, or PID142 for paper 142.");
         if (!silent) fieldError("f-pid", "err-pid", msg);
         return !msg;
       }
@@ -2263,6 +2266,7 @@
         });
 
         updateRequirements();
+        refreshUnsavedGuard();
       }
 
       /* Mirror of the server-side validation. */
@@ -2409,8 +2413,27 @@
       }
       function beforeUnloadHandler(e) {
         e.preventDefault();
-        e.returnValue = "An upload is still in progress. Leaving now will stop it.";
+        e.returnValue = queueRunning
+          ? "An upload is still in progress. Leaving now will stop it."
+          : "You have not uploaded your presentation yet. Leaving now will discard what you have entered.";
         return e.returnValue;
+      }
+
+      /* Guard unsaved work too, not just live uploads: once any field is filled
+         or any file is staged, leaving without pressing Upload loses it all —
+         the files never left the browser. Re-evaluated on every edit; disarms
+         itself if the author clears everything back out. */
+      function refreshUnsavedGuard() {
+        if (queueRunning || submitting) return;     // upload path owns the guard
+        var dirty = staged.length > 0;
+        if (!dirty) {
+          dirty = ["f-name", "f-email", "f-phone", "f-org", "f-pid"].some(function (id) {
+            var el = $(id);
+            return el && el.value.trim() !== "";
+          });
+        }
+        if (!dirty) dirty = !!chosenMode;
+        if (dirty) armBeforeUnload(); else disarmBeforeUnload();
       }
 
       /* =================================================================
@@ -3114,14 +3137,24 @@
           input.addEventListener("blur", function () { pair[1](); });
           input.addEventListener("input", function () {
             if (input.classList.contains("invalid")) pair[1]();
+            refreshUnsavedGuard();
           });
         });
 
         var pid = $("f-pid");
         pid.addEventListener("input", function () {
+          /* Uppercase as they type so "pid34" reads back as "PID34".
+             Caret is restored because assigning .value moves it to the end. */
+          var up = pid.value.toUpperCase();
+          if (up !== pid.value) {
+            var at = pid.selectionStart;
+            pid.value = up;
+            try { pid.setSelectionRange(at, at); } catch (e) { /* not all inputs support it */ }
+          }
           updatePidPreview();
           if (pid.classList.contains("invalid")) validatePid();
           show($("pid-exists"), false);
+          refreshUnsavedGuard();
         });
         pid.addEventListener("blur", function () {
           updatePidPreview();
@@ -3130,7 +3163,7 @@
         });
 
         Array.prototype.forEach.call(document.querySelectorAll('input[name="mode"]'), function (r) {
-          r.addEventListener("change", onModeChange);
+          r.addEventListener("change", function () { onModeChange(); refreshUnsavedGuard(); });
         });
 
         $("upload-form").addEventListener("submit", onSubmit);
