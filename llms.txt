@@ -24,5 +24,8 @@
 - [Camera-Ready](https://iprecon.org/camera-ready.html): Final paper submission instructions
 - [Tracks](https://iprecon.org/tracks.html): Technical tracks and topics
 - [Committee](https://iprecon.org/committee.html): Organizing committee
+- [Speakers](https://iprecon.org/speakers.html): Special session, tutorial and keynote speakers
+- [Tutorials](https://iprecon.org/tutorials.html): Pre-conference tutorial sessions and abstracts
+- [Special Sessions](https://iprecon.org/special-sessions.html): Invited and industry talks with abstracts
 - [Venue](https://iprecon.org/venue.html): Conference venue
 - [Contact](https://iprecon.org/contact.html): Contact information

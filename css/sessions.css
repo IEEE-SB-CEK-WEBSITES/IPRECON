@@ -1,0 +1,612 @@
+/* =================================================================
+   IPRECON 2026 - Session & Speaker Pages
+   Shared by: tutorials.html, special-sessions.html, speakers.html
+   Scoped under .sessions-section / .speakers-section only.
+   ================================================================= */
+
+/* --------------------- TYPOGRAPHY --------------------- */
+/* styles.css sets `* { font-family: Arial }`, which matches every element
+   directly, so setting Montserrat on a container will NOT inherit down.
+   Each component class must name the font itself.
+   Do NOT use a `.sessions-section *` wildcard here: it ties with Font
+   Awesome on specificity and, loading later, would blank the icons. */
+.page-title,
+.page-intro,
+.sessions-note,
+.session-badge,
+.session-title,
+.abstract-label,
+.abstract-text,
+.speaker-name,
+.speaker-role,
+.speaker-affiliation,
+.tba-heading,
+.tba-text,
+.sessions-section .section-title,
+.speakers-section .section-title {
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+/* --------------------- PAGE SHELL --------------------- */
+.sessions-section,
+.speakers-section {
+  padding: 60px 0;
+  background-color: #fafafa;
+}
+
+.sessions-container,
+.speakers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-title-container {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #211021;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+  margin: 0;
+}
+
+.page-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background-color: #8e24aa;
+}
+
+.page-intro {
+  max-width: 820px;
+  margin: 0 auto 46px;
+  text-align: center;
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.sessions-note {
+  margin: 36px auto 0;
+  max-width: 720px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #777;
+}
+
+/* --------------------- SPEAKER CARD ---------------------
+   Width-agnostic on purpose: the parent (session rail or gallery grid)
+   decides the track size, so one component serves all three pages. */
+.speaker-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease;
+}
+
+.speaker-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+}
+
+.speaker-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.speaker-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top; /* portraits: protect the head when cropped */
+  transition: transform 0.4s ease;
+}
+
+.speaker-card:hover .speaker-photo img {
+  transform: scale(1.04);
+}
+
+/* Solid caption rather than the gradient overlay used on committee.html:
+   these roles and affiliations run longer and would clip in a fixed-height
+   overlay. */
+.speaker-meta {
+  background-color: #211021;
+  padding: 14px 14px 16px;
+  flex: 1 1 auto;
+}
+
+.speaker-name {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 5px;
+}
+
+.speaker-role {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #d4af37;
+  margin: 0 0 4px;
+}
+
+.speaker-affiliation {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Gallery cards link through to their session anchor. Flex column + a
+   growing child so every card in a row matches the tallest one: the plum
+   caption absorbs the slack instead of leaving ragged bottom edges. */
+.speaker-card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+}
+
+.speaker-card-link .speaker-card {
+  flex: 1 1 auto;
+}
+
+.speaker-card-link:focus-visible {
+  outline: 3px solid #8e24aa;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* --------------------- SESSION CARD --------------------- */
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.session-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 34px 36px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #8e24aa;
+  scroll-margin-top: 140px; /* clear the fixed navbar on anchor landings */
+}
+
+/* No hover lift: these cards are not links. */
+
+.session-header {
+  margin-bottom: 28px;
+}
+
+.session-badge {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #6a1b9a;
+  background-color: rgba(142, 36, 170, 0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.session-badge--industry {
+  color: #7a5c10; /* clears 4.5:1 on the gold tint */
+  background-color: rgba(212, 175, 55, 0.2);
+}
+
+.session-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #211021;
+  margin: 0;
+}
+
+/* `max-content` resolves to one card (240px) or two (504px) on its own, so
+   solo and joint sessions share identical markup with no modifier class. */
+.session-body {
+  display: grid;
+  grid-template-columns: max-content minmax(320px, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.session-speakers {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+.session-speakers .speaker-card {
+  flex: 0 0 240px;
+  width: 240px;
+}
+
+.abstract-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8e24aa;
+  margin: 0 0 10px;
+}
+
+.abstract-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+  max-width: 76ch;
+}
+
+/* --------------------- SPEAKER GALLERY ---------------------
+   Uniform spacing and semantic ids only. No :first-child / :last-child /
+   :nth-child / sibling selectors anywhere, so a group can be reordered
+   (e.g. moving Keynote to the top) by cut-and-paste alone. */
+.speaker-group {
+  margin-bottom: 60px;
+}
+
+.speaker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
+  gap: 28px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* --------------------- TO BE ANNOUNCED PANEL --------------------- */
+.tba-panel {
+  max-width: 720px;
+  margin: 10px auto 0;
+  padding: 48px 32px;
+  text-align: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #211021 0%, #6a1b9a 100%);
+  box-shadow: 0 10px 30px rgba(33, 16, 33, 0.2);
+}
+
+.tba-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.tba-icon i {
+  font-size: 26px;
+  color: #d4af37;
+}
+
+.tba-heading {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  margin: 0 0 12px;
+}
+
+.tba-text {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+/* --------------------- RESPONSIVE --------------------- */
+@media (min-width: 1920px) {
+  /* The gallery is a centred card grid, so it can use the site-wide 70%.
+     Session pages deliberately do not: the abstract holds a capped reading
+     measure, so extra container width only strands empty space beside it. */
+  .speakers-container {
+    max-width: 70%;
+  }
+
+  .sessions-container {
+    max-width: 1400px;
+  }
+
+  .page-title {
+    font-size: 52px;
+  }
+
+  .session-title {
+    font-size: 30px;
+  }
+
+  .session-speakers .speaker-card {
+    flex-basis: 260px;
+    width: 260px;
+  }
+
+  .speaker-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+    gap: 32px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .page-title {
+    font-size: 42px;
+  }
+
+  .session-card {
+    padding: 28px 26px;
+  }
+
+  .session-title {
+    font-size: 24px;
+  }
+
+  .session-body {
+    grid-template-columns: max-content minmax(300px, 1fr);
+    gap: 28px;
+  }
+
+  .session-speakers {
+    gap: 20px;
+  }
+
+  .session-speakers .speaker-card {
+    flex-basis: 220px;
+    width: 220px;
+  }
+}
+
+/* Speaker rail moves above the abstract */
+@media (max-width: 1024px) {
+  .session-body {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .session-speakers {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .abstract-text {
+    max-width: none;
+  }
+}
+
+/* A two-speaker rail needs the full width by 1024px, but a single card does
+   not: stacking it there would centre one narrow photo in a wide empty band.
+   Solo sessions therefore keep the photo beside the abstract down to 768px.
+   :has() picks the duo case off the markup, so neither page needs a modifier
+   class and the two session pages stay structurally identical. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .session-body:not(:has(.speaker-card + .speaker-card)) {
+    grid-template-columns: max-content minmax(280px, 1fr);
+    gap: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sessions-section,
+  .speakers-section {
+    padding: 40px 0;
+  }
+
+  .sessions-container,
+  .speakers-container {
+    padding: 0 15px;
+  }
+
+  .page-title {
+    font-size: 36px;
+  }
+
+  .page-title::after {
+    width: 100px;
+    height: 3px;
+  }
+
+  .page-intro {
+    font-size: 15px;
+    margin-bottom: 34px;
+  }
+
+  .session-list {
+    gap: 26px;
+  }
+
+  .session-card {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .session-header {
+    margin-bottom: 22px;
+  }
+
+  .session-title {
+    font-size: 20px;
+  }
+
+  .abstract-text {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .session-speakers {
+    gap: 18px;
+  }
+
+  .session-speakers .speaker-card {
+    flex-basis: 200px;
+    width: 200px;
+  }
+
+  .speaker-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 210px));
+    gap: 20px;
+  }
+
+  .tba-panel {
+    padding: 36px 22px;
+  }
+
+  .tba-heading {
+    font-size: 20px;
+  }
+
+  .tba-text {
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 30px;
+  }
+
+  .page-title::after {
+    width: 80px;
+  }
+
+  .session-card {
+    padding: 20px 16px;
+  }
+
+  .session-title {
+    font-size: 18.5px;
+  }
+
+  .abstract-text {
+    font-size: 14.5px;
+  }
+
+  /* Co-speakers stack vertically rather than squeezing side by side */
+  .session-speakers {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .session-speakers .speaker-card {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .speaker-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .speaker-meta {
+    padding: 11px 11px 13px;
+  }
+
+  .speaker-name {
+    font-size: 13.5px;
+  }
+
+  .speaker-role {
+    font-size: 11px;
+  }
+
+  .speaker-affiliation {
+    font-size: 10px;
+  }
+}
+
+/* --------------------- ACCESSIBILITY --------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .speaker-card,
+  .speaker-photo img {
+    transition: none;
+  }
+
+  .speaker-card:hover {
+    transform: none;
+  }
+
+  .speaker-card:hover .speaker-photo img {
+    transform: none;
+  }
+}
+
+/* --------------------- PRINT --------------------- */
+@media print {
+  .session-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    border-top: 2px solid #666;
+  }
+
+  .speaker-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .speaker-grid {
+    gap: 12px;
+  }
+
+  /* Flatten the dark fills so printing does not dump solid blocks of ink */
+  .speaker-meta {
+    background-color: #eee;
+  }
+
+  .speaker-name {
+    color: #000;
+  }
+
+  .speaker-role {
+    color: #5a4a10;
+  }
+
+  .speaker-affiliation {
+    color: #333;
+  }
+
+  .tba-panel {
+    background: none;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  .tba-heading,
+  .tba-text {
+    color: #000;
+  }
+}
