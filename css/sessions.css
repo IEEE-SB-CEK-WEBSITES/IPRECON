@@ -196,7 +196,12 @@
   padding: 34px 36px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   border-top: 4px solid #8e24aa;
-  scroll-margin-top: 140px; /* clear the fixed navbar on anchor landings */
+  /* Anchor landings have to clear the navbar AND the marquee, which together
+     occupy 125px. script.js switches both to position:fixed only once the
+     page scrolls, pulling ~100px out of the flow after the jump has already
+     happened, so the offset has to cover the chrome plus that shift.
+     Measured on the live site: the card lands at (this value - 100). */
+  scroll-margin-top: 240px;
 }
 
 /* No hover lift: these cards are not links. */
@@ -390,6 +395,12 @@
 
 /* Speaker rail moves above the abstract */
 @media (max-width: 1024px) {
+  /* The desktop marquee is hidden here and the mobile one sits inside the
+     navbar, so only the ~60px bar goes fixed -- a much smaller offset. */
+  .session-card {
+    scroll-margin-top: 140px;
+  }
+
   .session-body {
     grid-template-columns: 1fr;
     gap: 26px;
