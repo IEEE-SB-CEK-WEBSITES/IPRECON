@@ -9,8 +9,11 @@
 - Venue: College of Engineering Karunagappally, Kerala, India
 - Mode: Hybrid (in-person and online)
 - Notification of acceptance: 30 June 2026
-- Final camera-ready paper: 31 July 2026
+- Final camera-ready paper: 18 August 2026
 - Early-bird registration deadline: 30 June 2026 (regular fee applies from 1 July 2026)
+- Author registration deadline: 18 August 2026 (final hard deadline, no extensions)
+- Presentation and video recording submission deadline: 25 August 2026
+- Attendee registration deadline: 2 September 2026
 - Registration: https://iprecon.org/registration.html
 
 ## Primary pages
