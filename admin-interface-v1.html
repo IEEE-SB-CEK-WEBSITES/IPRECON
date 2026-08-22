@@ -603,6 +603,70 @@
       .submissions-empty-state.show {
         display: block;
       }
+
+      /* Student Travel Grant Applications
+         Reuses the submissions strip/filter/table/empty-state classes; only
+         the travel-grant-specific bits below are new. */
+      .travel-grants-table {
+        min-width: 1500px;
+      }
+
+      .travel-grant-paper-cell {
+        white-space: nowrap;
+      }
+
+      /* Multi-applicant papers are the whole reason this table gets opened,
+         so the badge is loud and the row is tinted. */
+      .travel-grant-multi-badge {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #d4af37;
+        color: #211021;
+        border: 1px solid #a8842a;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .submissions-table tbody tr.travel-grant-row-multi {
+        background: #fff8e6;
+      }
+
+      .travel-grant-region-cell {
+        white-space: normal;
+        min-width: 210px;
+      }
+
+      .travel-grant-cap {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #6c757d;
+        margin-top: 3px;
+      }
+
+      .travel-grant-file-link {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        color: #8e24aa;
+      }
+
+      .travel-grant-file-link:hover {
+        text-decoration: underline;
+      }
+
+      .travel-grant-file-link-disabled {
+        color: #adb5bd;
+        text-decoration: line-through;
+        cursor: not-allowed;
+      }
     </style>
     <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/img/favicon.png" />
@@ -918,6 +982,102 @@
             No submissions yet.
           </div>
         </div>
+
+        <!-- Student Travel Grant Applications -->
+        <div
+          class="admin-card"
+          id="travelGrantsAdminCard"
+          style="grid-column: 1 / -1"
+        >
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-plane-departure"></i>
+            </div>
+            <h3 class="card-title">Student Travel Grant Applications</h3>
+          </div>
+
+          <div class="error-message" id="travelGrantsError"></div>
+
+          <div
+            class="submission-stats-strip"
+            id="travelGrantsStatsStrip"
+          ></div>
+
+          <div class="submissions-filter-row">
+            <label class="submissions-checkbox-label">
+              <input type="checkbox" id="travelGrantsLatestOnly" checked />
+              Latest per applicant
+            </label>
+
+            <div class="form-group submissions-filter-group">
+              <label for="travelGrantsRegionFilter">Region</label>
+              <select id="travelGrantsRegionFilter">
+                <option value="">All regions</option>
+                <option value="kerala">Kerala</option>
+                <option value="south">
+                  Tamil Nadu, Karnataka, Telangana, Andhra Pradesh
+                </option>
+                <option value="rest-of-india">
+                  Rest of India (excluding North-Eastern States)
+                </option>
+                <option value="ne-bhutan-nepal">
+                  North-East India, Bhutan &amp; Nepal
+                </option>
+              </select>
+            </div>
+
+            <label class="submissions-checkbox-label">
+              <input type="checkbox" id="travelGrantsMultiOnly" />
+              Multiple applicants only
+            </label>
+
+            <button
+              type="button"
+              class="btn secondary"
+              id="travelGrantsRefreshBtn"
+            >
+              <i class="fas fa-sync"></i>
+              Refresh
+            </button>
+
+            <button type="button" class="btn" id="travelGrantsExportBtn">
+              <i class="fas fa-file-csv"></i>
+              Export CSV
+            </button>
+          </div>
+
+          <div
+            class="submissions-table-wrapper"
+            id="travelGrantsTableWrapper"
+          >
+            <table
+              class="submissions-table travel-grants-table"
+              id="travelGrantsTable"
+            >
+              <thead>
+                <tr>
+                  <th>Paper</th>
+                  <th>Applicant</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Institution</th>
+                  <th>IEEE No.</th>
+                  <th>Category</th>
+                  <th>Region</th>
+                  <th>City/State</th>
+                  <th>Declaration</th>
+                  <th>Files</th>
+                  <th>Applied (IST)</th>
+                </tr>
+              </thead>
+              <tbody id="travelGrantsTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="submissions-empty-state" id="travelGrantsEmptyState">
+            No travel grant applications yet.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -981,6 +1141,21 @@
         bindListener("submissionsLatestOnly", "change", reloadSubmissionsList);
         bindListener("submissionsStatusFilter", "change", reloadSubmissionsList);
         bindListener("submissionsModeFilter", "change", reloadSubmissionsList);
+
+        // Student Travel Grant Applications
+        bindListener(
+          "travelGrantsRefreshBtn",
+          "click",
+          refreshTravelGrantsSection
+        );
+        bindListener("travelGrantsExportBtn", "click", handleTravelGrantsExport);
+        bindListener("travelGrantsLatestOnly", "change", reloadTravelGrantsList);
+        bindListener(
+          "travelGrantsRegionFilter",
+          "change",
+          reloadTravelGrantsList
+        );
+        bindListener("travelGrantsMultiOnly", "change", reloadTravelGrantsList);
       }
 
       function checkExistingSession() {
@@ -1120,6 +1295,16 @@
         } catch (error) {
           console.error(
             "Presentation & Video Submissions failed to initialise:",
+            error
+          );
+        }
+
+        // Student Travel Grant Applications (additive; must never break login)
+        try {
+          initTravelGrantsSection();
+        } catch (error) {
+          console.error(
+            "Student Travel Grant Applications failed to initialise:",
             error
           );
         }
@@ -2011,6 +2196,430 @@
         if (submissionsAutoLoaded) return;
         submissionsAutoLoaded = true;
         refreshSubmissionsSection();
+      }
+
+      // ===================================
+      // Student Travel Grant Applications
+      // ===================================
+      // Same shape as the submissions section above: UPLOADS_WORKER_URL via
+      // makeAuthenticatedRequest() with the existing Bearer token, and every
+      // entry point wrapped so a failure only shows a message inside this card
+      // and never touches login or any other card.
+
+      let travelGrantsAutoLoaded = false;
+
+      function formatInr(value) {
+        const amount = Number(value);
+        if (!isFinite(amount)) return "₹0";
+        return `₹${amount.toLocaleString("en-IN")}`;
+      }
+
+      function travelGrantFileLabel(kind) {
+        if (kind === "declaration") return "Declaration";
+        if (kind === "ias") return "IAS";
+        if (kind === "pes") return "PES";
+        return kind ? String(kind) : "File";
+      }
+
+      function getTravelGrantsFilterParams() {
+        const params = new URLSearchParams();
+        const latestOnly = document.getElementById(
+          "travelGrantsLatestOnly"
+        ).checked;
+        const region = document.getElementById("travelGrantsRegionFilter")
+          .value;
+        const multiOnly = document.getElementById(
+          "travelGrantsMultiOnly"
+        ).checked;
+
+        if (latestOnly) params.set("latest", "1");
+        if (region) params.set("region", region);
+        if (multiOnly) params.set("multi", "1");
+
+        return params;
+      }
+
+      function setTravelGrantsLoading(isLoading) {
+        const btn = document.getElementById("travelGrantsRefreshBtn");
+        if (!btn) return;
+        const icon = btn.querySelector("i");
+
+        btn.disabled = isLoading;
+        if (icon) {
+          icon.className = isLoading
+            ? "fas fa-spinner spinner"
+            : "fas fa-sync";
+        }
+      }
+
+      function clearTravelGrantsError() {
+        const errorBox = document.getElementById("travelGrantsError");
+        if (errorBox) {
+          errorBox.textContent = "";
+          errorBox.classList.remove("show");
+        }
+      }
+
+      function showTravelGrantsError(error) {
+        console.error("Student Travel Grant Applications error:", error);
+        const errorBox = document.getElementById("travelGrantsError");
+        if (!errorBox) return;
+
+        const detail = error && error.message ? ` (${error.message})` : "";
+        errorBox.textContent = `Could not reach the uploads worker.${detail}`;
+        errorBox.classList.add("show");
+      }
+
+      // Numeric stats only (server-controlled) but still rendered via
+      // textContent everywhere, consistent with the rest of this section.
+      function renderTravelGrantsStats(stats) {
+        const strip = document.getElementById("travelGrantsStatsStrip");
+        if (!strip) return;
+
+        strip.replaceChildren();
+
+        const boxes = [
+          ["Total", stats.total],
+          ["Applicants", stats.applicants],
+          ["Papers", stats.papers],
+          ["Kerala", stats.kerala],
+          ["South", stats.south],
+          ["Rest of India", stats.rest_of_india],
+          ["NE/Bhutan/Nepal", stats.ne_bhutan_nepal],
+          ["Multi-Applicant Papers", stats.multi_applicant_papers],
+          ["Total Indicative", formatInr(stats.total_cap_inr)],
+        ];
+
+        boxes.forEach(([label, value]) => {
+          const box = document.createElement("div");
+          box.className = "submission-stat-box";
+
+          const valueEl = document.createElement("div");
+          valueEl.className = "submission-stat-value";
+          valueEl.textContent =
+            value === undefined || value === null ? "0" : String(value);
+
+          const labelEl = document.createElement("div");
+          labelEl.className = "submission-stat-label";
+          labelEl.textContent = label;
+
+          box.appendChild(valueEl);
+          box.appendChild(labelEl);
+          strip.appendChild(box);
+        });
+      }
+
+      // XSS-safe cell builders below use createElement/textContent only.
+      // applicant_name, applicant_email, phone, institution, paper_title,
+      // ieee_member_no, origin_city and origin_state all come from a public
+      // form and are never trusted.
+
+      function buildTravelGrantPaperCell(app) {
+        const td = document.createElement("td");
+        td.className = "travel-grant-paper-cell";
+        td.title = app.paper_title ? String(app.paper_title) : "";
+
+        const name = document.createElement("span");
+        name.textContent = cellText(app.folder_name || app.paper_id);
+        td.appendChild(name);
+
+        const coApplicants = Number(app.co_applicants);
+        if (isFinite(coApplicants) && coApplicants > 1) {
+          const badge = document.createElement("span");
+          badge.className = "travel-grant-multi-badge";
+          badge.textContent = `${coApplicants} applicants`;
+          td.appendChild(badge);
+        }
+
+        return td;
+      }
+
+      function buildTravelGrantRegionCell(app) {
+        const td = document.createElement("td");
+        td.className = "travel-grant-region-cell";
+
+        const label = document.createElement("div");
+        label.textContent = cellText(app.region_label || app.region);
+        td.appendChild(label);
+
+        if (app.cap_inr !== undefined && app.cap_inr !== null) {
+          const cap = document.createElement("div");
+          cap.className = "travel-grant-cap";
+          cap.textContent = formatInr(app.cap_inr);
+          td.appendChild(cap);
+        }
+
+        return td;
+      }
+
+      function buildTravelGrantDeclarationCell(confirmed) {
+        const td = document.createElement("td");
+        const chip = document.createElement("span");
+        const isConfirmed = Boolean(confirmed);
+
+        chip.className = `submission-status-chip ${
+          isConfirmed ? "status-complete" : "status-abandoned"
+        }`;
+        chip.textContent = isConfirmed ? "Yes" : "No";
+        td.appendChild(chip);
+        return td;
+      }
+
+      function buildTravelGrantFilesCell(app) {
+        const td = document.createElement("td");
+        td.className = "submission-links-cell";
+
+        const files = Array.isArray(app.files) ? app.files : [];
+
+        files.forEach((file) => {
+          const label = travelGrantFileLabel(file && file.kind);
+          const title = file && file.name ? String(file.name) : label;
+
+          if (file && file.drive_link) {
+            const a = document.createElement("a");
+            a.href = file.drive_link;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.title = title;
+            a.className = "travel-grant-file-link";
+            a.textContent = label;
+            td.appendChild(a);
+          } else {
+            const span = document.createElement("span");
+            span.className =
+              "travel-grant-file-link travel-grant-file-link-disabled";
+            span.title = `${title} (no link)`;
+            span.textContent = label;
+            td.appendChild(span);
+          }
+        });
+
+        if (app.drive_folder_link) {
+          const folder = document.createElement("a");
+          folder.href = app.drive_folder_link;
+          folder.target = "_blank";
+          folder.rel = "noopener noreferrer";
+          folder.title = "Drive folder";
+          folder.className = "travel-grant-file-link";
+          folder.textContent = "Folder";
+          td.appendChild(folder);
+        }
+
+        if (!td.childNodes.length) {
+          td.textContent = "—";
+        }
+
+        return td;
+      }
+
+      function formatTravelGrantOrigin(app) {
+        const parts = [app.origin_city, app.origin_state].filter(
+          (part) => part !== undefined && part !== null && part !== ""
+        );
+        return parts.length ? parts.join(", ") : "";
+      }
+
+      function buildTravelGrantRow(app) {
+        const tr = document.createElement("tr");
+        const coApplicants = Number(app.co_applicants);
+        if (isFinite(coApplicants) && coApplicants > 1) {
+          tr.className = "travel-grant-row-multi";
+        }
+
+        const cell = (text) => {
+          const td = document.createElement("td");
+          td.textContent = cellText(text);
+          return td;
+        };
+
+        tr.appendChild(buildTravelGrantPaperCell(app));
+        tr.appendChild(cell(app.applicant_name));
+        tr.appendChild(cell(app.applicant_email));
+        tr.appendChild(cell(app.phone));
+        tr.appendChild(cell(app.institution));
+        tr.appendChild(cell(app.ieee_member_no));
+        tr.appendChild(
+          cell(app.registration_category_label || app.registration_category)
+        );
+        tr.appendChild(buildTravelGrantRegionCell(app));
+        tr.appendChild(cell(formatTravelGrantOrigin(app)));
+        tr.appendChild(
+          buildTravelGrantDeclarationCell(app.declaration_confirmed)
+        );
+        tr.appendChild(buildTravelGrantFilesCell(app));
+        tr.appendChild(cell(formatSubmittedIST(app.created_at)));
+
+        return tr;
+      }
+
+      // An empty result is a legitimate answer, never an error — the error box
+      // stays for requests that actually failed. Name the active filters, so
+      // a combination that correctly returns nothing (e.g. a region with no
+      // multi-applicant papers) reads as a filter effect, not a fault.
+      function travelGrantsEmptyMessage() {
+        const latestOnly = document.getElementById("travelGrantsLatestOnly");
+        const region = document.getElementById("travelGrantsRegionFilter");
+        const multiOnly = document.getElementById("travelGrantsMultiOnly");
+
+        const active = [];
+        if (latestOnly && latestOnly.checked) {
+          active.push("Latest per applicant");
+        }
+        if (region && region.value) {
+          active.push(
+            `Region: ${region.options[region.selectedIndex].text.trim()}`
+          );
+        }
+        if (multiOnly && multiOnly.checked) {
+          active.push("Multiple applicants only");
+        }
+
+        return active.length
+          ? `No travel grant applications match the current filters (${active.join(
+              ", "
+            )}).`
+          : "No travel grant applications yet.";
+      }
+
+      function renderTravelGrantsTable(applications) {
+        const tbody = document.getElementById("travelGrantsTableBody");
+        const wrapper = document.getElementById("travelGrantsTableWrapper");
+        const emptyState = document.getElementById("travelGrantsEmptyState");
+        if (!tbody || !wrapper || !emptyState) return;
+
+        tbody.replaceChildren();
+
+        if (!Array.isArray(applications) || applications.length === 0) {
+          wrapper.style.display = "none";
+          emptyState.textContent = travelGrantsEmptyMessage();
+          emptyState.classList.add("show");
+          return;
+        }
+
+        emptyState.classList.remove("show");
+        wrapper.style.display = "";
+        applications.forEach((app) =>
+          tbody.appendChild(buildTravelGrantRow(app))
+        );
+      }
+
+      // Stats are deliberately fetched unfiltered so the strip always shows
+      // the whole picture; that is what keeps "Refresh reloads stats + table,
+      // a filter change reloads only the table" honest.
+      async function loadTravelGrantsStats() {
+        const response = await makeAuthenticatedRequest(
+          "/api/admin/travel-grants/stats",
+          {},
+          UPLOADS_WORKER_URL
+        );
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(data.error || "Failed to load travel grant stats");
+        }
+
+        renderTravelGrantsStats(data.stats || {});
+      }
+
+      async function loadTravelGrantsList() {
+        const params = getTravelGrantsFilterParams();
+        const response = await makeAuthenticatedRequest(
+          `/api/admin/travel-grants?${params.toString()}`,
+          {},
+          UPLOADS_WORKER_URL
+        );
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(
+            data.error || "Failed to load travel grant applications"
+          );
+        }
+
+        renderTravelGrantsTable(data.applications || []);
+      }
+
+      // Full reload: stats strip + table. Used on init and Refresh click.
+      async function refreshTravelGrantsSection() {
+        clearTravelGrantsError();
+        setTravelGrantsLoading(true);
+
+        try {
+          await loadTravelGrantsStats();
+          await loadTravelGrantsList();
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showTravelGrantsError(error);
+          }
+        } finally {
+          setTravelGrantsLoading(false);
+        }
+      }
+
+      // Table-only reload: used when a filter changes.
+      async function reloadTravelGrantsList() {
+        clearTravelGrantsError();
+        setTravelGrantsLoading(true);
+
+        try {
+          await loadTravelGrantsList();
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showTravelGrantsError(error);
+          }
+        } finally {
+          setTravelGrantsLoading(false);
+        }
+      }
+
+      async function handleTravelGrantsExport() {
+        const exportBtn = document.getElementById("travelGrantsExportBtn");
+        const icon = exportBtn ? exportBtn.querySelector("i") : null;
+        const originalIconClass = icon ? icon.className : "";
+
+        if (exportBtn) exportBtn.disabled = true;
+        if (icon) icon.className = "fas fa-spinner spinner";
+
+        try {
+          const params = getTravelGrantsFilterParams();
+          const response = await makeAuthenticatedRequest(
+            `/api/admin/travel-grants/export.csv?${params.toString()}`,
+            {},
+            UPLOADS_WORKER_URL
+          );
+
+          if (!response.ok) {
+            throw new Error(`Export failed (status ${response.status})`);
+          }
+
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "iprecon-travel-grants.csv";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          if (error.message !== "Authentication expired") {
+            showAlert(
+              "error",
+              `Could not export travel grant applications: ${error.message}`
+            );
+          }
+        } finally {
+          if (exportBtn) exportBtn.disabled = false;
+          if (icon) icon.className = originalIconClass || "fas fa-file-csv";
+        }
+      }
+
+      // Called once from showAdminInterface(); Refresh/filter handlers can
+      // still be triggered any number of times afterwards.
+      function initTravelGrantsSection() {
+        if (travelGrantsAutoLoaded) return;
+        travelGrantsAutoLoaded = true;
+        refreshTravelGrantsSection();
       }
 
       // Console welcome message for developers
