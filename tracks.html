@@ -21,7 +21,6 @@
 
     .page-heading,
     .page-meta,
-    .hero-stat,
     .schedule-btn,
     .hero-hint,
     .info-card-title,
@@ -140,57 +139,19 @@
       margin-right: 8px;
     }
 
-    .hero-stats {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-
-    .hero-stat {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      border-radius: 14px;
-      padding: 16px 28px;
-      min-width: 110px;
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: #d4af37;
-      line-height: 1;
-    }
-
-    .hero-stat span {
-      display: block;
-      margin-top: 6px;
-      font-size: 0.8rem;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .hero-actions,
     .schedule-footer-actions {
       display: flex;
       gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
-    }
-
-    .schedule-footer-actions {
       margin-top: 44px;
     }
 
-    /* The download button is the loudest thing in the hero, so a reader can
-       take the PDF and leave without ever learning the schedule is on the page
-       and searchable. This says so directly, under the button. */
+    /* The hero carries no download button any more; the PDF is offered at the
+       foot of the page instead, after the schedule itself. This line is what
+       sends a reader down to it. */
     .hero-hint {
-      margin: 18px 0 0;
+      margin: 6px 0 0;
       font-size: 0.95rem;
       color: rgba(255, 255, 255, 0.88);
       display: flex;
@@ -880,15 +841,6 @@
         text-align: center;
       }
 
-      .hero-stat {
-        padding: 13px 20px;
-        min-width: 92px;
-      }
-
-      .hero-stat strong {
-        font-size: 1.5rem;
-      }
-
       .schedule-btn {
         width: 100%;
         max-width: 380px;
@@ -1012,15 +964,6 @@
         font-size: 1.7rem;
       }
 
-      .hero-stats {
-        gap: 10px;
-      }
-
-      .hero-stat {
-        padding: 11px 15px;
-        min-width: 80px;
-      }
-
       .hero-hint {
         font-size: 0.88rem;
       }
@@ -1100,21 +1043,6 @@
             <span><i class="fas fa-location-dot"></i>College of Engineering Karunagappally, Kerala, India</span>
             <span><i class="fas fa-calendar-days"></i>4 - 6 September 2026</span>
           </p>
-
-          <div class="hero-stats">
-            <div class="hero-stat"><strong>61</strong><span>Papers</span></div>
-            <div class="hero-stat"><strong>8</strong><span>Tracks</span></div>
-            <div class="hero-stat"><strong>3</strong><span>Days</span></div>
-          </div>
-
-          <div class="hero-actions">
-            <a class="schedule-btn primary"
-              href="./assets/documents/IPRECON_2026_Track_Schedule.pdf"
-              download="IPRECON 2026 - Track Schedule.pdf">
-              <i class="fas fa-file-arrow-down"></i>
-              Download Track Schedule (PDF)
-            </a>
-          </div>
 
           <p class="hero-hint">
             <i class="fas fa-arrow-down" aria-hidden="true"></i>
@@ -1203,7 +1131,6 @@
               <span class="day-toggle-side">
                 <span class="day-stat">2 tracks</span>
                 <span class="day-stat">4 sessions</span>
-                <span class="day-stat">25 papers</span>
                 <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
               </span>
             </button>
@@ -1474,7 +1401,6 @@
               </span>
               <span class="day-toggle-side">
                 <span class="day-stat">4 tracks</span>
-                <span class="day-stat">23 papers</span>
                 <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
               </span>
             </button>
@@ -1735,7 +1661,6 @@
               </span>
               <span class="day-toggle-side">
                 <span class="day-stat">2 tracks</span>
-                <span class="day-stat">13 papers</span>
                 <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
               </span>
             </button>
