@@ -4,541 +4,853 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conference Tracks - IPRECON 2026</title>
+  <title>Track Schedule - IPRECON 2026</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css" />
   <style>
-    /* Your existing styles... */
-    .coming-soon-section {
-      padding: 80px 0;
-      background: linear-gradient(135deg,
-          #6c5a7a 0%,
-          #4a3c5a 50%,
-          #3d2f4a 100%);
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
+    /* =================================================================
+       IPRECON 2026 - Track Schedule
+       Palette follows the site: #8e24aa purple, #211021 ink, #d4af37 gold.
+
+       FONT NOTE: styles.css sets `* { font-family: Arial }`, which matches
+       every element directly, so a font set on a container will NOT inherit
+       down to its children. Every component class below therefore names the
+       font itself. This is the same trap documented in css/sessions.css.
+       ================================================================= */
+
+    .page-heading,
+    .page-sub,
+    .page-meta,
+    .hero-stat,
+    .schedule-btn,
+    .info-card-title,
+    .info-list,
+    .section-heading,
+    .section-heading-note,
+    .day-toggle,
+    .day-badge,
+    .day-date,
+    .day-stat,
+    .track-num,
+    .track-title,
+    .track-session,
+    .parallel-tag,
+    .track-meta,
+    .track-table,
+    .notice-title,
+    .notice-card p,
+    .pid-chip {
+      font-family: "Montserrat", Arial, sans-serif;
     }
 
-    .coming-soon-container {
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* --------------------------- HERO --------------------------- */
+    .schedule-hero {
+      background: linear-gradient(135deg, #211021 0%, #4a1259 55%, #8e24aa 100%);
+      padding: 64px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .schedule-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="d" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.6" fill="rgba(255,255,255,0.10)"/></pattern></defs><rect width="100" height="100" fill="url(%23d)"/></svg>');
+      pointer-events: none;
+    }
+
+    .schedule-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+    }
+
+    .schedule-hero-content {
+      position: relative;
+      z-index: 1;
       text-align: center;
     }
 
-    .coming-soon-content {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 60px 40px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
-
-    .coming-soon-content::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #8e24aa, #d4af37);
-    }
-
-    .coming-soon-icon {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #8e24aa, #211021);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 30px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .coming-soon-icon i {
-      font-size: 3rem;
-      color: white;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .coming-soon-title {
+    .page-heading {
       font-size: 3rem;
       font-weight: 700;
-      color: #211021;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .coming-soon-subtitle {
-      font-size: 1.5rem;
-      color: #8e24aa;
-      margin-bottom: 30px;
-      font-weight: 600;
-    }
-
-    .coming-soon-message {
-      font-size: 1.2rem;
-      color: #6c757d;
-      margin-bottom: 40px;
-      line-height: 1.6;
-    }
-
-    .notification-signup {
-      background: linear-gradient(135deg, #211021, #8e24aa);
-      color: white;
-      padding: 40px;
-      border-radius: 15px;
-      margin: 40px 0;
+      color: #fff;
+      margin: 0 0 14px;
+      line-height: 1.15;
       position: relative;
-      overflow: hidden;
+      display: inline-block;
+      padding-bottom: 16px;
     }
 
-    .notification-signup::before {
+    .page-heading::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-    }
-
-    .notification-signup h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .notification-signup p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      opacity: 0.9;
-      position: relative;
-      z-index: 2;
-    }
-
-    .notification-form {
-      max-width: 400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 15px;
-    }
-
-    .email-input-container {
-      flex: 1;
-    }
-
-    .notification-form input {
-      width: 100%;
-      padding: 12px 15px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .notification-form input:focus {
-      border-color: #d4af37;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-    }
-
-    .notification-form input.error {
-      border-color: #dc3545;
-      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-    }
-
-    .notification-form button {
-      padding: 12px 20px;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
       background: #d4af37;
-      color: #211021;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      min-width: 120px;
+      border-radius: 2px;
     }
 
-    .notification-form button:hover:not(:disabled) {
-      background: #b8941f;
-      transform: scale(1.05);
-    }
-
-    .notification-form button:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-      transform: none;
-    }
-
-    .notification-form button .fa-spinner {
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .error-message,
-    .success-message {
-      font-size: 0.875rem;
-      margin-top: 8px;
-      margin-bottom: 0;
-      display: none;
+    .page-sub {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 10px 0 6px;
       font-weight: 500;
-      text-align: left;
-      position: relative;
-      z-index: 2;
     }
 
-    .error-message {
-      color: #ff6b6b;
-    }
-
-    .success-message {
-      color: #51cf66;
-    }
-
-    .error-message.show,
-    .success-message.show {
-      display: block;
-      animation: fadeInMessage 0.3s ease;
-    }
-
-    @keyframes fadeInMessage {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .coming-soon-actions {
+    .page-meta {
       display: flex;
-      gap: 20px;
+      gap: 26px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 40px;
+      margin: 0 0 30px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
     }
 
-    .action-btn {
+    .page-meta span {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+    }
+
+    .page-meta i {
+      color: #d4af37;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      padding: 16px 28px;
+      min-width: 110px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #d4af37;
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-actions,
+    .schedule-footer-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .schedule-footer-actions {
+      margin-top: 44px;
+    }
+
+    /* -------------------------- BUTTONS -------------------------- */
+    .schedule-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       padding: 15px 30px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      line-height: 1;
       border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
     }
 
-    .action-btn.primary {
-      background: #8e24aa;
-      color: white;
+    .schedule-btn.primary {
+      background: #d4af37;
+      color: #211021;
+      border-color: #d4af37;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .schedule-btn.primary:hover,
+    .schedule-btn.primary:focus-visible {
+      background: #e0bd4d;
+      border-color: #e0bd4d;
+      color: #211021;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(212, 175, 55, 0.42);
+      text-decoration: none;
+    }
+
+    .schedule-btn.ghost {
+      background: transparent;
+      color: #8e24aa;
       border-color: #8e24aa;
     }
 
-    .action-btn.primary:hover {
-      background: transparent;
-      color: #8e24aa;
+    .schedule-btn.ghost:hover,
+    .schedule-btn.ghost:focus-visible {
+      background: #8e24aa;
+      color: #fff;
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(142, 36, 170, 0.3);
+      text-decoration: none;
     }
 
-    /* Success Popup Modal - Enhanced */
-    .success-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+    /* ------------------------- SECTIONS -------------------------- */
+    .schedule-section {
+      padding: 56px 0 80px;
+      background: #fafafa;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 30px 32px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+      border-left: 5px solid #8e24aa;
+    }
+
+    .info-card-title {
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .success-popup.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .success-popup-content {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 450px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      position: relative;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-
-    .success-popup.show .success-popup-content {
-      transform: scale(1);
-    }
-
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: #28a745;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      animation: successBounce 0.6s ease;
-    }
-
-    .success-icon i {
-      font-size: 2.5rem;
-      color: white;
-    }
-
-    @keyframes successBounce {
-      0% {
-        transform: scale(0);
-      }
-
-      50% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .success-popup h3 {
-      font-size: 1.8rem;
+      gap: 12px;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: #211021;
-      margin-bottom: 15px;
+      margin: 0 0 16px;
+    }
+
+    .info-card-title i {
+      color: #8e24aa;
+      font-size: 1.15rem;
+    }
+
+    .info-list {
+      margin: 0;
+      padding-left: 22px;
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .info-list li + li {
+      margin-top: 6px;
+    }
+
+    .info-list strong {
+      color: #211021;
       font-weight: 700;
     }
 
-    .success-popup p {
-      font-size: 1.1rem;
+    .notes-card {
+      border-left-color: #4caf50;
+    }
+
+    .notes-card .info-card-title i {
+      color: #4caf50;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #211021;
+      margin: 46px 0 6px;
+      text-align: center;
+    }
+
+    .section-heading-note {
+      text-align: center;
       color: #6c757d;
-      margin-bottom: 25px;
-      line-height: 1.5;
+      margin: 0 0 26px;
+      font-size: 0.98rem;
     }
 
-    .success-popup-actions {
+    /* ------------------------ ACCORDION -------------------------- */
+    .day-block {
+      margin-bottom: 18px;
+      /* Anchor landings must clear the navbar AND marquee (125px together).
+         script.js switches both to fixed only after the page scrolls, pulling
+         ~100px out of flow after the jump, so the offset covers both. Same
+         reasoning as .session-card in css/sessions.css. */
+      scroll-margin-top: 240px;
+    }
+
+    .day-heading {
+      margin: 0;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    .day-toggle {
+      width: 100%;
       display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 26px;
+      background: linear-gradient(135deg, #211021, #6a1b9a);
+      color: #fff;
+      border: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: filter 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 6px 18px rgba(33, 16, 33, 0.18);
     }
 
-    .popup-btn {
+    .day-toggle:hover {
+      filter: brightness(1.12);
+    }
+
+    .day-toggle:focus-visible {
+      outline: 3px solid #d4af37;
+      outline-offset: 3px;
+    }
+
+    .day-toggle[aria-expanded="true"] {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .day-toggle-main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .day-badge {
+      background: #d4af37;
+      color: #211021;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .day-date {
+      font-size: 1.22rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .day-toggle-side {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .day-stat {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      padding: 6px 13px;
+      white-space: nowrap;
+    }
+
+    .day-chevron {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .day-chevron i {
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+    .day-toggle[aria-expanded="true"] .day-chevron {
+      transform: rotate(180deg);
+      background: #d4af37;
+    }
+
+    .day-toggle[aria-expanded="true"] .day-chevron i {
+      color: #211021;
+    }
+
+    /* Collapsed height is driven from JS (scrollHeight), so the transition
+       works with content of any length. `hidden` is honoured for the
+       no-JS case; JS removes it and manages max-height instead. */
+    .day-panel {
+      overflow: hidden;
+      background: #f4eef7;
+      border-radius: 0 0 14px 14px;
+      transition: max-height 0.35s ease;
+    }
+
+    .day-panel[hidden] {
+      display: none;
+    }
+
+    .day-panel-inner {
+      padding: 24px 22px 26px;
+      display: grid;
+      gap: 22px;
+    }
+
+    /* ------------------------ TRACK CARDS ------------------------ */
+    .track-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 26px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+      border-top: 4px solid #8e24aa;
+    }
+
+    .track-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .track-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .track-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #6a1b9a;
+      background: rgba(142, 36, 170, 0.1);
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .track-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #211021;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .track-session {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #8e24aa;
+      white-space: nowrap;
+    }
+
+    .parallel-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #e65100;
+      background: #fff3e0;
+      border: 1px solid #ffb74d;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .track-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      padding: 12px 0 18px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .meta-item {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      border: 2px solid;
-      cursor: pointer;
     }
 
-    .popup-btn.primary {
-      background: #8e24aa;
-      color: white;
-      border-color: #8e24aa;
-    }
-
-    .popup-btn.primary:hover {
-      background: #7b1f96;
-      transform: translateY(-2px);
-    }
-
-    .popup-btn.secondary {
-      background: transparent;
-      color: #6c757d;
-      border-color: #6c757d;
-    }
-
-    .popup-btn.secondary:hover {
-      background: #6c757d;
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .auto-close-info {
+    .meta-item i {
+      color: #8e24aa;
       font-size: 0.85rem;
-      color: #adb5bd;
-      margin-top: 15px;
-      font-style: italic;
     }
 
-    /* Responsive Design */
+    /* -------------------------- TABLES --------------------------- */
+    .track-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .track-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .track-table thead th {
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: #6a1b9a;
+      background: #f7f2f9;
+      padding: 12px 14px;
+      border-bottom: 2px solid #e5d5ec;
+      white-space: nowrap;
+    }
+
+    .track-table tbody td {
+      padding: 13px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #333;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .track-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .track-table tbody tr:hover td {
+      background: #fbf7fd;
+    }
+
+    .cell-id {
+      width: 1%;
+      white-space: nowrap;
+    }
+
+    .pid-chip {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      background: #8e24aa;
+      border-radius: 6px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+
+    .cell-title {
+      min-width: 260px;
+    }
+
+    .cell-time {
+      white-space: nowrap;
+      font-weight: 600;
+      color: #211021;
+      width: 1%;
+    }
+
+    .summary-table .pid-chip {
+      background: #6a1b9a;
+    }
+
+    /* ------------------------- NOTICE ---------------------------- */
+    .notice-card {
+      background: linear-gradient(135deg, #fff3e0, #ffebee);
+      border: 2px solid #ff9800;
+      border-left-width: 6px;
+      border-radius: 14px;
+      padding: 30px 32px;
+      margin-top: 26px;
+    }
+
+    .notice-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #e65100;
+      margin: 0 0 14px;
+      line-height: 1.3;
+    }
+
+    .notice-title i {
+      color: #ff9800;
+      flex-shrink: 0;
+    }
+
+    .notice-card p {
+      color: #4a2c00;
+      line-height: 1.75;
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .notice-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .notice-card strong {
+      color: #bf360c;
+      font-weight: 700;
+    }
+
+    /* ------------------------ RESPONSIVE ------------------------- */
+    @media (max-width: 1024px) {
+      .page-heading {
+        font-size: 2.5rem;
+      }
+
+      .track-card {
+        padding: 22px 20px;
+      }
+
+      .day-panel-inner {
+        padding: 20px 16px 22px;
+      }
+    }
+
+    /* Below this width a 3- or 7-column table cannot stay legible, so each
+       row becomes its own labelled block. The <table> markup is kept for
+       semantics and screen readers; only the visual box changes. Labels come
+       from each cell's data-label, so they never drift from the <th>. */
     @media (max-width: 768px) {
-      .coming-soon-content {
-        padding: 40px 30px;
+      .schedule-hero {
+        padding: 44px 0 40px;
       }
 
-      .coming-soon-title {
-        font-size: 2.2rem;
+      .page-heading {
+        font-size: 2rem;
       }
 
-      .coming-soon-subtitle {
-        font-size: 1.2rem;
-      }
-
-      .coming-soon-message {
+      .page-sub {
         font-size: 1rem;
       }
 
-      .coming-soon-actions {
+      .page-meta {
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
       }
 
-      .action-btn {
+      .hero-stat {
+        padding: 13px 20px;
+        min-width: 92px;
+      }
+
+      .hero-stat strong {
+        font-size: 1.5rem;
+      }
+
+      .schedule-btn {
         width: 100%;
-        max-width: 250px;
-        justify-content: center;
+        max-width: 380px;
+        padding: 14px 22px;
       }
 
-      .form-row {
+      .info-card,
+      .notice-card {
+        padding: 24px 20px;
+      }
+
+      .section-heading {
+        font-size: 1.6rem;
+      }
+
+      .day-toggle {
         flex-direction: column;
-        gap: 15px;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 18px;
       }
 
-      .notification-form {
-        max-width: 100%;
+      .day-toggle-side {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .day-chevron {
+        margin-left: auto;
+      }
+
+      .day-date {
+        font-size: 1.05rem;
+      }
+
+      .track-card-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .track-title {
+        font-size: 1.12rem;
+      }
+
+      .track-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .track-table-wrap {
+        overflow-x: visible;
+      }
+
+      .track-table,
+      .track-table tbody,
+      .track-table tr,
+      .track-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .track-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      .track-table tbody tr {
+        border: 1px solid #ece2f1;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        background: #fff;
+      }
+
+      .track-table tbody tr:last-child {
+        margin-bottom: 0;
+      }
+
+      .track-table tbody td {
+        padding: 6px 0;
+        border: 0;
+      }
+
+      .track-table tbody tr:hover td {
+        background: transparent;
+      }
+
+      .track-table tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #8e24aa;
+        margin-bottom: 3px;
+      }
+
+      .cell-id,
+      .cell-time {
+        width: auto;
+      }
+
+      .cell-title {
+        min-width: 0;
+        font-weight: 500;
+      }
+
+      .cell-time {
+        color: #6a1b9a;
       }
     }
 
     @media (max-width: 480px) {
-      .coming-soon-content {
-        padding: 30px 20px;
+      .page-heading {
+        font-size: 1.7rem;
       }
 
-      .coming-soon-title {
-        font-size: 1.8rem;
+      .hero-stats {
+        gap: 10px;
       }
 
-      .coming-soon-icon {
-        width: 80px;
-        height: 80px;
+      .hero-stat {
+        padding: 11px 15px;
+        min-width: 80px;
       }
 
-      .coming-soon-icon i {
-        font-size: 2rem;
+      .day-badge {
+        font-size: 0.75rem;
+        padding: 6px 11px;
       }
 
-      .success-popup-content {
-        padding: 30px 20px;
+      .day-stat {
+        font-size: 0.75rem;
+        padding: 5px 10px;
       }
 
-      .success-icon {
-        width: 60px;
-        height: 60px;
+      .info-card,
+      .notice-card {
+        padding: 20px 16px;
       }
 
-      .success-icon i {
-        font-size: 2rem;
-      }
-
-      .success-popup h3 {
-        font-size: 1.5rem;
-      }
-
-      .success-popup p {
-        font-size: 1rem;
-      }
-
-      .success-popup-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .popup-btn {
-        width: 100%;
-        max-width: 200px;
-        justify-content: center;
+      .track-card {
+        padding: 18px 15px;
       }
     }
 
-    /* Animation for elements */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
+    /* Users who ask for less motion get the state change without the sweep. */
+    @media (prefers-reduced-motion: reduce) {
+      .day-panel {
+        transition: none;
+      }
 
-    .fade-in:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .fade-in:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .fade-in:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    .fade-in:nth-child(4) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .day-chevron,
+      .schedule-btn {
+        transition: none;
       }
     }
   </style>
-  <meta name="description" content="Technical tracks and topics for IPRECON 2026 in Kerala, India. Coming soon." />
+  <meta name="description" content="Full IPRECON 2026 track schedule: 61 papers across 8 tracks, 4-6 September 2026 at College of Engineering Karunagappally, Kerala, India. Session timings for every accepted paper." />
   <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/img/favicon.png" />
   <meta property="og:type" content="website" />
@@ -549,13 +861,13 @@
   <meta name="twitter:image" content="https://iprecon.org/assets/img/og-image.png" />
   <link rel="canonical" href="https://iprecon.org/tracks.html" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Conference Tracks - IPRECON 2026" />
-  <meta property="og:description" content="Technical tracks and topics for IPRECON 2026 in Kerala, India. Coming soon." />
+  <meta property="og:title" content="Track Schedule - IPRECON 2026" />
+  <meta property="og:description" content="Full IPRECON 2026 track schedule: 61 papers across 8 tracks, 4-6 September 2026 at College of Engineering Karunagappally, Kerala, India. Session timings for every accepted paper." />
   <meta property="og:url" content="https://iprecon.org/tracks.html" />
   <meta property="og:site_name" content="IPRECON 2026" />
   <meta property="og:locale" content="en_US" />
-  <meta name="twitter:title" content="Conference Tracks - IPRECON 2026" />
-  <meta name="twitter:description" content="Technical tracks and topics for IPRECON 2026 in Kerala, India. Coming soon." />
+  <meta name="twitter:title" content="Track Schedule - IPRECON 2026" />
+  <meta name="twitter:description" content="Full IPRECON 2026 track schedule: 61 papers across 8 tracks, 4-6 September 2026 at College of Engineering Karunagappally, Kerala, India. Session timings for every accepted paper." />
 </head>
 
 <body>
@@ -572,296 +884,998 @@
   <div id="marquee-placeholder" style="display: none"></div>
 
   <main>
-    <!-- Coming Soon Section -->
-    <section class="coming-soon-section">
-      <div class="coming-soon-container">
-        <div class="coming-soon-content">
-          <div class="coming-soon-icon fade-in">
-            <i class="fas fa-cogs"></i>
-          </div>
-
-          <h1 class="coming-soon-title fade-in">Coming Soon</h1>
-          <h2 class="coming-soon-subtitle fade-in">
-            This Page Is Being Developed
-          </h2>
-
-          <p class="coming-soon-message fade-in">
-            This section is currently being finalized. We are preparing
-            comprehensive information and details that will be published
-            shortly. Please check back soon for updates.
+    <!-- Hero -->
+    <section class="schedule-hero">
+      <div class="schedule-container">
+        <div class="schedule-hero-content">
+          <h1 class="page-heading">Track Schedule</h1>
+          <p class="page-sub">
+            IEEE International Power and Renewable Energy Conference
+          </p>
+          <p class="page-meta">
+            <span><i class="fas fa-location-dot"></i>College of Engineering Karunagappally, Kerala, India</span>
+            <span><i class="fas fa-calendar-days"></i>4 &ndash; 6 September 2026</span>
           </p>
 
-          <div class="notification-signup fade-in">
-            <h3>Get Notified When We Launch</h3>
-            <p>
-              Be the first to know when this section becomes available. We'll
-              send you an update as soon as it's ready!
-            </p>
-            <div class="notification-form">
-              <div class="form-row">
-                <div class="email-input-container">
-                  <input type="email" placeholder="Enter your email address" id="emailInput" autocomplete="email" />
-                </div>
-                <button type="submit" id="notifyBtn">
-                  <i class="fas fa-bell"></i>
-                  Notify Me
-                </button>
-              </div>
-              <div class="error-message" id="errorMessage"></div>
-              <div class="success-message" id="successMessage"></div>
-            </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>61</strong><span>Papers</span></div>
+            <div class="hero-stat"><strong>8</strong><span>Tracks</span></div>
+            <div class="hero-stat"><strong>3</strong><span>Days</span></div>
           </div>
 
-          <div class="coming-soon-actions fade-in">
-            <a href="./index.html" class="action-btn primary">
-              <i class="fas fa-home"></i>
-              Back to Home
+          <div class="hero-actions">
+            <a class="schedule-btn primary"
+              href="./assets/documents/IPRECON_2026_Track_Schedule.pdf"
+              download="IPRECON 2026 - Track Schedule.pdf">
+              <i class="fas fa-file-arrow-down"></i>
+              Download Track Schedule (PDF)
             </a>
           </div>
         </div>
       </div>
     </section>
-  </main>
 
-  <!-- Success Popup Modal -->
-  <div class="success-popup" id="successPopup">
-    <div class="success-popup-content">
-      <div class="success-icon">
-        <i class="fas fa-check"></i>
+    <section class="schedule-section">
+      <div class="schedule-container">
+
+        <!-- Timing model -->
+        <div class="info-card">
+          <h2 class="info-card-title"><i class="fas fa-stopwatch"></i>Timing model</h2>
+          <ul class="info-list">
+            <li>Every paper is allotted <strong>15 minutes</strong> &mdash; 12 minutes presentation and 3 minutes Q&amp;A.</li>
+            <li>Sessions marked <strong>Parallel</strong> run simultaneously in separate halls.</li>
+            <li>Each session window closes a little later than its last paper, to absorb overruns and technical difficulties.</li>
+            <li>In total, <strong>61 papers</strong> are scheduled across <strong>8 tracks</strong> over three days.</li>
+          </ul>
+        </div>
+
+        <!-- Summary -->
+        <div class="info-card">
+          <h2 class="info-card-title"><i class="fas fa-table-list"></i>Schedule at a glance</h2>
+          <div class="track-table-wrap">
+            <table class="track-table summary-table">
+              <caption class="sr-only">Summary of all tracks, sessions and windows</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Track</th>
+                  <th scope="col">Theme</th>
+                  <th scope="col">Day</th>
+                  <th scope="col">Session</th>
+                  <th scope="col">Window</th>
+                  <th scope="col">Papers</th>
+                  <th scope="col">Last paper ends</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 1</span></td>
+                <td data-label="Theme">Renewable Energy &amp; Storage</td>
+                <td data-label="Day">Day 1</td>
+                <td data-label="Session">Session I</td>
+                <td data-label="Window">10:45 AM - 12:45 PM</td>
+                <td data-label="Papers">7</td>
+                <td data-label="Last paper ends">12:30 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 2</span></td>
+                <td data-label="Theme">Computing, AI &amp; Data Science</td>
+                <td data-label="Day">Day 1</td>
+                <td data-label="Session">Session I</td>
+                <td data-label="Window">10:45 AM - 12:45 PM</td>
+                <td data-label="Papers">7</td>
+                <td data-label="Last paper ends">12:30 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 1</span></td>
+                <td data-label="Theme">Renewable Energy &amp; Storage</td>
+                <td data-label="Day">Day 1</td>
+                <td data-label="Session">Session II</td>
+                <td data-label="Window">2:45 PM - 4:30 PM</td>
+                <td data-label="Papers">6</td>
+                <td data-label="Last paper ends">4:15 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 2</span></td>
+                <td data-label="Theme">Computing, AI &amp; Data Science</td>
+                <td data-label="Day">Day 1</td>
+                <td data-label="Session">Session II</td>
+                <td data-label="Window">2:45 PM - 4:30 PM</td>
+                <td data-label="Papers">5</td>
+                <td data-label="Last paper ends">4:00 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 3</span></td>
+                <td data-label="Theme">Renewable Energy &amp; Storage</td>
+                <td data-label="Day">Day 2</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">9:00 AM - 10:45 AM</td>
+                <td data-label="Papers">6</td>
+                <td data-label="Last paper ends">10:30 AM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 4</span></td>
+                <td data-label="Theme">Power Electronics &amp; Control</td>
+                <td data-label="Day">Day 2</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">9:00 AM - 10:45 AM</td>
+                <td data-label="Papers">6</td>
+                <td data-label="Last paper ends">10:30 AM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 5</span></td>
+                <td data-label="Theme">Computing, AI &amp; Data Science</td>
+                <td data-label="Day">Day 2</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">3:45 PM - 5:45 PM</td>
+                <td data-label="Papers">6</td>
+                <td data-label="Last paper ends">5:15 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 6</span></td>
+                <td data-label="Theme">Electronics &amp; Embedded Systems</td>
+                <td data-label="Day">Day 2</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">3:45 PM - 5:45 PM</td>
+                <td data-label="Papers">5</td>
+                <td data-label="Last paper ends">5:00 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 8</span></td>
+                <td data-label="Theme">Emerging Tech &amp; Interdisciplinary</td>
+                <td data-label="Day">Day 3</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">10:45 AM - 12:45 PM</td>
+                <td data-label="Papers">7</td>
+                <td data-label="Last paper ends">12:30 PM</td>
+              </tr>
+              <tr>
+                <td data-label="Track"><span class="pid-chip">Track 7</span></td>
+                <td data-label="Theme">Power &amp; Energy Systems</td>
+                <td data-label="Day">Day 3</td>
+                <td data-label="Session">&mdash;</td>
+                <td data-label="Window">4:00 PM - 5:45 PM</td>
+                <td data-label="Papers">6</td>
+                <td data-label="Last paper ends">5:30 PM</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Day accordion -->
+        <div class="day-accordion-head">
+          <h2 class="section-heading">Detailed schedule</h2>
+          <p class="section-heading-note">Select a day to view its tracks. One day is shown at a time.</p>
+        </div>
+
+        <div class="day-accordion" id="dayAccordion">
+
+        <section class="day-block">
+          <h3 class="day-heading">
+            <button type="button" class="day-toggle" id="tab-day-1"
+              aria-expanded="true" aria-controls="panel-day-1">
+              <span class="day-toggle-main">
+                <span class="day-badge">Day 1</span>
+                <span class="day-date">Friday, 04 September 2026</span>
+              </span>
+              <span class="day-toggle-side">
+                <span class="day-stat">2 tracks</span>
+                <span class="day-stat">4 sessions</span>
+                <span class="day-stat">25 papers</span>
+                <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+              </span>
+            </button>
+          </h3>
+
+          <div class="day-panel" id="panel-day-1" role="region" aria-labelledby="tab-day-1">
+            <div class="day-panel-inner">
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 1</span>
+                <h4 class="track-title">Renewable Energy &amp; Storage <span class="track-session">Session I</span></h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 10:45 AM - 12:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>7 &times; 15 min (10:45 AM - 12:30 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 2</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 1 &ndash; Renewable Energy &amp; Storage Session I, Friday, 04 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">3</span></td>
+                <td class="cell-title" data-label="Paper Title">Utilizing Human Locomotion to Harvest Piezo Electric Energy</td>
+                <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">4</span></td>
+                <td class="cell-title" data-label="Paper Title">The Correlative Study of Diverse Fuel Cell Technologies</td>
+                <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">273</span></td>
+                <td class="cell-title" data-label="Paper Title">Co-simulation of Real and Virtual ECUs for Left Shifting</td>
+                <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">275</span></td>
+                <td class="cell-title" data-label="Paper Title">A new Hybrid Perturb &amp; Observe-Tianji's Horse Racing Optimization Algorithm for Enhancing PV Power Extraction Under Partial Shading Scenarios</td>
+                <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">302</span></td>
+                <td class="cell-title" data-label="Paper Title">EV WIREFREE- Smart Dynamic Wireless Charging System for Electric Vehicles with Embedded AI and Gyro Sensors</td>
+                <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">316</span></td>
+                <td class="cell-title" data-label="Paper Title">Automated I-V Tracer Circuit for Inspection of Bypass Diodes in Photovoltaic Module</td>
+                <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">355</span></td>
+                <td class="cell-title" data-label="Paper Title">Techno-Economic and Simulation-Based Assessment of Energy Storage Systems for Residential and Utility-Scale Solar Applications: A Case Study of Jalgaon City, India</td>
+                <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 2</span>
+                <h4 class="track-title">Computing, AI &amp; Data Science <span class="track-session">Session I</span></h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 10:45 AM - 12:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>7 &times; 15 min (10:45 AM - 12:30 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 1</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 2 &ndash; Computing, AI &amp; Data Science Session I, Friday, 04 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">148</span></td>
+                <td class="cell-title" data-label="Paper Title">Solar irradiation forecasting using CNN-LSTM: A hybrid model</td>
+                <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">180</span></td>
+                <td class="cell-title" data-label="Paper Title">Multi-Modal Wavelet Scalogram Fusion for Deep CNN-Based Capacitance Estimation</td>
+                <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">205</span></td>
+                <td class="cell-title" data-label="Paper Title">Performance Enhancement of a DC-DC Boost Converter Using TD3-Based Reinforcement Learning Control</td>
+                <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">259</span></td>
+                <td class="cell-title" data-label="Paper Title">MetaphorMind: Cross-Lingual Metaphor Detector and Interpreter</td>
+                <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">304</span></td>
+                <td class="cell-title" data-label="Paper Title">Circuit Copilot: An AI-Based Assistant for Understanding Hand-Drawn Circuit Diagrams</td>
+                <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">322</span></td>
+                <td class="cell-title" data-label="Paper Title">An Iterative Improved Framework for Severity Prediction and Aerosol Classification in Solar Photovoltaic Plants Using Integrated Deep Learning Fuzzy Logic and Predictive Control Process</td>
+                <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">387</span></td>
+                <td class="cell-title" data-label="Paper Title">A Comprehensive Analysis of Cybersecurity Requirements for Electric Vehicles and Charging Infrastructure</td>
+                <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 1</span>
+                <h4 class="track-title">Renewable Energy &amp; Storage <span class="track-session">Session II</span></h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 2:45 PM - 4:30 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>6 &times; 15 min (2:45 PM - 4:15 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 2</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 1 &ndash; Renewable Energy &amp; Storage Session II, Friday, 04 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">470</span></td>
+                <td class="cell-title" data-label="Paper Title">Comparative Analysis of LSTM based Day-Ahead Scheduling of Energy Storage Integrated Grid Connected Microgrid</td>
+                <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">506</span></td>
+                <td class="cell-title" data-label="Paper Title">A Novel SOC Based Control Algorithm for Enabling V2G and G2V Modes of Operation in EV Charging Station</td>
+                <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">522</span></td>
+                <td class="cell-title" data-label="Paper Title">Fast and Cost-Effective Cell Balancing for Lithium-Ion Batteries using a Single DC-DC Converter</td>
+                <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">532</span></td>
+                <td class="cell-title" data-label="Paper Title">Energy Management of a Solar/Wind/Second-life Battery Integrated System with SOH Estimation</td>
+                <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">537</span></td>
+                <td class="cell-title" data-label="Paper Title">Generation Scheduling of Power System with Thermal Power Plants, Electric Vehicles and Solar-powered Batteries with a Novel Cost function of Batteries</td>
+                <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">550</span></td>
+                <td class="cell-title" data-label="Paper Title">Modelling and Simulation of an Intelligent Phase-Shift Controlled Isolated DC-DC Converter with Machine Learning-Based Fault Detection and Charging Mode Optimization</td>
+                <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 2</span>
+                <h4 class="track-title">Computing, AI &amp; Data Science <span class="track-session">Session II</span></h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 2:45 PM - 4:30 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>5 &times; 15 min (2:45 PM - 4:00 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 1</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 2 &ndash; Computing, AI &amp; Data Science Session II, Friday, 04 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">388</span></td>
+                <td class="cell-title" data-label="Paper Title">Design of Power Efficient CNN Accelerator on FPGA</td>
+                <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">449</span></td>
+                <td class="cell-title" data-label="Paper Title">Comparative SOC Estimation for Li-Ion Batteries Using NN, 1D-CNN, and LSTM on Public Cycling Data</td>
+                <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">528</span></td>
+                <td class="cell-title" data-label="Paper Title">A Closed-Loop Control Strategy for Robust Operation of the Dual Active Semi-Bridge Converter</td>
+                <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">529</span></td>
+                <td class="cell-title" data-label="Paper Title">Hybrid Covariance-Guided ABC-NSGA-II for Multi-Objective Transformer Design Optimization with Finite Element Analysis Validation</td>
+                <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">540</span></td>
+                <td class="cell-title" data-label="Paper Title">Machine Learning-Based Reliability Improvement of a PSFB DC-DC Converter for Electric Vehicle Fast Charging</td>
+                <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="day-block">
+          <h3 class="day-heading">
+            <button type="button" class="day-toggle" id="tab-day-2"
+              aria-expanded="false" aria-controls="panel-day-2">
+              <span class="day-toggle-main">
+                <span class="day-badge">Day 2</span>
+                <span class="day-date">Saturday, 05 September 2026</span>
+              </span>
+              <span class="day-toggle-side">
+                <span class="day-stat">4 tracks</span>
+                <span class="day-stat">23 papers</span>
+                <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+              </span>
+            </button>
+          </h3>
+
+          <div class="day-panel" id="panel-day-2" role="region" aria-labelledby="tab-day-2" hidden>
+            <div class="day-panel-inner">
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 3</span>
+                <h4 class="track-title">Renewable Energy &amp; Storage</h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 9:00 AM - 10:45 AM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>6 &times; 15 min (9:00 AM - 10:30 AM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 4 and the PDW Panel Discussion</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 3 &ndash; Renewable Energy &amp; Storage, Saturday, 05 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">669</span></td>
+                <td class="cell-title" data-label="Paper Title">Advance Nuclear Energy System for Sustainable Transportation: Evaluating Nuclear Batteries as the Future of Electric Vehicles</td>
+                <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">794</span></td>
+                <td class="cell-title" data-label="Paper Title">Defect-Tolerance Analysis of ZnO Nanorod Electron Transport Layers in Perovskite Solar Cells</td>
+                <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">803</span></td>
+                <td class="cell-title" data-label="Paper Title">Hybrid Optimization of Thermal and Battery Management for Enhanced EV Efficiency using ML Algorithms</td>
+                <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">809</span></td>
+                <td class="cell-title" data-label="Paper Title">Field Data Analysis of Harmonic Distortion in Public PV-EV Charging Stations</td>
+                <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">819</span></td>
+                <td class="cell-title" data-label="Paper Title">Optimization of Grid-Tied Photovoltaic Inverters Using TLBO, HHO, and Upgraded Addax Algorithm for Remote Areas</td>
+                <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">824</span></td>
+                <td class="cell-title" data-label="Paper Title">Intelligent EV Battery Charging and Power Management in a DC Microgrid</td>
+                <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 4</span>
+                <h4 class="track-title">Power Electronics &amp; Control</h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 9:00 AM - 10:45 AM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>6 &times; 15 min (9:00 AM - 10:30 AM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 3 and the PDW Panel Discussion</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 4 &ndash; Power Electronics &amp; Control, Saturday, 05 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">281</span></td>
+                <td class="cell-title" data-label="Paper Title">An Enhanced Control Strategy for Glitch-Free Mode Transition in Multi-Mode Power Electronic Converters</td>
+                <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">370</span></td>
+                <td class="cell-title" data-label="Paper Title">Hybrid AC/DC Transmission Architectures for Clean Energy Transition</td>
+                <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">451</span></td>
+                <td class="cell-title" data-label="Paper Title">Review of Control Strategies in Mathematically Modelled Electric Vehicle Motors</td>
+                <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">697</span></td>
+                <td class="cell-title" data-label="Paper Title">Mitigation of Power System Oscillations in Multimachine Networks During Transient States Using a Hybrid Fuzzy Logic and Neural Network-Based Power Flow Controller</td>
+                <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">777</span></td>
+                <td class="cell-title" data-label="Paper Title">Normalized Modeling and Optimal Design of SPS-Controlled Dual Active Bridge Converter</td>
+                <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">823</span></td>
+                <td class="cell-title" data-label="Paper Title">Next Generation Electrical Machines for Automotive Traction Applications Part I: 2-Wheeler and 3-Wheeler Vehicles</td>
+                <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 5</span>
+                <h4 class="track-title">Computing, AI &amp; Data Science</h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 3:45 PM - 5:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>6 &times; 15 min (3:45 PM - 5:15 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 6</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 5 &ndash; Computing, AI &amp; Data Science, Saturday, 05 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">593</span></td>
+                <td class="cell-title" data-label="Paper Title">Optimal Placement of Electric Vehicle Charging Stations with Distributed Generation in Distribution Networks: A Comprehensive Review</td>
+                <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">742</span></td>
+                <td class="cell-title" data-label="Paper Title">An OCPP Simulation Framework for Security Evaluation of EV Charging Infrastructure</td>
+                <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">810</span></td>
+                <td class="cell-title" data-label="Paper Title">Hybrid Kalman-Machine Learning Framework for Fault Detection and Isolation in Lithium-Ion Battery Systems</td>
+                <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">818</span></td>
+                <td class="cell-title" data-label="Paper Title">Containerized SCADA Testbed for Supervisory Cybersecurity Analysis in Power System Infrastructure</td>
+                <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">821</span></td>
+                <td class="cell-title" data-label="Paper Title">A Swarm Intelligence Assisted Neural Network based Maximum Power Extraction Strategy for Solar PV Applications with Resistive Loading</td>
+                <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">610</span></td>
+                <td class="cell-title" data-label="Paper Title">Reviving Legacy Brushless Exciter After Severe High Speed Rotating Rectifier System Damage of 120 MW Turbine Generator - A Case Study</td>
+                <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 6</span>
+                <h4 class="track-title">Electronics &amp; Embedded Systems</h4>
+              </div>
+              <span class="parallel-tag"><i class="fas fa-layer-group"></i>Parallel</span>
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 3:45 PM - 5:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>5 &times; 15 min (3:45 PM - 5:00 PM)</span>
+              <span class="meta-item"><i class="fas fa-code-branch"></i>In parallel with Track 5</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 6 &ndash; Electronics &amp; Embedded Systems, Saturday, 05 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">199</span></td>
+                <td class="cell-title" data-label="Paper Title">Impact of Model Complexity on Optimization-Based Control Strategies for Residential Battery Energy Storage Systems</td>
+                <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">207</span></td>
+                <td class="cell-title" data-label="Paper Title">Impact of the Reactive Power Control Modes of Wind Parks on the Power Systems Voltage Stability</td>
+                <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">531</span></td>
+                <td class="cell-title" data-label="Paper Title">The role of synchronous condensers in power systems dominated by inverter-based resources</td>
+                <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">807</span></td>
+                <td class="cell-title" data-label="Paper Title">Supercapacitor based TMS pulse generator design - Analysis of pulse shaping capability</td>
+                <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">826</span></td>
+                <td class="cell-title" data-label="Paper Title">Energy-Efficient JFET-Based Neuron-Like Signal Generator for Low-Power Neuromorphic Systems</td>
+                <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="day-block">
+          <h3 class="day-heading">
+            <button type="button" class="day-toggle" id="tab-day-3"
+              aria-expanded="false" aria-controls="panel-day-3">
+              <span class="day-toggle-main">
+                <span class="day-badge">Day 3</span>
+                <span class="day-date">Sunday, 06 September 2026</span>
+              </span>
+              <span class="day-toggle-side">
+                <span class="day-stat">2 tracks</span>
+                <span class="day-stat">13 papers</span>
+                <span class="day-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+              </span>
+            </button>
+          </h3>
+
+          <div class="day-panel" id="panel-day-3" role="region" aria-labelledby="tab-day-3" hidden>
+            <div class="day-panel-inner">
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 8</span>
+                <h4 class="track-title">Emerging Tech &amp; Interdisciplinary</h4>
+              </div>
+              
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 10:45 AM - 12:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>7 &times; 15 min (10:45 AM - 12:30 PM)</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 8 &ndash; Emerging Tech &amp; Interdisciplinary, Sunday, 06 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">184</span></td>
+                <td class="cell-title" data-label="Paper Title">Remaining Life Time Estimation of Power Transformers</td>
+                <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">301</span></td>
+                <td class="cell-title" data-label="Paper Title">Design and Implementation of an Autonomous Medical Observation &amp; Remote Assistant</td>
+                <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">602</span></td>
+                <td class="cell-title" data-label="Paper Title">Design and Simulation of a Robust Open-Loop Flyback Converter with an Intermediate Voltage Rail for Portable Medical Devices</td>
+                <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">762</span></td>
+                <td class="cell-title" data-label="Paper Title">Smart Grid Shield: IoT-Based Embedded System for Electricity Theft Detection</td>
+                <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">782</span></td>
+                <td class="cell-title" data-label="Paper Title">Real-Time Vision-Based Multi-Zone Automatic Load Control Using Raspberry Pi for Indoor Energy Management</td>
+                <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">784</span></td>
+                <td class="cell-title" data-label="Paper Title">Time-Dependent Degradation and Risk Evolution in Utility-Scale Photovoltaic Systems: Evidence From Long-Term Operational Data</td>
+                <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">827</span></td>
+                <td class="cell-title" data-label="Paper Title">A Critical Analysis of Energy Harvesting and Intelligent Energy Management in Wireless Sensor Networks with a Value-Aware Decision Model</td>
+                <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="track-card">
+            <header class="track-card-head">
+              <div class="track-heading">
+                <span class="track-num">Track 7</span>
+                <h4 class="track-title">Power &amp; Energy Systems</h4>
+              </div>
+              
+            </header>
+
+            <div class="track-meta">
+              <span class="meta-item"><i class="fas fa-clock"></i>Session window: 4:00 PM - 5:45 PM</span>
+              <span class="meta-item"><i class="fas fa-microphone-lines"></i>6 &times; 15 min (4:00 PM - 5:30 PM)</span>
+            </div>
+
+            <div class="track-table-wrap">
+              <table class="track-table">
+                <caption class="sr-only">Track 7 &ndash; Power &amp; Energy Systems, Sunday, 06 September 2026</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Paper ID</th>
+                    <th scope="col">Paper Title</th>
+                    <th scope="col">Presentation Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">208</span></td>
+                <td class="cell-title" data-label="Paper Title">Experimental Assessment of the Performance of a Rotationally Asymmetrical Concentrator Based Solar Window with Time</td>
+                <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">216</span></td>
+                <td class="cell-title" data-label="Paper Title">Assessing the Societal Benefit of Hosting Capacity Flexibility: A Case Study of the Brazilian Market</td>
+                <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">274</span></td>
+                <td class="cell-title" data-label="Paper Title">FPGA Based SPWM Controller for Five-Level Inverter</td>
+                <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">789</span></td>
+                <td class="cell-title" data-label="Paper Title">Control of a Three-Phase Grid-Connected Voltage Source Inverter Using a dq-Frame Current Estimator</td>
+                <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">806</span></td>
+                <td class="cell-title" data-label="Paper Title">Comparative Evaluation of Front-End Converter Topologies for Supraharmonic Emission Reduction in Low-Voltage Grids</td>
+                <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
+              </tr>
+              <tr>
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">227</span></td>
+                <td class="cell-title" data-label="Paper Title">AI-Optimised Hybrid Flywheel-Hydrogen Fuel Cell System for Grid Frequency Stabilization in Sub-Saharan Power Networks</td>
+                <td class="cell-time" data-label="Presentation Time">5:15 PM - 5:30 PM</td>
+              </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+            </div>
+          </div>
+        </section>
+        </div>
+
+        <!-- Notes for authors -->
+        <div class="info-card notes-card">
+          <h2 class="info-card-title"><i class="fas fa-circle-info"></i>Notes for authors</h2>
+          <ul class="info-list">
+            <li>Report to your session hall at least <strong>15 minutes</strong> before the session begins.</li>
+            <li>Virtual presenters receive the online meeting link by e-mail at their registered address.</li>
+            <li>For any clarification regarding your session, please contact the organising committee.</li>
+          </ul>
+        </div>
+
+        <!-- Important notice -->
+        <div class="notice-card" role="note">
+          <h2 class="notice-title">
+            <i class="fas fa-triangle-exclamation"></i>
+            Important notice to authors &amp; presenters
+          </h2>
+          <p>
+            The track and presentation timings shown here are <strong>indicative and subject to significant
+            change at short notice</strong>, on account of administrative or organising requirements, session
+            re-arrangement, or technical difficulties.
+          </p>
+          <p>
+            Authors are therefore requested to be present for the <strong>entire day on which their track is
+            scheduled</strong>, and not only for their allotted time slot. Presenters who are unavailable when
+            their paper is called may forfeit the opportunity to present.
+          </p>
+          <p>
+            Kindly report to your session hall at least 15 minutes before the session begins, and follow the
+            announcements of the organising committee and session chairs for the timings in force on the day.
+          </p>
+        </div>
+
+        <div class="schedule-footer-actions">
+          <a class="schedule-btn primary"
+            href="./assets/documents/IPRECON_2026_Track_Schedule.pdf"
+            download="IPRECON 2026 - Track Schedule.pdf">
+            <i class="fas fa-file-arrow-down"></i>
+            Download Track Schedule (PDF)
+          </a>
+          <a class="schedule-btn ghost" href="./presentation-guidelines.html">
+            <i class="fas fa-chalkboard-user"></i>
+            Presentation Guidelines
+          </a>
+          <a class="schedule-btn ghost" href="./contact.html">
+            <i class="fas fa-headset"></i>
+            Contact the Committee
+          </a>
+        </div>
+
       </div>
-      <h3>Thank You!</h3>
-      <p>
-        We'll notify you at the earliest once this page is ready. Please check
-        your inbox regularly for updates.
-      </p>
-      <div class="success-popup-actions">
-        <a href="./index.html" class="popup-btn primary">
-          <i class="fas fa-home"></i>
-          Back to Home
-        </a>
-        <button class="popup-btn secondary" onclick="closeSuccessPopup()">
-          <i class="fas fa-times"></i>
-          Close
-        </button>
-      </div>
-      <div class="auto-close-info">
-        This popup will close automatically in
-        <span id="countdown">5</span> seconds
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <!-- Footer section -->
   <esi:include src="/includes/footer.html" />
 
   <script src="./scripts/script.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function () {
-      // Configuration - REPLACE WITH YOUR ACTUAL WORKER URL
-      const WORKER_URL = 'https://iprecon-email-collector.ieeesbcek2000.workers.dev'; // Replace with your Worker URL
-      const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+    /*
+     * Day accordion.
+     *
+     * One day open at a time, Day 1 open on load. The panels are marked
+     * [hidden] in the markup so that without JavaScript every day renders
+     * expanded and the schedule is still fully readable — a conference
+     * programme must not depend on scripting to be legible. On boot this
+     * removes [hidden] and takes over height management.
+     *
+     * Heights are driven from scrollHeight rather than a fixed max-height:
+     * the days differ in length (Day 1 carries four tracks, Day 3 two), and
+     * any constant large enough for the longest would make the shorter ones
+     * animate at the wrong speed. After the sweep the open panel is set back
+     * to max-height:none so a viewport resize cannot clip its own content.
+     */
+    (function () {
+      "use strict";
 
-      // Enhanced notification form handling with backend integration
-      let countdownTimer;
-      let countdownInterval;
+      var root = document.getElementById("dayAccordion");
+      if (!root) return;
 
-      $("#notifyBtn").click(function (e) {
-        e.preventDefault();
+      var toggles = Array.prototype.slice.call(root.querySelectorAll(".day-toggle"));
+      if (!toggles.length) return;
 
-        const email = $("#emailInput").val().trim();
-        const emailInput = $("#emailInput");
-        const errorMessage = $("#errorMessage");
-        const successMessage = $("#successMessage");
-        const submitButton = $(this);
+      function panelFor(btn) {
+        return document.getElementById(btn.getAttribute("aria-controls"));
+      }
 
-        // Clear previous states
-        emailInput.removeClass("error");
-        errorMessage.removeClass("show").text("");
-        successMessage.removeClass("show").text("");
+      function collapse(btn) {
+        var panel = panelFor(btn);
+        if (!panel || btn.getAttribute("aria-expanded") !== "true") return;
+        // Pin the current height first: a transition from "none" does nothing,
+        // so the panel would otherwise vanish instead of sliding shut.
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        void panel.offsetHeight;
+        btn.setAttribute("aria-expanded", "false");
+        panel.style.maxHeight = "0px";
+      }
 
-        // Validation
-        if (!email) {
-          showError("Please enter an email address.");
-          return;
-        }
+      function expand(btn) {
+        var panel = panelFor(btn);
+        if (!panel) return;
+        btn.setAttribute("aria-expanded", "true");
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
 
-        if (!isValidEmail(email)) {
-          showError("Please enter a valid email address.");
-          return;
-        }
+      // Once open, release the pinned height so reflow (rotation, font swap,
+      // a long title wrapping to another line) cannot crop the panel.
+      root.addEventListener("transitionend", function (e) {
+        if (e.propertyName !== "max-height") return;
+        var panel = e.target;
+        if (!panel.classList || !panel.classList.contains("day-panel")) return;
+        var btn = document.getElementById(panel.getAttribute("aria-labelledby"));
+        if (btn && btn.getAttribute("aria-expanded") === "true") panel.style.maxHeight = "none";
+      });
 
-        // Show loading state
-        showLoadingState(submitButton, true);
+      toggles.forEach(function (btn) {
+        var panel = panelFor(btn);
+        if (!panel) return;
 
-        // Send to backend
-        submitEmailToBackend(email, currentPage)
-          .then(response => {
-            showLoadingState(submitButton, false);
+        // Take over from the no-JS default.
+        panel.hidden = false;
+        var startOpen = btn.getAttribute("aria-expanded") === "true";
+        panel.style.maxHeight = startOpen ? "none" : "0px";
 
-            if (response.success) {
-              showSuccessPopup(response.message);
-              emailInput.val("");
+        btn.addEventListener("click", function () {
+          var isOpen = btn.getAttribute("aria-expanded") === "true";
+          toggles.forEach(collapse);
+          if (!isOpen) expand(btn);
+        });
+      });
 
-              // Track the submission (optional analytics)
-              if (typeof gtag !== 'undefined') {
-                gtag('event', 'email_signup', {
-                  'page': currentPage,
-                  'email_domain': email.split('@')[1]
-                });
-              }
-            } else {
-              showError(response.error || "An error occurred. Please try again.");
-            }
-          })
-          .catch(error => {
-            showLoadingState(submitButton, false);
-            console.error('Email submission error:', error);
-            showError("Network error. Please check your connection and try again.");
+      // A day left open across a resize is re-measured, since wrapped text
+      // changes its height.
+      var resizeTimer = null;
+      window.addEventListener("resize", function () {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          toggles.forEach(function (btn) {
+            if (btn.getAttribute("aria-expanded") !== "true") return;
+            var panel = panelFor(btn);
+            if (panel) panel.style.maxHeight = "none";
           });
-
-        function showError(message) {
-          emailInput.addClass("error");
-          errorMessage.text(message).addClass("show");
-          successMessage.removeClass("show");
-        }
-
-        function isValidEmail(email) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailRegex.test(email);
-        }
+        }, 150);
       });
-
-      // Clear error state when user starts typing
-      $("#emailInput").on("input", function () {
-        $(this).removeClass("error");
-        $("#errorMessage").removeClass("show");
-        $("#successMessage").removeClass("show");
-      });
-
-      // Submit email to backend
-      async function submitEmailToBackend(email, page) {
-        try {
-          const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: email,
-              page: page
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          return await response.json();
-        } catch (error) {
-          console.error('Backend submission error:', error);
-          throw error;
-        }
-      }
-
-      // Show loading state on button
-      function showLoadingState(button, isLoading) {
-        const originalText = button.data('original-text') || button.html();
-
-        if (!button.data('original-text')) {
-          button.data('original-text', originalText);
-        }
-
-        if (isLoading) {
-          button.prop('disabled', true);
-          button.html('<i class="fas fa-spinner fa-spin"></i> Subscribing...');
-        } else {
-          button.prop('disabled', false);
-          button.html(originalText);
-        }
-      }
-
-      // Success popup functions
-      function showSuccessPopup(customMessage) {
-        // Update the success message if provided
-        if (customMessage) {
-          $("#successPopup .success-popup-content p").text(customMessage);
-        }
-
-        $("#successPopup").addClass("show");
-        startCountdown();
-      }
-
-      function closeSuccessPopup() {
-        $("#successPopup").removeClass("show");
-        if (countdownTimer) {
-          clearTimeout(countdownTimer);
-        }
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-        }
-
-        // Reset the success message to default
-        $("#successPopup .success-popup-content p").text(
-          "We'll notify you at the earliest once this page is ready. Please check your inbox regularly for updates."
-        );
-      }
-
-      function startCountdown() {
-        let seconds = 5;
-        $("#countdown").text(seconds);
-
-        countdownInterval = setInterval(function () {
-          seconds--;
-          $("#countdown").text(seconds);
-
-          if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            closeSuccessPopup();
-          }
-        }, 1000);
-
-        countdownTimer = setTimeout(function () {
-          closeSuccessPopup();
-        }, 5000);
-      }
-
-      // Close popup when clicking outside
-      $("#successPopup").click(function (e) {
-        if (e.target === this) {
-          closeSuccessPopup();
-        }
-      });
-
-      // Global function for close button
-      window.closeSuccessPopup = closeSuccessPopup;
-
-      // Enhanced form validation with real-time feedback
-      $("#emailInput").on("blur", function () {
-        const email = $(this).val().trim();
-        if (email && !isValidEmail(email)) {
-          $(this).addClass("error");
-          $("#errorMessage").text("Please enter a valid email address.").addClass("show");
-        }
-      });
-
-      function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      }
-
-      // Add keyboard support for form submission
-      $("#emailInput").on("keypress", function (e) {
-        if (e.which === 13) { // Enter key
-          $("#notifyBtn").click();
-        }
-      });
-
-      // Optional: Add a subtle animation to the form on page load
-      setTimeout(function () {
-        $(".notification-signup").addClass("fade-in");
-      }, 500);
-    });
+    })();
   </script>
 </body>
+
 </html>
