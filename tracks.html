@@ -27,7 +27,6 @@
     .info-card-title,
     .info-list,
     .section-heading,
-    .section-heading-note,
     .day-toggle,
     .day-badge,
     .day-date,
@@ -237,6 +236,29 @@
       background: #fafafa;
     }
 
+    /* Timing model and Notes for authors sit side by side. Both are short
+       bullet lists that left a lot of dead white space stacked full-width.
+       auto-fit with a 380px floor means the pair collapses to one column on
+       its own once a card would be squeezed, so no separate breakpoint has to
+       be kept in step with it.
+
+       min(380px, 100%) rather than a bare 380px: a bare floor is a floor even
+       when the container is narrower than it, so on a 390px phone the 350px of
+       available width still produced a 380px column and pushed the page 25px
+       sideways. Wrapping it in min() lets the track shrink to the container
+       once there is no room, which is exactly when the single column is
+       wanted anyway. */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+      gap: 26px;
+      margin-bottom: 26px;
+      /* Default stretch alignment, left explicit: the two cards have different
+         numbers of bullets, and ragged bottom edges on a side-by-side pair
+         read as a mistake. */
+      align-items: stretch;
+    }
+
     .info-card {
       background: #fff;
       border-radius: 14px;
@@ -244,6 +266,11 @@
       margin-bottom: 26px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
       border-left: 5px solid #8e24aa;
+    }
+
+    /* The grid supplies the gap; a trailing margin would double it. */
+    .info-grid .info-card {
+      margin-bottom: 0;
     }
 
     .info-card-title {
@@ -292,13 +319,6 @@
       color: #211021;
       margin: 46px 0 6px;
       text-align: center;
-    }
-
-    .section-heading-note {
-      text-align: center;
-      color: #6c757d;
-      margin: 0 0 26px;
-      font-size: 0.98rem;
     }
 
     /* -------------------------- SEARCH --------------------------- */
@@ -1032,25 +1052,26 @@
     <section class="schedule-section">
       <div class="schedule-container">
 
-        <!-- Timing model -->
-        <div class="info-card">
-          <h2 class="info-card-title"><i class="fas fa-stopwatch"></i>Timing model</h2>
-          <ul class="info-list">
-            <li>Every paper is allotted <strong>15 minutes</strong> &mdash; 12 minutes presentation and 3 minutes Q&amp;A.</li>
-            <li>Sessions marked <strong>Parallel</strong> run simultaneously in separate halls.</li>
-            <li>Each session window closes a little later than its last paper, to absorb overruns and technical difficulties.</li>
-            <li>In total, <strong>61 papers</strong> are scheduled across <strong>8 tracks</strong> over three days.</li>
-          </ul>
-        </div>
+        <!-- Timing model + Notes for authors, side by side -->
+        <div class="info-grid">
+          <div class="info-card">
+            <h2 class="info-card-title"><i class="fas fa-stopwatch"></i>Timing model</h2>
+            <ul class="info-list">
+              <li>Every paper is allotted <strong>15 minutes</strong> &mdash; 12 minutes presentation and 3 minutes Q&amp;A.</li>
+              <li>Sessions marked <strong>Parallel</strong> run simultaneously in separate halls.</li>
+              <li>Each session window closes a little later than its last paper, to absorb overruns and technical difficulties.</li>
+              <li>In total, <strong>61 papers</strong> are scheduled across <strong>8 tracks</strong> over three days.</li>
+            </ul>
+          </div>
 
-        <!-- Notes for authors -->
-        <div class="info-card notes-card">
-          <h2 class="info-card-title"><i class="fas fa-circle-info"></i>Notes for authors</h2>
-          <ul class="info-list">
-            <li>Report to your session hall at least <strong>15 minutes</strong> before the session begins.</li>
-            <li>Virtual presenters receive the online meeting link by e-mail at their registered address.</li>
-            <li>For any clarification regarding your session, please contact the organising committee.</li>
-          </ul>
+          <div class="info-card notes-card">
+            <h2 class="info-card-title"><i class="fas fa-circle-info"></i>Notes for authors</h2>
+            <ul class="info-list">
+              <li>Report to your session hall at least <strong>15 minutes</strong> before the session begins.</li>
+              <li>Virtual presenters receive the online meeting link by e-mail at their registered address.</li>
+              <li>For any clarification regarding your session, please contact the organising committee.</li>
+            </ul>
+          </div>
         </div>
 
         <!-- Important notice -->
