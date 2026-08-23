@@ -592,6 +592,17 @@
       line-height: 1.55;
     }
 
+    /* Sits between a label and its control, for a field that needs explaining
+       before the applicant acts rather than after. The format and size limits
+       stay in .field-hint below the input, where every other field keeps them,
+       so only the part you need in order to choose the right file moves up. */
+    .field-note {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin: 0 0 10px;
+      line-height: 1.55;
+    }
+
     .field-hint.cap {
       display: none;
       color: #5d4a13;
@@ -1567,13 +1578,14 @@
                   <div class="form-field full">
                     <label class="form-label" for="file-declaration">Signed Declaration<span
                         class="req-star">*</span></label>
+                    <p class="field-note" id="note-file-declaration">A letter from your university or institution,
+                      signed by your head of department or an equivalent authority, confirming that you are not
+                      receiving travel support from the institution or from any other source to attend
+                      IPRECON 2026.</p>
                     <input class="form-input" type="file" id="file-declaration" name="file_declaration"
                       accept=".pdf,.jpg,.jpeg,.png" required
-                      aria-describedby="hint-file-declaration err-file-declaration" />
-                    <p class="field-hint" id="hint-file-declaration">PDF, JPG or PNG &middot; up to 10 MB. A letter
-                      from your university or institution, signed by your head of department or an equivalent
-                      authority, confirming that you are not receiving travel support from the institution or from
-                      any other source to attend IPRECON 2026.</p>
+                      aria-describedby="note-file-declaration hint-file-declaration err-file-declaration" />
+                    <p class="field-hint" id="hint-file-declaration">PDF, JPG or PNG &middot; up to 10 MB.</p>
                     <div class="file-chosen" id="chosen-declaration">
                       <div class="file-chosen-meta">
                         <div class="file-chosen-name" id="chosen-declaration-name"></div>
