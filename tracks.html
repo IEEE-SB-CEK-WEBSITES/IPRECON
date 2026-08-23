@@ -23,6 +23,7 @@
     .page-meta,
     .hero-stat,
     .schedule-btn,
+    .hero-hint,
     .info-card-title,
     .info-list,
     .section-heading,
@@ -172,6 +173,47 @@
 
     .schedule-footer-actions {
       margin-top: 44px;
+    }
+
+    /* The download button is the loudest thing in the hero, so a reader can
+       take the PDF and leave without ever learning the schedule is on the page
+       and searchable. This says so directly, under the button. */
+    .hero-hint {
+      margin: 18px 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .hero-hint i {
+      color: #d4af37;
+      font-size: 0.85rem;
+    }
+
+    .hero-hint-link {
+      color: #d4af37;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .hero-hint-link:hover,
+    .hero-hint-link:focus-visible {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* The jump target has to clear the navbar AND the marquee. script.js makes
+       both fixed only after the page scrolls, pulling ~100px out of the flow
+       after the jump has already landed, so the offset covers the chrome plus
+       that shift - same value as .day-block. */
+    .day-accordion-head {
+      scroll-margin-top: 240px;
     }
 
     /* -------------------------- BUTTONS -------------------------- */
@@ -811,9 +853,20 @@
         font-size: 2rem;
       }
 
+      /* align-items, not justify-content. Turning the row into a column swaps
+         the axes: justify-content now centres vertically and horizontal
+         placement falls to align-items, which defaults to stretch - so each
+         line filled the width and its text sat hard against the left while the
+         heading above it stayed centred. text-align handles the second line of
+         the venue, which wraps on a phone. */
       .page-meta {
         flex-direction: column;
+        align-items: center;
         gap: 10px;
+      }
+
+      .page-meta span {
+        text-align: center;
       }
 
       .hero-stat {
@@ -957,6 +1010,10 @@
         min-width: 80px;
       }
 
+      .hero-hint {
+        font-size: 0.88rem;
+      }
+
       .day-badge {
         font-size: 0.75rem;
         padding: 6px 11px;
@@ -1047,6 +1104,12 @@
               Download Track Schedule (PDF)
             </a>
           </div>
+
+          <p class="hero-hint">
+            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+            The full schedule is on this page too -
+            <a class="hero-hint-link" href="#schedule">scroll down or search your paper ID</a>
+          </p>
         </div>
       </div>
     </section>
@@ -1099,7 +1162,7 @@
         </div>
 
         <!-- Day accordion -->
-        <div class="day-accordion-head">
+        <div class="day-accordion-head" id="schedule">
           <h2 class="section-heading">Detailed schedule</h2>
           <p class="section-heading-note">Select a day to view its tracks.</p>
         </div>
