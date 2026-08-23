@@ -32,6 +32,8 @@
     .day-badge,
     .day-date,
     .day-stat,
+    .search-input,
+    .search-status,
     .track-num,
     .track-title,
     .track-session,
@@ -299,6 +301,112 @@
       font-size: 0.98rem;
     }
 
+    /* -------------------------- SEARCH --------------------------- */
+    .search-bar {
+      margin: 0 0 22px;
+    }
+
+    .search-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 2px solid #e3d6ea;
+      border-radius: 12px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-field:focus-within {
+      border-color: #8e24aa;
+      box-shadow: 0 0 0 4px rgba(142, 36, 170, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      color: #8e24aa;
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      padding: 16px 16px 16px 48px;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1rem;
+      color: #211021;
+      border-radius: 12px;
+    }
+
+    .search-input::placeholder {
+      color: #9b8ea3;
+    }
+
+    /* The browser's own clear affordance would sit beside ours. */
+    .search-input::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    .search-clear {
+      flex-shrink: 0;
+      margin-right: 10px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #f0e6f5;
+      color: #6a1b9a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .search-clear:hover {
+      background: #8e24aa;
+      color: #fff;
+    }
+
+    .search-clear[hidden] {
+      display: none;
+    }
+
+    .search-status {
+      margin: 10px 2px 0;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 0.9rem;
+      color: #6c757d;
+      min-height: 1.2em;
+    }
+
+    .search-status.has-results {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .search-status.no-results {
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    /* Rows and cards the filter has excluded. Kept as a class rather than an
+       inline style so a cleared search restores everything in one sweep. */
+    .is-filtered-out {
+      display: none !important;
+    }
+
+    mark.search-hit {
+      background: #ffe082;
+      color: #211021;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
     /* ------------------------ ACCORDION -------------------------- */
     .day-block {
       margin-bottom: 18px;
@@ -417,8 +525,18 @@
 
     /* Collapsed height is driven from JS (scrollHeight), so the transition
        works with content of any length. `hidden` is honoured for the
-       no-JS case; JS removes it and manages max-height instead. */
+       no-JS case; JS removes it and manages max-height instead.
+
+       position:relative is load-bearing, not decoration. Each table carries a
+       `<caption class="sr-only">`, which is position:absolute. On a static
+       parent their containing block is an ancestor OUTSIDE this element, so
+       overflow:hidden could not clip them: the captions of the two collapsed
+       days kept their full layout position and stretched the root element
+       868px past the footer, which showed on the live site as a huge blank
+       gap below it. Making the panel a containing block brings them back
+       inside the clip. */
     .day-panel {
+      position: relative;
       overflow: hidden;
       background: #f4eef7;
       border-radius: 0 0 14px 14px;
@@ -592,10 +710,6 @@
       font-weight: 600;
       color: #211021;
       width: 1%;
-    }
-
-    .summary-table .pid-chip {
-      background: #6a1b9a;
     }
 
     /* ------------------------- NOTICE ---------------------------- */
@@ -929,123 +1043,54 @@
           </ul>
         </div>
 
-        <!-- Summary -->
-        <div class="info-card">
-          <h2 class="info-card-title"><i class="fas fa-table-list"></i>Schedule at a glance</h2>
-          <div class="track-table-wrap">
-            <table class="track-table summary-table">
-              <caption class="sr-only">Summary of all tracks, sessions and windows</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Track</th>
-                  <th scope="col">Theme</th>
-                  <th scope="col">Day</th>
-                  <th scope="col">Session</th>
-                  <th scope="col">Window</th>
-                  <th scope="col">Papers</th>
-                  <th scope="col">Last paper ends</th>
-                </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 1</span></td>
-                <td data-label="Theme">Renewable Energy &amp; Storage</td>
-                <td data-label="Day">Day 1</td>
-                <td data-label="Session">Session I</td>
-                <td data-label="Window">10:45 AM - 12:45 PM</td>
-                <td data-label="Papers">7</td>
-                <td data-label="Last paper ends">12:30 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 2</span></td>
-                <td data-label="Theme">Computing, AI &amp; Data Science</td>
-                <td data-label="Day">Day 1</td>
-                <td data-label="Session">Session I</td>
-                <td data-label="Window">10:45 AM - 12:45 PM</td>
-                <td data-label="Papers">7</td>
-                <td data-label="Last paper ends">12:30 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 1</span></td>
-                <td data-label="Theme">Renewable Energy &amp; Storage</td>
-                <td data-label="Day">Day 1</td>
-                <td data-label="Session">Session II</td>
-                <td data-label="Window">2:45 PM - 4:30 PM</td>
-                <td data-label="Papers">6</td>
-                <td data-label="Last paper ends">4:15 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 2</span></td>
-                <td data-label="Theme">Computing, AI &amp; Data Science</td>
-                <td data-label="Day">Day 1</td>
-                <td data-label="Session">Session II</td>
-                <td data-label="Window">2:45 PM - 4:30 PM</td>
-                <td data-label="Papers">5</td>
-                <td data-label="Last paper ends">4:00 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 3</span></td>
-                <td data-label="Theme">Renewable Energy &amp; Storage</td>
-                <td data-label="Day">Day 2</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">9:00 AM - 10:45 AM</td>
-                <td data-label="Papers">6</td>
-                <td data-label="Last paper ends">10:30 AM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 4</span></td>
-                <td data-label="Theme">Power Electronics &amp; Control</td>
-                <td data-label="Day">Day 2</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">9:00 AM - 10:45 AM</td>
-                <td data-label="Papers">6</td>
-                <td data-label="Last paper ends">10:30 AM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 5</span></td>
-                <td data-label="Theme">Computing, AI &amp; Data Science</td>
-                <td data-label="Day">Day 2</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">3:45 PM - 5:45 PM</td>
-                <td data-label="Papers">6</td>
-                <td data-label="Last paper ends">5:15 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 6</span></td>
-                <td data-label="Theme">Electronics &amp; Embedded Systems</td>
-                <td data-label="Day">Day 2</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">3:45 PM - 5:45 PM</td>
-                <td data-label="Papers">5</td>
-                <td data-label="Last paper ends">5:00 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 8</span></td>
-                <td data-label="Theme">Emerging Tech &amp; Interdisciplinary</td>
-                <td data-label="Day">Day 3</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">10:45 AM - 12:45 PM</td>
-                <td data-label="Papers">7</td>
-                <td data-label="Last paper ends">12:30 PM</td>
-              </tr>
-              <tr>
-                <td data-label="Track"><span class="pid-chip">Track 7</span></td>
-                <td data-label="Theme">Power &amp; Energy Systems</td>
-                <td data-label="Day">Day 3</td>
-                <td data-label="Session">&mdash;</td>
-                <td data-label="Window">4:00 PM - 5:45 PM</td>
-                <td data-label="Papers">6</td>
-                <td data-label="Last paper ends">5:30 PM</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+        <!-- Notes for authors -->
+        <div class="info-card notes-card">
+          <h2 class="info-card-title"><i class="fas fa-circle-info"></i>Notes for authors</h2>
+          <ul class="info-list">
+            <li>Report to your session hall at least <strong>15 minutes</strong> before the session begins.</li>
+            <li>Virtual presenters receive the online meeting link by e-mail at their registered address.</li>
+            <li>For any clarification regarding your session, please contact the organising committee.</li>
+          </ul>
+        </div>
+
+        <!-- Important notice -->
+        <div class="notice-card" role="note">
+          <h2 class="notice-title">
+            <i class="fas fa-triangle-exclamation"></i>
+            Important notice to authors &amp; presenters
+          </h2>
+          <p>
+            The track and presentation timings shown here are <strong>indicative and subject to significant
+            change at short notice</strong>, on account of administrative or organising requirements, session
+            re-arrangement, or technical difficulties.
+          </p>
+          <p>
+            Authors are therefore requested to be present for the <strong>entire day on which their track is
+            scheduled</strong>, and not only for their allotted time slot. Presenters who are unavailable when
+            their paper is called may forfeit the opportunity to present.
+          </p>
+          <p>
+            Kindly report to your session hall at least 15 minutes before the session begins, and follow the
+            announcements of the organising committee and session chairs for the timings in force on the day.
+          </p>
         </div>
 
         <!-- Day accordion -->
         <div class="day-accordion-head">
           <h2 class="section-heading">Detailed schedule</h2>
-          <p class="section-heading-note">Select a day to view its tracks. One day is shown at a time.</p>
+        </div>
+
+        <div class="search-bar">
+          <label class="sr-only" for="paperSearch">Search by paper ID or paper title</label>
+          <div class="search-field">
+            <i class="fas fa-magnifying-glass search-icon" aria-hidden="true"></i>
+            <input type="search" id="paperSearch" class="search-input" autocomplete="off"
+              placeholder="Find your paper &mdash; type a paper ID or title" />
+            <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search">
+              <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+          <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
         </div>
 
         <div class="day-accordion" id="dayAccordion">
@@ -1096,37 +1141,37 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="3" data-search="3 utilizing human locomotion to harvest piezo electric energy">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">3</span></td>
                 <td class="cell-title" data-label="Paper Title">Utilizing Human Locomotion to Harvest Piezo Electric Energy</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="4" data-search="4 the correlative study of diverse fuel cell technologies">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">4</span></td>
                 <td class="cell-title" data-label="Paper Title">The Correlative Study of Diverse Fuel Cell Technologies</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="273" data-search="273 co-simulation of real and virtual ecus for left shifting">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">273</span></td>
                 <td class="cell-title" data-label="Paper Title">Co-simulation of Real and Virtual ECUs for Left Shifting</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="275" data-search="275 a new hybrid perturb &amp; observe-tianji's horse racing optimization algorithm for enhancing pv power extraction under partial shading scenarios">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">275</span></td>
                 <td class="cell-title" data-label="Paper Title">A new Hybrid Perturb &amp; Observe-Tianji's Horse Racing Optimization Algorithm for Enhancing PV Power Extraction Under Partial Shading Scenarios</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="302" data-search="302 ev wirefree- smart dynamic wireless charging system for electric vehicles with embedded ai and gyro sensors">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">302</span></td>
                 <td class="cell-title" data-label="Paper Title">EV WIREFREE- Smart Dynamic Wireless Charging System for Electric Vehicles with Embedded AI and Gyro Sensors</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="316" data-search="316 automated i-v tracer circuit for inspection of bypass diodes in photovoltaic module">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">316</span></td>
                 <td class="cell-title" data-label="Paper Title">Automated I-V Tracer Circuit for Inspection of Bypass Diodes in Photovoltaic Module</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="355" data-search="355 techno-economic and simulation-based assessment of energy storage systems for residential and utility-scale solar applications: a case study of jalgaon city, india">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">355</span></td>
                 <td class="cell-title" data-label="Paper Title">Techno-Economic and Simulation-Based Assessment of Energy Storage Systems for Residential and Utility-Scale Solar Applications: A Case Study of Jalgaon City, India</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
@@ -1162,37 +1207,37 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="148" data-search="148 solar irradiation forecasting using cnn-lstm: a hybrid model">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">148</span></td>
                 <td class="cell-title" data-label="Paper Title">Solar irradiation forecasting using CNN-LSTM: A hybrid model</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="180" data-search="180 multi-modal wavelet scalogram fusion for deep cnn-based capacitance estimation">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">180</span></td>
                 <td class="cell-title" data-label="Paper Title">Multi-Modal Wavelet Scalogram Fusion for Deep CNN-Based Capacitance Estimation</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="205" data-search="205 performance enhancement of a dc-dc boost converter using td3-based reinforcement learning control">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">205</span></td>
                 <td class="cell-title" data-label="Paper Title">Performance Enhancement of a DC-DC Boost Converter Using TD3-Based Reinforcement Learning Control</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="259" data-search="259 metaphormind: cross-lingual metaphor detector and interpreter">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">259</span></td>
                 <td class="cell-title" data-label="Paper Title">MetaphorMind: Cross-Lingual Metaphor Detector and Interpreter</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="304" data-search="304 circuit copilot: an ai-based assistant for understanding hand-drawn circuit diagrams">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">304</span></td>
                 <td class="cell-title" data-label="Paper Title">Circuit Copilot: An AI-Based Assistant for Understanding Hand-Drawn Circuit Diagrams</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="322" data-search="322 an iterative improved framework for severity prediction and aerosol classification in solar photovoltaic plants using integrated deep learning fuzzy logic and predictive control process">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">322</span></td>
                 <td class="cell-title" data-label="Paper Title">An Iterative Improved Framework for Severity Prediction and Aerosol Classification in Solar Photovoltaic Plants Using Integrated Deep Learning Fuzzy Logic and Predictive Control Process</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="387" data-search="387 a comprehensive analysis of cybersecurity requirements for electric vehicles and charging infrastructure">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">387</span></td>
                 <td class="cell-title" data-label="Paper Title">A Comprehensive Analysis of Cybersecurity Requirements for Electric Vehicles and Charging Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
@@ -1228,32 +1273,32 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="470" data-search="470 comparative analysis of lstm based day-ahead scheduling of energy storage integrated grid connected microgrid">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">470</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative Analysis of LSTM based Day-Ahead Scheduling of Energy Storage Integrated Grid Connected Microgrid</td>
                 <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="506" data-search="506 a novel soc based control algorithm for enabling v2g and g2v modes of operation in ev charging station">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">506</span></td>
                 <td class="cell-title" data-label="Paper Title">A Novel SOC Based Control Algorithm for Enabling V2G and G2V Modes of Operation in EV Charging Station</td>
                 <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="522" data-search="522 fast and cost-effective cell balancing for lithium-ion batteries using a single dc-dc converter">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">522</span></td>
                 <td class="cell-title" data-label="Paper Title">Fast and Cost-Effective Cell Balancing for Lithium-Ion Batteries using a Single DC-DC Converter</td>
                 <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="532" data-search="532 energy management of a solar/wind/second-life battery integrated system with soh estimation">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">532</span></td>
                 <td class="cell-title" data-label="Paper Title">Energy Management of a Solar/Wind/Second-life Battery Integrated System with SOH Estimation</td>
                 <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="537" data-search="537 generation scheduling of power system with thermal power plants, electric vehicles and solar-powered batteries with a novel cost function of batteries">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">537</span></td>
                 <td class="cell-title" data-label="Paper Title">Generation Scheduling of Power System with Thermal Power Plants, Electric Vehicles and Solar-powered Batteries with a Novel Cost function of Batteries</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="550" data-search="550 modelling and simulation of an intelligent phase-shift controlled isolated dc-dc converter with machine learning-based fault detection and charging mode optimization">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">550</span></td>
                 <td class="cell-title" data-label="Paper Title">Modelling and Simulation of an Intelligent Phase-Shift Controlled Isolated DC-DC Converter with Machine Learning-Based Fault Detection and Charging Mode Optimization</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
@@ -1289,27 +1334,27 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="388" data-search="388 design of power efficient cnn accelerator on fpga">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">388</span></td>
                 <td class="cell-title" data-label="Paper Title">Design of Power Efficient CNN Accelerator on FPGA</td>
                 <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="449" data-search="449 comparative soc estimation for li-ion batteries using nn, 1d-cnn, and lstm on public cycling data">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">449</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative SOC Estimation for Li-Ion Batteries Using NN, 1D-CNN, and LSTM on Public Cycling Data</td>
                 <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="528" data-search="528 a closed-loop control strategy for robust operation of the dual active semi-bridge converter">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">528</span></td>
                 <td class="cell-title" data-label="Paper Title">A Closed-Loop Control Strategy for Robust Operation of the Dual Active Semi-Bridge Converter</td>
                 <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="529" data-search="529 hybrid covariance-guided abc-nsga-ii for multi-objective transformer design optimization with finite element analysis validation">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">529</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Covariance-Guided ABC-NSGA-II for Multi-Objective Transformer Design Optimization with Finite Element Analysis Validation</td>
                 <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="540" data-search="540 machine learning-based reliability improvement of a psfb dc-dc converter for electric vehicle fast charging">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">540</span></td>
                 <td class="cell-title" data-label="Paper Title">Machine Learning-Based Reliability Improvement of a PSFB DC-DC Converter for Electric Vehicle Fast Charging</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
@@ -1367,32 +1412,32 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="669" data-search="669 advance nuclear energy system for sustainable transportation: evaluating nuclear batteries as the future of electric vehicles">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">669</span></td>
                 <td class="cell-title" data-label="Paper Title">Advance Nuclear Energy System for Sustainable Transportation: Evaluating Nuclear Batteries as the Future of Electric Vehicles</td>
                 <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="794" data-search="794 defect-tolerance analysis of zno nanorod electron transport layers in perovskite solar cells">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">794</span></td>
                 <td class="cell-title" data-label="Paper Title">Defect-Tolerance Analysis of ZnO Nanorod Electron Transport Layers in Perovskite Solar Cells</td>
                 <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="803" data-search="803 hybrid optimization of thermal and battery management for enhanced ev efficiency using ml algorithms">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">803</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Optimization of Thermal and Battery Management for Enhanced EV Efficiency using ML Algorithms</td>
                 <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="809" data-search="809 field data analysis of harmonic distortion in public pv-ev charging stations">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">809</span></td>
                 <td class="cell-title" data-label="Paper Title">Field Data Analysis of Harmonic Distortion in Public PV-EV Charging Stations</td>
                 <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="819" data-search="819 optimization of grid-tied photovoltaic inverters using tlbo, hho, and upgraded addax algorithm for remote areas">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">819</span></td>
                 <td class="cell-title" data-label="Paper Title">Optimization of Grid-Tied Photovoltaic Inverters Using TLBO, HHO, and Upgraded Addax Algorithm for Remote Areas</td>
                 <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="824" data-search="824 intelligent ev battery charging and power management in a dc microgrid">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">824</span></td>
                 <td class="cell-title" data-label="Paper Title">Intelligent EV Battery Charging and Power Management in a DC Microgrid</td>
                 <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
@@ -1428,32 +1473,32 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="281" data-search="281 an enhanced control strategy for glitch-free mode transition in multi-mode power electronic converters">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">281</span></td>
                 <td class="cell-title" data-label="Paper Title">An Enhanced Control Strategy for Glitch-Free Mode Transition in Multi-Mode Power Electronic Converters</td>
                 <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="370" data-search="370 hybrid ac/dc transmission architectures for clean energy transition">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">370</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid AC/DC Transmission Architectures for Clean Energy Transition</td>
                 <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="451" data-search="451 review of control strategies in mathematically modelled electric vehicle motors">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">451</span></td>
                 <td class="cell-title" data-label="Paper Title">Review of Control Strategies in Mathematically Modelled Electric Vehicle Motors</td>
                 <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="697" data-search="697 mitigation of power system oscillations in multimachine networks during transient states using a hybrid fuzzy logic and neural network-based power flow controller">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">697</span></td>
                 <td class="cell-title" data-label="Paper Title">Mitigation of Power System Oscillations in Multimachine Networks During Transient States Using a Hybrid Fuzzy Logic and Neural Network-Based Power Flow Controller</td>
                 <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="777" data-search="777 normalized modeling and optimal design of sps-controlled dual active bridge converter">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">777</span></td>
                 <td class="cell-title" data-label="Paper Title">Normalized Modeling and Optimal Design of SPS-Controlled Dual Active Bridge Converter</td>
                 <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="823" data-search="823 next generation electrical machines for automotive traction applications part i: 2-wheeler and 3-wheeler vehicles">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">823</span></td>
                 <td class="cell-title" data-label="Paper Title">Next Generation Electrical Machines for Automotive Traction Applications Part I: 2-Wheeler and 3-Wheeler Vehicles</td>
                 <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
@@ -1489,32 +1534,32 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="593" data-search="593 optimal placement of electric vehicle charging stations with distributed generation in distribution networks: a comprehensive review">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">593</span></td>
                 <td class="cell-title" data-label="Paper Title">Optimal Placement of Electric Vehicle Charging Stations with Distributed Generation in Distribution Networks: A Comprehensive Review</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="742" data-search="742 an ocpp simulation framework for security evaluation of ev charging infrastructure">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">742</span></td>
                 <td class="cell-title" data-label="Paper Title">An OCPP Simulation Framework for Security Evaluation of EV Charging Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="810" data-search="810 hybrid kalman-machine learning framework for fault detection and isolation in lithium-ion battery systems">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">810</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Kalman-Machine Learning Framework for Fault Detection and Isolation in Lithium-Ion Battery Systems</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="818" data-search="818 containerized scada testbed for supervisory cybersecurity analysis in power system infrastructure">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">818</span></td>
                 <td class="cell-title" data-label="Paper Title">Containerized SCADA Testbed for Supervisory Cybersecurity Analysis in Power System Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="821" data-search="821 a swarm intelligence assisted neural network based maximum power extraction strategy for solar pv applications with resistive loading">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">821</span></td>
                 <td class="cell-title" data-label="Paper Title">A Swarm Intelligence Assisted Neural Network based Maximum Power Extraction Strategy for Solar PV Applications with Resistive Loading</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="610" data-search="610 reviving legacy brushless exciter after severe high speed rotating rectifier system damage of 120 mw turbine generator - a case study">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">610</span></td>
                 <td class="cell-title" data-label="Paper Title">Reviving Legacy Brushless Exciter After Severe High Speed Rotating Rectifier System Damage of 120 MW Turbine Generator - A Case Study</td>
                 <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
@@ -1550,27 +1595,27 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="199" data-search="199 impact of model complexity on optimization-based control strategies for residential battery energy storage systems">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">199</span></td>
                 <td class="cell-title" data-label="Paper Title">Impact of Model Complexity on Optimization-Based Control Strategies for Residential Battery Energy Storage Systems</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="207" data-search="207 impact of the reactive power control modes of wind parks on the power systems voltage stability">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">207</span></td>
                 <td class="cell-title" data-label="Paper Title">Impact of the Reactive Power Control Modes of Wind Parks on the Power Systems Voltage Stability</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="531" data-search="531 the role of synchronous condensers in power systems dominated by inverter-based resources">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">531</span></td>
                 <td class="cell-title" data-label="Paper Title">The role of synchronous condensers in power systems dominated by inverter-based resources</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="807" data-search="807 supercapacitor based tms pulse generator design - analysis of pulse shaping capability">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">807</span></td>
                 <td class="cell-title" data-label="Paper Title">Supercapacitor based TMS pulse generator design - Analysis of pulse shaping capability</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="826" data-search="826 energy-efficient jfet-based neuron-like signal generator for low-power neuromorphic systems">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">826</span></td>
                 <td class="cell-title" data-label="Paper Title">Energy-Efficient JFET-Based Neuron-Like Signal Generator for Low-Power Neuromorphic Systems</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
@@ -1627,37 +1672,37 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="184" data-search="184 remaining life time estimation of power transformers">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">184</span></td>
                 <td class="cell-title" data-label="Paper Title">Remaining Life Time Estimation of Power Transformers</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="301" data-search="301 design and implementation of an autonomous medical observation &amp; remote assistant">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">301</span></td>
                 <td class="cell-title" data-label="Paper Title">Design and Implementation of an Autonomous Medical Observation &amp; Remote Assistant</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="602" data-search="602 design and simulation of a robust open-loop flyback converter with an intermediate voltage rail for portable medical devices">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">602</span></td>
                 <td class="cell-title" data-label="Paper Title">Design and Simulation of a Robust Open-Loop Flyback Converter with an Intermediate Voltage Rail for Portable Medical Devices</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="762" data-search="762 smart grid shield: iot-based embedded system for electricity theft detection">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">762</span></td>
                 <td class="cell-title" data-label="Paper Title">Smart Grid Shield: IoT-Based Embedded System for Electricity Theft Detection</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr>
+              <tr data-paper="782" data-search="782 real-time vision-based multi-zone automatic load control using raspberry pi for indoor energy management">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">782</span></td>
                 <td class="cell-title" data-label="Paper Title">Real-Time Vision-Based Multi-Zone Automatic Load Control Using Raspberry Pi for Indoor Energy Management</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="784" data-search="784 time-dependent degradation and risk evolution in utility-scale photovoltaic systems: evidence from long-term operational data">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">784</span></td>
                 <td class="cell-title" data-label="Paper Title">Time-Dependent Degradation and Risk Evolution in Utility-Scale Photovoltaic Systems: Evidence From Long-Term Operational Data</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="827" data-search="827 a critical analysis of energy harvesting and intelligent energy management in wireless sensor networks with a value-aware decision model">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">827</span></td>
                 <td class="cell-title" data-label="Paper Title">A Critical Analysis of Energy Harvesting and Intelligent Energy Management in Wireless Sensor Networks with a Value-Aware Decision Model</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
@@ -1692,32 +1737,32 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr>
+              <tr data-paper="208" data-search="208 experimental assessment of the performance of a rotationally asymmetrical concentrator based solar window with time">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">208</span></td>
                 <td class="cell-title" data-label="Paper Title">Experimental Assessment of the Performance of a Rotationally Asymmetrical Concentrator Based Solar Window with Time</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="216" data-search="216 assessing the societal benefit of hosting capacity flexibility: a case study of the brazilian market">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">216</span></td>
                 <td class="cell-title" data-label="Paper Title">Assessing the Societal Benefit of Hosting Capacity Flexibility: A Case Study of the Brazilian Market</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="274" data-search="274 fpga based spwm controller for five-level inverter">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">274</span></td>
                 <td class="cell-title" data-label="Paper Title">FPGA Based SPWM Controller for Five-Level Inverter</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="789" data-search="789 control of a three-phase grid-connected voltage source inverter using a dq-frame current estimator">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">789</span></td>
                 <td class="cell-title" data-label="Paper Title">Control of a Three-Phase Grid-Connected Voltage Source Inverter Using a dq-Frame Current Estimator</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="806" data-search="806 comparative evaluation of front-end converter topologies for supraharmonic emission reduction in low-voltage grids">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">806</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative Evaluation of Front-End Converter Topologies for Supraharmonic Emission Reduction in Low-Voltage Grids</td>
                 <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
               </tr>
-              <tr>
+              <tr data-paper="227" data-search="227 ai-optimised hybrid flywheel-hydrogen fuel cell system for grid frequency stabilization in sub-saharan power networks">
                 <td class="cell-id" data-label="Paper ID"><span class="pid-chip">227</span></td>
                 <td class="cell-title" data-label="Paper Title">AI-Optimised Hybrid Flywheel-Hydrogen Fuel Cell System for Grid Frequency Stabilization in Sub-Saharan Power Networks</td>
                 <td class="cell-time" data-label="Presentation Time">5:15 PM - 5:30 PM</td>
@@ -1729,38 +1774,6 @@
             </div>
           </div>
         </section>
-        </div>
-
-        <!-- Notes for authors -->
-        <div class="info-card notes-card">
-          <h2 class="info-card-title"><i class="fas fa-circle-info"></i>Notes for authors</h2>
-          <ul class="info-list">
-            <li>Report to your session hall at least <strong>15 minutes</strong> before the session begins.</li>
-            <li>Virtual presenters receive the online meeting link by e-mail at their registered address.</li>
-            <li>For any clarification regarding your session, please contact the organising committee.</li>
-          </ul>
-        </div>
-
-        <!-- Important notice -->
-        <div class="notice-card" role="note">
-          <h2 class="notice-title">
-            <i class="fas fa-triangle-exclamation"></i>
-            Important notice to authors &amp; presenters
-          </h2>
-          <p>
-            The track and presentation timings shown here are <strong>indicative and subject to significant
-            change at short notice</strong>, on account of administrative or organising requirements, session
-            re-arrangement, or technical difficulties.
-          </p>
-          <p>
-            Authors are therefore requested to be present for the <strong>entire day on which their track is
-            scheduled</strong>, and not only for their allotted time slot. Presenters who are unavailable when
-            their paper is called may forfeit the opportunity to present.
-          </p>
-          <p>
-            Kindly report to your session hall at least 15 minutes before the session begins, and follow the
-            announcements of the organising committee and session chairs for the timings in force on the day.
-          </p>
         </div>
 
         <div class="schedule-footer-actions">
@@ -1873,6 +1886,150 @@
             if (panel) panel.style.maxHeight = "none";
           });
         }, 150);
+      });
+
+      /*
+       * Paper search.
+       *
+       * 61 papers over three collapsed days means an author hunting for their
+       * own slot would otherwise open each day and read. The filter matches a
+       * paper ID or any part of a title, across ALL days at once, and opens
+       * every day that still has a hit — searching inside a closed accordion
+       * would find nothing the reader can see.
+       *
+       * While a search is active the accordion is suspended: days are opened
+       * by relevance, not by clicking, and heights go to "none" because the
+       * visible row count changes on every keystroke and a pinned pixel height
+       * would clip or overshoot.
+       */
+      var input = document.getElementById("paperSearch");
+      var clearBtn = document.getElementById("searchClear");
+      var status = document.getElementById("searchStatus");
+      if (!input) return;
+
+      var rows = Array.prototype.slice.call(root.querySelectorAll("tr[data-search]"));
+      var cards = Array.prototype.slice.call(root.querySelectorAll(".track-card"));
+      var blocks = Array.prototype.slice.call(root.querySelectorAll(".day-block"));
+
+      function clearHighlights() {
+        rows.forEach(function (tr) {
+          var marks = tr.querySelectorAll("mark.search-hit");
+          for (var i = 0; i < marks.length; i++) {
+            var m = marks[i];
+            m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+          }
+          if (marks.length) tr.normalize();
+        });
+      }
+
+      // Highlight by splitting the existing text node, never by assigning
+      // innerHTML: these titles are conference data, and a title containing
+      // "<" must not be able to become markup.
+      function highlight(cell, term) {
+        var text = cell.textContent;
+        var at = text.toLowerCase().indexOf(term);
+        if (at === -1) return;
+        var frag = document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(text.slice(0, at)));
+        var mark = document.createElement("mark");
+        mark.className = "search-hit";
+        mark.textContent = text.slice(at, at + term.length);
+        frag.appendChild(mark);
+        frag.appendChild(document.createTextNode(text.slice(at + term.length)));
+        cell.textContent = "";
+        cell.appendChild(frag);
+      }
+
+      function resetFilter() {
+        clearHighlights();
+        rows.concat(cards, blocks).forEach(function (el) {
+          el.classList.remove("is-filtered-out");
+        });
+        status.textContent = "";
+        status.className = "search-status";
+        clearBtn.hidden = true;
+        // Hand the accordion back exactly as it loads: first day only.
+        toggles.forEach(function (btn, i) {
+          var panel = panelFor(btn);
+          if (!panel) return;
+          btn.setAttribute("aria-expanded", i === 0 ? "true" : "false");
+          panel.style.maxHeight = i === 0 ? "none" : "0px";
+        });
+      }
+
+      function applyFilter(raw) {
+        var term = raw.trim().toLowerCase();
+        if (!term) {
+          resetFilter();
+          return;
+        }
+
+        clearHighlights();
+        clearBtn.hidden = false;
+
+        var hits = 0;
+        rows.forEach(function (tr) {
+          var match = tr.getAttribute("data-search").indexOf(term) !== -1;
+          tr.classList.toggle("is-filtered-out", !match);
+          if (match) {
+            hits++;
+            // Target the chip, not its <td>: highlight() rewrites the element's
+            // children, so passing the cell would delete the .pid-chip span and
+            // the ID would lose its styling mid-search.
+            highlight(tr.querySelector(".cell-title"), term);
+            highlight(tr.querySelector(".pid-chip"), term);
+          }
+        });
+
+        // A track with no surviving rows is noise; so is a day with no tracks.
+        cards.forEach(function (card) {
+          var any = card.querySelector("tr[data-search]:not(.is-filtered-out)");
+          card.classList.toggle("is-filtered-out", !any);
+        });
+
+        blocks.forEach(function (block) {
+          var any = block.querySelector(".track-card:not(.is-filtered-out)");
+          block.classList.toggle("is-filtered-out", !any);
+          var btn = block.querySelector(".day-toggle");
+          var panel = btn && panelFor(btn);
+          if (!panel) return;
+          btn.setAttribute("aria-expanded", any ? "true" : "false");
+          panel.style.maxHeight = any ? "none" : "0px";
+        });
+
+        status.textContent = hits
+          ? hits + (hits === 1 ? " paper matches " : " papers match ") + '"' + raw.trim() + '"'
+          : 'No paper matches "' + raw.trim() + '". Check the paper ID, or search part of the title.';
+        status.className = "search-status " + (hits ? "has-results" : "no-results");
+      }
+
+      input.addEventListener("input", function () {
+        applyFilter(input.value);
+      });
+
+      // Escape clears, which is what people expect of a search box.
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && input.value) {
+          e.preventDefault();
+          input.value = "";
+          resetFilter();
+        }
+      });
+
+      clearBtn.addEventListener("click", function () {
+        input.value = "";
+        resetFilter();
+        input.focus();
+      });
+
+      // A day clicked while a search is live would fight the filter.
+      toggles.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (input.value.trim()) {
+            input.value = "";
+            resetFilter();
+          }
+        }, true);
       });
     })();
   </script>
