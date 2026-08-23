@@ -26,6 +26,7 @@
     .info-card-title,
     .info-list,
     .section-heading,
+    .section-heading-note,
     .day-toggle,
     .day-badge,
     .day-date,
@@ -309,8 +310,19 @@
       font-size: 2rem;
       font-weight: 700;
       color: #211021;
-      margin: 46px 0 6px;
+      margin: 46px 0 10px;
       text-align: center;
+    }
+
+    /* The bottom margin here is the whole gap down to the search field: the
+       .day-accordion-head wrapper has none of its own, and margins between
+       siblings inside a grid-free block do not collapse across the wrapper
+       boundary in a way that would give it back. */
+    .section-heading-note {
+      text-align: center;
+      color: #6c757d;
+      margin: 0 0 30px;
+      font-size: 0.98rem;
     }
 
     /* -------------------------- SEARCH --------------------------- */
@@ -1084,6 +1096,7 @@
         <!-- Day accordion -->
         <div class="day-accordion-head">
           <h2 class="section-heading">Detailed schedule</h2>
+          <p class="section-heading-note">Select a day to view its tracks.</p>
         </div>
 
         <div class="search-bar">
@@ -1091,7 +1104,7 @@
           <div class="search-field">
             <i class="fas fa-magnifying-glass search-icon" aria-hidden="true"></i>
             <input type="search" id="paperSearch" class="search-input" autocomplete="off"
-              placeholder="Find your paper - type a paper ID or title" />
+              placeholder="Find your paper - type PID275, 275, or part of the title" />
             <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search">
               <i class="fas fa-xmark" aria-hidden="true"></i>
             </button>
@@ -1147,38 +1160,38 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="3" data-search="3 utilizing human locomotion to harvest piezo electric energy">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">3</span></td>
+              <tr data-paper="3" data-pid="003" data-search="utilizing human locomotion to harvest piezo electric energy">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID003</span></td>
                 <td class="cell-title" data-label="Paper Title">Utilizing Human Locomotion to Harvest Piezo Electric Energy</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr data-paper="4" data-search="4 the correlative study of diverse fuel cell technologies">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">4</span></td>
+              <tr data-paper="4" data-pid="004" data-search="the correlative study of diverse fuel cell technologies">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID004</span></td>
                 <td class="cell-title" data-label="Paper Title">The Correlative Study of Diverse Fuel Cell Technologies</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr data-paper="273" data-search="273 co-simulation of real and virtual ecus for left shifting">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">273</span></td>
+              <tr data-paper="273" data-pid="273" data-search="co-simulation of real and virtual ecus for left shifting">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID273</span></td>
                 <td class="cell-title" data-label="Paper Title">Co-simulation of Real and Virtual ECUs for Left Shifting</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr data-paper="275" data-search="275 a new hybrid perturb &amp; observe-tianji's horse racing optimization algorithm for enhancing pv power extraction under partial shading scenarios">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">275</span></td>
+              <tr data-paper="275" data-pid="275" data-search="a new hybrid perturb &amp; observe-tianji's horse racing optimization algorithm for enhancing pv power extraction under partial shading scenarios">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID275</span></td>
                 <td class="cell-title" data-label="Paper Title">A new Hybrid Perturb &amp; Observe-Tianji's Horse Racing Optimization Algorithm for Enhancing PV Power Extraction Under Partial Shading Scenarios</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr data-paper="302" data-search="302 ev wirefree- smart dynamic wireless charging system for electric vehicles with embedded ai and gyro sensors">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">302</span></td>
+              <tr data-paper="302" data-pid="302" data-search="ev wirefree- smart dynamic wireless charging system for electric vehicles with embedded ai and gyro sensors">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID302</span></td>
                 <td class="cell-title" data-label="Paper Title">EV WIREFREE- Smart Dynamic Wireless Charging System for Electric Vehicles with Embedded AI and Gyro Sensors</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr data-paper="316" data-search="316 automated i-v tracer circuit for inspection of bypass diodes in photovoltaic module">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">316</span></td>
+              <tr data-paper="316" data-pid="316" data-search="automated i-v tracer circuit for inspection of bypass diodes in photovoltaic module">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID316</span></td>
                 <td class="cell-title" data-label="Paper Title">Automated I-V Tracer Circuit for Inspection of Bypass Diodes in Photovoltaic Module</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr data-paper="355" data-search="355 techno-economic and simulation-based assessment of energy storage systems for residential and utility-scale solar applications: a case study of jalgaon city, india">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">355</span></td>
+              <tr data-paper="355" data-pid="355" data-search="techno-economic and simulation-based assessment of energy storage systems for residential and utility-scale solar applications: a case study of jalgaon city, india">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID355</span></td>
                 <td class="cell-title" data-label="Paper Title">Techno-Economic and Simulation-Based Assessment of Energy Storage Systems for Residential and Utility-Scale Solar Applications: A Case Study of Jalgaon City, India</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
               </tr>
@@ -1213,38 +1226,38 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="148" data-search="148 solar irradiation forecasting using cnn-lstm: a hybrid model">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">148</span></td>
+              <tr data-paper="148" data-pid="148" data-search="solar irradiation forecasting using cnn-lstm: a hybrid model">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID148</span></td>
                 <td class="cell-title" data-label="Paper Title">Solar irradiation forecasting using CNN-LSTM: A hybrid model</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr data-paper="180" data-search="180 multi-modal wavelet scalogram fusion for deep cnn-based capacitance estimation">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">180</span></td>
+              <tr data-paper="180" data-pid="180" data-search="multi-modal wavelet scalogram fusion for deep cnn-based capacitance estimation">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID180</span></td>
                 <td class="cell-title" data-label="Paper Title">Multi-Modal Wavelet Scalogram Fusion for Deep CNN-Based Capacitance Estimation</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr data-paper="205" data-search="205 performance enhancement of a dc-dc boost converter using td3-based reinforcement learning control">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">205</span></td>
+              <tr data-paper="205" data-pid="205" data-search="performance enhancement of a dc-dc boost converter using td3-based reinforcement learning control">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID205</span></td>
                 <td class="cell-title" data-label="Paper Title">Performance Enhancement of a DC-DC Boost Converter Using TD3-Based Reinforcement Learning Control</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr data-paper="259" data-search="259 metaphormind: cross-lingual metaphor detector and interpreter">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">259</span></td>
+              <tr data-paper="259" data-pid="259" data-search="metaphormind: cross-lingual metaphor detector and interpreter">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID259</span></td>
                 <td class="cell-title" data-label="Paper Title">MetaphorMind: Cross-Lingual Metaphor Detector and Interpreter</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr data-paper="304" data-search="304 circuit copilot: an ai-based assistant for understanding hand-drawn circuit diagrams">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">304</span></td>
+              <tr data-paper="304" data-pid="304" data-search="circuit copilot: an ai-based assistant for understanding hand-drawn circuit diagrams">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID304</span></td>
                 <td class="cell-title" data-label="Paper Title">Circuit Copilot: An AI-Based Assistant for Understanding Hand-Drawn Circuit Diagrams</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr data-paper="322" data-search="322 an iterative improved framework for severity prediction and aerosol classification in solar photovoltaic plants using integrated deep learning fuzzy logic and predictive control process">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">322</span></td>
+              <tr data-paper="322" data-pid="322" data-search="an iterative improved framework for severity prediction and aerosol classification in solar photovoltaic plants using integrated deep learning fuzzy logic and predictive control process">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID322</span></td>
                 <td class="cell-title" data-label="Paper Title">An Iterative Improved Framework for Severity Prediction and Aerosol Classification in Solar Photovoltaic Plants Using Integrated Deep Learning Fuzzy Logic and Predictive Control Process</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr data-paper="387" data-search="387 a comprehensive analysis of cybersecurity requirements for electric vehicles and charging infrastructure">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">387</span></td>
+              <tr data-paper="387" data-pid="387" data-search="a comprehensive analysis of cybersecurity requirements for electric vehicles and charging infrastructure">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID387</span></td>
                 <td class="cell-title" data-label="Paper Title">A Comprehensive Analysis of Cybersecurity Requirements for Electric Vehicles and Charging Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
               </tr>
@@ -1279,33 +1292,33 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="470" data-search="470 comparative analysis of lstm based day-ahead scheduling of energy storage integrated grid connected microgrid">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">470</span></td>
+              <tr data-paper="470" data-pid="470" data-search="comparative analysis of lstm based day-ahead scheduling of energy storage integrated grid connected microgrid">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID470</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative Analysis of LSTM based Day-Ahead Scheduling of Energy Storage Integrated Grid Connected Microgrid</td>
                 <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
               </tr>
-              <tr data-paper="506" data-search="506 a novel soc based control algorithm for enabling v2g and g2v modes of operation in ev charging station">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">506</span></td>
+              <tr data-paper="506" data-pid="506" data-search="a novel soc based control algorithm for enabling v2g and g2v modes of operation in ev charging station">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID506</span></td>
                 <td class="cell-title" data-label="Paper Title">A Novel SOC Based Control Algorithm for Enabling V2G and G2V Modes of Operation in EV Charging Station</td>
                 <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
               </tr>
-              <tr data-paper="522" data-search="522 fast and cost-effective cell balancing for lithium-ion batteries using a single dc-dc converter">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">522</span></td>
+              <tr data-paper="522" data-pid="522" data-search="fast and cost-effective cell balancing for lithium-ion batteries using a single dc-dc converter">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID522</span></td>
                 <td class="cell-title" data-label="Paper Title">Fast and Cost-Effective Cell Balancing for Lithium-Ion Batteries using a Single DC-DC Converter</td>
                 <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
               </tr>
-              <tr data-paper="532" data-search="532 energy management of a solar/wind/second-life battery integrated system with soh estimation">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">532</span></td>
+              <tr data-paper="532" data-pid="532" data-search="energy management of a solar/wind/second-life battery integrated system with soh estimation">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID532</span></td>
                 <td class="cell-title" data-label="Paper Title">Energy Management of a Solar/Wind/Second-life Battery Integrated System with SOH Estimation</td>
                 <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
               </tr>
-              <tr data-paper="537" data-search="537 generation scheduling of power system with thermal power plants, electric vehicles and solar-powered batteries with a novel cost function of batteries">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">537</span></td>
+              <tr data-paper="537" data-pid="537" data-search="generation scheduling of power system with thermal power plants, electric vehicles and solar-powered batteries with a novel cost function of batteries">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID537</span></td>
                 <td class="cell-title" data-label="Paper Title">Generation Scheduling of Power System with Thermal Power Plants, Electric Vehicles and Solar-powered Batteries with a Novel Cost function of Batteries</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr data-paper="550" data-search="550 modelling and simulation of an intelligent phase-shift controlled isolated dc-dc converter with machine learning-based fault detection and charging mode optimization">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">550</span></td>
+              <tr data-paper="550" data-pid="550" data-search="modelling and simulation of an intelligent phase-shift controlled isolated dc-dc converter with machine learning-based fault detection and charging mode optimization">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID550</span></td>
                 <td class="cell-title" data-label="Paper Title">Modelling and Simulation of an Intelligent Phase-Shift Controlled Isolated DC-DC Converter with Machine Learning-Based Fault Detection and Charging Mode Optimization</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
@@ -1340,28 +1353,28 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="388" data-search="388 design of power efficient cnn accelerator on fpga">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">388</span></td>
+              <tr data-paper="388" data-pid="388" data-search="design of power efficient cnn accelerator on fpga">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID388</span></td>
                 <td class="cell-title" data-label="Paper Title">Design of Power Efficient CNN Accelerator on FPGA</td>
                 <td class="cell-time" data-label="Presentation Time">2:45 PM - 3:00 PM</td>
               </tr>
-              <tr data-paper="449" data-search="449 comparative soc estimation for li-ion batteries using nn, 1d-cnn, and lstm on public cycling data">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">449</span></td>
+              <tr data-paper="449" data-pid="449" data-search="comparative soc estimation for li-ion batteries using nn, 1d-cnn, and lstm on public cycling data">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID449</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative SOC Estimation for Li-Ion Batteries Using NN, 1D-CNN, and LSTM on Public Cycling Data</td>
                 <td class="cell-time" data-label="Presentation Time">3:00 PM - 3:15 PM</td>
               </tr>
-              <tr data-paper="528" data-search="528 a closed-loop control strategy for robust operation of the dual active semi-bridge converter">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">528</span></td>
+              <tr data-paper="528" data-pid="528" data-search="a closed-loop control strategy for robust operation of the dual active semi-bridge converter">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID528</span></td>
                 <td class="cell-title" data-label="Paper Title">A Closed-Loop Control Strategy for Robust Operation of the Dual Active Semi-Bridge Converter</td>
                 <td class="cell-time" data-label="Presentation Time">3:15 PM - 3:30 PM</td>
               </tr>
-              <tr data-paper="529" data-search="529 hybrid covariance-guided abc-nsga-ii for multi-objective transformer design optimization with finite element analysis validation">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">529</span></td>
+              <tr data-paper="529" data-pid="529" data-search="hybrid covariance-guided abc-nsga-ii for multi-objective transformer design optimization with finite element analysis validation">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID529</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Covariance-Guided ABC-NSGA-II for Multi-Objective Transformer Design Optimization with Finite Element Analysis Validation</td>
                 <td class="cell-time" data-label="Presentation Time">3:30 PM - 3:45 PM</td>
               </tr>
-              <tr data-paper="540" data-search="540 machine learning-based reliability improvement of a psfb dc-dc converter for electric vehicle fast charging">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">540</span></td>
+              <tr data-paper="540" data-pid="540" data-search="machine learning-based reliability improvement of a psfb dc-dc converter for electric vehicle fast charging">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID540</span></td>
                 <td class="cell-title" data-label="Paper Title">Machine Learning-Based Reliability Improvement of a PSFB DC-DC Converter for Electric Vehicle Fast Charging</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
@@ -1418,33 +1431,33 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="669" data-search="669 advance nuclear energy system for sustainable transportation: evaluating nuclear batteries as the future of electric vehicles">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">669</span></td>
+              <tr data-paper="669" data-pid="669" data-search="advance nuclear energy system for sustainable transportation: evaluating nuclear batteries as the future of electric vehicles">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID669</span></td>
                 <td class="cell-title" data-label="Paper Title">Advance Nuclear Energy System for Sustainable Transportation: Evaluating Nuclear Batteries as the Future of Electric Vehicles</td>
                 <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
               </tr>
-              <tr data-paper="794" data-search="794 defect-tolerance analysis of zno nanorod electron transport layers in perovskite solar cells">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">794</span></td>
+              <tr data-paper="794" data-pid="794" data-search="defect-tolerance analysis of zno nanorod electron transport layers in perovskite solar cells">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID794</span></td>
                 <td class="cell-title" data-label="Paper Title">Defect-Tolerance Analysis of ZnO Nanorod Electron Transport Layers in Perovskite Solar Cells</td>
                 <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
               </tr>
-              <tr data-paper="803" data-search="803 hybrid optimization of thermal and battery management for enhanced ev efficiency using ml algorithms">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">803</span></td>
+              <tr data-paper="803" data-pid="803" data-search="hybrid optimization of thermal and battery management for enhanced ev efficiency using ml algorithms">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID803</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Optimization of Thermal and Battery Management for Enhanced EV Efficiency using ML Algorithms</td>
                 <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
               </tr>
-              <tr data-paper="809" data-search="809 field data analysis of harmonic distortion in public pv-ev charging stations">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">809</span></td>
+              <tr data-paper="809" data-pid="809" data-search="field data analysis of harmonic distortion in public pv-ev charging stations">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID809</span></td>
                 <td class="cell-title" data-label="Paper Title">Field Data Analysis of Harmonic Distortion in Public PV-EV Charging Stations</td>
                 <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
               </tr>
-              <tr data-paper="819" data-search="819 optimization of grid-tied photovoltaic inverters using tlbo, hho, and upgraded addax algorithm for remote areas">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">819</span></td>
+              <tr data-paper="819" data-pid="819" data-search="optimization of grid-tied photovoltaic inverters using tlbo, hho, and upgraded addax algorithm for remote areas">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID819</span></td>
                 <td class="cell-title" data-label="Paper Title">Optimization of Grid-Tied Photovoltaic Inverters Using TLBO, HHO, and Upgraded Addax Algorithm for Remote Areas</td>
                 <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
               </tr>
-              <tr data-paper="824" data-search="824 intelligent ev battery charging and power management in a dc microgrid">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">824</span></td>
+              <tr data-paper="824" data-pid="824" data-search="intelligent ev battery charging and power management in a dc microgrid">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID824</span></td>
                 <td class="cell-title" data-label="Paper Title">Intelligent EV Battery Charging and Power Management in a DC Microgrid</td>
                 <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
               </tr>
@@ -1479,33 +1492,33 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="281" data-search="281 an enhanced control strategy for glitch-free mode transition in multi-mode power electronic converters">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">281</span></td>
+              <tr data-paper="281" data-pid="281" data-search="an enhanced control strategy for glitch-free mode transition in multi-mode power electronic converters">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID281</span></td>
                 <td class="cell-title" data-label="Paper Title">An Enhanced Control Strategy for Glitch-Free Mode Transition in Multi-Mode Power Electronic Converters</td>
                 <td class="cell-time" data-label="Presentation Time">9:00 AM - 9:15 AM</td>
               </tr>
-              <tr data-paper="370" data-search="370 hybrid ac/dc transmission architectures for clean energy transition">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">370</span></td>
+              <tr data-paper="370" data-pid="370" data-search="hybrid ac/dc transmission architectures for clean energy transition">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID370</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid AC/DC Transmission Architectures for Clean Energy Transition</td>
                 <td class="cell-time" data-label="Presentation Time">9:15 AM - 9:30 AM</td>
               </tr>
-              <tr data-paper="451" data-search="451 review of control strategies in mathematically modelled electric vehicle motors">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">451</span></td>
+              <tr data-paper="451" data-pid="451" data-search="review of control strategies in mathematically modelled electric vehicle motors">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID451</span></td>
                 <td class="cell-title" data-label="Paper Title">Review of Control Strategies in Mathematically Modelled Electric Vehicle Motors</td>
                 <td class="cell-time" data-label="Presentation Time">9:30 AM - 9:45 AM</td>
               </tr>
-              <tr data-paper="697" data-search="697 mitigation of power system oscillations in multimachine networks during transient states using a hybrid fuzzy logic and neural network-based power flow controller">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">697</span></td>
+              <tr data-paper="697" data-pid="697" data-search="mitigation of power system oscillations in multimachine networks during transient states using a hybrid fuzzy logic and neural network-based power flow controller">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID697</span></td>
                 <td class="cell-title" data-label="Paper Title">Mitigation of Power System Oscillations in Multimachine Networks During Transient States Using a Hybrid Fuzzy Logic and Neural Network-Based Power Flow Controller</td>
                 <td class="cell-time" data-label="Presentation Time">9:45 AM - 10:00 AM</td>
               </tr>
-              <tr data-paper="777" data-search="777 normalized modeling and optimal design of sps-controlled dual active bridge converter">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">777</span></td>
+              <tr data-paper="777" data-pid="777" data-search="normalized modeling and optimal design of sps-controlled dual active bridge converter">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID777</span></td>
                 <td class="cell-title" data-label="Paper Title">Normalized Modeling and Optimal Design of SPS-Controlled Dual Active Bridge Converter</td>
                 <td class="cell-time" data-label="Presentation Time">10:00 AM - 10:15 AM</td>
               </tr>
-              <tr data-paper="823" data-search="823 next generation electrical machines for automotive traction applications part i: 2-wheeler and 3-wheeler vehicles">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">823</span></td>
+              <tr data-paper="823" data-pid="823" data-search="next generation electrical machines for automotive traction applications part i: 2-wheeler and 3-wheeler vehicles">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID823</span></td>
                 <td class="cell-title" data-label="Paper Title">Next Generation Electrical Machines for Automotive Traction Applications Part I: 2-Wheeler and 3-Wheeler Vehicles</td>
                 <td class="cell-time" data-label="Presentation Time">10:15 AM - 10:30 AM</td>
               </tr>
@@ -1540,33 +1553,33 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="593" data-search="593 optimal placement of electric vehicle charging stations with distributed generation in distribution networks: a comprehensive review">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">593</span></td>
+              <tr data-paper="593" data-pid="593" data-search="optimal placement of electric vehicle charging stations with distributed generation in distribution networks: a comprehensive review">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID593</span></td>
                 <td class="cell-title" data-label="Paper Title">Optimal Placement of Electric Vehicle Charging Stations with Distributed Generation in Distribution Networks: A Comprehensive Review</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr data-paper="742" data-search="742 an ocpp simulation framework for security evaluation of ev charging infrastructure">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">742</span></td>
+              <tr data-paper="742" data-pid="742" data-search="an ocpp simulation framework for security evaluation of ev charging infrastructure">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID742</span></td>
                 <td class="cell-title" data-label="Paper Title">An OCPP Simulation Framework for Security Evaluation of EV Charging Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr data-paper="810" data-search="810 hybrid kalman-machine learning framework for fault detection and isolation in lithium-ion battery systems">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">810</span></td>
+              <tr data-paper="810" data-pid="810" data-search="hybrid kalman-machine learning framework for fault detection and isolation in lithium-ion battery systems">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID810</span></td>
                 <td class="cell-title" data-label="Paper Title">Hybrid Kalman-Machine Learning Framework for Fault Detection and Isolation in Lithium-Ion Battery Systems</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr data-paper="818" data-search="818 containerized scada testbed for supervisory cybersecurity analysis in power system infrastructure">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">818</span></td>
+              <tr data-paper="818" data-pid="818" data-search="containerized scada testbed for supervisory cybersecurity analysis in power system infrastructure">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID818</span></td>
                 <td class="cell-title" data-label="Paper Title">Containerized SCADA Testbed for Supervisory Cybersecurity Analysis in Power System Infrastructure</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr data-paper="821" data-search="821 a swarm intelligence assisted neural network based maximum power extraction strategy for solar pv applications with resistive loading">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">821</span></td>
+              <tr data-paper="821" data-pid="821" data-search="a swarm intelligence assisted neural network based maximum power extraction strategy for solar pv applications with resistive loading">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID821</span></td>
                 <td class="cell-title" data-label="Paper Title">A Swarm Intelligence Assisted Neural Network based Maximum Power Extraction Strategy for Solar PV Applications with Resistive Loading</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
               </tr>
-              <tr data-paper="610" data-search="610 reviving legacy brushless exciter after severe high speed rotating rectifier system damage of 120 mw turbine generator - a case study">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">610</span></td>
+              <tr data-paper="610" data-pid="610" data-search="reviving legacy brushless exciter after severe high speed rotating rectifier system damage of 120 mw turbine generator - a case study">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID610</span></td>
                 <td class="cell-title" data-label="Paper Title">Reviving Legacy Brushless Exciter After Severe High Speed Rotating Rectifier System Damage of 120 MW Turbine Generator - A Case Study</td>
                 <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
               </tr>
@@ -1601,28 +1614,28 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="199" data-search="199 impact of model complexity on optimization-based control strategies for residential battery energy storage systems">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">199</span></td>
+              <tr data-paper="199" data-pid="199" data-search="impact of model complexity on optimization-based control strategies for residential battery energy storage systems">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID199</span></td>
                 <td class="cell-title" data-label="Paper Title">Impact of Model Complexity on Optimization-Based Control Strategies for Residential Battery Energy Storage Systems</td>
                 <td class="cell-time" data-label="Presentation Time">3:45 PM - 4:00 PM</td>
               </tr>
-              <tr data-paper="207" data-search="207 impact of the reactive power control modes of wind parks on the power systems voltage stability">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">207</span></td>
+              <tr data-paper="207" data-pid="207" data-search="impact of the reactive power control modes of wind parks on the power systems voltage stability">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID207</span></td>
                 <td class="cell-title" data-label="Paper Title">Impact of the Reactive Power Control Modes of Wind Parks on the Power Systems Voltage Stability</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr data-paper="531" data-search="531 the role of synchronous condensers in power systems dominated by inverter-based resources">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">531</span></td>
+              <tr data-paper="531" data-pid="531" data-search="the role of synchronous condensers in power systems dominated by inverter-based resources">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID531</span></td>
                 <td class="cell-title" data-label="Paper Title">The role of synchronous condensers in power systems dominated by inverter-based resources</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr data-paper="807" data-search="807 supercapacitor based tms pulse generator design - analysis of pulse shaping capability">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">807</span></td>
+              <tr data-paper="807" data-pid="807" data-search="supercapacitor based tms pulse generator design - analysis of pulse shaping capability">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID807</span></td>
                 <td class="cell-title" data-label="Paper Title">Supercapacitor based TMS pulse generator design - Analysis of pulse shaping capability</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr data-paper="826" data-search="826 energy-efficient jfet-based neuron-like signal generator for low-power neuromorphic systems">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">826</span></td>
+              <tr data-paper="826" data-pid="826" data-search="energy-efficient jfet-based neuron-like signal generator for low-power neuromorphic systems">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID826</span></td>
                 <td class="cell-title" data-label="Paper Title">Energy-Efficient JFET-Based Neuron-Like Signal Generator for Low-Power Neuromorphic Systems</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
               </tr>
@@ -1678,38 +1691,38 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="184" data-search="184 remaining life time estimation of power transformers">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">184</span></td>
+              <tr data-paper="184" data-pid="184" data-search="remaining life time estimation of power transformers">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID184</span></td>
                 <td class="cell-title" data-label="Paper Title">Remaining Life Time Estimation of Power Transformers</td>
                 <td class="cell-time" data-label="Presentation Time">10:45 AM - 11:00 AM</td>
               </tr>
-              <tr data-paper="301" data-search="301 design and implementation of an autonomous medical observation &amp; remote assistant">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">301</span></td>
+              <tr data-paper="301" data-pid="301" data-search="design and implementation of an autonomous medical observation &amp; remote assistant">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID301</span></td>
                 <td class="cell-title" data-label="Paper Title">Design and Implementation of an Autonomous Medical Observation &amp; Remote Assistant</td>
                 <td class="cell-time" data-label="Presentation Time">11:00 AM - 11:15 AM</td>
               </tr>
-              <tr data-paper="602" data-search="602 design and simulation of a robust open-loop flyback converter with an intermediate voltage rail for portable medical devices">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">602</span></td>
+              <tr data-paper="602" data-pid="602" data-search="design and simulation of a robust open-loop flyback converter with an intermediate voltage rail for portable medical devices">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID602</span></td>
                 <td class="cell-title" data-label="Paper Title">Design and Simulation of a Robust Open-Loop Flyback Converter with an Intermediate Voltage Rail for Portable Medical Devices</td>
                 <td class="cell-time" data-label="Presentation Time">11:15 AM - 11:30 AM</td>
               </tr>
-              <tr data-paper="762" data-search="762 smart grid shield: iot-based embedded system for electricity theft detection">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">762</span></td>
+              <tr data-paper="762" data-pid="762" data-search="smart grid shield: iot-based embedded system for electricity theft detection">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID762</span></td>
                 <td class="cell-title" data-label="Paper Title">Smart Grid Shield: IoT-Based Embedded System for Electricity Theft Detection</td>
                 <td class="cell-time" data-label="Presentation Time">11:30 AM - 11:45 AM</td>
               </tr>
-              <tr data-paper="782" data-search="782 real-time vision-based multi-zone automatic load control using raspberry pi for indoor energy management">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">782</span></td>
+              <tr data-paper="782" data-pid="782" data-search="real-time vision-based multi-zone automatic load control using raspberry pi for indoor energy management">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID782</span></td>
                 <td class="cell-title" data-label="Paper Title">Real-Time Vision-Based Multi-Zone Automatic Load Control Using Raspberry Pi for Indoor Energy Management</td>
                 <td class="cell-time" data-label="Presentation Time">11:45 AM - 12:00 PM</td>
               </tr>
-              <tr data-paper="784" data-search="784 time-dependent degradation and risk evolution in utility-scale photovoltaic systems: evidence from long-term operational data">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">784</span></td>
+              <tr data-paper="784" data-pid="784" data-search="time-dependent degradation and risk evolution in utility-scale photovoltaic systems: evidence from long-term operational data">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID784</span></td>
                 <td class="cell-title" data-label="Paper Title">Time-Dependent Degradation and Risk Evolution in Utility-Scale Photovoltaic Systems: Evidence From Long-Term Operational Data</td>
                 <td class="cell-time" data-label="Presentation Time">12:00 PM - 12:15 PM</td>
               </tr>
-              <tr data-paper="827" data-search="827 a critical analysis of energy harvesting and intelligent energy management in wireless sensor networks with a value-aware decision model">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">827</span></td>
+              <tr data-paper="827" data-pid="827" data-search="a critical analysis of energy harvesting and intelligent energy management in wireless sensor networks with a value-aware decision model">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID827</span></td>
                 <td class="cell-title" data-label="Paper Title">A Critical Analysis of Energy Harvesting and Intelligent Energy Management in Wireless Sensor Networks with a Value-Aware Decision Model</td>
                 <td class="cell-time" data-label="Presentation Time">12:15 PM - 12:30 PM</td>
               </tr>
@@ -1743,33 +1756,33 @@
                   </tr>
                 </thead>
                 <tbody>
-              <tr data-paper="208" data-search="208 experimental assessment of the performance of a rotationally asymmetrical concentrator based solar window with time">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">208</span></td>
+              <tr data-paper="208" data-pid="208" data-search="experimental assessment of the performance of a rotationally asymmetrical concentrator based solar window with time">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID208</span></td>
                 <td class="cell-title" data-label="Paper Title">Experimental Assessment of the Performance of a Rotationally Asymmetrical Concentrator Based Solar Window with Time</td>
                 <td class="cell-time" data-label="Presentation Time">4:00 PM - 4:15 PM</td>
               </tr>
-              <tr data-paper="216" data-search="216 assessing the societal benefit of hosting capacity flexibility: a case study of the brazilian market">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">216</span></td>
+              <tr data-paper="216" data-pid="216" data-search="assessing the societal benefit of hosting capacity flexibility: a case study of the brazilian market">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID216</span></td>
                 <td class="cell-title" data-label="Paper Title">Assessing the Societal Benefit of Hosting Capacity Flexibility: A Case Study of the Brazilian Market</td>
                 <td class="cell-time" data-label="Presentation Time">4:15 PM - 4:30 PM</td>
               </tr>
-              <tr data-paper="274" data-search="274 fpga based spwm controller for five-level inverter">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">274</span></td>
+              <tr data-paper="274" data-pid="274" data-search="fpga based spwm controller for five-level inverter">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID274</span></td>
                 <td class="cell-title" data-label="Paper Title">FPGA Based SPWM Controller for Five-Level Inverter</td>
                 <td class="cell-time" data-label="Presentation Time">4:30 PM - 4:45 PM</td>
               </tr>
-              <tr data-paper="789" data-search="789 control of a three-phase grid-connected voltage source inverter using a dq-frame current estimator">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">789</span></td>
+              <tr data-paper="789" data-pid="789" data-search="control of a three-phase grid-connected voltage source inverter using a dq-frame current estimator">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID789</span></td>
                 <td class="cell-title" data-label="Paper Title">Control of a Three-Phase Grid-Connected Voltage Source Inverter Using a dq-Frame Current Estimator</td>
                 <td class="cell-time" data-label="Presentation Time">4:45 PM - 5:00 PM</td>
               </tr>
-              <tr data-paper="806" data-search="806 comparative evaluation of front-end converter topologies for supraharmonic emission reduction in low-voltage grids">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">806</span></td>
+              <tr data-paper="806" data-pid="806" data-search="comparative evaluation of front-end converter topologies for supraharmonic emission reduction in low-voltage grids">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID806</span></td>
                 <td class="cell-title" data-label="Paper Title">Comparative Evaluation of Front-End Converter Topologies for Supraharmonic Emission Reduction in Low-Voltage Grids</td>
                 <td class="cell-time" data-label="Presentation Time">5:00 PM - 5:15 PM</td>
               </tr>
-              <tr data-paper="227" data-search="227 ai-optimised hybrid flywheel-hydrogen fuel cell system for grid frequency stabilization in sub-saharan power networks">
-                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">227</span></td>
+              <tr data-paper="227" data-pid="227" data-search="ai-optimised hybrid flywheel-hydrogen fuel cell system for grid frequency stabilization in sub-saharan power networks">
+                <td class="cell-id" data-label="Paper ID"><span class="pid-chip">PID227</span></td>
                 <td class="cell-title" data-label="Paper Title">AI-Optimised Hybrid Flywheel-Hydrogen Fuel Cell System for Grid Frequency Stabilization in Sub-Saharan Power Networks</td>
                 <td class="cell-time" data-label="Presentation Time">5:15 PM - 5:30 PM</td>
               </tr>
@@ -1963,11 +1976,45 @@
         });
       }
 
+      // "PID 275", "pid-275" and "275" are all the same query.
+      function normaliseTerm(raw) {
+        return raw.trim().toLowerCase().replace(/^pid[\s._-]*/, "");
+      }
+
+      /*
+       * An all-digits query is a paper-number lookup, and is matched against
+       * the ID alone rather than the whole row.
+       *
+       * Matching digits against the title too looked reasonable until it was
+       * measured: "120" returned PID610, whose only connection to 120 is the
+       * phrase "120 MW Turbine Generator" in its title, and "20" pulled the
+       * same row in beside PID205/207/208. An author typing their paper number
+       * should not have to wonder why someone else's paper came back.
+       *
+       * Prefix, not equality, so typing 2 -> 27 -> 275 narrows as you go. Both
+       * the padded and unpadded forms are tried, so 3, 03 and 003 all reach
+       * PID003. If a digit query matches no ID at all the caller falls back to
+       * a text search, which is what rescues a genuine title hunt for "120 MW".
+       */
+      function matchesId(tr, digits) {
+        return (
+          tr.getAttribute("data-paper").indexOf(digits) === 0 ||
+          tr.getAttribute("data-pid").indexOf(digits) === 0
+        );
+      }
+
       function applyFilter(raw) {
-        var term = raw.trim().toLowerCase();
+        var term = normaliseTerm(raw);
         if (!term) {
           resetFilter();
           return;
+        }
+
+        // Digit lookup first; fall back to text when it finds nothing.
+        var digits = /^[0-9]+$/.test(term) ? term : null;
+        if (digits && !rows.some(function (tr) { return matchesId(tr, digits); })) {
+          digits = null;
+          term = raw.trim().toLowerCase();
         }
 
         clearHighlights();
@@ -1975,15 +2022,17 @@
 
         var hits = 0;
         rows.forEach(function (tr) {
-          var match = tr.getAttribute("data-search").indexOf(term) !== -1;
+          var match = digits
+            ? matchesId(tr, digits)
+            : tr.getAttribute("data-search").indexOf(term) !== -1;
           tr.classList.toggle("is-filtered-out", !match);
           if (match) {
             hits++;
             // Target the chip, not its <td>: highlight() rewrites the element's
             // children, so passing the cell would delete the .pid-chip span and
             // the ID would lose its styling mid-search.
-            highlight(tr.querySelector(".cell-title"), term);
-            highlight(tr.querySelector(".pid-chip"), term);
+            highlight(tr.querySelector(".pid-chip"), digits || term);
+            if (!digits) highlight(tr.querySelector(".cell-title"), term);
           }
         });
 
