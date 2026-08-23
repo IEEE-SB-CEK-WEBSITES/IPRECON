@@ -119,14 +119,25 @@
       color: rgba(255, 255, 255, 0.85);
     }
 
+    /* The icon rides in the text flow, it is not a flex sibling of it.
+       As a flex item it was laid out beside the whole text block, so when the
+       venue wrapped to two lines on a phone the pin centred against the pair
+       and floated between them. Switching to flex-start fixed the height but
+       not the width: the text item still filled the row while its longest line
+       was 32px shorter, and text-align centred the line inside that item,
+       leaving the pin marooned 34px from the words it labels.
+
+       Inline, the icon is simply the first thing on the first line. It wraps,
+       centres and aligns with the text because it IS the text flow, and the
+       gap is a plain margin that cannot stretch. */
     .page-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: block;
+      line-height: 1.45;
     }
 
     .page-meta i {
       color: #d4af37;
+      margin-right: 8px;
     }
 
     .hero-stats {
@@ -1107,7 +1118,8 @@
 
           <p class="hero-hint">
             <i class="fas fa-arrow-down" aria-hidden="true"></i>
-            <a class="hero-hint-link" href="#schedule">Scroll down to view the full schedule or search your paper ID</a>
+            The full schedule is on this page too -
+            <a class="hero-hint-link" href="#schedule">scroll down or search your paper ID</a>
           </p>
         </div>
       </div>
