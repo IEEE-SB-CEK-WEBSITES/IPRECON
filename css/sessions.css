@@ -273,6 +273,13 @@
   max-width: 76ch;
 }
 
+/* An abstract can run to more than one paragraph (keynote.html does). The
+   spacing goes on the following paragraph so a single-paragraph abstract keeps
+   the flush margins the other two session pages rely on. */
+.abstract-text + .abstract-text {
+  margin-top: 16px;
+}
+
 /* --------------------- SPEAKER GALLERY ---------------------
    Uniform spacing and semantic ids only. No :first-child / :last-child /
    :nth-child / sibling selectors anywhere, so a group can be reordered

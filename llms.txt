@@ -30,5 +30,6 @@
 - [Speakers](https://iprecon.org/speakers.html): Special session, tutorial and keynote speakers
 - [Tutorials](https://iprecon.org/tutorials.html): Pre-conference tutorial sessions and abstracts
 - [Special Sessions](https://iprecon.org/special-sessions.html): Invited and industry talks with abstracts
+- [Keynote](https://iprecon.org/keynote.html): Keynote address, speaker profile and abstract
 - [Venue](https://iprecon.org/venue.html): Conference venue
 - [Contact](https://iprecon.org/contact.html): Contact information
